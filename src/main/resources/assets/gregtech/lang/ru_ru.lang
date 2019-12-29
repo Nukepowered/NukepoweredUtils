@@ -1,0 +1,863 @@
+gregtech.universal.tooltip.voltage_out_till=Выходное напряжение до: §a%d §7(§a%s§7)
+
+metaitem.assembly.normal.name=Сборный процессор
+metaitem.assembly.normal.tooltip=Продвинутая микросхема
+metaitem.assembly.nano.name=Сборный нанопроцессор
+metaitem.assembly.nano.tooltip=Экстримальная микросхема
+metaitem.assembly.wetware.name=Сборный нейроный процессор
+metaitem.assembly.wetware.tooltip=Ультимативная микросхема
+metaitem.board.coated.name=Печатная плата с покрытием
+metaitem.board.coated.tooltip=Базовая печатная плата
+metaitem.board.epoxy.name=Эпоксидная печатная плата
+metaitem.board.epoxy.tooltip=Продвинутая печатная плата
+metaitem.board.fiber-reinforced.name=Стеклотекстолитовая печатная плата
+metaitem.board.fiber-reinforced.tooltip=Экстримальная печатная плата
+metaitem.board.multilayer.fiber-reinforced.name=Многослойная стекловолоконная печатная плата
+metaitem.board.multilayer.fiber-reinforced.tooltip=Элитная печатная плата
+metaitem.board.phenolic.name=Фенольная плата
+metaitem.board.phenolic.tooltip=Хорошая печатная плата
+metaitem.board.plastic.name=Пластиковая печатная плата
+metaitem.board.plastic.tooltip=Хорошая печатная плата
+metaitem.board.wetware.name=Нейронная плата жизнеобеспечения
+metaitem.board.wetware.tooltip=Плата поддерживающая жизнь
+metaitem.boule.silicon.name=Монокристалл кремния
+metaitem.boule.silicon.tooltip=Необработанная интегральная микросхема
+metaitem.boule.glowstone.name=Монокристалл кремния с присадкой из светопыли
+metaitem.boule.glowstone.tooltip=Необработанная интегральная микросхема
+metaitem.boule.naquadah.name=Монокристалл кремния с присадкой из наквадаха
+metaitem.boule.naquadah.tooltip=Необработанная интегральная микросхема
+metaitem.npu_brick.coke.name=Кирпич коксовой печи
+metaitem.npu_brick.fireclay.name=Огнеупорный кирпич
+metaitem.circuit.advanced.regular.name=Продвинутая микросхема
+metaitem.circuit.good.regular.name=Хорошая интегральная микросхема
+metaitem.circuit.good.regular.tooltip=Хорошая микросхема
+metaitem.circuit.basic.regular.name=Базовая микросхема
+metaitem.circuit.basic.regular.tooltip=Базовая микросхема
+metaitem.circuit.vacuum.tube.name=Электронная лампа
+metaitem.circuit.vacuum.tube.tooltip=Элементарная микросхема
+metaitem.component.diode.name=Диод
+metaitem.component.diode.tooltip=Основная радиодеталь
+metaitem.component.capacitor.name=Конденсатор
+metaitem.component.capacitor.tooltip=Радиодеталь
+metaitem.component.glass.fiber.name=Стекловолокно
+metaitem.component.glass.fiber.tooltip=B(SiO2)7
+metaitem.component.glass.tube.name=Стеклянная трубка
+metaitem.component.petri.dish.name=Чашка Петри
+metaitem.component.petri.dish.tooltip=Для разведения клеток
+metaitem.component.resistor.name=Резистор
+metaitem.component.resistor.tooltip=Основная радиодеталь
+metaitem.component.small.coil.name=Маленький дроссель
+metaitem.component.small.coil.tooltip=Основная радиодеталь
+metaitem.component.smd.capacitor.name=Конденсатор поверхностного монтажа
+metaitem.component.smd.capacitor.tooltip=Радиодеталь
+metaitem.component.smd.diode.name=Диод поверхностного монтажа
+metaitem.component.smd.diode.tooltip=Радиодеталь
+metaitem.component.smd.resistor.name=Резистор поверхностного монтажа
+metaitem.component.smd.resistor.tooltip=Радиодеталь
+metaitem.component.smd.transistor.name=Транзистор поверхностного монтажа
+metaitem.component.smd.transistor.tooltip=Радиодеталь
+metaitem.component.transistor.name=Транзистор
+metaitem.component.transistor.tooltip=Основная радиодеталь
+metaitem.npu_compressed.clay.name=Необожженный глиняный кирпич
+metaitem.npu_compressed.coke.clay.name=Необожженный кирпич коксовой печи
+metaitem.npu_compressed.fireclay.name=Формированный кирпич из огнеупорной глины
+metaitem.npu_compressed.fireclay.tooltip=В форме кирпича
+metaitem.computer.crystal.name=Ультимативный кристальный процессор
+metaitem.computer.crystal.tooltip=Ультимативная микросхема
+metaitem.computer.nano.name=Элитный нанокомпьютер
+metaitem.computer.nano.tooltip=Элитная микросхема
+metaitem.computer.quantum.name=Мастерский квантовый компьютер
+metaitem.computer.quantum.tooltip=Омега микросхема
+metaitem.computer.wetware.name=Нейро-суперкомпьютер
+metaitem.computer.wetware.tooltip=Супер процессор
+metaitem.mainframe.crystal.name=Кристальный центраяльный процессор
+metaitem.mainframe.crystal.tooltip=Супер процессор
+metaitem.mainframe.nano.name=Центральный нанопроцессор
+metaitem.mainframe.nano.tooltip=Омега микросхема
+metaitem.mainframe.normal.name=Центральный процессор
+metaitem.mainframe.normal.tooltip=Элитная микросхема
+metaitem.mainframe.quantum.name=Квантовый центральный процессор
+metaitem.mainframe.quantum.tooltip=Ультимативная микросхема
+metaitem.mainframe.wetware.name=Центраяльный нейропроцессор
+metaitem.mainframe.wetware.tooltip=Бесконечный потенциал вычислений 
+metaitem.plate.asoc.name=ASoC
+metaitem.plate.asoc.tooltip=Продвинутая система на одном чипе
+metaitem.plate.circuit.name=Интегрированная логическая микросхема
+metaitem.plate.circuit.tooltip=Интегрированная микросхема
+metaitem.plate.cpu.name=Центральное процессорное устройство
+metaitem.plate.cpu.tooltip=Интегрированная микросхема
+metaitem.plate.hpic.name=Высокомощный силовой драйвер
+metaitem.plate.hpic.tooltip=Микросхема высокой мощности
+metaitem.plate.nand.name=Чип NAND-памяти
+metaitem.plate.nand.tooltip=Интегрированная микросхема
+metaitem.plate.nanocpu.name=Нанокомпонентный центральный процессор
+metaitem.plate.nanocpu.tooltip=Мощная микросхема
+metaitem.plate.nor.name=Чип NOR-памяти
+metaitem.plate.nor.tooltip=Интегрированная микросхема
+metaitem.plate.pic.name=Мощный драйвер
+metaitem.plate.pic.tooltip=Мощная микросхема
+metaitem.plate.qbit.name=Блок обработки на технологии QBit
+metaitem.plate.qbit.tooltip=Квантовый ЦПУ
+metaitem.plate.ram.name=Чип оперативной памяти
+metaitem.plate.ram.tooltip=Интегрированная микросхема
+metaitem.plate.soc.name=SoC
+metaitem.plate.soc.tooltip=Система на одном чипе
+metaitem.processor.crystal.name=Кристальный процессор
+metaitem.processor.crystal.tooltip=Элитная микросхема
+metaitem.processor.nano.name=Нанопроцессор
+metaitem.processor.nano.tooltip=Продвинутая микросхема
+metaitem.processor.quantum.name=Квантовый процессор
+metaitem.processor.quantum.tooltip=Экстримальный процессор
+metaitem.processor.wetware.name=Нейропроцессор
+metaitem.processor.wetware.tooltip=Мастер-схема
+metaitem.wafer.asoc.name=Вафля ASoC
+metaitem.wafer.asoc.tooltip=Необработанная микросхема
+metaitem.wafer.circuit.name=Интегрированная логическая схема (Вафля)
+metaitem.wafer.circuit.tooltip=Необработанная микросхема
+metaitem.wafer.cpu.name=Центральное процессорное устройство (Вафля)
+metaitem.wafer.cpu.tooltip=Необработанная микросхема
+metaitem.wafer.glowstone.name=Вафля с присадкой светопыли
+metaitem.wafer.glowstone.tooltip=Необработанная микросхема
+metaitem.wafer.hpic.name=Вафля HPIC
+metaitem.wafer.hpic.tooltip=Необработанная микросхема
+metaitem.wafer.naquadah.name=Вафля с присадкой из наквадаха
+metaitem.wafer.naquadah.tooltip=Необработанная микросхема
+metaitem.wafer.nand.name=Чип NAND-памяти (Вафля)
+metaitem.wafer.nand.tooltip=Необработанная микросхема
+metaitem.wafer.nanocpu.name=NanoCPU Wafer
+metaitem.wafer.nanocpu.tooltip=Необработанная микросхема
+metaitem.wafer.nor.name=Чип NOR-памяти (Вафля)
+metaitem.wafer.nor.tooltip=Необработанная микросхема
+metaitem.wafer.pic.name=Вафля PIC
+metaitem.wafer.pic.tooltip=Необработанная микросхема
+metaitem.wafer.qbit.name=Вафля QBit
+metaitem.wafer.qbit.tooltip=Необработанная микросхема
+metaitem.wafer.ram.name=Чип оперативной	памяти (Вафля)
+metaitem.wafer.ram.tooltip=Необработанная микросхема
+metaitem.wafer.silicon.name=Вафля
+metaitem.wafer.silicon.tooltip=Необработанная микросхема
+metaitem.wafer.soc.name=SoC Wafer
+metaitem.wafer.soc.tooltip=Необработанная микросхема
+metaitem.carbon.fibers.name=Необработанные углеродные волокна
+metaitem.plate.mixed.metal.name=Смешанная металлическая пластина
+metaitem.plate.advanced.alloy.name=Пластина продвинутого сплава
+metaitem.crystal.raw.name=Необработанный кристальный чип
+metaitem.crystal.raw.tooltip=Необработанный кристальный процессор
+metaitem.crystal.cpu.name=Кристальный блок обработки
+metaitem.crystal.cpu.tooltip=Кристальный ЦПУ
+metaitem.crystal.soc.name=Кристальная SoC
+metaitem.crystal.soc.tooltip=Кристальная с система на одном чипе
+metaitem.stemcells.name=Стволовые клетки
+metaitem.stemcells.tooltip=Сырой интеллект
+metaitem.crystal.lapotron.name=Лапотрон Кристалл
+metaitem.plate.iridium.alloy.name=Пластина иридиевого сплава
+metaitem.plate.iridium.alloy.uncompressed.name=Несжатая пластина иридиевого сплава
+metaitem.neutron.reflector.name=Отражатель нейтронов
+metaitem.computer.normal.name=Экстримальный компьютер
+metaitem.computer.normal.tooltip=Эктримальная микросхема
+metaitem.processor.neuro.name=Нейро Процессор
+metaitem.processor.neuro.tooltip=Нейро ЦПУ
+
+metaitem.electrode.apatite.name=Апатитовый электрод
+metaitem.electrode.blaze.name=Полыхающий электрод
+metaitem.electrode.bronze.name=Бронзовый электрод
+metaitem.electrode.copper.name=Медный электрод
+metaitem.electrode.diamond.name=Алмазный электрод
+metaitem.electrode.emerald.name=Изумрудный электрод
+metaitem.electrode.ender.name=Эндер электрод
+metaitem.electrode.gold.name=Золотой электрод
+metaitem.electrode.iron.name=Железный электрод
+metaitem.electrode.lapis.name=Ляпис электрод
+metaitem.electrode.obsidian.name=Обсидиановый электрод
+metaitem.electrode.orchid.name=Орхидейный электрод
+metaitem.electrode.rubber.name=Прорезиненный электрод
+metaitem.electrode.tin.name=Оловянный электрод
+
+metaitem.npu_compressed.grout.name=Необожженный обожженный кирпич
+metaitem.mold.form.anvil.name=Литейная форма (Наковальня)
+metaitem.mold.form.ball.name=Литейная форма (Шар)
+metaitem.mold.form.block.name=Литейная форма (Блок)
+metaitem.mold.form.bottle.name=Литейная форма (Бутылка)
+metaitem.mold.form.cylinder.name=Литейная форма (Цилиндр)
+metaitem.mold.form.coinage.name=Литейная форма (Монета)
+metaitem.mold.form.gear.name=Литейная форма (Шестерня)
+metaitem.mold.form.ingot.name=Литейная форма (Слиток)
+metaitem.mold.form.name.name=Литейная форма (Именной-тег)
+metaitem.mold.form.nuggets.name=Литейная форма (Самородок)
+metaitem.mold.form.plate.name=Литейная форма (Пластина)
+metaitem.mold.form.small_gear.name=Литейная форма (Малая шестерня)
+metaitem.shape.axe_head.name=Форма (Головка топора)
+metaitem.shape.block.name=Форма (Блок)
+metaitem.shape.bolt.name=Форма (Болт)
+metaitem.shape.bottle.name=Форма (Бутылка)
+metaitem.shape.cell.name=Форма (Ячейка)
+metaitem.shape.file_head.name=Форма (Головка напильника)
+metaitem.shape.gear.name=Форма (Шестерня)
+metaitem.shape.hammer_head.name=Форма (Головка молота)
+metaitem.shape.hoe_head.name=Форма (Головка мотыги)
+metaitem.shape.ingot.name=Форма (Слиток)
+metaitem.shape.large_pipe.name=Форма (Большая труба)
+metaitem.shape.normal_pipe.name=Форма (Средняя труба)
+metaitem.shape.pickaxe_head.name=Форма (Головка кирки)
+metaitem.shape.plate.name=Форма (Пластина)
+metaitem.shape.ring.name=Форма (Кольцо)
+metaitem.shape.rod.name=Форма (Стрежнь)
+metaitem.shape.saw_blade.name=Форма (Лезвие пилы)
+metaitem.shape.shovel_head.name=Форма (Голова лопаты)
+metaitem.shape.small_pipe.name=Форма (Маленькая труба)
+metaitem.shape.sword_blade.name=Форма (Лезвие меча)
+metaitem.shape.tiny_pipe.name=Форма (Крошечная труба)
+metaitem.shape.wire.name=Форма (Провод)
+
+metaitem.energy.module.name=Энергетический модуль
+metaitem.energy.cluster.name=Энергетический кластер
+metaitem.max.battery.name=МАКСИМАЛЬНАЯ Батарея
+
+metaitem.mica_sheet.name=Лист на основе слюды
+metaitem.mica_insulator_sheet.name=Лист слюденной изоляции
+metaitem.mica_insulator_foil.name=Фольга из слюденной изоляции
+
+metaitem.board.basic.name=Базовая печатная плата
+metaitem.board.good.phenolic.name=Хорошая фенольная плата
+metaitem.board.good.plastic.name=Хорошая пластиковая плата
+metaitem.board.advanced.name=Усовершенствованная печатная плата
+metaitem.board.extreme.name=Экстремальная печатная плата
+metaitem.board.elite.name=Элитная плата
+metaitem.board.master.name=Мастер печатная плата
+
+metaitem.stator.lv.name=Базовый статор
+metaitem.stator.mv.name=Улучшенный статор
+metaitem.stator.hv.name=Улучшенный статор II
+metaitem.stator.ev.name=Улучшенный статор III
+metaitem.stator.iv.name=Улучшенный статор IV
+metaitem.stator.luv.name=Улучшенный статор V
+metaitem.stator.zpm.name=Улучшенный статор VI
+metaitem.stator.uv.name=Супер-проводящий статор
+
+metaitem.rotor.lv.name=Базовый ротор
+metaitem.rotor.mv.name=Улучшенный ротор
+metaitem.rotor.hv.name=Улучшенный ротор II
+metaitem.rotor.ev.name=Улучшенный ротор III
+metaitem.rotor.iv.name=Улучшенный ротор IV
+metaitem.rotor.luv.name=Улучшенный ротор V
+metaitem.rotor.zpm.name=Улучшенный ротор VI
+metaitem.rotor.uv.name=Супер-проводящий ротор
+
+metaitem.motor_hull.lv.name=Стальной корпус мотора
+metaitem.motor_hull.mv.name=Алюминиевый корпус мотора
+metaitem.motor_hull.hv.name=Корпус мотора из нержавеющей стали
+metaitem.motor_hull.ev.name=Титановый корпус мотора
+metaitem.motor_hull.iv.name=Вольфрамовостальной корпус мотора
+metaitem.motor_hull.luv.name=Корпус мотора из HSS-G стали
+metaitem.motor_hull.zpm.name=Корпус мотора из HSS-E стали
+metaitem.motor_hull.uv.name=Нейтроновый корпус мотора
+
+metaitem.magnetic_plates.name=Набор магнитопроводящих пластин
+metaitem.magnetic_plates.tooltip=Fe₂₆Si
+metaitem.ferrite_plates.name=Набор ферритовых пластин
+metaitem.ferrite_plates.tooltip=NiZnFe₄O₈
+metaitem.insulating_tape.name=МегаМозгТех Аэрокосмическая улучшенная укреплённая изолента FAL-84
+metaitem.insulating_tape.tooltip=Если не получеться починить что то с этим, просто используйте больше!
+
+metaitem.solar_cell.polycrystalline.name=Поликристаллический фотоэлемент
+metaitem.solar_cell.polycrystalline.tooltip=Производит энергию от солнца!
+metaitem.solar_cell.monocrystalline.name=Монокристаллический фотоэлемент
+metaitem.solar_cell.monocrystalline.tooltip=Производит энергию от солнца!
+metaitem.plate.monocrystall_silicone.name=Тонкая монокристаллическая пластинка кремния
+metaitem.plate.monocrystall_silicone.tooltip=Она крайне чиста!
+
+metaarmor.render_warning=Если у вас присутствуют проблемы с отображением брони, то это не баг NPU. Пожалуйста обратитесь к автору GTCE.
+
+metaarmor.nms.nightvision.enabled=Костюм NanoMuscle™: Ночное зрение активировано
+metaarmor.nms.nightvision.disabled=Костюм NanoMuscle™: Ночное зрение отключено
+
+metaarmor.qts.nightvision.enabled=Костюм QuarkTech™: Ночное зрение активировано
+metaarmor.qts.nightvision.disabled=Костюм QuarkTech™: Ночное зрение отключено
+
+metaarmor.jetpack.hover.enable=Реактивный ранец: режим зависания активирован
+metaarmor.jetpack.hover.disable=Реактивный ранец: режим зависания отключен
+
+metaarmor.hud.status.enabled=§aВКЛ
+metaarmor.hud.status.disabled=§cВЫКЛ
+metaarmor.hud.energy_lvl=Уровень энергии: %s
+metaarmor.hud.fuel_lvl=Уровень топлива: %s
+metaarmor.hud.hover_mode=Режим парения: %s
+mataarmor.hud.supply_mode=Режим зарядки: %s
+metaarmor.hud.fly_mode=Режим полёта: %s
+metaarmor.hud.gravi_engine=ГравиДвигатель: %s
+
+metaarmor.energy_share.enable=Передача энергии: Подзарядка гаджетов активирована
+metaarmor.energy_share.disable=Передача энергии: Подзарядка гаджетов отключена
+metaarom.energy_share.tooltip=Режим зарядки: %s
+metaarom.energy_share.tooltip.guide=Для изменения режима нажмите shift-правый клик держа в руках
+
+metaitem.liquid_fuel_jetpack.name=§eРеактивный ранец на жидком топливе
+metaitem.impeller_jetpack.name=§eРанец на основе импеллера
+metaitem.advanced_impeller_jetpack.name=§bПродвинутый ранец на основе импеллера
+metaitem.battery_pack.lv.name=Ранец с аккумуляторами (§eLV§r)
+metaitem.battery_pack.mv.name=Ранец с аккумуляторами (§eMV§r)
+metaitem.battery_pack.hv.name=Ранец с аккумуляторами (§eHV§r)
+
+metaitem.nms.chestplate.name=§eНагрудник костюма NanoMuscle™
+metaitem.nms.leggins.name=§eПоножи костюма NanoMuscle™
+metaitem.nms.boots.name=§eБотинки костюма NanoMuscle™
+metaitem.nms.helmet.name=§eШлем костюма NanoMuscle™
+metaitem.nms.advanced_chestplate.name=§bПродвинутый нагрудник костюма NanoMuscle™
+
+metaitem.qts.chestplate.name=§bНагрудник костюма QuarkTech™
+metaitem.qts.leggins.name=§bПоножи костюма  QuarkTech™
+metaitem.qts.boots.name=§bБотинки костюма QuarkTech™
+metaitem.qts.helmet.name=§bШлем костюма QuarkTech™
+metaitem.qts.advanced_chestplate.name=§5Продвинутый нагрудник костюма QuarkTech™
+
+metaitem.impeller.mv.name=§eМощный импеллер
+metaitem.impeller.hv.name=§bУлучшенный мощный импеллер
+metaitem.gravitation_engine.name=§5Модуль гравитационного двигателя
+
+nputils.work_in_progress=В разработке
+
+nputils.machine.solar_panel.maxstack=Максимальный размер: §a%s
+nputils.machine.solar_panel.generation=Выработка: §a%s §7EU/t
+nputils.machine.solar_panel.multiblock=Может быть объедененно в мультиблок до максимального размера
+nputils.machine.solar_panel.basic.name=Базовая фотоячейка
+nputils.machine.solar_panel.basic.description=Примитивный фото элемент
+nputils.machine.solar_panel.polycrystalline.name=Солнечная панель из поликристаллического кремния
+nputils.machine.solar_panel.polycrystalline.description=Хороший выбор между стоимостью производства и выработкой энергии!
+nputils.machine.solar_panel.monocrystalline.name=Солнечная панель из монокристаллического кремния
+nputils.machine.solar_panel.monocrystalline.description=Самая высокоэффективаня панель, но сложна в производстве
+
+nputils.machine.power_inverter.lv.name=§eВысокотоковый силовой инвертор версия I
+nputils.machine.power_inverter.mv.name=§bВысокотоковый силовой инвертор версия II
+nputils.machine.power_inverter.hv.name=§dВысокотоковый силовой инвертор версия III
+nputils.machine.power_inverter.message_panelmode=Режим работы только с солнечными панелями: %s
+nputils.machine.power_inverter.description=Очень мощный повышающий инвертор. Для переключения режима работы ударьте киянкой
+nputils.machine.power_inverter.lv.description=Производит очень много тепла при работе, будьте осторожны!
+nputils.machine.power_inverter.mv.description=Мощное устройство, позволяющее контролировать ваши солненые поля
+nputils.machine.power_inverter.hv.description=Продвинутый контроллер мощности для дорогих панелей
+
+nputils.machine.circuit_assembler.lv.name=Базовый стонок по сборке интегральных микросхем
+nputils.machine.circuit_assembler.mv.name=Улучшеный стонок по сборке интегральных микросхем
+nputils.machine.circuit_assembler.hv.name=Улучшеный стонок по сборке интегральных микросхем II
+nputils.machine.circuit_assembler.ev.name=Улучшеный стонок по сборке интегральных микросхем III
+nputils.machine.circuit_assembler.iv.name=Улучшеный стонок по сборке интегральных микросхем IV
+nputils.machine.circuit_assembler.luv.name=Улучшеный стонок по сборке интегральных микросхем V
+nputils.machine.circuit_assembler.zpm.name=Улучшеный стонок по сборке интегральных микросхем VI
+nputils.machine.circuit_assembler.uv.name=Улучшеный стонок по сборке интегральных микросхем VII
+
+nputils.machine.disassembling_machine.lv.name=Базовый авторазборочный станок
+nputils.machine.disassembling_machine.mv.name=Улучшеный авторазборочный станок
+nputils.machine.disassembling_machine.hv.name=Улучшеный авторазборочный станок II
+nputils.machine.disassembling_machine.ev.name=Улучшеный авторазборочный станок III
+nputils.machine.disassembling_machine.iv.name=Улучшеный авторазборочный станок IV
+nputils.machine.disassembling_machine.luv.name=Улучшеный авторазборочный станок V
+nputils.machine.disassembling_machine.zpm.name=Улучшеный авторазборочный станок VI
+nputils.machine.disassembling_machine.uv.name=Улучшеный авторазборочный станок VII
+
+nputils.machine.cluster_mill.lv.name=Базовый прокатный станок
+nputils.machine.cluster_mill.mv.name=Улучшеный прокатный станок
+nputils.machine.cluster_mill.hv.name=Улучшеный прокатный станок II
+nputils.machine.cluster_mill.ev.name=Улучшеный прокатный станок III
+nputils.machine.cluster_mill.iv.name=Улучшеный прокатный станок IV
+nputils.machine.cluster_mill.luv.name=Улучшеный прокатный станок V
+nputils.machine.cluster_mill.zpm.name=Улучшеный прокатный станок VI
+nputils.machine.cluster_mill.uv.name=Улучшеный прокатный станок VII
+
+nputils.machine.electric_furnace.iv.name=Процессор электронного возбуждения
+nputils.machine.electric_furnace.luv.name=Процессор электронного возбуждения
+nputils.machine.electric_furnace.zpm.name=Процессор электронного возбуждения
+nputils.machine.electric_furnace.uv.name=Процессор электронного возбуждения
+
+nputils.machine.macerator.iv.name=Blend-O-Matic 9001
+nputils.machine.macerator.luv.name=Blend-O-Matic 9002
+nputils.machine.macerator.zpm.name=Blend-O-Matic 9003
+nputils.machine.macerator.uv.name=Blend-O-Matic 9004
+
+nputils.machine.alloy_smelter.iv.name=Продвинутая сплавная печь IV
+nputils.machine.alloy_smelter.luv.name=Продвинутая сплавная печь V
+nputils.machine.alloy_smelter.zpm.name=Продвинутая сплавная печь VI
+nputils.machine.alloy_smelter.uv.name=Продвинутая сплавная печь VII
+
+nputils.machine.amplifab.iv.name=Улучшеный амплифабрикатор IV
+nputils.machine.amplifab.luv.name=Улучшеный амплифабрикатор V
+nputils.machine.amplifab.zpm.name=Улучшеный амплифабрикатор VI
+nputils.machine.amplifab.uv.name=Улучшеный амплифабрикатор VII
+
+nputils.machine.arc_furnace.iv.name=Продвинутая дуговая печь IV
+nputils.machine.arc_furnace.luv.name=Продвинутая дуговая печь V
+nputils.machine.arc_furnace.zpm.name=Продвинутая дуговая печь VI
+nputils.machine.arc_furnace.uv.name=Продвинутая дуговая печь VII
+
+gregtech.machine.assembler.iv.name=Улучшеный сборочный станок IV
+nputils.machine.assembler.luv.name=Улучшеный сборочный станок V
+nputils.machine.assembler.zpm.name=Улучшеный сборочный станок VI
+nputils.machine.assembler.uv.name=Улучшеный сборочный станок VII
+
+gregtech.machine.autoclave.iv.name=Улучшеный автоклав IV
+nputils.machine.autoclave.luv.name=Улучшеный автоклав V
+nputils.machine.autoclave.zpm.name=Улучшеный автоклав VI
+nputils.machine.autoclave.uv.name=Улучшеный автоклав VII
+
+nputils.machine.bender.iv.name=Улучшеный загибочный станок IV
+nputils.machine.bender.luv.name=Улучшеный загибочный станок V
+nputils.machine.bender.zpm.name=Улучшеный загибочный станок VI
+nputils.machine.bender.uv.name=Улучшеный загибочный станок VII
+
+nputils.machine.brewery.iv.name=Улучшеный пивоваренный завод IV
+nputils.machine.brewery.luv.name=Улучшеный пивоваренный завод V
+nputils.machine.brewery.zpm.name=Улучшеный пивоваренный завод VI
+nputils.machine.brewery.uv.name=Улучшеный пивоваренный завод VII
+
+nputils.machine.canner.iv.name=Продвинутая консервная машина IV
+nputils.machine.canner.luv.name=Продвинутая консервная машина V
+nputils.machine.canner.zpm.name=Продвинутая консервная машина VI
+nputils.machine.canner.uv.name=Продвинутая консервная машина VII
+
+gregtech.machine.centrifuge.ev.name=Молекулярный разделитель
+nputils.machine.centrifuge.iv.name=Молекулярный Циклон
+nputils.machine.centrifuge.luv.name=Молекулярный Циклон
+nputils.machine.centrifuge.zpm.name=Молекулярный Циклон
+nputils.machine.centrifuge.uv.name=Молекулярный Циклон
+
+nputils.machine.chemical_bath.iv.name=Продвинутая Хим.ванна IV
+nputils.machine.chemical_bath.luv.name=Продвинутая Хим.ванна V
+nputils.machine.chemical_bath.zpm.name=Продвинутая Хим.ванна VI
+nputils.machine.chemical_bath.uv.name=Продвинутая Хим.ванна VII
+
+nputils.machine.chemical_reactor.iv.name=Улучшеный хим.реактор IV
+nputils.machine.chemical_reactor.luv.name=Улучшеный хим.реактор V
+nputils.machine.chemical_reactor.zpm.name=Улучшеный хим.реактор VI
+nputils.machine.chemical_reactor.uv.name=Улучшеный хим.реактор VII
+
+gregtech.machine.compressor.ev.name=Улучшеный компрессор III
+nputils.machine.compressor.iv.name=Сингулирующий компрессор
+nputils.machine.compressor.luv.name=Сингулирующий компрессор
+nputils.machine.compressor.zpm.name=Сингулирующий компрессор
+nputils.machine.compressor.uv.name=Сингулирующий компрессор
+
+nputils.machine.cutter.iv.name=Улучшеный нарезной станок IV
+nputils.machine.cutter.luv.name=Улучшеный нарезной станок V
+nputils.machine.cutter.zpm.name=Улучшеный нарезной станок VI
+nputils.machine.cutter.uv.name=Улучшеный нарезной станок VII
+
+nputils.machine.distillery.iv.name=Улучшеный дистиллятор IV
+nputils.machine.distillery.luv.name=Улучшеный дистиллятор V
+nputils.machine.distillery.zpm.name=Улучшеный дистиллятор VI
+nputils.machine.distillery.uv.name=Улучшеный дистиллятор VII
+
+gregtech.machine.electrolyzer.ev.name=Улучшеный электролизер III
+nputils.machine.electrolyzer.iv.name=Молекулярный дезинтегратор E-4905
+nputils.machine.electrolyzer.luv.name=Молекулярный дезинтегратор E-4906
+nputils.machine.electrolyzer.zpm.name=Молекулярный дезинтегратор E-4907
+nputils.machine.electrolyzer.uv.name=Молекулярный дезинтеграторr E-4908
+
+nputils.machine.electromagnetic_separator.iv.name=Улучшеный Электромагнитный Сепаратор IV
+nputils.machine.electromagnetic_separator.luv.name=Улучшеный Электромагнитный Сепаратор V
+nputils.machine.electromagnetic_separator.zpm.name=Улучшеный Электромагнитный Сепаратор VI
+nputils.machine.electromagnetic_separator.uv.name=Улучшеный Электромагнитный Сепаратор VII
+
+gregtech.machine.extractor.ev.name=Улучшеный Экстрактор III
+nputils.machine.extractor.iv.name=Вакуумный Экстрактор I
+nputils.machine.extractor.luv.name=Вакуумный Экстрактор II
+nputils.machine.extractor.zpm.name=Вакуумный Экстрактор III
+nputils.machine.extractor.uv.name=Вакуумный Экстрактор IV
+
+nputils.machine.extruder.iv.name=Улучшеный Экструдер IV
+nputils.machine.extruder.luv.name=Улучшеный Экструдер V
+nputils.machine.extruder.zpm.name=Улучшеный Экструдер VI
+nputils.machine.extruder.uv.name=Улучшеный Экструдер VII
+
+nputils.machine.fermenter.iv.name=Улучшеный Ферментер IV
+nputils.machine.fermenter.luv.name=Улучшеный Ферментер V
+nputils.machine.fermenter.zpm.name=Улучшеный Ферментер VI
+nputils.machine.fermenter.uv.name=Улучшеный Ферментер VII
+
+nputils.machine.fluid_canner.iv.name=Мнгновненный разливочный аппарат I
+nputils.machine.fluid_canner.luv.name=Мнгновненный разливочный аппарат II
+nputils.machine.fluid_canner.zpm.name=Мнгновненный разливочный аппарат III
+nputils.machine.fluid_canner.uv.name=Мнгновненный разливочный аппарат IV
+
+nputils.machine.fluid_extractor.iv.name=Улучшеный жидкостный экстрактор IV
+nputils.machine.fluid_extractor.luv.name=Улучшеный жидкостный экстрактор V
+nputils.machine.fluid_extractor.zpm.name=Улучшеный жидкостный экстрактор VI
+nputils.machine.fluid_extractor.uv.name=Улучшеный жидкостный экстрактор VII
+
+nputils.machine.fluid_heater.iv.name=Улучшеный жидкостный нагреватель IV
+nputils.machine.fluid_heater.luv.name=Улучшеный жидкостный нагреватель V
+nputils.machine.fluid_heater.zpm.name=Улучшеный жидкостный нагреватель VI
+nputils.machine.fluid_heater.uv.name=Улучшеный жидкостный нагреватель VII
+
+nputils.machine.fluid_solidifier.iv.name=Улучшеный жидкостный отвердитель IV
+nputils.machine.fluid_solidifier.luv.name=Улучшеный жидкостный отвердитель V
+nputils.machine.fluid_solidifier.zpm.name=Улучшеный жидкостный отвердитель VI
+nputils.machine.fluid_solidifier.uv.name=Улучшеный жидкостный отвердитель VII
+
+nputils.machine.forge_hammer.iv.name=Улучшеная кузнечный молот IV
+nputils.machine.forge_hammer.luv.name=Улучшеная кузнечный молот V
+nputils.machine.forge_hammer.zpm.name=Улучшеная кузнечный молот VI
+nputils.machine.forge_hammer.uv.name=Улучшеная кузнечный молот VII
+
+nputils.machine.forming_press.iv.name=Улучшеный формовочный пресс IV
+nputils.machine.forming_press.luv.name=Улучшеный формовочный пресс V
+nputils.machine.forming_press.zpm.name=Улучшеный формовочный пресс VI
+nputils.machine.forming_press.uv.name=Улучшеный формовочный пресс VII
+
+nputils.machine.lathe.iv.name=ЧПУ токарный станок IV
+nputils.machine.lathe.luv.name=ЧПУ токарный станок V
+nputils.machine.lathe.zpm.name=ЧПУ токарный станок VI
+nputils.machine.lathe.uv.name=ЧПУ токарный станок VII
+
+nputils.machine.microwave.iv.name=Улучшеная микроволновка IV
+nputils.machine.microwave.luv.name=Улучшеная микроволновка V
+nputils.machine.microwave.zpm.name=Улучшеная микроволновка VI
+nputils.machine.microwave.uv.name=Улучшеная микроволновка VII
+
+nputils.machine.mixer.iv.name=Улучшеный смеситель IV
+nputils.machine.mixer.luv.name=Улучшеный смеситель V
+nputils.machine.mixer.zpm.name=Улучшеный смеситель VI
+nputils.machine.mixer.uv.name=Улучшеный смеситель VII
+
+nputils.machine.ore_washer.iv.name=Многофункциональная стиральная машина I-360
+nputils.machine.ore_washer.luv.name=Многофункциональная стиральная машина I-720
+nputils.machine.ore_washer.zpm.name=Многофункциональная стиральная машина I-1080
+nputils.machine.ore_washer.uv.name=Многофункциональная стиральная машина I-1440
+
+nputils.machine.packer.iv.name=Короб'о'натор K-4001
+nputils.machine.packer.luv.name=Короб'о'натор K-4002
+nputils.machine.packer.zpm.name=Короб'о'натор K-4003
+nputils.machine.packer.uv.name=Короб'о'натор K-4004
+
+nputils.machine.unpacker.iv.name=Разкороб'о'натор U-4001
+nputils.machine.unpacker.luv.name=Разкороб'о'натор U-4002
+nputils.machine.unpacker.zpm.name=Разкороб'о'натор U-4003
+nputils.machine.unpacker.uv.name=Разкороб'о'натор U-4004
+
+nputils.machine.plasma_arc_furnace.iv.name=Улучшеная плазменная дуговая печь IV
+nputils.machine.plasma_arc_furnace.luv.name=Улучшеная плазменная дуговая печь V
+nputils.machine.plasma_arc_furnace.zpm.name=Улучшеная плазменная дуговая печь VI
+nputils.machine.plasma_arc_furnace.uv.name=Улучшеная плазменная дуговая печь VII
+
+nputils.machine.polarizer.iv.name=Улучшеный поляризатор IV
+nputils.machine.polarizer.luv.name=Улучшеный поляризатор V
+nputils.machine.polarizer.zpm.name=Улучшеный поляризатор VI
+nputils.machine.polarizer.uv.name=Улучшеный поляризатор VII
+
+gregtech.machine.laser_engraver.iv.name=Улучшеный точный лазерный гравер IV
+nputils.machine.laser_engraver.luv.name=Ультра точный лазерный гравер V
+nputils.machine.laser_engraver.zpm.name=Омега точный лазерный гравер VI
+nputils.machine.laser_engraver.uv.name=Супер-пупер омега точный лазерный гравер L-1401
+
+nputils.machine.sifter.iv.name=Улучшеная просеивающая машина IV
+nputils.machine.sifter.luv.name=Улучшеная просеивающая машина V
+nputils.machine.sifter.zpm.name=Улучшеная просеивающая машина VI
+nputils.machine.sifter.uv.name=Улучшеная просеивающая машина VII
+
+nputils.machine.thermal_centrifuge.iv.name=Полыхающий барабан T-6350
+nputils.machine.thermal_centrifuge.luv.name=Полыхающий барабан T-6360
+nputils.machine.thermal_centrifuge.zpm.name=Полыхающий барабан T-6370
+nputils.machine.thermal_centrifuge.uv.name=Полыхающий барабан T-6380
+
+nputils.machine.wiremill.iv.name=Улучшеный волочильный стан IV
+nputils.machine.wiremill.luv.name=Улучшеный волочильный стан V
+nputils.machine.wiremill.zpm.name=Улучшеный волочильный стан VI
+nputils.machine.wiremill.uv.name=Улучшеный волочильный стан VII
+
+nputils.machine.assembly_line.name=Сборочный конвеер
+
+nputils.machine.steam_mixer.name=Смеситель на паровой тяге
+
+nputils.machine.naquadah_reactor.mk1.name=Наквадах реактор Mk. 1
+nputils.machine.naquadah_reactor.mk2.name=Наквадах реактор Mk. 2
+nputils.machine.naquadah_reactor.mk3.name=Наквадах реактор Mk. 3
+nputils.machine.naquadah_reactor.mk4.name=Наквадах реактор Mk. 4
+
+nputils.machine.mass_fab.lv.name=Базовый фабрикатор материи
+nputils.machine.mass_fab.mv.name=Улучшеный фабрикатор материи
+nputils.machine.mass_fab.hv.name=Улучшеный фабрикатор материи II
+nputils.machine.mass_fab.ev.name=Улучшеный фабрикатор материи III
+nputils.machine.mass_fab.iv.name=Улучшеный фабрикатор материи IV
+nputils.machine.mass_fab.luv.name=Улучшеный фабрикатор материи V
+nputils.machine.mass_fab.zpm.name=Улучшеный фабрикатор материи VI
+nputils.machine.mass_fab.uv.name=Улучшеный фабрикатор материи VII
+
+nputils.machine.replicator.lv.name=Базовый репликатор
+nputils.machine.replicator.mv.name=Улучшеный репликатор
+nputils.machine.replicator.hv.name=Улучшеный репликатор II
+nputils.machine.replicator.ev.name=Улучшеный репликатор III
+nputils.machine.replicator.iv.name=Улучшеный репликатор IV
+nputils.machine.replicator.luv.name=Улучшеный репликатор V
+nputils.machine.replicator.zpm.name=Улучшеный репликатор VI
+nputils.machine.replicator.uv.name=Улучшеный репликатор VII
+
+nputils.machine.pump.iv.name=Улучшеный насос IV
+nputils.machine.pump.luv.name=Улучшеный насос V
+nputils.machine.pump.zpm.name=Улучшеный насос VI
+nputils.machine.pump.uv.name=Улучшеный насос VII
+
+gregtech.machine.air_collector.ev.name=Улучшеный воздухосборник III
+nputils.machine.air_collector.iv.name=Атмосферный коллектор I
+nputils.machine.air_collector.luv.name=Атмосферный коллектор II
+
+nputils.machine.replicator.tooltip=Производство наичистейших элементов
+
+nputils.machine.fusion_reactor.luv.name=Компьютер термоядерного реактора версия 1
+nputils.machine.fusion_reactor.zpm.name=Компьютер термоядерного реактора версия 2
+nputils.machine.fusion_reactor.uv.name=Компьютер термоядерного реактора версия 3
+
+nputils.machine.fisher_lv.name=Базовый автоматический рыболовный агригат
+nputils.machine.fisher_mv.name=Улучшеный автоматический рыболовный агригат
+nputils.machine.fisher_hv.name=Улучшеный автоматический рыболовный агригат II
+nputils.machine.fisher_ev.name=Улучшеный автоматический рыболовный агригат III
+nputils.machine.fisher_iv.name=Улучшеный автоматический рыболовный агригат VI
+nputils.machine.fisher_luv.name=Улучшеный автоматический рыболовный агригат V
+nputils.machine.fisher_zpm.name=Улучшеный автоматический рыболовный агригат VI
+nputils.machine.fisher_uv.name=Улучшеный автоматический рыболовный агригат VII
+
+tile.npu_multiblock_casing.tungstensteel_gearbox_casing.name=Корпус сборочного конвеера
+tile.npu_transparent_casing.reinforced_glass.name=Армированное стекло
+tile.npu_multiblock_casing.reactor_casing.name=Реакторный корпус
+
+metaitem.tool.bending_cylinder.name=%s гнущий цилиндр
+metaitem.tool.bending_cylinder_small.name=Малый %s гнущий цилиндр
+
+recipemap.cluster_mill.name=Прокатывание
+recipemap.circuit_assembler.name=Сборка микросхем
+recipemap.assembly_line.name=Сборочный конвеер
+recipemap.naquadah_reactor.name=Топливо для наквадах реактора
+recipemap.replicator.name=Репликация
+recipemap.mass_fab.name=Фабрикация Материи
+recipemap.disassembling_machine.name=Разборка
+
+recipemap.plasma_generator.name=Топливо для плазменной турбины
+
+material.coke=Коксовый уголь
+material.phosphorous_pentoxide=Пентоксид фосфора
+material.phosphoric_acid=Ортофосфорная кислота
+material.polyvinyl_acetate=Поливинилацетат
+material.phenol=Фенол
+material.bisphenol_a=Бисфенол А
+material.epoxid=Эпоксидная смола
+material.reinforced_epoxy_resin=Волоконно-укреплённая эпоксидная смола
+material.borosilicate_glass=Боросиликатное стекло
+material.polyvinyl_chloride=Поливинил хлорид
+material.vinyl_chloride=Винил хлорид
+material.ethylene=Этилен
+material.charcoal_byproducts=Побочные продукты древесного угля
+material.benzene=Бензол
+material.wood_gas=Древесный газ
+material.wood_vinegar=Древесный уксус
+material.wood_tar=Древесная смола
+material.sodium_hydroxide=Гидроксид натрия
+material.quicklime=Негашеная известь
+material.acetone=Ацетон
+material.sulfur_trioxide=Триоксид серы
+material.sulfur_dioxide=Диоксид серы
+material.glycerol=Глицерин
+material.fish_oil=Рыбий жир
+material.sodium_hydroxide_solution=Раствор гидроксида натрия
+material.methanol=Метанол
+material.carbon_monoxide=Угарный газ
+material.nitro_fuel=Цетановый дизель
+material.diluted_sulfuric_acid=Разбавленная серная кислота
+material.sodium_bisulfate=Бисульфат натрия
+material.chloroform=Хлороформ
+material.diluted_hydrochloric_acid=Разбавленная соляная кислота
+material.hypochlorous_acid=Хлорноватистая кислота
+material.ammonia=Амиак
+material.chloramine=Хлорамин
+material.dimethylamine=Диметиламин
+material.dimethylhidrazine=1,1-Диметилгидразин
+material.rocket_fuel=Ракетное топливо
+material.dinitrogen_tetroxide=Динитроген тетроксид
+material.silicon_rubber=Силиконовая резина
+material.polydimethylsiloxane=Полидиметилсилоксан
+material.dimethyldichlorosilane=Диметилдихлорсилан
+material.styrene=Стирол
+material.Полистирол=Полистирол
+material.butadiene=Бутадиен
+material.raw_styrene_butadiene_rubber=Сырой Стирол-бутадиеновый каучук
+material.styrene_butadiene_rubber=Стирол-бутадиеновый каучук
+material.dichlorobenzene=Дихлорбензол
+material.hydrochloric_acid=Соляная кислота
+material.acetic_acid=Уксусная кислота
+material.fermented_biomass=Забродившая биомасса
+material.potash=Поташ
+material.soda_ash=Кальцинированная сода
+material.hydrofluoric_acid=Плавиковая кислота
+material.nitric_oxide=Оксид азота
+material.methyl_acetate=Метилацетат
+material.ethenone=Кетен
+material.tetranitromethane=Тетранитрометан
+material.bio_diesel=Био-дизель
+material.raw_growth_medium=Сырая среда роста
+material.sterilized_growth_medium=Стерилизованная среда роста
+material.meat=Мясо
+material.cooked_meat=Приготовленное мясо
+material.vinyl_acetate=Винилацетат
+material.gallium_arsenide=Арсенид галлия
+material.polyphenylene_sulfide=Полифениленсульфид
+material.nickel_sulfate_water_solution=Водный раствор сульфата никеля
+material.blue_vitriol_water_solution=Водный раствор медного купороса
+material.propane=Пропан
+material.propene=Пропен
+material.ethane=Этан
+material.butene=Бутен
+material.butane=Бутан
+material.calcium_acetate=Раствор ацетата кальция
+material.cumene=Кумол
+material.indium_gallium_phosphide=Индий-Галлий фосфид
+material.platinum_group_sludge=Шлак платновой группы
+material.ferrite_mixture=Ферритовая смесь
+material.nickel_zinc_ferrite=Цинк-никелиевый феррит
+material.indium_concentrate=Индиевый концентрат
+material.lead_zinc_solution=Свинец-цинковый раствор
+material.tetrafluoroethylene=Тетрафторэтилен
+material.salt_water=Солёная вода
+material.hydrocracked_ethane=Этан прошедший крекинг водородом
+material.hydrocracked_ethylene=Этилен прошедший крекинг водородом
+material.hydrocracked_propene=Пропен прошедший крекинг водородом
+material.hydrocracked_propane=Пропан прошедший крекинг водородом
+material.hydrocracked_light_fuel=Легкое топливо прошедшее крекинг водородом
+material.hydrocracked_butane=Бутан прошедший крекинг водородом
+material.hydrocracked_naphtha=Лигроин прошедший крекинг водородом
+material.hydrocracked_heavy_fuel=Тяжёлое топливо прошедшее крекинг водородом
+material.hydrocracked_gas=Попутный газ прошедший крекинг водородом
+material.hydrocracked_butene=Бутен прошедший крекинг водородом
+material.hydrocracked_butadiene=Бутадиен прошедший крекинг водородом
+material.steamcracked_ethane=Этан прошедший крекинг паром
+material.steamcracked_ethylene=Этилен прошедший крекинг паром
+material.steamcracked_propene=Пропен прошедший крекинг паром
+material.steamcracked_propane=Пропан прошедший крекинг паром
+material.cracked_light_fuel=Лёгкое топливо прошедшее крекинг паром
+material.steamcracked_butane=Бутан прошедший крекинг паром
+material.steamcracked_naphtha=Легроин прошедший крекинг паром
+material.cracked_heavy_fuel=Тяжёлое топливо прошедлее крекинг паром
+material.steamcracked_gas=Попутный газ прошедший крекинг паром
+material.steamcracked_butene=Бутен прошедший крекинг паром
+material.steamcracked_butadiene=Бутадиен прошедший крекинг паром
+material.biogas=Биогаз
+material.chloromethane=Хлорметан
+material.allyl_chloride=Аллилхлорид
+material.isoprene=Изопропен
+material.massicot=Массикот
+material.antimony_trioxide=Триоксид сурьмы
+material.zincite=Цинкит
+material.cobalt_oxide=Оксид кобальта
+material.arsenic_trioxide=Триоксид мышьяка
+material.cupric_oxide=Оксид меди
+material.ferrosilite=Ферросилит
+material.magnesia=Жжёная магнезия
+material.npu_sodium_sulfide=Сульфид натрия
+material.neutral_matter=Нейтральная материя
+material.positive_matter=Позитивная материя
+material.neutronium=Нейтроний
+material.plasma=Плазменный конфайнмент
+material.lignite_coke=Кокс из бурого угля
+material.mv_superconductor_base=MV Основа суперпроводника
+material.hv_superconductor_base=HV Основа суперпроводника
+material.ev_superconductor_base=EV Основа суперпроводника
+material.iv_superconductor_base=IV Основа суперпроводника
+material.luv_superconductor_base=LuV Основа суперпроводника
+material.zpm_superconductor_base=ZPM Основа суперпроводника
+material.mv_superconductor=MV Суперпроводник
+material.hv_superconductor=HV Суперпроводник
+material.ev_superconductor=EV Суперпроводник
+material.iv_superconductor=IV Суперпроводник
+material.luv_superconductor=LuV Суперпроводник
+material.zpm_superconductor=ZPM Суперпроводник
+material.enderium=Эндериум
+material.alumino_silicate_wool=Алюмосиликатная шерсть
+item.alumino_silicate_wool.dust=Алюмосиликатная шерсть
+material.mica_based=Слюдяная мякоть
+item.mica_based.dust=Слюдяная мякоть
+material.iron_chloride=Хлорид железа III
+material.sand=Кварцевый песок
+material.electrical_steel=Электротехническая сталь
+
+item.epoxid.ingot=Брусок эпоксидной смолы
+item.epoxid.dustTiny=Крошечная пылька эпоксидной смолы
+item.epoxid.dustSmall=Малая пыль эпоксидной смолы
+item.epoxid.dust=Пыль эпоксидной смолы
+item.epoxid.nugget=Кусочек эпоксидной смолы
+item.epoxid.plateDense=Плотный лист эпоксидной смолы
+item.epoxid.plate=Лист эпоксидной смолы
+item.epoxid.foil=Тонкий лист эпоксидной смолы
+item.reinforced_epoxy_resin.ingot=Брусок из аримрованной эпоксидки
+item.reinforced_epoxy_resin.dustTiny=Крошечная пыльки аримрованной эпоксидки
+item.reinforced_epoxy_resin.dustSmall=Малая пыль аримрованной эпоксидки
+item.reinforced_epoxy_resin.dust=Пыль аримрованной эпоксидки
+item.reinforced_epoxy_resin.nugget=Кусочек аримрованной эпоксидки
+item.reinforced_epoxy_resin.plateDense=Плотный лист аримрованной эпоксидки
+item.reinforced_epoxy_resin.plate=Лист аримрованной эпоксидки
+item.reinforced_epoxy_resin.foil=Тонкий лист аримрованной эпоксидки
+item.borosilicate_glass.ingot=Брусок боросиликатного стекла
+item.borosilicate_glass.dustTiny=Крошечная пыль боросиликатного стекла
+item.borosilicate_glass.dustSmall=Малая пыль боросиликатного стекла
+item.borosilicate_glass.dust=Пыль боросиликатного стекла
+item.borosilicate_glass.nugget=Кусочек боросиликатного стекла
+item.borosilicate_glass.plateDense=Плотный лист боросиликатного стекла
+item.borosilicate_glass.plate=Лист боросиликатного стекла
+item.borosilicate_glass.foil=Тонкий лист боросиликатного стекла
+item.polyvinyl_chloride.ingot=Брусок поливинилхлорида
+item.polyvinyl_chloride.dustTiny=Крошечная пыль поливинилхлорида
+item.polyvinyl_chloride.dustSmall=Малая пыль поливинилхлорида 
+item.polyvinyl_chloride.dust=Пыль поливинилхлорида
+item.polyvinyl_chloride.nugget=Кусочек поливинилхлорида
+item.polyvinyl_chloride.plateDense=Плотный лист поливинилхлорида
+item.polyvinyl_chloride.plate=Лист из поливинилхлорида
+item.polyvinyl_chloride.foil=Тонкий лист из поливинилхлорида
+item.silicone_rubber.ingot=Брусок силиконовой резины
+item.silicone_rubber.dustTiny=Крошечная пыль силиконовой резины
+item.silicone_rubber.dustSmall=Малая пыль силиконовой резины
+item.silicone_rubber.dust=Пыль силиконовой резины
+item.silicone_rubber.nugget=Кусочек силиконовой резины
+item.silicone_rubber.plateDense=Плотный лист силиконовой резины
+item.silicone_rubber.plate=Лист из силиконовой резины
+item.silicone_rubber.foil=Тонкий лист из силиконовой резины
+item.Полистирол.ingot=Брусок полистирола
+item.Полистирол.dustTiny=Крошечная пыль полистирола
+item.Полистирол.dustSmall=Малая пыль полистирола
+item.Полистирол.dust=Пыль полистирола
+item.Полистирол.nugget=Кусочек полистирол
+item.Полистирол.plateDense=Плотный лист полистирол
+item.Полистирол.plate=Лист из полистирола
+item.Полистирол.foil=Тонкий лист из полистирола
+item.styrene_butadiene_rubber.ingot=Брусок стирол-бутадиенового каучука
+item.styrene_butadiene_rubber.dustTiny=Крошечная пыль стирол-бутадиенового каучука
+item.styrene_butadiene_rubber.dustSmall=Малая пыль стирол-бутадиенового каучука
+item.styrene_butadiene_rubber.dust=Пыль стирол-бутадиенового каучука
+item.styrene_butadiene_rubber.nugget=Кусочек стирол-бутадиенового каучука
+item.styrene_butadiene_rubber.plateDense=Плотный лист из стирол-бутадиенового каучука
+item.styrene_butadiene_rubber.plate=Лист из тирол-бутадиенового каучука
+item.styrene_butadiene_rubber.foil=Тонкий лист из стирол-бутадиенового каучука
+item.meat.dustTiny=Крошечная кучка молотого мяса
+item.meat.dustSmall=Малая куча молотого мяса
+item.meat.dust=Молотое мяса
+
+gregtech.multiblock.assembly_line.description=Сборочный конвеер - большой мультиблок состоящий от 5 до 16 "слоёв". В теории, это большая сборочная машина для создания более продвинутых деталей для ремесла.
+gregtech.multiblock.fusion_reactor_mk1.description=Термоядерный реактор - большая многоблочная структура использующаяся для термоядерного синтеза двух элементов в один. Версия 1 термоядерного реакторма может использовать LuV, ZPM или UV энерго-люки. За каждый люк внутренний буффер увеличиваеться на 100т.
+gregtech.multiblock.fusion_reactor_mk2.description=Термоядерный реактор - большая многоблочная структура использующаяся для термоядерного синтеза двух элементов в один. Версия 1 термоядерного реакторма может использовать ZPM или UV энерго-люки. За каждый люк внутренний буффер увеличиваеться на 200т.
+gregtech.multiblock.fusion_reactor_mk3.description=Термоядерный реактор - большая многоблочная структура использующаяся для термоядерного синтеза двух элементов в один. Версия 1 термоядерного реакторма может использовать UV энерго-люки. За каждый люк внутренний буффер увеличиваеться на 400т.
+
+item.material.oreprefix.plateCurved=Изогнутый %s лист
+item.material.oreprefix.ingotDouble=Двойной слиток %s
+
+metaitem.circuit.advanced_parts.name=Микропроцессор
+metaitem.circuit.advanced_parts.tooltip=Базовая микросхема
+metaitem.circuit.integrated.name=Программируемый контроллер
+metaitem.circuit.basic.name=Интегрированная микросхема
+metaitem.circuit.basic.tooltip=Базовая микросхема
+metaitem.circuit.advanced.name=Интегрированный процессор
+metaitem.circuit.advanced.tooltip=Хорошая микросхема
+metaitem.circuit.energy_flow.name=Сборный кристальный процессор
+metaitem.circuit.energy_flow.tooltip=Отличная микросхема
+metaitem.circuit.data_control.name=Сборный квантовый процессор
+metaitem.circuit.data_control.tooltip=Элитная микросхема
+metaitem.credit.darmstadtium.name=Нейтрониевая монета
+
+metaitem.rubber_drop.name=Каучук
+
+tile.metal_casing.primitive_bricks.name=Огнеупорный крипич
+gregtech.machine.primitive_blast_furnace.bronze.tooltip=Структура: 3x3x4 (ШxДxВ) Вся структура сделанна из огнеупорного кирпича (32 в сумме)./nПервый слой - квадрат 3x3./nВторой, третий, и четвёртые слои - с дыркой посередине./nЭтот блок нужно разместить во втором слое посередине с любой стороны./nСтороны доменной печи могут быть раздеденны между несколькими печами, если там нет контрлллера./n
+
+fluid.tile.water=Вода
+fluid.tile.lava=Лава

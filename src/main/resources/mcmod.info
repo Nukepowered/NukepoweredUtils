@@ -1,0 +1,16 @@
+[
+{
+  "modid": "nputils",
+  "name": "Nukepowered Utils",
+  "description": "An addon for GregTech Community Edition which adds missed stuff from GT5U, IC2 mod and IC2 addons. Mod was created especially for NP Server. ",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "https://nukepowered.info/nputils.html",
+  "updateUrl": "",
+  "authorList": [ "The_DnK" ],
+  "credits": "The creators of GTCE, GT5U and most importantly, GregoriusT.",
+  "logoFile": "assets/nputils/npbanner.png",
+  "screenshots": [],
+  "dependencies": ["gregtech"]
+}
+]

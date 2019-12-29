@@ -1,0 +1,26 @@
+{
+	"type": "nputils:fluid_recipe",
+	"result": {
+		"item": "gregtech:metal_casing",
+		"data": 1
+	},
+	"pattern":[
+		"BGB",
+		"BCB",
+		"BGB"
+	],
+	"key":  {
+		"G": {
+			"type": "forge:ore_dict",
+			"ore": "dustGypsum"
+		},
+		"B": {
+			"item": "nputils:npu_meta_item",
+			"data": 32001
+		},
+		"C": {
+			"type": "nputils:fluid",
+			"fluid": "concrete"
+		}
+	}
+}

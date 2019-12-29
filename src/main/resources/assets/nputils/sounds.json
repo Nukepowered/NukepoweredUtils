@@ -1,0 +1,6 @@
+{
+  "jet_engine": {
+    "category": "player",
+    "sounds": [ "nputils:jet_engine" ]
+  }
+}

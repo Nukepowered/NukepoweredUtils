@@ -1,0 +1,8 @@
+{
+	"ingredients": {
+		"fluid": "info.nukepowered.nputils.recipes.FluidIngredientFactory"
+	},
+	"recipes": {
+		"fluid_recipe": "info.nukepowered.nputils.recipes.FluidRecipeFactory"
+	}
+}
