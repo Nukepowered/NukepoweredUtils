@@ -56,6 +56,11 @@ public abstract class ArmorLogicSuite implements ISpecialArmorLogic {
 	public abstract void onArmorTick(World world, EntityPlayer player, ItemStack itemStack);
 	
 	@Override
+	public int getArmorLayersAmount(ItemStack itemStack) {
+        return 1;
+    }
+	
+	@Override
 	public ArmorProperties getProperties(EntityLivingBase player, @Nonnull ItemStack armor, DamageSource source, double damage, EntityEquipmentSlot equipmentSlot) {
 		IElectricItem item = armor.getCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null);
 		int damageLimit = Integer.MAX_VALUE;
@@ -92,7 +97,6 @@ public abstract class ArmorLogicSuite implements ISpecialArmorLogic {
 	}
 	
 	public void addInfo(ItemStack itemStack, List<String> lines) {
-		lines.add(I18n.format("metaarmor.render_warning"));
 	}
 	
 	public ActionResult<ItemStack> onRightClick(World world, EntityPlayer player, EnumHand hand) {

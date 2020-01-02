@@ -266,8 +266,6 @@ metaitem.solar_cell.monocrystalline.tooltip=Производит энергию 
 metaitem.plate.monocrystall_silicone.name=Тонкая монокристаллическая пластинка кремния
 metaitem.plate.monocrystall_silicone.tooltip=Она крайне чиста!
 
-metaarmor.render_warning=Если у вас присутствуют проблемы с отображением брони, то это не баг NPU. Пожалуйста обратитесь к автору GTCE.
-
 metaarmor.nms.nightvision.enabled=Костюм NanoMuscle™: Ночное зрение активировано
 metaarmor.nms.nightvision.disabled=Костюм NanoMuscle™: Ночное зрение отключено
 

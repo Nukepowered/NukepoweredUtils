@@ -134,6 +134,11 @@ public class BatteryPack extends ArmorLogicSuite {
 	}
 	
 	@Override
+	public int getArmorLayersAmount(ItemStack itemStack) {
+        return 2;
+    }
+	
+	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
 		return String.format("nputils:textures/armor/battery_pack_%s.png", GTValues.VN[tier].toLowerCase());
 	}

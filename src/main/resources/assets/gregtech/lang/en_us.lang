@@ -265,8 +265,6 @@ metaitem.solar_cell.monocrystalline.tooltip=Can produce energy from sun!
 metaitem.plate.monocrystall_silicone.name=Thin monocrystalline silicon plate
 metaitem.plate.monocrystall_silicone.tooltip=It is really clean!
 
-metaarmor.render_warning=If you have armor rendering problem, it isn't NPU bug. Please report about this to GTCE's author.
-
 metaarmor.nms.nightvision.enabled=NanoMuscle™ Suite: NightVision enabled
 metaarmor.nms.nightvision.disabled=NanoMuscle™ Suite: NightVision disabled
 

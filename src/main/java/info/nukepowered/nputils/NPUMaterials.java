@@ -151,9 +151,6 @@ public class NPUMaterials implements IMaterialHandler {
         Materials.NitroFuel.addFlag(Material.MatFlags.DISABLE_DECOMPOSITION);
         Materials.Ash.addFlag(Material.MatFlags.DISABLE_DECOMPOSITION);
         
-		//TODO: Archengius did not think of this.
-		Materials.Wood.setBurnTime(300);
-        
         OrePrefix.gemChipped.setIgnored(LigniteCoke);
         OrePrefix.gemFlawed.setIgnored(LigniteCoke);
         OrePrefix.gemFlawless.setIgnored(LigniteCoke);

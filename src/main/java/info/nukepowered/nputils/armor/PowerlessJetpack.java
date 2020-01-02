@@ -264,7 +264,6 @@ public class PowerlessJetpack implements IArmorLogic {
 		
 		@Override
 		public void addInformation(ItemStack itemStack, List<String> lines) {
-			lines.add(I18n.format("metaarmor.render_warning"));
 		}
 	}
 	
