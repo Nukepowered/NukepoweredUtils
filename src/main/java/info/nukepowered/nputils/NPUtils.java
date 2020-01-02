@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = NPUtils.MODID, name = NPUtils.NAME, version = NPUtils.VERSION, dependencies = "required-after:gregtech;after:tconstruct")
+@Mod(modid = NPUtils.MODID, name = NPUtils.NAME, version = NPUtils.VERSION, dependencies = "required-after:gregtech@[1.8.13.470,);after:tconstruct")
 public class NPUtils {
 	public static final String MODID = "nputils";
 	public static final String NAME = "Nukepowered Utils";
