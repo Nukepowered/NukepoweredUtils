@@ -12,7 +12,7 @@ public class NPUtils {
 	public static final String MODID = "nputils";
 	public static final String NAME = "Nukepowered Utils";
 	public static final String VERSION = "@VERSION@";
-	@SidedProxy(modId = MODID, clientSide = "nputils.ClientProxy", serverSide = "nputils.CommonProxy")
+	@SidedProxy(modId = MODID, clientSide = "info.nukepowered.nputils.ClientProxy", serverSide = "info.nukepowered.nputils.CommonProxy")
 	private static CommonProxy proxy;
 
 	

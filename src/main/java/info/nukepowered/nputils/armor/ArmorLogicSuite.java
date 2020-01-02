@@ -2,6 +2,8 @@ package info.nukepowered.nputils.armor;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 
@@ -27,11 +29,11 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ISpecialArmor;
+import net.minecraftforge.common.ISpecialArmor.ArmorProperties;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class ArmorLogicSuite implements ISpecialArmorLogic, ISpecialArmor {
+public abstract class ArmorLogicSuite implements ISpecialArmorLogic {
 	
 	protected final int energyPerUse;
 	protected final int tier;
@@ -54,7 +56,7 @@ public abstract class ArmorLogicSuite implements ISpecialArmorLogic, ISpecialArm
 	public abstract void onArmorTick(World world, EntityPlayer player, ItemStack itemStack);
 	
 	@Override
-	public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot) {
+	public ArmorProperties getProperties(EntityLivingBase player, @Nonnull ItemStack armor, DamageSource source, double damage, EntityEquipmentSlot equipmentSlot) {
 		IElectricItem item = armor.getCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null);
 		int damageLimit = Integer.MAX_VALUE;
 		if (source.isUnblockable()) return new ArmorProperties(0, 0.0, 0);
@@ -108,11 +110,6 @@ public abstract class ArmorLogicSuite implements ISpecialArmorLogic, ISpecialArm
 	}
 	
 	@Override
-	public void damageArmor(EntityLivingBase entity, ItemStack stack, DamageSource source, int damage, int slot) {
-		this.damageArmor(entity, stack, source, damage, getSlotByIndex(slot));
-	}
-	
-	@Override
 	public void damageArmor(EntityLivingBase entity, ItemStack itemStack, DamageSource source, int damage, EntityEquipmentSlot equipmentSlot) {
 	}
 
@@ -152,15 +149,6 @@ public abstract class ArmorLogicSuite implements ISpecialArmorLogic, ISpecialArm
 		if (cont.getCharge() == 0) return;
 		float energyMultiplier = cont.getCharge() * 100.0F / cont.getMaxCharge();
 		this.HUD.newString(I18n.format("metaarmor.hud.energy_lvl", String.format("%.1f", energyMultiplier) + "%"));
-	}
-	
-	private static EntityEquipmentSlot getSlotByIndex(int slot) {
-		switch (slot) {
-	        case 0: return EntityEquipmentSlot.FEET;
-	        case 1: return EntityEquipmentSlot.LEGS;
-	        case 2: return EntityEquipmentSlot.CHEST;
-	        default: return EntityEquipmentSlot.HEAD;
-		}
 	}
 	
 	public int getEnergyPerUse() {

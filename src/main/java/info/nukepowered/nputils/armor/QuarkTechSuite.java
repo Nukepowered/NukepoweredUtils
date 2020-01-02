@@ -32,6 +32,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ISpecialArmor.ArmorProperties;
 
 public class QuarkTechSuite extends ArmorLogicSuite {
 	protected static final Map<Potion, Integer> potionRemovalCost = new IdentityHashMap<>();
@@ -209,7 +210,7 @@ public class QuarkTechSuite extends ArmorLogicSuite {
 	}
 	
 	@Override
-	public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot) {
+	public ArmorProperties getProperties(EntityLivingBase player, @Nonnull ItemStack armor, DamageSource source, double damage, EntityEquipmentSlot equipmentSlot) {
 		int damageLimit = Integer.MAX_VALUE;
 		IElectricItem item = armor.getCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null);
 		if (energyPerUse > 0) {
@@ -226,11 +227,6 @@ public class QuarkTechSuite extends ArmorLogicSuite {
 			}
 		}
 		return new ArmorProperties(8, getDamageAbsorption() * getAbsorption(armor), damageLimit);
-	}
-	
-	@Override
-	public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage, EntityEquipmentSlot equipmentSlot) {
-		return null;
 	}
 	
 	@Override

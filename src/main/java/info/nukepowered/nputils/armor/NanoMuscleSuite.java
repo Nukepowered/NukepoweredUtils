@@ -21,6 +21,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ISpecialArmor.ArmorProperties;
 
 public class NanoMuscleSuite extends ArmorLogicSuite {
 	
@@ -90,7 +91,7 @@ public class NanoMuscleSuite extends ArmorLogicSuite {
     }
 	
 	@Override
-	public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot) {
+	public ArmorProperties getProperties(EntityLivingBase player, @Nonnull ItemStack armor, DamageSource source, double damage, EntityEquipmentSlot equipmentSlot) {
 		IElectricItem container = armor.getCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null);
 		int damageLimit = Integer.MAX_VALUE;
 		if (source == DamageSource.FALL && this.getEquipmentSlot(armor) == EntityEquipmentSlot.FEET) {
@@ -99,12 +100,7 @@ public class NanoMuscleSuite extends ArmorLogicSuite {
 			}
 			return new ArmorProperties(10, (damage < 8.0) ? 1.0 : 0.875, damageLimit);
 		} 
-		return super.getProperties(player, armor, source, damage, slot);
-	}
-	
-	@Override
-	public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage, EntityEquipmentSlot equipmentSlot) {
-		return null;
+		return super.getProperties(player, armor, source, damage, equipmentSlot);
 	}
 	
 	@Override
