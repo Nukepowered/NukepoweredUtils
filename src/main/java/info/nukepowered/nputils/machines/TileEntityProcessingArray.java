@@ -15,6 +15,7 @@ import gregtech.api.render.Textures;
 import gregtech.api.util.GTUtility;
 import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import gregtech.common.blocks.MetaBlocks;
+import info.nukepowered.nputils.api.NPULib;
 import info.nukepowered.nputils.recipes.NPURecipeMaps;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,6 +29,7 @@ import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
@@ -259,18 +261,56 @@ public class TileEntityProcessingArray extends RecipeMapMultiblockController {
 				return false;
 			}
 			
-			int usableMachinesAmount = (int) (getMaxVoltage() / this.recipeVoltage);
 			
-			for (int i = 0; i < Math.min(this.multiplier, usableMachinesAmount); i++) {
-				// TODO FIX IT
-				boolean canPutItems = MetaTileEntity.addItemsToItemHandler(getOutputInventory(), true, recipe.getAllItemOutputs(getOutputInventory().getSlots()));
-				boolean canPutFluids = MetaTileEntity.addFluidsToFluidHandler(getOutputTank(), true, recipe.getFluidOutputs());
+			int usableMachinesAmount = (int) (getMaxVoltage() / this.recipeVoltage);
+			List<ItemStack> outItems = recipe.getAllItemOutputs(getOutputInventory().getSlots());
+			List<FluidStack> outFluids = recipe.getFluidOutputs();
+			
+			for (int i = 1; i <= Math.min(this.multiplier, usableMachinesAmount); i++) {
+				List<ItemStack> currentOutItems = NPULib.copyStackList(outItems);
+				List<FluidStack> currentOutFluids = GTUtility.copyFluidList(outFluids);
 				
+				for (int y = 0; y < outItems.size(); y++) {
+					ItemStack current = currentOutItems.get(y);
+					int newAmount = outItems.get(y).getCount() * i;
+					if (newAmount > current.getMaxStackSize()) {
+						currentOutItems.remove(y);
+						currentOutItems.addAll(y, NPULib.getStackedList(current, newAmount));
+					} else {
+						current.setCount(newAmount);
+					}
+				}
+				
+				for (int y = 0; y < currentOutFluids.size(); y++) {
+					FluidStack current = currentOutFluids.get(y);
+					current.amount = outFluids.get(y).amount * i;
+				}
+				
+				List<IFluidTank> tanks = getOutputFluidInventory().getFluidTanks();
+				boolean canInsert = true;
+				
+				if (tanks.size() <= currentOutFluids.size()) {
+					for (int y = 0; y < tanks.size(); y++) {
+						IFluidTank tank = tanks.get(y);
+						FluidStack stack = currentOutFluids.get(y);
+						if ((tank.getCapacity() - tank.getFluidAmount()) < stack.amount) {
+							canInsert = false;
+						}
+					}
+				}
+				
+				boolean canPutItems = MetaTileEntity.addItemsToItemHandler(getOutputInventory(), true, currentOutItems) &&
+						GTUtility.itemHandlerToList(getOutputInventory()).size() >= currentOutItems.size();
+				boolean canPutFluids = MetaTileEntity.addFluidsToFluidHandler(getOutputFluidInventory(), true, currentOutFluids) &&
+						canInsert && (tanks.size() <= currentOutFluids.size());
+
 				
 				if (canPutItems && canPutFluids) {
 					if (recipe.matches(true, getInputInventory(), getInputTank())) {
 						this.successfulOperations++;
 					} else break;
+				} else {
+					break;
 				}
 			}
 			
@@ -294,14 +334,6 @@ public class TileEntityProcessingArray extends RecipeMapMultiblockController {
 				for (ItemStack stack : stacks) itemOutputs.add(stack);
 				for (FluidStack stack : fluidStacks) fluidOutputs.add(stack);
 			}
-			
-			
-//			for (FluidStack stack : recipe.getFluidOutputs()) {
-//				int newAmount = stack.amount * this.successfulOperations;
-//				FluidStack sample = stack.copy();
-//				sample.amount = newAmount;
-//				fluidOutputs.add(sample);
-//			}
 			
 			this.fluidOutputs = fluidOutputs;
 			this.itemOutputs = itemOutputs;
@@ -327,7 +359,7 @@ public class TileEntityProcessingArray extends RecipeMapMultiblockController {
 			
 			if (this.recipes != null) {
 				boolean dirty = checkRecipeInputsDirty(importInventory, importFluids);
-				if (dirty || this.forceRecipeRecheck) {
+				if (dirty || this.forceRecipeRecheck || getWorld().getWorldTime() % 40 == 0) {
 					this.forceRecipeRecheck = false;
 					currentRecipe = findRecipe(maxVoltage, importInventory, importFluids);
 					if (currentRecipe != null) {

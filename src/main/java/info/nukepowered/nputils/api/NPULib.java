@@ -45,6 +45,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
@@ -57,6 +58,49 @@ public class NPULib {
 	
 	public static final Side SIDE = FMLCommonHandler.instance().getSide();
 	public static final SoundEvent JET_ENGINE = new SoundEvent(new ResourceLocation("nputils:jet_engine"));
+	
+	
+	public static List<ItemStack> getStackedList(ItemStack sample, int totalAmount) {
+		List<ItemStack> result = new ArrayList<>();
+		if (totalAmount > sample.getMaxStackSize()) {
+			double totalStacks = (totalAmount * 1.0D) / sample.getMaxStackSize();
+			if (totalStacks == MathHelper.floor(totalStacks)) {
+				for (int i = 0; i < totalStacks; i++) {
+					ItemStack curr = sample.copy();
+					curr.setCount(curr.getMaxStackSize());
+					result.add(curr);
+				}
+			} else {
+				totalAmount -= MathHelper.floor(totalStacks) * sample.getMaxStackSize();
+				for (int i = 0; i < MathHelper.floor(totalStacks); i++) {
+					ItemStack curr = sample.copy();
+					curr.setCount(curr.getMaxStackSize());
+					result.add(curr);
+				}
+				ItemStack curr = sample.copy();
+				curr.setCount(totalAmount);
+				result.add(curr);
+			}
+		} else {
+			ItemStack res = sample.copy();
+			res.setCount(totalAmount);
+			result.add(res);
+		}
+		
+		return result;
+	}
+	
+	public static List<ItemStack> copyStackList(List<ItemStack> itemStacks) {
+        List<ItemStack> stacks = new ArrayList<>();
+        for (int i = 0; i < itemStacks.size(); i++) {
+        	ItemStack stack = itemStacks.get(i);
+        	if (!stack.isEmpty()) {
+        		stacks.add(stack.copy());
+        	}
+        }
+        
+        return stacks;
+    }
 	
 	/** Check is possible to charge item
 	 * 
@@ -247,6 +291,21 @@ public class NPULib {
 		int index = 1;
 		for (ItemStack item : list) {
 			result += item.getCount() + "x " + item.getDisplayName();
+			if (index == list.size()) {
+				result += " ]";
+			} else {
+				result += ", ";
+			}
+			++index;
+		}
+		NPULog.info(result);
+	}
+	
+	public static void printFluidList(List<FluidStack> list) {
+		String result = "[ ";
+		int index = 1;
+		for (FluidStack fluid : list) {
+			result += fluid.amount + "x " + fluid.getLocalizedName();
 			if (index == list.size()) {
 				result += " ]";
 			} else {
