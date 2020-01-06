@@ -111,25 +111,13 @@ public class NPUMaterials implements IMaterialHandler {
         Materials.Naquadah.setFluidPipeProperties(1000, 19000, true);
         Neutronium.setFluidPipeProperties(2800, 1000000, true);
         
+        //TODO remove this
         Materials.Diatomite.addFlag(DustMaterial.MatFlags.GENERATE_ORE);
         Materials.GarnetSand.addFlag(DustMaterial.MatFlags.GENERATE_ORE);
+        
         Materials.Mica.addFlag(DustMaterial.MatFlags.GENERATE_ORE);
         Materials.Asbestos.addFlag(DustMaterial.MatFlags.GENERATE_ORE);
-        Materials.Kyanite.addFlag(DustMaterial.MatFlags.GENERATE_ORE);
-        Materials.Pollucite.addFlag(DustMaterial.MatFlags.GENERATE_ORE);
-        Materials.BasalticMineralSand.addFlag(DustMaterial.MatFlags.GENERATE_ORE);
-        Materials.GraniticMineralSand.addFlag(DustMaterial.MatFlags.GENERATE_ORE);
-        Materials.FullersEarth.addFlag(DustMaterial.MatFlags.GENERATE_ORE);
-        Materials.Gypsum.addFlag(DustMaterial.MatFlags.GENERATE_ORE);
-        Materials.Zeolite.addFlag(DustMaterial.MatFlags.GENERATE_ORE);
         Materials.Kaolinite.addFlag(DustMaterial.MatFlags.GENERATE_ORE);
-        Materials.Dolomite.addFlag(DustMaterial.MatFlags.GENERATE_ORE);
-        Materials.Wollastonite.addFlag(DustMaterial.MatFlags.GENERATE_ORE);
-        Materials.Trona.addFlag(DustMaterial.MatFlags.GENERATE_ORE);
-        Materials.Andradite.addFlag(DustMaterial.MatFlags.GENERATE_ORE);
-        Materials.Vermiculite.addFlag(DustMaterial.MatFlags.GENERATE_ORE);
-        Materials.Alunite.addFlag(DustMaterial.MatFlags.GENERATE_ORE);
-        Materials.GlauconiteSand.addFlag(DustMaterial.MatFlags.GENERATE_ORE);
         
         Materials.Naquadah.addFlag(IngotMaterial.MatFlags.GENERATE_FOIL);
         Materials.NaquadahEnriched.addFlag(IngotMaterial.MatFlags.GENERATE_FOIL);

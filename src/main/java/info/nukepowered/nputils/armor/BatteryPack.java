@@ -107,8 +107,8 @@ public class BatteryPack extends ArmorLogicSuite {
 		} else {
 			state = I18n.format("metaarmor.hud.status.disabled");
 		}
-		lines.add(I18n.format("metaarom.energy_share.tooltip", state));
-		lines.add(I18n.format("metaarom.energy_share.tooltip.guide"));
+		lines.add(I18n.format("metaarmor.energy_share.tooltip", state));
+		lines.add(I18n.format("metaarmor.energy_share.tooltip.guide"));
 		super.addInfo(itemStack, lines);
 	}
 	

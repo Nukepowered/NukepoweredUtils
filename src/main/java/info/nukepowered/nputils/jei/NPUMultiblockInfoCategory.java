@@ -25,7 +25,8 @@ public class NPUMultiblockInfoCategory implements IRecipeCategory<MultiblockInfo
 				new MultiblockInfoRecipeWrapper(new AsseblyLineInfo()),
 				new MultiblockInfoRecipeWrapper(new FusionReactor1Info()),
 				new MultiblockInfoRecipeWrapper(new FusionReactor2Info()),
-				new MultiblockInfoRecipeWrapper(new FusionReactor3Info())
+				new MultiblockInfoRecipeWrapper(new FusionReactor3Info()),
+				new MultiblockInfoRecipeWrapper(new ProcessingArrayInfo())
 		), "nputils:multiblock_info");
 	}
 	

@@ -285,8 +285,11 @@ metaarmor.hud.gravi_engine=GraviEngine: %s
 
 metaarmor.energy_share.enable=Energy Supply: Gadgets charging enabled
 metaarmor.energy_share.disable=Energy Supply: Gadgets charging disabled
-metaarom.energy_share.tooltip=Supply mode: %s
-metaarom.energy_share.tooltip.guide=To change mode shift-right click when holding item
+metaarmor.energy_share.tooltip=Supply mode: %s
+metaarmor.energy_share.tooltip.guide=To change mode shift-right click when holding item
+
+nputils.multiblock.processing_array.nomachines=No machines installed
+nputils.multiblock.processing_array.eu_required=Required EU/t: %s (%s)
 
 metaitem.liquid_fuel_jetpack.name=§eLiquid fuel jetpack
 metaitem.impeller_jetpack.name=§eImpeller jetpack
@@ -322,6 +325,8 @@ nputils.machine.solar_panel.polycrystalline.name=Polycrystalline silicon solar p
 nputils.machine.solar_panel.polycrystalline.description=A good choice between the cost of production and energy production.
 nputils.machine.solar_panel.monocrystalline.name=Monocrystalline silicon solar panel
 nputils.machine.solar_panel.monocrystalline.description=The best power efficiency, but cost of production is big.
+
+nputils.machine.processing_array.name=Processing Array
 
 nputils.machine.power_inverter.lv.name=§eHigh-current power inverter Mk.I
 nputils.machine.power_inverter.mv.name=§bHigh-current power inverter Mk.II
@@ -622,6 +627,7 @@ recipemap.naquadah_reactor.name=Naquadah Reactor Fuels
 recipemap.replicator.name=Replicator
 recipemap.mass_fab.name=Mass Fabricator
 recipemap.disassembling_machine.name=Disassembling
+recipemap.processing_array.name=Processing Array
 
 recipemap.plasma_generator.name=Plasma Turbine Fuels
 
@@ -830,6 +836,7 @@ item.meat.dustSmall=Small Pile of Mince Meat
 item.meat.dust=Mince Meat
 
 gregtech.multiblock.assembly_line.description=The Assembly Line is a large multiblock structure consisting of 5 to 16 "slices". In theory, it's large Assembling Machine, used for creating advanced crafting components.
+gregtech.multiblock.processing_array.description=The Processing Array combines up to 16 single block machines in a single multiblock.
 gregtech.multiblock.fusion_reactor_mk1.description=The Fusion Reactor Mark 1 is a large multiblock structure used for fusing elements into heavier ones. The Mark 1 Fusion Reactor can use LuV, ZPM or UV Energy Hatches. For every Hatch it has its buffer increases by 100k.
 gregtech.multiblock.fusion_reactor_mk2.description=The Fusion Reactor Mark 2 is a large multiblock structure used for fusing elements into heavier ones. The Mark 2 Fusion Reactor can use ZPM or UV Energy Hatches. For every Hatch it has its buffer increases by 200k.
 gregtech.multiblock.fusion_reactor_mk3.description=The Fusion Reactor Mark 3 is a large multiblock structure used for fusing elements into heavier ones. The Mark 3 Fusion Reactor can only use UV Energy Hatches. For every Hatch it has its buffer increases by 400k.

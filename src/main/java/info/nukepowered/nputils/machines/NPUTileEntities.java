@@ -63,6 +63,7 @@ public class NPUTileEntities {
     public static TileEntityFusionReactor[] FUSION_REACTOR = new TileEntityFusionReactor[3];
 
     public static TileEntityAssemblyLine ASSEMBLY_LINE;
+    public static TileEntityProcessingArray PROCESSING_ARRAY;
 
     public static SteamMixer STEAM_MIXER;
     
@@ -493,8 +494,6 @@ public class NPUTileEntities {
         FUSION_REACTOR[1] = GregTechAPI.registerMetaTileEntity(2502, new TileEntityFusionReactor(location("fusion_reactor.zpm"), 7));
         FUSION_REACTOR[2] = GregTechAPI.registerMetaTileEntity(2503, new TileEntityFusionReactor(location("fusion_reactor.uv"), 8));
         
-        STEAM_MIXER = GregTechAPI.registerMetaTileEntity(2221, new SteamMixer(location("steam_mixer")));
-        
         if (NPUConfig.GT5U.highTierPumps) {
             PUMP[0] = GregTechAPI.registerMetaTileEntity(2201, new MetaTileEntityPump(location("pump.iv"), 5));
             PUMP[1] = GregTechAPI.registerMetaTileEntity(2202, new MetaTileEntityPump(location("pump.luv"), 6));
@@ -529,6 +528,9 @@ public class NPUTileEntities {
         POWER_INVERTER[1] = GregTechAPI.registerMetaTileEntity(2219, new TileEntityPowerInverter(location("power_inverter.mv"), GTValues.MV));
         POWER_INVERTER[2] = GregTechAPI.registerMetaTileEntity(2220, new TileEntityPowerInverter(location("power_inverter.hv"), GTValues.HV));
         
+        STEAM_MIXER = GregTechAPI.registerMetaTileEntity(2221, new SteamMixer(location("steam_mixer")));
+        
+        PROCESSING_ARRAY = GregTechAPI.registerMetaTileEntity(2222, new TileEntityProcessingArray(location("processing_array")));
 	}
 	
 	private static ResourceLocation location(String name) {
