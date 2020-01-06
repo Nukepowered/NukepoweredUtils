@@ -227,12 +227,21 @@ public class TileEntityProcessingArray extends RecipeMapMultiblockController {
 		protected Recipe findRecipe(long maxVoltage, IItemHandlerModifiable inputs, IMultipleTankHandler fluidInputs) {
 			Recipe result = null;
 			if (this.recipes != null && this.multiplier > 0 && this.recipeVoltage > 0) {
-				for (int i = 0; i < inputs.getSlots(); i++) {
-					ItemStack stack = inputs.getStackInSlot(i);
-					if (stack.isEmpty()) continue;
-					result = this.recipes.findRecipe(this.recipeVoltage, Collections.singletonList(stack), GTUtility.fluidHandlerToList(fluidInputs), this.getMinTankCapacity(this.getOutputTank()));
-					if (result != null) break;
+				int outTankCap = this.getMinTankCapacity(this.getOutputTank());
+				
+				// try check recipe
+				result = this.recipes.findRecipe(this.recipeVoltage, inputs, fluidInputs, outTankCap);
+				
+				// if recipe not found, check recipe for every slot (for one slots machines like furnance)
+				if (result == null) {
+					for (int i = 0; i < inputs.getSlots(); i++) {
+						ItemStack stack = inputs.getStackInSlot(i);
+						if (stack.isEmpty()) continue;
+						result = this.recipes.findRecipe(this.recipeVoltage, Collections.singletonList(stack), GTUtility.fluidHandlerToList(fluidInputs), outTankCap);
+						if (result != null) break;
+					}
 				}
+				
 			}
 			
 			return result;
