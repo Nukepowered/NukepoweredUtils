@@ -111,10 +111,6 @@ public class NPUMaterials implements IMaterialHandler {
         Materials.Naquadah.setFluidPipeProperties(1000, 19000, true);
         Neutronium.setFluidPipeProperties(2800, 1000000, true);
         
-        //TODO remove this
-        Materials.Diatomite.addFlag(DustMaterial.MatFlags.GENERATE_ORE);
-        Materials.GarnetSand.addFlag(DustMaterial.MatFlags.GENERATE_ORE);
-        
         Materials.Mica.addFlag(DustMaterial.MatFlags.GENERATE_ORE);
         Materials.Asbestos.addFlag(DustMaterial.MatFlags.GENERATE_ORE);
         Materials.Kaolinite.addFlag(DustMaterial.MatFlags.GENERATE_ORE);
