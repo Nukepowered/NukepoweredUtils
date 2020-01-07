@@ -18,6 +18,7 @@ import info.nukepowered.nputils.recipes.MatterReplication;
 import info.nukepowered.nputils.recipes.NPUMachineRecipeRemoval;
 import info.nukepowered.nputils.recipes.NPURecipeAddition;
 import info.nukepowered.nputils.recipes.TinkersIntegration;
+import info.nukepowered.nputils.worldgen.WorldGenRegister;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -45,6 +46,7 @@ public class CommonProxy {
 	}
 	
 	public void init() {
+		WorldGenRegister.init();
 		if (Loader.isModLoaded("forestry") && NPUConfig.Integration.ForestryIntegration)
 			ForestryIntegration.removeFabricatorRecipes();
 	}

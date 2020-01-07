@@ -16,19 +16,31 @@ public class NPULog {
 		logger.info("##########################################################");
 	}
 	
-	public static <T> void info(T str) {
-		logger.info(str);
+	public static <T> void info(T obj) {
+		logger.info(obj);
 	}
 	
-	public static <T> void warn(T str) {
-		logger.warn(str);
+	public static <T> void warn(T obj) {
+		logger.warn(obj);
+	}
+	
+	public static <T> void error(T obj) {
+		logger.error(obj);
+	}
+
+	public static <T> void fatal(T obj) {
+		logger.fatal(obj);
 	}
 	
 	public static <T> void warn(String str, T e) {
 		logger.warn(str, e);
 	}
 	
-	public static <T> void error(T str) {
-		logger.error(str);
+	public static <T> void error(String str, T e) {
+		logger.error(str, e);
+	}
+	
+	public static <T> void fatal(String str, T e) {
+		logger.fatal(str, e);
 	}
 }
