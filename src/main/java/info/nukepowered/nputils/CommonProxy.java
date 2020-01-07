@@ -46,9 +46,9 @@ public class CommonProxy {
 	}
 	
 	public void init() {
-		WorldGenRegister.init();
 		if (Loader.isModLoaded("forestry") && NPUConfig.Integration.ForestryIntegration)
 			ForestryIntegration.removeFabricatorRecipes();
+		WorldGenRegister.init();
 	}
 	
 	public void postInit() {

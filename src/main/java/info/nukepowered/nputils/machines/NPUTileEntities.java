@@ -75,6 +75,7 @@ public class NPUTileEntities {
 
     public static TileEntityFisher[] FISHER = new TileEntityFisher[8];
 	
+    // TODO Vending machine & coins
 	
 	public static void init() {
 		CIRCUITASSEMBLER[0] = GregTechAPI.registerMetaTileEntity(2000, new SimpleMachineMetaTileEntity(location("circuit_assembler.lv"), NPURecipeMaps.CIRCUIT_ASSEMBLER_RECIPES, Textures.ASSEMBLER_OVERLAY, 1));

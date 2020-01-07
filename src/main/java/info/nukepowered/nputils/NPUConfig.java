@@ -14,6 +14,9 @@ public class NPUConfig {
 	@Config.Comment({"Set to false to disable steam machines ARC furnance recipes", "This working without any calculation, just written recipes, so if you are changed it - disable this property"})
 	public static boolean enableSteamMachineRecycling = true;
 	
+	@Config.Comment({"Set to false to disable replacing of standalone GT worldgen", "This function is testing, there is no any veins yet"})
+	public static boolean replaceGTWorldGen = false;
+	
 	@Config.Comment("Config options for stuff from GT6")
 	public static GT6 GT6 = new GT6();
 	
