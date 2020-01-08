@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import org.apache.commons.lang3.ArrayUtils;
 
+import appeng.core.localization.GuiText;
 import codechicken.lib.raytracer.CuboidRayTraceResult;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.ColourMultiplier;
@@ -11,6 +12,7 @@ import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
 import gregtech.api.GTValues;
 import gregtech.api.capability.impl.EnergyContainerHandler;
+import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntityHolder;
@@ -21,17 +23,11 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
-import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityVendingMachine extends MetaTileEntity {
 	
 	private EnergyContainerHandler energyContainer;
 	private EnumFacing outputFacing;
-	
-	protected IItemHandler tradeOut;
-	protected IItemHandler tradeIn;
 	
 	public TileEntityVendingMachine(ResourceLocation metaTileEntityId) {
 		super(metaTileEntityId);
@@ -54,12 +50,6 @@ public class TileEntityVendingMachine extends MetaTileEntity {
 	}
 	
 	@Override
-	protected IItemHandlerModifiable createImportItemHandler() {
-		// TODO 
-		return new ItemStackHandler(4);
-	}
-	
-	@Override
     protected void initializeInventory() {
 		super.initializeInventory();
 	}
@@ -70,7 +60,12 @@ public class TileEntityVendingMachine extends MetaTileEntity {
 	
 	@Override
 	protected ModularUI createUI(EntityPlayer entityPlayer) {
-		ModularUI.Builder builder = ModularUI.defaultBuilder();
+		ModularUI.Builder builder = ModularUI.builder(GuiTextures.BACKGROUND, 176, 180);
+		
+		builder.label(5, 5, "Vending Machine")
+		// Add slots to import & export items
+		.slot(getImportItems(), 0, 20, 20, GuiTextures.SLOT)
+		.bindPlayerInventory(entityPlayer.inventory, 96);
 		
 		return builder.build(getHolder(), entityPlayer);
 	}
