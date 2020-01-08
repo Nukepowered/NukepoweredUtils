@@ -75,7 +75,7 @@ public class NPUTileEntities {
 
     public static TileEntityFisher[] FISHER = new TileEntityFisher[8];
 	
-    // TODO Vending machine & coins
+    public static TileEntityVendingMachine VENDING_MACHINE;
 	
 	public static void init() {
 		CIRCUITASSEMBLER[0] = GregTechAPI.registerMetaTileEntity(2000, new SimpleMachineMetaTileEntity(location("circuit_assembler.lv"), NPURecipeMaps.CIRCUIT_ASSEMBLER_RECIPES, Textures.ASSEMBLER_OVERLAY, 1));
@@ -532,6 +532,8 @@ public class NPUTileEntities {
         STEAM_MIXER = GregTechAPI.registerMetaTileEntity(2221, new SteamMixer(location("steam_mixer")));
         
         PROCESSING_ARRAY = GregTechAPI.registerMetaTileEntity(2222, new TileEntityProcessingArray(location("processing_array")));
+        
+        VENDING_MACHINE = GregTechAPI.registerMetaTileEntity(2223, new TileEntityVendingMachine(location("vending_machine")));
 	}
 	
 	private static ResourceLocation location(String name) {
