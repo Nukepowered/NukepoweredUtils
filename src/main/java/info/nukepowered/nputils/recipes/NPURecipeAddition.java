@@ -826,6 +826,10 @@ public class NPURecipeAddition {
         	ModHandler.addShapelessRecipe("nputils:clean_jetpack_" + fluid.getUnlocalizedName(), NPUMetaItems.SEMIFLUID_JETPACK.getStackForm(), jetpack);
         }
         
+        // Wallet
+        ModHandler.addShapedRecipe("nputils:wallet", NPUMetaItems.COIN_WALLET.getStackForm(), " L ", "S S", " L ", 'L', new ItemStack(Items.LEATHER), 'S', new ItemStack(Items.STRING));
+        
+        
         
         NPULog.info(String.format("Recipes was registered for  %.3f seconds", (System.currentTimeMillis() - time_c) / 1000.0f));
 	}

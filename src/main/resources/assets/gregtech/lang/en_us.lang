@@ -265,6 +265,12 @@ metaitem.solar_cell.monocrystalline.tooltip=Can produce energy from sun!
 metaitem.plate.monocrystall_silicone.name=Thin monocrystalline silicon plate
 metaitem.plate.monocrystall_silicone.tooltip=It is really clean!
 
+metaitem.coin.name=%s Credit
+metaitem.coin.value=%s Credits
+metaitem.coin_wallet.name=Wallet
+metaitem.coin_wallet.money_amont=Credits: %s
+metaitem.coin_wallet.use=Shift-right click while holding to add all credits from inventory to wallet
+
 metaarmor.nms.nightvision.enabled=NanoMuscle™ Suite: NightVision enabled
 metaarmor.nms.nightvision.disabled=NanoMuscle™ Suite: NightVision disabled
 

@@ -293,6 +293,22 @@ public class NPUMachineRecipeRemoval {
         	ModHandler.removeRecipeByName(new ResourceLocation("gregtech", "electric_motor/electric_motor_iv"));
         }
         
+        // Coins recipes due other coin value
+        ModHandler.removeRecipeByName(new ResourceLocation("gregtech", "credit/credit_darmstadtium"));
+        ModHandler.removeRecipeByName(new ResourceLocation("gregtech", "credit/credit_naquadah"));
+        ModHandler.removeRecipeByName(new ResourceLocation("gregtech", "credit/credit_naquadah_alt"));
+        ModHandler.removeRecipeByName(new ResourceLocation("gregtech", "credit/credit_osmium"));
+        ModHandler.removeRecipeByName(new ResourceLocation("gregtech", "credit/credit_osmium_alt"));
+        ModHandler.removeRecipeByName(new ResourceLocation("gregtech", "credit/credit_platinum"));
+        ModHandler.removeRecipeByName(new ResourceLocation("gregtech", "credit/credit_platinum_alt"));
+        ModHandler.removeRecipeByName(new ResourceLocation("gregtech", "credit/credit_gold"));
+        ModHandler.removeRecipeByName(new ResourceLocation("gregtech", "credit/credit_gold_alt"));
+        ModHandler.removeRecipeByName(new ResourceLocation("gregtech", "credit/credit_silver"));
+        ModHandler.removeRecipeByName(new ResourceLocation("gregtech", "credit/credit_silver_alt"));
+        ModHandler.removeRecipeByName(new ResourceLocation("gregtech", "credit/credit_cupronickel"));
+        ModHandler.removeRecipeByName(new ResourceLocation("gregtech", "credit/credit_cupronickel_alt"));
+        ModHandler.removeRecipeByName(new ResourceLocation("gregtech", "credit/credit_copper"));
+        removeRecipesByInputs(RecipeMaps.FORMING_PRESS_RECIPES, OreDictUnifier.get(OrePrefix.plate, Materials.Cupronickel), MetaItems.SHAPE_MOLD_CREDIT.getStackForm());
 	}
 	
 	private static void removeRecipesByInputs(RecipeMap<? extends RecipeBuilder<?>> map, ItemStack... itemInputs) {

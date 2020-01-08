@@ -1,7 +1,10 @@
 package info.nukepowered.nputils.item;
 
+import java.util.Comparator;
 import gregtech.api.items.materialitem.MaterialMetaItem;
 import gregtech.api.items.metaitem.ElectricStats;
+import gregtech.api.items.metaitem.MetaItem;
+import gregtech.api.items.metaitem.stats.IItemBehaviour;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.MarkerMaterials.Tier;
 import gregtech.api.unification.ore.OrePrefix;
@@ -161,5 +164,34 @@ public class NPUMetaItem extends MaterialMetaItem {
         NPUMetaItems.IMPELLER_MV = addItem(120, "impeller.mv");
         NPUMetaItems.IMPELLER_HV = addItem(121, "impeller.hv");
         NPUMetaItems.GRAVITATION_ENGINE = addItem(122, "gravitation_engine");
+        
+        NPUMetaItems.COIN_WALLET = addItem(123, "coin_wallet").addComponents(new WalletBehavior());
+        
+        NPUMetaItems.COIN_BRONZE = addItem(124, "credit.bronze").addComponents(new CoinBehaviour(10), new CoinInfoBehaviour(Materials.Bronze));
+        NPUMetaItems.COIN_IRON = addItem(125, "credit.iron").addComponents(new CoinBehaviour(20), new CoinInfoBehaviour(Materials.Iron));
+
+        MetaItems.CREDIT_COPPER.addComponents(new CoinBehaviour(1));
+        MetaItems.CREDIT_CUPRONICKEL.addComponents(new CoinBehaviour(5));
+        MetaItems.CREDIT_SILVER.addComponents(new CoinBehaviour(50));
+        MetaItems.CREDIT_GOLD.addComponents(new CoinBehaviour(100));
+        MetaItems.CREDIT_PLATINUM.addComponents(new CoinBehaviour(200));
+        MetaItems.CREDIT_NAQUADAH.addComponents(new CoinBehaviour(500));
+        MetaItems.CREDIT_OSMIUM.addComponents(new CoinBehaviour(1000));
+        MetaItems.CREDIT_DARMSTADTIUM.addComponents(new CoinBehaviour(10000));
+        
+        // Add all of coins in list
+        for (MetaItem<?> item : MetaItem.getMetaItems()) {
+        	for (MetaItem<?>.MetaValueItem metaValue : item.getAllItems()) {
+        		for (IItemBehaviour beh : metaValue.getBehaviours()) {
+        			if (beh instanceof CoinBehaviour) {
+        				NPUMetaItems.COINS.add(metaValue);
+        			}
+        		}
+        	}
+        }
+        
+        // Sort coins for proper display in wallet's UI
+        NPUMetaItems.COINS.sort(Comparator.comparing(coin -> CoinBehaviour.getCoinValue(coin)));
+        
 	}
 }

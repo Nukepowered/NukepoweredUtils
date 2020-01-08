@@ -1,7 +1,7 @@
 package info.nukepowered.nputils.item;
 
+import java.util.ArrayList;
 import java.util.List;
-
 import gregtech.api.items.armor.ArmorMetaItem;
 import gregtech.api.items.metaitem.MetaItem;
 import gregtech.common.items.MetaItems;
@@ -166,6 +166,12 @@ public class NPUMetaItems {
 	public static MetaItem<?>.MetaValueItem IMPELLER_HV;
 	public static MetaItem<?>.MetaValueItem GRAVITATION_ENGINE;
 	
+	public static MetaItem<?>.MetaValueItem COIN_WALLET;
+	
+	public static MetaItem<?>.MetaValueItem COIN_BRONZE;
+	public static MetaItem<?>.MetaValueItem COIN_IRON;
+	
+	public static final List<MetaItem<?>.MetaValueItem> COINS = new ArrayList<>();
 	
 	public static void init() {
 		NPUMetaItem item = new NPUMetaItem();

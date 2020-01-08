@@ -258,13 +258,18 @@ metaitem.ferrite_plates.name=Набор ферритовых пластин
 metaitem.ferrite_plates.tooltip=NiZnFe₄O₈
 metaitem.insulating_tape.name=МегаМозгТех Аэрокосмическая улучшенная укреплённая изолента FAL-84
 metaitem.insulating_tape.tooltip=Если не получеться починить что то с этим, просто используйте больше!
-
 metaitem.solar_cell.polycrystalline.name=Поликристаллический фотоэлемент
 metaitem.solar_cell.polycrystalline.tooltip=Производит энергию от солнца!
 metaitem.solar_cell.monocrystalline.name=Монокристаллический фотоэлемент
 metaitem.solar_cell.monocrystalline.tooltip=Производит энергию от солнца!
 metaitem.plate.monocrystall_silicone.name=Тонкая монокристаллическая пластинка кремния
 metaitem.plate.monocrystall_silicone.tooltip=Она крайне чиста!
+
+metaitem.coin.name=%s кредит
+metaitem.coin.value=%s Кредитов
+metaitem.coin_wallet.name=Кошелёк
+metaitem.coin_wallet.money_amont=Кредитов: %s
+metaitem.coin_wallet.use=Шфит-правый клик держа в руке чтобы положить все монеты из инвентаря в кошелёк
 
 metaarmor.nms.nightvision.enabled=Костюм NanoMuscle™: Ночное зрение активировано
 metaarmor.nms.nightvision.disabled=Костюм NanoMuscle™: Ночное зрение отключено
