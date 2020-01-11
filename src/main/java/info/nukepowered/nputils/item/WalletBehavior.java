@@ -12,6 +12,7 @@ import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.items.metaitem.stats.IItemBehaviour;
 import gregtech.api.util.GTUtility;
 import info.nukepowered.nputils.NPULog;
+import info.nukepowered.nputils.api.NPULib;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -107,19 +108,14 @@ public class WalletBehavior implements IItemBehaviour, ItemUIFactory {
 			}
 		} else {
 			NBTTagCompound data = GTUtility.getOrCreateNbtCompound(heldItem);
-			
-			for (int i = 0; i < player.inventoryContainer.inventorySlots.size(); i++) {
+			for (int i = 0; i < player.inventoryContainer.inventoryItemStacks.size(); i++) {
 				ItemStack current = player.inventoryContainer.inventoryItemStacks.get(i);
-				if (current.getItem() instanceof MetaItem<?>) {
-					List<IItemBehaviour> behaviours = ((MetaItem<?>) current.getItem()).getBehaviours(current);
-					for (IItemBehaviour beh : behaviours) {
-						if (beh instanceof CoinBehaviour) {
-							int money = data.hasKey("MoneyAmount") ? data.getInteger("MoneyAmount") : 0;
-							money += current.getCount() * ((CoinBehaviour) beh).getValue();
-							data.setInteger("MoneyAmount", money);
-							player.inventoryContainer.putStackInSlot(i, ItemStack.EMPTY);
-						}
-					}
+				CoinBehaviour coinBeh = NPULib.getCoinBehaviour(current);
+				if (coinBeh != null) {
+					int money = data.hasKey("MoneyAmount") ? data.getInteger("MoneyAmount") : 0;
+					money += current.getCount() * coinBeh.getValue();
+					data.setInteger("MoneyAmount", money);
+					player.inventoryContainer.putStackInSlot(i, ItemStack.EMPTY);
 				}
 			}
 			

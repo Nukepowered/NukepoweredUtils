@@ -7,14 +7,16 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.IElectricItem;
 import gregtech.api.items.armor.ArmorMetaItem;
 import gregtech.api.items.metaitem.MetaItem;
+import gregtech.api.items.metaitem.stats.IItemBehaviour;
 import gregtech.api.items.toolitem.ToolMetaItem;
 import gregtech.api.recipes.CountableIngredient;
 import gregtech.api.recipes.Recipe;
@@ -25,6 +27,7 @@ import info.nukepowered.nputils.NPULog;
 import info.nukepowered.nputils.input.EnumKey;
 import info.nukepowered.nputils.input.Key;
 import info.nukepowered.nputils.input.Keybinds;
+import info.nukepowered.nputils.item.CoinBehaviour;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.entity.player.EntityPlayer;
@@ -59,6 +62,20 @@ public class NPULib {
 	public static final Side SIDE = FMLCommonHandler.instance().getSide();
 	public static final SoundEvent JET_ENGINE = new SoundEvent(new ResourceLocation("nputils:jet_engine"));
 	
+	
+	@Nullable
+	public static CoinBehaviour getCoinBehaviour(ItemStack stack) {
+		if (stack.getItem() instanceof MetaItem<?>) {
+			List<IItemBehaviour> behaviours = ((MetaItem<?>) stack.getItem()).getBehaviours(stack);
+			for (IItemBehaviour behaviour : behaviours) {
+				if (behaviour instanceof CoinBehaviour) {
+					return (CoinBehaviour) behaviour;
+				}
+			}
+		}
+		
+		return null;
+	}
 	
 	public static List<ItemStack> getStackedList(ItemStack sample, int totalAmount) {
 		List<ItemStack> result = new ArrayList<>();
