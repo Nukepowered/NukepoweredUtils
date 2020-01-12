@@ -3,6 +3,9 @@ package info.nukepowered.nputils.machines;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import java.util.function.Function;
+import java.util.function.IntConsumer;
+import java.util.function.Predicate;
 
 import javax.annotation.Nonnull;
 
@@ -19,7 +22,10 @@ import gregtech.api.capability.impl.EnergyContainerHandler;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
 import gregtech.api.gui.widgets.ClickButtonWidget;
+import gregtech.api.gui.widgets.ClickButtonWidget.ClickData;
+import gregtech.api.gui.widgets.CycleButtonWidget;
 import gregtech.api.gui.widgets.DynamicLabelWidget;
+import gregtech.api.gui.widgets.ImageWidget;
 import gregtech.api.gui.widgets.LabelWidget;
 import gregtech.api.gui.widgets.WidgetGroup;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -29,8 +35,11 @@ import gregtech.api.render.Textures;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.Position;
 import gregtech.api.util.Size;
+import info.nukepowered.nputils.NPULog;
+import info.nukepowered.nputils.NPUTextures;
 import info.nukepowered.nputils.api.NPULib;
-import info.nukepowered.nputils.gui.VendingMachineUI;
+import info.nukepowered.nputils.gui.VendingMachineWrapper;
+import info.nukepowered.nputils.item.CoinBehaviour;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -49,14 +58,17 @@ import net.minecraftforge.items.ItemStackHandler;
 public class TileEntityVendingMachine extends MetaTileEntity {
 	
 	private EnergyContainerHandler energyContainer;
-	private EnumFacing outputFacing = EnumFacing.UP;
 	private IItemHandlerModifiable coins;
 	private IItemHandlerModifiable workingWith;
 	private IItemHandlerModifiable sample;
+	private UUID owner;
 	private int price = 0;
 	private int dealsAmount = 0;
+	private int coinsInserted = 0;
+	private boolean oreDictMode = false;
+	private boolean unlimitedStock = false;
 	private MODE workingMode = MODE.SALE;
-	private UUID owner;
+	private EnumFacing outputFacing = EnumFacing.UP;
 
 	
 	public TileEntityVendingMachine(ResourceLocation metaTileEntityId) {
@@ -71,10 +83,10 @@ public class TileEntityVendingMachine extends MetaTileEntity {
 		list.add("Output: " + (this.outputFacing != null ? this.outputFacing.toString() : "§cnull"));
 		list.add("Working mode: " + this.workingMode.name());
 		list.add("Price: " + this.price);
+		list.add("OreDictMode: " + this.oreDictMode);
+		list.add("CoinsInside: " + this.coinsInserted);
+		list.add("UnlimitedStock: " + this.unlimitedStock);
     }
-	
-	
-	
 	
 	public IItemHandlerModifiable getCoinSlot() {
 		return this.coins;
@@ -88,20 +100,26 @@ public class TileEntityVendingMachine extends MetaTileEntity {
 		return this.sample;
 	}
 	
-	public int getDeals() {
-		return this.dealsAmount;
-	}
-	
 	public int getPrice() {
 		return this.price;
 	}
 	
-	public String workingMode() {
-		return "Mode: " + (this.workingMode == MODE.SALE ? "Sale" : "Buying");
+	public int getCoinsInserted() {
+		return this.coinsInserted;
 	}
 	
 	public MODE getMode() {
 		return this.workingMode;
+	}
+	
+	public void toggleStock() {
+		this.unlimitedStock = !this.unlimitedStock;
+		writeCustomData(105, buf -> buf.writeBoolean(this.unlimitedStock));
+	}
+	
+	public void toggleOreDict() {
+		this.oreDictMode = !this.oreDictMode;
+		writeCustomData(104, buf -> buf.writeBoolean(this.oreDictMode));
 	}
 	
 	public void changeWorkingMode() {
@@ -128,6 +146,28 @@ public class TileEntityVendingMachine extends MetaTileEntity {
 	
 	public boolean isOwner(@Nonnull EntityPlayer player) {
 		return EntityPlayer.getUUID(player.getGameProfile()).equals(this.owner);
+	}
+	
+	public boolean tryDeal() {
+		ItemStack sample = this.sample.getStackInSlot(0);
+		if (sample.isItemEqual(ItemStack.EMPTY)) return false; 
+		Predicate<ItemStack> canInsert = stack -> this.workingWith.insertItem(0, stack, true).isEmpty();
+		if (this.unlimitedStock) {
+			if (this.workingMode == MODE.SALE) {
+				while (canInsert.test(sample) && this.coinsInserted >= this.price) {
+					this.coinsInserted -= this.price;
+					writeCustomData(106, buf -> buf.writeInt(this.coinsInserted));
+					this.workingWith.insertItem(0, sample.copy(), false);
+				}
+			} else {
+				// TODO
+			}
+		} else {
+			// TODO
+		}
+
+		
+		return false;
 	}
 	
 	@Override
@@ -160,10 +200,47 @@ public class TileEntityVendingMachine extends MetaTileEntity {
 		this.coins = new ItemStackHandler(1) {
 			@Override
 			public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-				return NPULib.getCoinBehaviour(stack) != null;
+				if (workingMode == MODE.SALE) {
+					return NPULib.getCoinBehaviour(stack) != null;
+				} else {
+					return NPULib.getWalletBehaviour(stack) != null;
+				}
+			}
+			
+			@Override
+			protected void onContentsChanged(int slot) {
+				if (workingMode == MODE.SALE) {
+					ItemStack coin = this.getStackInSlot(slot);
+					int value = 0;
+					if (NPULib.getCoinBehaviour(coin) != null) {
+						CoinBehaviour beh = NPULib.getCoinBehaviour(coin);
+						value = beh.getValue() * coin.getCount();
+					}
+					if (value <= 0) return;
+					coinsInserted += value;
+					this.setStackInSlot(slot, ItemStack.EMPTY);
+					tryDeal();
+				} else {
+					
+				}
+				
+				
+		    }
+		};
+		this.workingWith = new ItemStackHandler(1) {
+			@Override
+			protected void onContentsChanged(int slot) {
+				if (workingMode == MODE.PURCHASE) {
+					tryDeal();
+				}
+		    }
+			
+			@Override
+		    @Nonnull
+		    public ItemStack extractItem(int slot, int amount, boolean simulate) {
+				return super.extractItem(slot, amount, simulate);
 			}
 		};
-		this.workingWith = new ItemStackHandler(1);
 		this.sample = new ItemStackHandler(1);
 	}
 	
@@ -173,19 +250,29 @@ public class TileEntityVendingMachine extends MetaTileEntity {
 	
     @Override
 	protected ModularUI createUI(EntityPlayer entityPlayer) {
-    	VendingMachineUI ui = new VendingMachineUI(new Position(0, 0), new Size(176, 120), this, this.isOwner(entityPlayer));
-		WidgetGroup group = new WidgetGroup();
+    	VendingMachineWrapper ui = new VendingMachineWrapper(new Position(0, 0), new Size(176, 120), this, this.isOwner(entityPlayer));
+		WidgetGroup group  = new WidgetGroup();
+		Function<ClickData, Integer> getValue = data -> {
+			return data.isCtrlClick && data.isShiftClick ? 1000 : 
+				data.isShiftClick ? 100 :
+				data.isCtrlClick ? 1 : 10;
+		};
 		
-		group.addWidget(new LabelWidget(5, 5, "Vending Machine"));
-		group.addWidget(new DynamicLabelWidget(18, 70, () -> "Deals: " + this.dealsAmount));
-		if (this.isOwner(entityPlayer)) {
-			group.addWidget(new ClickButtonWidget(25, 45, 12, 11, "+", data -> this.incPrice(data.isCtrlClick ? 1 : data.isShiftClick ? 100 : 10)));
-			group.addWidget(new ClickButtonWidget(12, 45, 12, 11, "-", data -> this.decrPrice(data.isCtrlClick ? 1 : data.isShiftClick ? 100 : 10)));
-			group.addWidget(new ClickButtonWidget(12, 57, 30, 11, "Mode", data -> this.changeWorkingMode()));
-		}
-		// TODO OreDict toggle button
 		ui.initUI();
-		
+		group.addWidget(new LabelWidget(5, 5, "Vending Machine"));
+		group.addWidget(new DynamicLabelWidget(10, 19, () -> "Deals: " + this.dealsAmount));
+		group.addWidget(new ImageWidget(144, 39, 3, 24, NPUTextures.VENDING_MACHINE_LINE));
+		group.addWidget(new ImageWidget(104, 39, 3, 24, NPUTextures.VENDING_MACHINE_LINE));
+		if (this.isOwner(entityPlayer)) {
+			group.addWidget(new CycleButtonWidget(10, 42, 38, 13, new String[] {"Exact", "OreDict"}, () -> this.oreDictMode ? 1 : 0, val -> this.toggleOreDict()));
+			group.addWidget(new ClickButtonWidget(10, 29, 30, 11, "Mode", data -> this.changeWorkingMode()));
+			group.addWidget(new ClickButtonWidget(23, 57, 12, 11, "+", data -> this.incPrice(getValue.apply(data))));
+			group.addWidget(new ClickButtonWidget(10, 57, 12, 11, "-", data -> this.decrPrice(getValue.apply(data))));
+			if (entityPlayer.canUseCommand(2, "")) {
+				group.addWidget(new CycleButtonWidget(41, 29, 12, 11, new String[] {"✖", "∞"}, () -> this.unlimitedStock ? 1 : 0, val -> this.toggleStock()));
+			}
+		}
+
 		return ModularUI.builder(GuiTextures.BACKGROUND, 176, 180)
 				.widget(group)
 				.widget(ui)
@@ -272,7 +359,11 @@ public class TileEntityVendingMachine extends MetaTileEntity {
 		buf.writeByte(this.outputFacing != null ? this.outputFacing.getIndex() : 1);
 		buf.writeString(this.owner != null ? this.owner.toString() : "");
 		buf.writeInt(this.price);
+		buf.writeInt(this.coinsInserted);
+		buf.writeInt(this.dealsAmount);
 		buf.writeEnumValue(this.workingMode);
+		buf.writeBoolean(this.unlimitedStock);
+		buf.writeBoolean(this.oreDictMode);
 	}
 	
 	@Override
@@ -282,17 +373,25 @@ public class TileEntityVendingMachine extends MetaTileEntity {
 		String own = buf.readString(36);
 		if (own.length() == 36) this.owner = UUID.fromString(own);
 		this.price = buf.readInt();
+		this.coinsInserted = buf.readInt();
+		this.dealsAmount = buf.readInt();
 		this.workingMode = buf.readEnumValue(MODE.class);
+		this.unlimitedStock = buf.readBoolean();
+		this.oreDictMode = buf.readBoolean();
 	}
 	
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound data) {
 		super.writeToNBT(data);
-		
 		if (this.owner != null) data.setString("Owner", this.owner.toString());
 		if (this.outputFacing != null) data.setByte("Output", (byte) this.outputFacing.getIndex());
 		data.setInteger("Price", this.price);
+		data.setInteger("CoinsInside", this.coinsInserted);
+		data.setInteger("Deals", this.dealsAmount);
 		data.setBoolean("Mode", this.workingMode == MODE.SALE);
+		data.setBoolean("Unlimited", this.unlimitedStock);
+		data.setBoolean("OreDictMode", this.oreDictMode);
+		GTUtility.writeItems(this.sample, "Sample", data);
 		
 		return data;
 	}
@@ -300,12 +399,15 @@ public class TileEntityVendingMachine extends MetaTileEntity {
 	@Override
 	public void readFromNBT(NBTTagCompound data) {
 		super.readFromNBT(data);
-		
 		if (data.hasKey("Owner")) this.owner = UUID.fromString(data.getString("Owner"));
 		if (data.hasKey("Output")) this.outputFacing = EnumFacing.VALUES[data.getByte("Output")];
 		this.price = data.getInteger("Price");
+		this.coinsInserted = data.getInteger("CoinsInside");
+		this.dealsAmount = data.getInteger("Deals");
 		this.workingMode = data.getBoolean("Mode") ? MODE.SALE : MODE.PURCHASE;
-		
+		this.unlimitedStock = data.getBoolean("Unlimited");
+		this.oreDictMode = data.getBoolean("OreDictMode");
+		GTUtility.readItems(this.sample, "Sample", data);
 	}
 	
 	@Override
@@ -321,6 +423,12 @@ public class TileEntityVendingMachine extends MetaTileEntity {
         	this.workingMode = buf.readEnumValue(MODE.class);
         } else if (dataId == 103) {
         	this.price = buf.readInt();
+        } else if (dataId == 104) {
+        	this.oreDictMode = buf.readBoolean();
+        } else if (dataId == 105) {
+        	this.unlimitedStock = buf.readBoolean();
+        } else if (dataId == 106) {
+        	this.coinsInserted = buf.readInt();
         }
     }
 	

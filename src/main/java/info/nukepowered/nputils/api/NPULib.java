@@ -28,6 +28,7 @@ import info.nukepowered.nputils.input.EnumKey;
 import info.nukepowered.nputils.input.Key;
 import info.nukepowered.nputils.input.Keybinds;
 import info.nukepowered.nputils.item.CoinBehaviour;
+import info.nukepowered.nputils.item.WalletBehavior;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.entity.player.EntityPlayer;
@@ -64,8 +65,22 @@ public class NPULib {
 	
 	
 	@Nullable
+	public static WalletBehavior getWalletBehaviour(ItemStack stack) {
+		if (stack.getItem() instanceof MetaItem) {
+			List<IItemBehaviour> behaviours = ((MetaItem<?>) stack.getItem()).getBehaviours(stack);
+			for (IItemBehaviour behaviour : behaviours) {
+				if (behaviour instanceof WalletBehavior) {
+					return (WalletBehavior) behaviour;
+				}
+			}
+		}
+		
+		return null;
+	}
+	
+	@Nullable
 	public static CoinBehaviour getCoinBehaviour(ItemStack stack) {
-		if (stack.getItem() instanceof MetaItem<?>) {
+		if (stack.getItem() instanceof MetaItem) {
 			List<IItemBehaviour> behaviours = ((MetaItem<?>) stack.getItem()).getBehaviours(stack);
 			for (IItemBehaviour behaviour : behaviours) {
 				if (behaviour instanceof CoinBehaviour) {

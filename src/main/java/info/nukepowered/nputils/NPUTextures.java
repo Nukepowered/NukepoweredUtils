@@ -36,6 +36,7 @@ public class NPUTextures {
 //  GUI Textures
     public static final TextureArea BRONZE_FLUID_SLOT = TextureArea.fullImage("textures/gui/steam/fluid_slot.png");
     public static final TextureArea COAL_OVERLAY = TextureArea.fullImage("textures/gui/steam/bronze/overlay_bronze_coal.png");
+    public static final TextureArea VENDING_MACHINE_LINE = TextureArea.fullImage("textures/gui/vending_machine_line_overlay.png");
     
     static {
     	SOLAR_PANEL_BASIC = new SolarPanelRenderer("machines/solar_panel/solar_panel.basic");
