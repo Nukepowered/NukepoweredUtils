@@ -27,8 +27,10 @@ import gregtech.api.metatileentity.MetaTileEntityHolder;
 import gregtech.api.metatileentity.MetaTileEntityUIFactory;
 import gregtech.api.render.Textures;
 import gregtech.api.util.GTUtility;
+import gregtech.api.util.Position;
+import gregtech.api.util.Size;
 import info.nukepowered.nputils.api.NPULib;
-import info.nukepowered.nputils.gui.VendingMachineWrapper;
+import info.nukepowered.nputils.gui.VendingMachineUI;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -48,7 +50,6 @@ public class TileEntityVendingMachine extends MetaTileEntity {
 	
 	private EnergyContainerHandler energyContainer;
 	private EnumFacing outputFacing = EnumFacing.UP;
-	private VendingMachineWrapper vendingMachine;
 	private IItemHandlerModifiable coins;
 	private IItemHandlerModifiable workingWith;
 	private IItemHandlerModifiable sample;
@@ -62,7 +63,6 @@ public class TileEntityVendingMachine extends MetaTileEntity {
 		super(metaTileEntityId);
 		reinitializeEnergyContainer();
 		initializeInventory();
-		this.vendingMachine = new VendingMachineWrapper(this);
 	}
 	
 	@Override
@@ -88,12 +88,20 @@ public class TileEntityVendingMachine extends MetaTileEntity {
 		return this.sample;
 	}
 	
+	public int getDeals() {
+		return this.dealsAmount;
+	}
+	
 	public int getPrice() {
 		return this.price;
 	}
 	
 	public String workingMode() {
 		return "Mode: " + (this.workingMode == MODE.SALE ? "Sale" : "Buying");
+	}
+	
+	public MODE getMode() {
+		return this.workingMode;
 	}
 	
 	public void changeWorkingMode() {
@@ -165,23 +173,22 @@ public class TileEntityVendingMachine extends MetaTileEntity {
 	
     @Override
 	protected ModularUI createUI(EntityPlayer entityPlayer) {
+    	VendingMachineUI ui = new VendingMachineUI(new Position(0, 0), new Size(176, 120), this, this.isOwner(entityPlayer));
 		WidgetGroup group = new WidgetGroup();
+		
 		group.addWidget(new LabelWidget(5, 5, "Vending Machine"));
-		group.addWidget(new DynamicLabelWidget(13, 26, () -> {return "Price: " + this.price;}));
-		group.addWidget(new DynamicLabelWidget(13, 36, () -> this.workingMode()));
+		group.addWidget(new DynamicLabelWidget(18, 70, () -> "Deals: " + this.dealsAmount));
 		if (this.isOwner(entityPlayer)) {
 			group.addWidget(new ClickButtonWidget(25, 45, 12, 11, "+", data -> this.incPrice(data.isCtrlClick ? 1 : data.isShiftClick ? 100 : 10)));
 			group.addWidget(new ClickButtonWidget(12, 45, 12, 11, "-", data -> this.decrPrice(data.isCtrlClick ? 1 : data.isShiftClick ? 100 : 10)));
 			group.addWidget(new ClickButtonWidget(12, 57, 30, 11, "Mode", data -> this.changeWorkingMode()));
 		}
-		group.addWidget(new DynamicLabelWidget(6, 84, () -> "Deals: " + this.dealsAmount));
-//		group.addWidget(new SlotWidget(this.coins, 0, 50, 70, true, true).setBackgroundTexture(GuiTextures.SLOT, GuiTextures.COMPRESSOR_OVERLAY));
-
-		this.vendingMachine.initUI(30, group::addWidget, this.isOwner(entityPlayer));
-		
+		// TODO OreDict toggle button
+		ui.initUI();
 		
 		return ModularUI.builder(GuiTextures.BACKGROUND, 176, 180)
 				.widget(group)
+				.widget(ui)
 				.bindPlayerInventory(entityPlayer.inventory, 96)
 				.build(getHolder(), entityPlayer);
 	}
