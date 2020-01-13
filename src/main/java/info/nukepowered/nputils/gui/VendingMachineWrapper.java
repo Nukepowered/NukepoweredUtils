@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.widgets.AbstractWidgetGroup;
+import gregtech.api.gui.widgets.CycleButtonWidget;
 import gregtech.api.gui.widgets.LabelWidget;
 import gregtech.api.gui.widgets.SlotWidget;
 import gregtech.api.util.Position;
@@ -32,22 +33,26 @@ public class VendingMachineWrapper extends AbstractWidgetGroup {
     	TileEntityVendingMachine machine = this.getMachine();
     	if (machine == null) return;
     	
-    	// TODO remove oredict button when changed mod and move prices' buttons
-    	// TODO 2 add redeal button if coinsInside > price
     	// TODO add separated inserted money counter
     	
 		boolean isSaling = machineMode == MODE.SALE;
 		LabelWidget str = new LabelWidget(106, isSaling ? 28 : 74, "credits", 0x404040).setXCentered(true);
-		CenterDynamicLabel money = new CenterDynamicLabel(106 , isSaling ? 20 : 66, () -> Integer.toString(machine.getPrice() - (isSaling ? machine.getCoinsInserted() : 0)));
+		CenterDynamicLabel money = new CenterDynamicLabel(106 , isSaling ? 20 : 66, () -> {
+			return isSaling ? (machine.getCoinsInserted() + "/" + machine.getPrice()) : Integer.toString(machine.getPrice());
+		});
 		SlotWidget coinSlot = new SlotWidget(machine.getCoinSlot(), 0, 136, isSaling ? 18 : 65, true, true)
 				.setBackgroundTexture(GuiTextures.SLOT, GuiTextures.LENS_OVERLAY);
 		SlotWidget workSlot = new SlotWidget(machine.getWorkingSlot(), 0, 136, isSaling ? 65 : 18, isSaling, !isSaling)
 				.setBackgroundTexture(GuiTextures.SLOT);
 		SlotWidget sampleSlot = new SlotWidget(machine.getSample(), 0, 96, isSaling ? 65 : 18, isOwner, isOwner);
-		
+		CycleButtonWidget oreDict = new CycleButtonWidget(10, 55, 38, 13, new String[] {"Exact", "OreDict"},
+				() -> machine.getOreDictState() ? 1 : 0,
+				val -> machine.toggleOreDict());
 
 		if (isOwner) sampleSlot.setBackgroundTexture(GuiTextures.SLOT); 
-		
+		if (isSaling) {
+			this.addWidget(oreDict);
+		}
 		this.addWidget(money);
 		this.addWidget(str);
 		this.addWidget(coinSlot);

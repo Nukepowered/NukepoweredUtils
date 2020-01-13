@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.function.Function;
-import java.util.function.IntConsumer;
 import java.util.function.Predicate;
 
 import javax.annotation.Nonnull;
@@ -35,7 +34,6 @@ import gregtech.api.render.Textures;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.Position;
 import gregtech.api.util.Size;
-import info.nukepowered.nputils.NPULog;
 import info.nukepowered.nputils.NPUTextures;
 import info.nukepowered.nputils.api.NPULib;
 import info.nukepowered.nputils.gui.VendingMachineWrapper;
@@ -62,7 +60,7 @@ public class TileEntityVendingMachine extends MetaTileEntity {
 	private IItemHandlerModifiable workingWith;
 	private IItemHandlerModifiable sample;
 	private UUID owner;
-	private int price = 0;
+	private int price = 1;
 	private int dealsAmount = 0;
 	private int coinsInserted = 0;
 	private boolean oreDictMode = false;
@@ -75,6 +73,14 @@ public class TileEntityVendingMachine extends MetaTileEntity {
 		super(metaTileEntityId);
 		reinitializeEnergyContainer();
 		initializeInventory();
+	}
+	
+	@Override
+	public void update() {
+		super.update();
+		if (this.coinsInserted >= this.price && getWorld().getWorldTime() % 20 == 0) {
+			tryDeal();
+		}
 	}
 	
 	@Override
@@ -108,6 +114,10 @@ public class TileEntityVendingMachine extends MetaTileEntity {
 		return this.coinsInserted;
 	}
 	
+	public boolean getOreDictState() {
+		return this.oreDictMode;
+	}
+	
 	public MODE getMode() {
 		return this.workingMode;
 	}
@@ -133,7 +143,7 @@ public class TileEntityVendingMachine extends MetaTileEntity {
 	}
 	
 	public void decrPrice(int decr) {
-		if (this.price - decr >= 0) {
+		if (this.price - decr > 0) {
 			this.price -= decr;
 			writeCustomData(103, buf -> buf.writeInt(this.price));
 		}
@@ -148,26 +158,39 @@ public class TileEntityVendingMachine extends MetaTileEntity {
 		return EntityPlayer.getUUID(player.getGameProfile()).equals(this.owner);
 	}
 	
-	public boolean tryDeal() {
-		ItemStack sample = this.sample.getStackInSlot(0);
-		if (sample.isItemEqual(ItemStack.EMPTY)) return false; 
-		Predicate<ItemStack> canInsert = stack -> this.workingWith.insertItem(0, stack, true).isEmpty();
-		if (this.unlimitedStock) {
-			if (this.workingMode == MODE.SALE) {
-				while (canInsert.test(sample) && this.coinsInserted >= this.price) {
-					this.coinsInserted -= this.price;
-					writeCustomData(106, buf -> buf.writeInt(this.coinsInserted));
-					this.workingWith.insertItem(0, sample.copy(), false);
-				}
-			} else {
-				// TODO
-			}
+	public void tryDeal() {
+		if (this.workingMode == MODE.SALE) {
+			ItemStack sample = this.sample.getStackInSlot(0);
+			if (sample.isEmpty() || !this.workingWith.insertItem(0, sample.copy(), true).isEmpty() || this.price > this.coinsInserted) return;
+			this.workModeSelling(sample);
 		} else {
-			// TODO
+			ItemStack workingItem = this.workingWith.getStackInSlot(0);
+			ItemStack wallet = this.coins.getStackInSlot(0);
+			if (workingItem.isEmpty() || wallet.isEmpty()) return;
+			// TODO OreDict
 		}
-
+	}
+	
+	private void workModeSelling(ItemStack sample) {
+		Predicate<ItemStack> canInsert = stack -> this.workingWith.insertItem(0, stack, true).isEmpty();
+		while (canInsert.test(sample) && this.coinsInserted >= this.price && this.energyContainer.getEnergyStored() >= 32L * sample.getCount()) {
+			this.coinsInserted -= this.price;
+			this.dealsAmount++;
+			this.workingWith.insertItem(0, sample.copy(), false);
+			this.energyContainer.removeEnergy(32L * sample.getCount());
+		}
+		writeCustomData(106, buf -> {
+			buf.writeInt(this.coinsInserted);
+			buf.writeInt(this.dealsAmount);
+		});
+	}
+	
+	private void workModeBuy() {
 		
-		return false;
+	}
+	
+	private void workModeBuyWithOreDict() {
+		
 	}
 	
 	@Override
@@ -219,7 +242,6 @@ public class TileEntityVendingMachine extends MetaTileEntity {
 					if (value <= 0) return;
 					coinsInserted += value;
 					this.setStackInSlot(slot, ItemStack.EMPTY);
-					tryDeal();
 				} else {
 					
 				}
@@ -231,7 +253,6 @@ public class TileEntityVendingMachine extends MetaTileEntity {
 			@Override
 			protected void onContentsChanged(int slot) {
 				if (workingMode == MODE.PURCHASE) {
-					tryDeal();
 				}
 		    }
 			
@@ -245,7 +266,7 @@ public class TileEntityVendingMachine extends MetaTileEntity {
 	}
 	
     protected void reinitializeEnergyContainer() {
-		this.energyContainer = EnergyContainerHandler.receiverContainer(this, 16384, GTValues.LV, 1L);
+		this.energyContainer = EnergyContainerHandler.receiverContainer(this, 16384, GTValues.V[GTValues.LV], 1L);
 	}
 	
     @Override
@@ -264,12 +285,11 @@ public class TileEntityVendingMachine extends MetaTileEntity {
 		group.addWidget(new ImageWidget(144, 39, 3, 24, NPUTextures.VENDING_MACHINE_LINE));
 		group.addWidget(new ImageWidget(104, 39, 3, 24, NPUTextures.VENDING_MACHINE_LINE));
 		if (this.isOwner(entityPlayer)) {
-			group.addWidget(new CycleButtonWidget(10, 42, 38, 13, new String[] {"Exact", "OreDict"}, () -> this.oreDictMode ? 1 : 0, val -> this.toggleOreDict()));
 			group.addWidget(new ClickButtonWidget(10, 29, 30, 11, "Mode", data -> this.changeWorkingMode()));
-			group.addWidget(new ClickButtonWidget(23, 57, 12, 11, "+", data -> this.incPrice(getValue.apply(data))));
-			group.addWidget(new ClickButtonWidget(10, 57, 12, 11, "-", data -> this.decrPrice(getValue.apply(data))));
+			group.addWidget(new ClickButtonWidget(23, 42, 12, 11, "+", data -> this.incPrice(getValue.apply(data))));
+			group.addWidget(new ClickButtonWidget(10, 42, 12, 11, "-", data -> this.decrPrice(getValue.apply(data))));
 			if (entityPlayer.canUseCommand(2, "")) {
-				group.addWidget(new CycleButtonWidget(41, 29, 12, 11, new String[] {"✖", "∞"}, () -> this.unlimitedStock ? 1 : 0, val -> this.toggleStock()));
+				group.addWidget(new CycleButtonWidget(41, 29, 12, 11, new String[] {"U", "∞"}, () -> this.unlimitedStock ? 1 : 0, val -> this.toggleStock()));
 			}
 		}
 
@@ -429,6 +449,7 @@ public class TileEntityVendingMachine extends MetaTileEntity {
         	this.unlimitedStock = buf.readBoolean();
         } else if (dataId == 106) {
         	this.coinsInserted = buf.readInt();
+        	this.dealsAmount = buf.readInt();
         }
     }
 	
