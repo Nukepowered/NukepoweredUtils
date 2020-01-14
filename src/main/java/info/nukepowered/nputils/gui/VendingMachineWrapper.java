@@ -15,7 +15,6 @@ import info.nukepowered.nputils.NPUTextures;
 import info.nukepowered.nputils.api.NPULib;
 import info.nukepowered.nputils.machines.TileEntityVendingMachine;
 import info.nukepowered.nputils.machines.TileEntityVendingMachine.MODE;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.network.PacketBuffer;
 
 public class VendingMachineWrapper extends AbstractWidgetGroup {
@@ -36,14 +35,14 @@ public class VendingMachineWrapper extends AbstractWidgetGroup {
     	TileEntityVendingMachine machine = this.getMachine();
     	if (machine == null) return;
 		boolean isSaling = machineMode == MODE.SALE;
-		LabelWidget str = new LabelWidget(106, isSaling ? 28 : 74, I18n.format("nputils.vending_machine.ui.wrapper.credits"), 0x404040).setXCentered(true);
+		LabelWidget str = new LabelWidget(106, isSaling ? 28 : 74, "nputils.vending_machine.ui.wrapper.credits", 0x404040).setXCentered(true);
 		CenterDynamicLabel money = new CenterDynamicLabel(106 , isSaling ? 20 : 66, () -> NPULib.format(machine.getPrice()));
 		SlotWidget coinSlot = new SlotWidget(machine.getCoinSlot(), 0, 130, isSaling ? 18 : 65, true, true)
 				.setBackgroundTexture(GuiTextures.SLOT, (isSaling ? NPUTextures.COIN_OVERLAY : NPUTextures.WALLET_OVERLAY));
 		SlotWidget workSlot = new SlotWidget(machine.getWorkingSlot(), 0, 130, isSaling ? 65 : 18, true, !isSaling)
 				.setBackgroundTexture(GuiTextures.SLOT, (isSaling ? NPUTextures.SELL_OVERLAY : NPUTextures.BUY_OVERLAY));
 		SlotWidget sampleSlot = new SlotWidget(machine.getSample(), 0, 96, isSaling ? 65 : 18, isOwner, isOwner);
-		CycleButtonWidget oreDict = new CycleButtonWidget(8, 57, 70, 12, new String[] {I18n.format("nputils.vending_machine.ui.wrapper.exact"), I18n.format("nputils.vending_machine.ui.wrapper.oredict")},
+		CycleButtonWidget oreDict = new CycleButtonWidget(8, 57, 70, 12, new String[] {"nputils.vending_machine.ui.wrapper.exact", "nputils.vending_machine.ui.wrapper.oredict"},
 				() -> machine.getOreDictState() ? 1 : 0,
 				val -> {if (isOwner) machine.toggleOreDict();});
 		

@@ -519,8 +519,8 @@ public class TileEntityVendingMachine extends MetaTileEntity {
 			textList.add(new TextComponentString(deals));
 		};
 		wrapper.initUI();
-		staticWidgets.addWidget(new LabelWidget(3, 3, I18n.format("nputils.machine.vending_machine.label")));
-		staticWidgets.addWidget(new LabelWidget(8, 15, I18n.format("nputils.vending_machine.ui.credits")));
+		staticWidgets.addWidget(new LabelWidget(3, 3, "nputils.machine.vending_machine.label"));
+		staticWidgets.addWidget(new LabelWidget(8, 15, "nputils.vending_machine.ui.credits"));
 		staticWidgets.addWidget(new DynamicLabelWidget(8, 85, () -> I18n.format("nputils.vending_machine.ui.deals", NPULib.format(this.dealsAmount))));
 		staticWidgets.addWidget(new DynamicLabelWidget(8, 26, () -> NPULib.format(this.coinsInserted)));
 		staticWidgets.addWidget(new AdvancedTextWidget(8, 37, text, 0x404040));
@@ -528,7 +528,7 @@ public class TileEntityVendingMachine extends MetaTileEntity {
 		staticWidgets.addWidget(new ImageWidget(104, 39, 3, 24, NPUTextures.VENDING_MACHINE_LINE));
 		if (!this.unlimitedStock) staticWidgets.addWidget(batterySlot);
 		if (this.isOwner(entityPlayer)) {
-			staticWidgets.addWidget(new ClickButtonWidget(8, 70, 31, 12, I18n.format("nputils.vending_machine.ui.mode_switch"), data -> this.toggleWorkingMode()));
+			staticWidgets.addWidget(new ClickButtonWidget(8, 70, 31, 12, "nputils.vending_machine.ui.mode_switch", data -> this.toggleWorkingMode()));
 			staticWidgets.addWidget(new ClickButtonWidget(52, 70, 13, 12, "+", data -> this.incPrice(getValue.apply(data))));
 			staticWidgets.addWidget(new ClickButtonWidget(39, 70, 13, 12, "-", data -> this.decrPrice(getValue.apply(data))));
 			if (entityPlayer.canUseCommand(2, "")) {
@@ -569,8 +569,6 @@ public class TileEntityVendingMachine extends MetaTileEntity {
 			if (!getWorld().isRemote) {
 				playerIn.sendMessage(new TextComponentString("Owner: " + (this.owner == null ? "null" : this.owner.toString())));
 			}
-		} else {
-			this.owner = UUID.randomUUID();
 		}
 		
 		return true;
