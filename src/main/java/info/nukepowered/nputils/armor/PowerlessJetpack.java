@@ -60,8 +60,6 @@ public class PowerlessJetpack implements IArmorLogic {
 	
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
-		// TODO fix hover mode on ground and working HUD without fuel
-		
 		IFluidHandlerItem internalTank = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
 		FuelRecipe currentRecipe = null;
 		if (internalTank.drain(1, false) != null && !player.isInWater() && !player.isInLava()) {

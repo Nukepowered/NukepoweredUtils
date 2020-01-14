@@ -8,6 +8,8 @@
 * Added few cooins and it values
 * Added coin wallet
 * Added vending machine
+* Fixed bugs with fuel jetpack
+* Fixed CT support, use "mods.nputils.recipe.RecipeMaps" for NP machines recipes
 
 
 #1.2.x
