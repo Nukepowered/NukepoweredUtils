@@ -563,7 +563,7 @@ public class NPURecipeAddition {
         //Fluid Heater Recipes
         RecipeMaps.FLUID_HEATER_RECIPES.recipeBuilder().duration(30).EUt(24).circuitMeta(1).fluidInputs(NPUMaterials.RawGrowthMedium.getFluid(500)).fluidOutputs(NPUMaterials.SterilizedGrowthMedium.getFluid(500)).buildAndRegister();
         
-        //Centrifuge recipes TODO: ������ ��� ����� �����
+        //Centrifuge recipes TODO: Убрать это нафиг
         //Lutetium
         RecipeMaps.CENTRIFUGE_RECIPES.recipeBuilder().duration(500).EUt(96).input(OrePrefix.dust, Materials.Thorium).chancedOutput(OreDictUnifier.get(OrePrefix.dustSmall, Materials.Lutetium), 1650, 100).buildAndRegister();
         

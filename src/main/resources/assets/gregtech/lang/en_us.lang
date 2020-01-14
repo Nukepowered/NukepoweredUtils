@@ -297,6 +297,18 @@ metaarmor.energy_share.tooltip.guide=To change mode shift-right click when holdi
 nputils.multiblock.processing_array.nomachines=No machines installed
 nputils.multiblock.processing_array.eu_required=Required EU/t: %s (%s)
 
+nputils.vending_machine.owner_change=Owner successfully set to %s
+nputils.vending_machine.ui.available_deals=Available deals:
+nputils.vending_machine.ui.deals=%s deals
+nputils.vending_machine.ui.credits=Credits:
+nputils.vending_machine.ui.mode_switch=Mode
+nputils.vending_machine.ui.wrapper.credits=credits
+nputils.vending_machine.ui.wrapper.oredict=OreDict
+nputils.vending_machine.ui.wrapper.exact=Exact
+
+
+
+
 metaitem.liquid_fuel_jetpack.name=§eLiquid fuel jetpack
 metaitem.impeller_jetpack.name=§eImpeller jetpack
 metaitem.advanced_impeller_jetpack.name=§bAdvanced Impeller jetpack
@@ -342,6 +354,9 @@ nputils.machine.power_inverter.description=Powerfull step-up power inverter. To 
 nputils.machine.power_inverter.lv.description=Making to many heat while working, be careful!
 nputils.machine.power_inverter.mv.description=Powerfull device let you controll your solar fields
 nputils.machine.power_inverter.hv.description=Advanced power controller for expensive panels
+
+nputils.machine.vending_machine.name=§eVending Machine
+nputils.machine.vending_machine.label=Vending Machine
 
 nputils.machine.circuit_assembler.lv.name=Basic Circuit Assembling Machine
 nputils.machine.circuit_assembler.mv.name=Advanced Circuit Assembling Machine

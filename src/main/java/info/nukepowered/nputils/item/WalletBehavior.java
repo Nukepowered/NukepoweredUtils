@@ -15,6 +15,7 @@ import info.nukepowered.nputils.NPULog;
 import info.nukepowered.nputils.api.NPULib;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
@@ -42,10 +43,12 @@ public class WalletBehavior implements IItemBehaviour, ItemUIFactory {
 				return;
 			}
 			
-			if (player.addItemStackToInventory(coin.getStackForm())) {
-				data.setInteger("MoneyAmount", money);
+			if (!player.world.isRemote) {
+				if (player.addItemStackToInventory(coin.getStackForm())) {
+					data.setInteger("MoneyAmount", money);
+					((EntityPlayerMP) player).sendContainerToPlayer(player.inventoryContainer);
+				}
 			}
-			
 			
 		}
 	}
@@ -110,7 +113,7 @@ public class WalletBehavior implements IItemBehaviour, ItemUIFactory {
 			NBTTagCompound data = GTUtility.getOrCreateNbtCompound(heldItem);
 			for (int i = 0; i < player.inventoryContainer.inventoryItemStacks.size(); i++) {
 				ItemStack current = player.inventoryContainer.inventoryItemStacks.get(i);
-				CoinBehaviour coinBeh = NPULib.getCoinBehaviour(current);
+				CoinBehaviour coinBeh = NPULib.getBehaviour(CoinBehaviour.class, current);
 				if (coinBeh != null) {
 					int money = data.hasKey("MoneyAmount") ? data.getInteger("MoneyAmount") : 0;
 					money += current.getCount() * coinBeh.getValue();

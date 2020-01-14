@@ -1,3 +1,15 @@
+
+
+#1.3.16
+* Fixed crush on using jetpack by somebody, when sound enabled pn server
+* Fixed worlgen, now we have asbestos vein (@see config/GregTech/overworld/npu_*.json)
+* Some misc bugfixes and incorrect code
+* Added proccessing array
+* Added few cooins and it values
+* Added coin wallet
+* Added vending machine
+
+
 #1.2.x
 * 100% fixed all startup crushes
 * Added liquid fuel jetpack

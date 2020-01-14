@@ -60,6 +60,8 @@ public class PowerlessJetpack implements IArmorLogic {
 	
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
+		// TODO fix hover mode on ground and working HUD without fuel
+		
 		IFluidHandlerItem internalTank = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
 		FuelRecipe currentRecipe = null;
 		if (internalTank.drain(1, false) != null && !player.isInWater() && !player.isInLava()) {
@@ -85,10 +87,10 @@ public class PowerlessJetpack implements IArmorLogic {
 			if (data.hasKey("toggleTimer")) toggleTimer = data.getByte("toggleTimer");
 			if (data.hasKey("hover")) hover = data.getBoolean("hover");
 			
-			if (NPULib.isKeyDown(player, EnumKey.MODE_SWITCH) && NPULib.isKeyDown(player, EnumKey.JUMP) && toggleTimer == 0) {
-				hover = !hover;
-				toggleTimer = 10;
-				if (!world.isRemote) {
+			if (!world.isRemote) {
+				if (NPULib.isKeyDown(player, EnumKey.MODE_SWITCH) && NPULib.isKeyDown(player, EnumKey.JUMP) && toggleTimer == 0) {
+					hover = !hover;
+					toggleTimer = 10;
 					data.setBoolean("hover", hover);
 					if (hover) {
 						player.sendMessage(new TextComponentTranslation("metaarmor.jetpack.hover.enable"));
@@ -96,6 +98,12 @@ public class PowerlessJetpack implements IArmorLogic {
 						player.sendMessage(new TextComponentTranslation("metaarmor.jetpack.hover.disable"));
 					}
 				}
+			}
+			
+			if (player.onGround && !NPULib.isKeyDown(player, EnumKey.JUMP) && hover && !world.isRemote) {
+				hover = !hover;
+				data.setBoolean("hover", hover);
+				player.sendMessage(new TextComponentTranslation("metaarmor.jetpack.hover.disable"));
 			}
 			
 			if (internalTank.drain(fuel, false).amount == fuel.amount || burntime >= GTValues.V[burnTier]) {
@@ -198,15 +206,15 @@ public class PowerlessJetpack implements IArmorLogic {
 					if (prop[0].getContents().amount == 0) return;
 					String formated = String.format("%.1f", (prop[0].getContents().amount * 100.0F / prop[0].getCapacity()));
 					this.HUD.newString(I18n.format("metaarmor.hud.fuel_lvl", formated + "%"));
+					NBTTagCompound data = item.getTagCompound();
+					if (data != null) {
+						if (data.hasKey("hover")) {
+							String status = (data.getBoolean("hover") ? I18n.format("metaarmor.hud.status.enabled") : I18n.format("metaarmor.hud.status.disabled"));
+							String result = I18n.format("metaarmor.hud.hover_mode", status);
+							this.HUD.newString(result);
+						}
+					}
 				}
-			}
-		}
-		NBTTagCompound data = item.getTagCompound();
-		if (data != null) {
-			if (data.hasKey("hover")) {
-				String status = (data.getBoolean("hover") ? I18n.format("metaarmor.hud.status.enabled") : I18n.format("metaarmor.hud.status.disabled"));
-				String result = I18n.format("metaarmor.hud.hover_mode", status);
-				this.HUD.newString(result);
 			}
 		}
 		this.HUD.draw();

@@ -297,6 +297,15 @@ metaarmor.energy_share.tooltip.guide=Для изменения режима на
 nputils.multiblock.processing_array.nomachines=Нет установленных машин
 nputils.multiblock.processing_array.eu_required=Требуеться EU/t: %s (%s)
 
+nputils.vending_machine.owner_change=Владелец установлен на %s
+nputils.vending_machine.ui.available_deals=Доступно сделок:
+nputils.vending_machine.ui.deals=%s сделок
+nputils.vending_machine.ui.credits=Кредитов:
+nputils.vending_machine.ui.mode_switch=Режим
+nputils.vending_machine.ui.wrapper.credits=кредитов
+nputils.vending_machine.ui.wrapper.oredict=OreDict
+nputils.vending_machine.ui.wrapper.exact=Строго
+
 metaitem.liquid_fuel_jetpack.name=§eРеактивный ранец на жидком топливе
 metaitem.impeller_jetpack.name=§eРанец на основе импеллера
 metaitem.advanced_impeller_jetpack.name=§bПродвинутый ранец на основе импеллера
@@ -342,6 +351,9 @@ nputils.machine.power_inverter.description=Очень мощный повыша�
 nputils.machine.power_inverter.lv.description=Производит очень много тепла при работе, будьте осторожны!
 nputils.machine.power_inverter.mv.description=Мощное устройство, позволяющее контролировать ваши солненые поля
 nputils.machine.power_inverter.hv.description=Продвинутый контроллер мощности для дорогих панелей
+
+nputils.machine.vending_machine.name=§eТорговый автомат
+nputils.machine.vending_machine.label=Торговый автомат
 
 nputils.machine.circuit_assembler.lv.name=Базовый стонок по сборке интегральных микросхем
 nputils.machine.circuit_assembler.mv.name=Улучшеный стонок по сборке интегральных микросхем

@@ -165,7 +165,7 @@ public class NPUMetaItem extends MaterialMetaItem {
         NPUMetaItems.IMPELLER_HV = addItem(121, "impeller.hv");
         NPUMetaItems.GRAVITATION_ENGINE = addItem(122, "gravitation_engine");
         
-        NPUMetaItems.COIN_WALLET = addItem(123, "coin_wallet").addComponents(new WalletBehavior());
+        NPUMetaItems.COIN_WALLET = addItem(123, "coin_wallet").addComponents(new WalletBehavior()).setMaxStackSize(1);
         
         NPUMetaItems.COIN_BRONZE = addItem(124, "credit.bronze").addComponents(new CoinBehaviour(10), new CoinInfoBehaviour(Materials.Bronze));
         NPUMetaItems.COIN_IRON = addItem(125, "credit.iron").addComponents(new CoinBehaviour(20), new CoinInfoBehaviour(Materials.Iron));

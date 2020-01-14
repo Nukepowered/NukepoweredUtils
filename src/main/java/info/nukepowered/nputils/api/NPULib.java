@@ -1,6 +1,7 @@
 package info.nukepowered.nputils.api;
 
 import java.text.DecimalFormat;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -28,7 +29,7 @@ import info.nukepowered.nputils.input.EnumKey;
 import info.nukepowered.nputils.input.Key;
 import info.nukepowered.nputils.input.Keybinds;
 import info.nukepowered.nputils.item.CoinBehaviour;
-import info.nukepowered.nputils.item.WalletBehavior;
+import info.nukepowered.nputils.item.NPUMetaItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.entity.player.EntityPlayer;
@@ -54,6 +55,7 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.IItemHandler;
 
 /**
  * @author The_DnK / TheDarkDnKTv / iDnK
@@ -63,14 +65,107 @@ public class NPULib {
 	public static final Side SIDE = FMLCommonHandler.instance().getSide();
 	public static final SoundEvent JET_ENGINE = new SoundEvent(new ResourceLocation("nputils:jet_engine"));
 	
+	/**
+	 * Return a list of slot's indexes wher is stack
+	 * @param handler
+	 * @param stack
+	 * @return
+	 */
+	public static List<Integer> getItemInSlots(IItemHandler handler, ItemStack stack) {
+		List<Integer> list = new ArrayList<>();
+		for (int i = 0; i < handler.getSlots(); i++) {
+			if (stack.isItemEqual(handler.getStackInSlot(i))) {
+				list.add(i);
+			}
+		}
+		
+		return list;
+	}
 	
+	public static List<ItemStack> createStackList() {
+		return new ArrayList<ItemStack>() {
+			private static final long serialVersionUID = 1L;
+			
+			@Override
+			public int indexOf(Object o) {
+				if (o == null) {
+					for (int i = 0; i < this.size(); i++) {
+						if (this.get(i) == null) {
+							return i;
+						}
+					}
+				} else {
+					if (!(o instanceof ItemStack)) return -1;
+					ItemStack that = (ItemStack) o;
+					for (int i = 0; i < this.size(); i++) {
+						if (that.isItemEqual(this.get(i))) {
+							return i;
+						}
+					}
+				}
+				
+				return -1;
+		    }
+		};
+	}
+	
+	public static List<ItemStack> itemHandlerToList(IItemHandler inputs) {
+        return new AbstractList<ItemStack>() {
+            @Override
+            public ItemStack set(int index, ItemStack element) {
+                ItemStack oldStack = inputs.getStackInSlot(index);
+                inputs.insertItem(index, element == null ? ItemStack.EMPTY : element, false);
+                return oldStack;
+            }
+
+            @Override
+            public ItemStack get(int index) {
+                return inputs.getStackInSlot(index);
+            }
+
+            @Override
+            public int size() {
+                return inputs.getSlots();
+            }
+        };
+    }
+	
+	/**
+	 * Converts number amount of credit to stacks
+	 * example: 1102 credit -> 1xOsmiumCredit, 1xGoldCredit, 2xCopperCredit
+	 * @param amount of credits
+	 * @return List of credits stack
+	 */
+	public static List<ItemStack> getCoinsList(int amount) {
+		List<ItemStack> result = new ArrayList<>();
+		while (amount > 0) {
+			for (int i = NPUMetaItems.COINS.size() - 1; i >= 0; i--) {
+				CoinBehaviour beh = NPULib.getCoinBehaviour(NPUMetaItems.COINS.get(i));
+				if (beh == null) break; // For safety
+				double multiplier = amount * 1.0D / beh.getValue();
+				if (multiplier >= 1.0F) {
+					int stackSize = MathHelper.floor(multiplier);
+					amount -= beh.getValue() * stackSize;
+					ItemStack coins = NPUMetaItems.COINS.get(i).getStackForm(stackSize);
+					NPULog.info(stackSize + "x " + coins.getDisplayName());
+					result.add(coins);
+				}
+			}
+		}
+		
+		return result;
+	}
+	
+
+	@SuppressWarnings("unchecked")
 	@Nullable
-	public static WalletBehavior getWalletBehaviour(ItemStack stack) {
+	public static <T> T getBehaviour(Class<T> classOf, ItemStack stack) {
+		if (stack == null || classOf == null) return null;
 		if (stack.getItem() instanceof MetaItem) {
 			List<IItemBehaviour> behaviours = ((MetaItem<?>) stack.getItem()).getBehaviours(stack);
 			for (IItemBehaviour behaviour : behaviours) {
-				if (behaviour instanceof WalletBehavior) {
-					return (WalletBehavior) behaviour;
+				if (classOf.isInstance(behaviour)) {
+					return (T) behaviour;
 				}
 			}
 		}
@@ -79,13 +174,11 @@ public class NPULib {
 	}
 	
 	@Nullable
-	public static CoinBehaviour getCoinBehaviour(ItemStack stack) {
-		if (stack.getItem() instanceof MetaItem) {
-			List<IItemBehaviour> behaviours = ((MetaItem<?>) stack.getItem()).getBehaviours(stack);
-			for (IItemBehaviour behaviour : behaviours) {
-				if (behaviour instanceof CoinBehaviour) {
-					return (CoinBehaviour) behaviour;
-				}
+	public static CoinBehaviour getCoinBehaviour(MetaItem<?>.MetaValueItem coinValue) {
+		List<IItemBehaviour> behaviours = coinValue.getBehaviours();
+		for (IItemBehaviour behaviour : behaviours) {
+			if (behaviour instanceof CoinBehaviour) {
+				return (CoinBehaviour) behaviour;
 			}
 		}
 		
@@ -201,7 +294,7 @@ public class NPULib {
 	}
 	
 	public static void playJetpackSound(@Nonnull EntityPlayer player) {
-		if (NPUConfig.Misc.enableSounds && SIDE.isClient()) {
+		if (NPUConfig.Misc.enableSounds && player.world.isRemote) {
 			float cons = (float)player.motionY + player.moveForward;
 			cons = MathHelper.clamp(cons, 0.6F, 1.0F);
 			
@@ -330,6 +423,7 @@ public class NPULib {
 			}
 			++index;
 		}
+		if (list.isEmpty()) result += "]";
 		NPULog.info(result);
 	}
 	

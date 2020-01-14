@@ -1,5 +1,6 @@
 package info.nukepowered.nputils.machines;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 import javax.annotation.Nullable;
 
@@ -44,7 +45,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class TileEntityPowerInverter extends MetaTileEntity {
 	
 	private EnergyContainerHandler energyContainer;
-	private TileEntitySolarPanel panel = null;
+	private WeakReference<TileEntitySolarPanel> panel = new WeakReference<>(null);
 	private boolean panelMode = true;
 	private boolean isPanelCheckedOnce = false;
 	private int tier = 0;
@@ -60,16 +61,15 @@ public class TileEntityPowerInverter extends MetaTileEntity {
 	public void update() {
 		super.update();
 		if (!this.getWorld().isRemote) {
-			// ��������� �������, ������� ��� ������� ������ ��� �����
 			if (!isPanelCheckedOnce) updatePanel();
 			if (panelMode && panel != null) {
-				if (panel.getType().getVoltage() <= energyContainer.getInputVoltage()) {
+				if (this.getPanel().getType().getVoltage() <= energyContainer.getInputVoltage()) {
 					long packet = energyContainer.getInputVoltage() * energyContainer.getInputAmperage();
-					if (panel.getPowerFromStack(packet)) {
+					if (this.getPanel().getPowerFromStack(packet)) {
 						energyContainer.addEnergy(packet);
 					}
 				} else {
-					GTUtility.doOvervoltageExplosion(this, panel.getType().getVoltage());
+					GTUtility.doOvervoltageExplosion(this, this.getPanel().getType().getVoltage());
 				}
 			}
 		}
@@ -78,14 +78,8 @@ public class TileEntityPowerInverter extends MetaTileEntity {
 	@Override
 	public void addDebugInfo(List<String> list) {
 		list.add("PanelMode: " + this.panelMode);
-		list.add("Panel: " + (this.panel == null ? "�cnull" : NPULib.posToStringC(this.panel.getPos())));
+		list.add("Panel: " + (this.panel == null ? "§cnull" : NPULib.posToStringC(this.getPanel().getPos())));
     }
-	
-//	TODO: ����� �� ��������
-//	@Override
-//	public void onAttached() {
-//		this.updatePanel();
-//	}
 	
 	@Override
 	public void updateInputRedstoneSignals() {
@@ -98,11 +92,24 @@ public class TileEntityPowerInverter extends MetaTileEntity {
 		MetaTileEntity mte = BlockMachine.getMetaTileEntity(getWorld(), panelPos);
 		if (mte != null) {
 			if (mte instanceof TileEntitySolarPanel) {
-				this.panel = (TileEntitySolarPanel) mte;
+				this.panel = new WeakReference<>((TileEntitySolarPanel) mte);
 				return;
 			} 
 		}
 		this.panel = null;
+	}
+	
+	@Nullable
+	private TileEntitySolarPanel getPanel() {
+		TileEntitySolarPanel panel = this.panel.get();
+		if (panel != null) {
+			if (panel.isValid()) {
+				return panel;
+			}
+		}
+		
+		this.panel.clear();
+		return null;
 	}
 	
 	private void reinitializeEnergyContainer() {

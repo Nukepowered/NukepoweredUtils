@@ -23,6 +23,8 @@ public class NPUTextures {
 
     public static OrientedOverlayRenderer STEAM_MIXER_OVERLAY;
     
+    public static final OrientedOverlayRenderer VENDING_MACHINE;
+    
     public static final SolarPanelRenderer SOLAR_PANEL_BASIC;
     public static final SolarPanelRenderer SOLAR_PANEL_POLYCRYSTALLNE;
     public static final SolarPanelRenderer SOLAR_PANEL_MONOCRYSTALLINE;
@@ -33,12 +35,19 @@ public class NPUTextures {
     public static final SimpleOverlayRenderer ENERGY_IN_MULTI_16;
     public static final SimpleOverlayRenderer ENERGY_IN_PANELMODE;
     
-//  GUI Textures
+//  GUI TEXTURES
     public static final TextureArea BRONZE_FLUID_SLOT = TextureArea.fullImage("textures/gui/steam/fluid_slot.png");
     public static final TextureArea COAL_OVERLAY = TextureArea.fullImage("textures/gui/steam/bronze/overlay_bronze_coal.png");
     public static final TextureArea VENDING_MACHINE_LINE = TextureArea.fullImage("textures/gui/vending_machine_line_overlay.png");
+    public static final TextureArea WALLET_OVERLAY = TextureArea.fullImage("textures/gui/overlay/waller_overlay.png");
+    public static final TextureArea COIN_OVERLAY = TextureArea.fullImage("textures/gui/overlay/coin_overlay.png");
+    public static final TextureArea BUY_OVERLAY = TextureArea.fullImage("textures/gui/overlay/buy_overlay.png");
+    public static final TextureArea SELL_OVERLAY = TextureArea.fullImage("textures/gui/overlay/sell_overlay.png");
+    
     
     static {
+    	VENDING_MACHINE = new OrientedOverlayRenderer("machines/vending_machine", OverlayFace.FRONT);
+    	
     	SOLAR_PANEL_BASIC = new SolarPanelRenderer("machines/solar_panel/solar_panel.basic");
     	SOLAR_PANEL_POLYCRYSTALLNE = new SolarPanelRenderer("machines/solar_panel/solar_panel.polycrystalline");
     	SOLAR_PANEL_MONOCRYSTALLINE = new SolarPanelRenderer("machines/solar_panel/solar_panel.monocrystalline");
