@@ -208,6 +208,7 @@ public class TileEntityProcessingArray extends RecipeMapMultiblockController {
 				return;
 			}
 			
+			// TODO fix recipes for EVERY machine
 			RecipeLogicEnergy rle = ObfuscationReflectionHelper.getPrivateValue(WorkableTieredMetaTileEntity.class, (WorkableTieredMetaTileEntity) machines.getKey(), "workable");
 			long recipeVoltage = GTValues.V[((WorkableTieredMetaTileEntity) machines.getKey()).getTier()];
 			

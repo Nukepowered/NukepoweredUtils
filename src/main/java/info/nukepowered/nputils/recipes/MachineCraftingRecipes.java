@@ -51,7 +51,9 @@ public class MachineCraftingRecipes {
         ModHandler.removeRecipeByName(new ResourceLocation("gregtech:coke_oven_hatch"));
         
         //Power Manipulation Machines
-        ItemStack last_bat = (NPUConfig.GT5U.replaceUVwithMAXBat ? NPUMetaItems.MAX_BATTERY : MetaItems.ZPM2).getStackForm();         ModHandler.addShapedRecipe("nputils:charger_ev", MetaTileEntities.CHARGER[GTValues.EV].getStackForm(), "WTW", "WMW", "BCB", 'M', MetaTileEntities.HULL[GTValues.EV].getStackForm(), 'W', new UnificationEntry(OrePrefix.wireGtHex, Materials.Aluminium), 'T', OreDictNames.chestWood, 'B', MetaItems.LAPOTRON_CRYSTAL, 'C', new UnificationEntry(OrePrefix.circuit, Tier.Extreme));ModHandler.addShapedRecipe("nputils:charger_zpm", MetaTileEntities.CHARGER[GTValues.ZPM].getStackForm(), "WTW", "WMW", "BCB", 'M', MetaTileEntities.HULL[GTValues.ZPM].getStackForm(), 'W', new UnificationEntry(OrePrefix.wireGtHex, Materials.Naquadah), 'T', OreDictNames.chestWood, 'B', (NPUConfig.GT5U.enableZPMandUVBats ? NPUMetaItems.ENERGY_MODULE : MetaItems.ENERGY_LAPOTRONIC_ORB2), 'C', new UnificationEntry(OrePrefix.circuit, Tier.Ultimate));
+        ItemStack last_bat = (NPUConfig.GT5U.replaceUVwithMAXBat ? NPUMetaItems.MAX_BATTERY : MetaItems.ZPM2).getStackForm();        
+        ModHandler.addShapedRecipe("nputils:charger_ev", MetaTileEntities.CHARGER[GTValues.EV].getStackForm(), "WTW", "WMW", "BCB", 'M', MetaTileEntities.HULL[GTValues.EV].getStackForm(), 'W', new UnificationEntry(OrePrefix.wireGtHex, Materials.Aluminium), 'T', OreDictNames.chestWood, 'B', MetaItems.LAPOTRON_CRYSTAL, 'C', new UnificationEntry(OrePrefix.circuit, Tier.Extreme));
+        ModHandler.addShapedRecipe("nputils:charger_zpm", MetaTileEntities.CHARGER[GTValues.ZPM].getStackForm(), "WTW", "WMW", "BCB", 'M', MetaTileEntities.HULL[GTValues.ZPM].getStackForm(), 'W', new UnificationEntry(OrePrefix.wireGtHex, Materials.Naquadah), 'T', OreDictNames.chestWood, 'B', (NPUConfig.GT5U.enableZPMandUVBats ? NPUMetaItems.ENERGY_MODULE : MetaItems.ENERGY_LAPOTRONIC_ORB2), 'C', new UnificationEntry(OrePrefix.circuit, Tier.Ultimate));
         ModHandler.addShapedRecipe("nputils:charger_uv", MetaTileEntities.CHARGER[GTValues.UV].getStackForm(), "WTW", "WMW", "BCB", 'M', MetaTileEntities.HULL[GTValues.UV].getStackForm(), 'W', new UnificationEntry(OrePrefix.wireGtHex, Materials.NaquadahAlloy), 'T', OreDictNames.chestWood, 'B', (NPUConfig.GT5U.enableZPMandUVBats ? NPUMetaItems.ENERGY_CLUSTER : last_bat), 'C', new UnificationEntry(OrePrefix.circuit, Tier.Superconductor));
         ModHandler.addShapedRecipe("nputils:charger_max", MetaTileEntities.CHARGER[GTValues.MAX].getStackForm(), "WTW", "WMW", "BCB", 'M', MetaTileEntities.HULL[GTValues.MAX].getStackForm(), 'W', new UnificationEntry(OrePrefix.wireGtHex, Tier.Superconductor), 'T', OreDictNames.chestWood, 'B', last_bat, 'C', new UnificationEntry(OrePrefix.circuit, Tier.Infinite));
 
@@ -77,7 +79,9 @@ public class MachineCraftingRecipes {
         
         //Generators
         registerMachineRecipe(NPUTileEntities.NAQUADAH_REACTOR, "RCR", "FMF", "QCQ", 'M', HULL, 'Q', CABLE_QUAD, 'C', BETTER_CIRCUIT, 'F', FIELD_GENERATOR, 'R', STICK_RADIOACTIVE);
-
+        
+        //TODO vending machine recipe
+        
         //Machines
         registerMachineRecipe(NPUTileEntities.CLUSTERMILL, "MMM", "CHC", "MMM", 'M', MOTOR, 'C', CIRCUIT, 'H', HULL);
         registerMachineRecipe(NPUTileEntities.CIRCUITASSEMBLER, "ACE", "VMV", "WCW", 'M', HULL, 'V', CONVEYOR, 'A', ROBOT_ARM, 'C', BETTER_CIRCUIT, 'W', CABLE, 'E', EMITTER);

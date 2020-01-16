@@ -96,6 +96,7 @@ public class WorldGenRegister {
 	}
 	
 	private static void extractJarVeinDefinitions(Path worldgenRootPath, String directory) throws IOException {
+		// TODO fix it, does not work properly while builded
 		FileSystem zipFileSystem = null;
 		try {
 			URI sampleUri = WorldGenRegister.class.getResource("/assets/gregtech/.gtassetsroot").toURI();
