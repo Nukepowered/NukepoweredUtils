@@ -269,7 +269,8 @@ metaitem.coin.name=%s кредит
 metaitem.coin.value=%s Кредитов
 metaitem.coin_wallet.name=Кошелёк
 metaitem.coin_wallet.money_amont=Кредитов: %s
-metaitem.coin_wallet.use=Шфит-правый клик держа в руке чтобы положить все монеты из инвентаря в кошелёк
+metaitem.coin_wallet.use_ui=Правая кнопка мыши держа в руке чтобы открыть UI
+metaitem.coin_wallet.use_add=Шфит-правый клик держа в руке чтобы положить все монеты из инвентаря в кошелёк
 
 metaarmor.nms.nightvision.enabled=Костюм NanoMuscle™: Ночное зрение активировано
 metaarmor.nms.nightvision.disabled=Костюм NanoMuscle™: Ночное зрение отключено

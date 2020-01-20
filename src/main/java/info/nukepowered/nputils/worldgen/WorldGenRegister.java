@@ -96,10 +96,9 @@ public class WorldGenRegister {
 	}
 	
 	private static void extractJarVeinDefinitions(Path worldgenRootPath, String directory) throws IOException {
-		// TODO fix it, does not work properly while builded
 		FileSystem zipFileSystem = null;
 		try {
-			URI sampleUri = WorldGenRegister.class.getResource("/assets/gregtech/.gtassetsroot").toURI();
+			URI sampleUri = WorldGenRegister.class.getResource("/assets/gregtech/assetsroot").toURI();
 			Path worldgenJarRootPath;
 			if (sampleUri.getScheme().equals("jar") || sampleUri.getScheme().equals("zip")) {
 				zipFileSystem = FileSystems.newFileSystem(sampleUri, Collections.emptyMap());
@@ -111,9 +110,9 @@ public class WorldGenRegister {
 			}
 			NPULog.info(String.format("Attempting extraction of worldgen definitions from %s to %s",
 					worldgenJarRootPath, worldgenRootPath));
-			List<Path> jarFiles = Files.walk(worldgenJarRootPath)
-					.filter(jarFile -> Files.isRegularFile(jarFile))
-					.collect(Collectors.toList());
+            List<Path> jarFiles = Files.walk(worldgenJarRootPath)
+            		.filter(jarFile -> Files.isRegularFile(jarFile))
+                    .collect(Collectors.toList());
 			for (Path jarFile : jarFiles) {
 				Path worldgenPath = worldgenRootPath.resolve(worldgenJarRootPath.relativize(jarFile).toString());
 				Files.createDirectories(worldgenPath.getParent());

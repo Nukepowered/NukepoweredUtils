@@ -1,11 +1,12 @@
 package info.nukepowered.nputils.item;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
+import gregtech.api.gui.widgets.AdvancedTextWidget;
 import gregtech.api.gui.widgets.ClickButtonWidget;
-import gregtech.api.gui.widgets.DynamicLabelWidget;
 import gregtech.api.items.gui.ItemUIFactory;
 import gregtech.api.items.gui.PlayerInventoryHolder;
 import gregtech.api.items.metaitem.MetaItem;
@@ -21,6 +22,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 public class WalletBehavior implements IItemBehaviour, ItemUIFactory {
@@ -64,9 +67,13 @@ public class WalletBehavior implements IItemBehaviour, ItemUIFactory {
 	
 	@Override
 	public ModularUI createUI(PlayerInventoryHolder holder, EntityPlayer entityPlayer) {
+		Consumer<List<ITextComponent>> label = list -> {
+			list.add(new TextComponentTranslation("metaitem.coin_wallet.money_amont", WalletBehavior.getMoney(holder.getCurrentItem())));
+		};
 		ModularUI.Builder ui = ModularUI.builder(GuiTextures.BACKGROUND, 176, 104)
-				.label(6, 6, I18n.format("metaitem.coin_wallet.name"))
-				.widget(new DynamicLabelWidget(62, 20, () -> I18n.format("metaitem.coin_wallet.money_amont", WalletBehavior.getMoney(holder.getCurrentItem()))));
+				.label(6, 6, "metaitem.coin_wallet.name")
+				.widget(new AdvancedTextWidget(62, 20, label, 0x404040));
+
 		
 		for (int i = 0; i < NPUMetaItems.COINS.size(); i++) {
 			int posX = 11;
@@ -98,7 +105,8 @@ public class WalletBehavior implements IItemBehaviour, ItemUIFactory {
 		NBTTagCompound data = GTUtility.getOrCreateNbtCompound(itemStack);
 		int money = data.hasKey("MoneyAmount") ? data.getInteger("MoneyAmount") : 0;
 		lines.add(I18n.format("metaitem.coin_wallet.money_amont", money));
-		lines.add(I18n.format("metaitem.coin_wallet.use"));
+		lines.add(I18n.format("metaitem.coin_wallet.use_ui"));
+		lines.add(I18n.format("metaitem.coin_wallet.use_add"));
 	}
 	
 	@Override

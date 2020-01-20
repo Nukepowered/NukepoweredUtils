@@ -1,3 +1,11 @@
+#1.3.21
+* Fixed brocken NanoMuscle recipes
+* Fixed brocken Wallet UI on server
+* Fixed worldgen not additing
+* Fixed non OreDict from scratch motor recipes
+* Changed mica vein, added gypsum
+* Added missed vendiong machine recipe
+* Added additional tooltip string for wallet
 
 
 #1.3.16

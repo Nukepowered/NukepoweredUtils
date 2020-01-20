@@ -20,6 +20,7 @@ public class TinkersIntegration {
 		TinkerRegistry.registerTableCasting(new CastingRecipe(MetaItems.SHAPE_EMPTY.getStackForm(), Materials.Steel.getMaterialFluid(), 576, 160));
 		for (ItemStack mold : NPURecipeAddition.molds)
 			ModHandler.removeRecipes(mold);
+		
 		ModHandler.addShapedRecipe("nputils:anvil_mold_form", NPUMetaItems.MOLD_FORM_ANVIL.getStackForm(), "fx ", " M ", "   ", 'M', new ItemStack(TinkerSmeltery.cast));
         ModHandler.addShapedRecipe("nputils:ball_mold_form", NPUMetaItems.MOLD_FORM_BALL.getStackForm(), "f x", " M ", "   ", 'M', new ItemStack(TinkerSmeltery.cast));
         ModHandler.addShapedRecipe("nputils:block_mold_form", NPUMetaItems.MOLD_FORM_BLOCK.getStackForm(), "f  ", "xM ", "   ", 'M', new ItemStack(TinkerSmeltery.cast));

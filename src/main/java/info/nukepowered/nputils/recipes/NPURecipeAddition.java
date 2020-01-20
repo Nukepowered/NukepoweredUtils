@@ -423,11 +423,11 @@ public class NPURecipeAddition {
 	    
         //Hardened motors crafting
         if (NPUConfig.enableRealisticMotorCraft) {
-        	ModHandler.addShapedRecipe("nputils:magnetic_plates_set", NPUMetaItems.MAGNETICALLY_PERMEABLE_PLATE_SET.getStackForm(4), "PP", "PP", "fx", 'P', OreDictUnifier.get(OrePrefix.plate, NPUMaterials.ElectricalSteel));
+        	ModHandler.addShapedRecipe("nputils:magnetic_plates_set", NPUMetaItems.MAGNETICALLY_PERMEABLE_PLATE_SET.getStackForm(4), "PP", "PP", "fx", 'P', "plateElectricalSteel");
         	ModHandler.addShapedRecipe("nputils:motor_from_scratch", MetaItems.ELECTRIC_MOTOR_LV.getStackForm(), "w H", " Sd", "RxC", 'H', NPUMetaItems.MOTOR_HULL_LV.getStackForm(), 'S', NPUMetaItems.STATOR_LV.getStackForm(), 'R', NPUMetaItems.ROTOR_LV.getStackForm(), 'C', OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.Tin));
-        	ModHandler.addShapedRecipe("nputils:basic_rotor_from_scratch", NPUMetaItems.ROTOR_LV.getStackForm(), "hP ", "RLR", " Pw", 'P', OreDictUnifier.get(OrePrefix.plate, Materials.Steel), 'R', OreDictUnifier.get(OrePrefix.stick, Materials.Iron), 'L', OreDictUnifier.get(OrePrefix.stickLong, Materials.Steel));
-        	ModHandler.addShapedRecipe("nputils:basic_stator_from_scratch", NPUMetaItems.STATOR_LV.getStackForm(), "CPC", "CPC", "hIx", 'I', NPUMetaItems.INSULATING_TAPE.getStackForm(), 'C', OreDictUnifier.get(OrePrefix.wireGtSingle, Materials.Copper), 'P', OreDictUnifier.get(OrePrefix.plate, Materials.Iron));
-        	ModHandler.addShapedRecipe("nputils:basic_motor_hull_from_scratch", NPUMetaItems.MOTOR_HULL_LV.getStackForm(), "hPd", "R R", "C C", 'P', OreDictUnifier.get(OrePrefix.plate, Materials.Steel), 'R', OreDictUnifier.get(OrePrefix.valueOf("plateCurved"), Materials.Steel), 'C', OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.Tin));
+        	ModHandler.addShapedRecipe("nputils:basic_rotor_from_scratch", NPUMetaItems.ROTOR_LV.getStackForm(), "hP ", "RLR", " Pw", 'P', "plateSteel", 'R', OreDictUnifier.get(OrePrefix.stick, Materials.Iron), 'L', OreDictUnifier.get(OrePrefix.stickLong, Materials.Steel));
+        	ModHandler.addShapedRecipe("nputils:basic_stator_from_scratch", NPUMetaItems.STATOR_LV.getStackForm(), "CPC", "CPC", "hIx", 'I', NPUMetaItems.INSULATING_TAPE.getStackForm(), 'C', OreDictUnifier.get(OrePrefix.wireGtSingle, Materials.Copper), 'P', "plateIron");
+        	ModHandler.addShapedRecipe("nputils:basic_motor_hull_from_scratch", NPUMetaItems.MOTOR_HULL_LV.getStackForm(), "hPd", "R R", "C C", 'P', "plateSteel", 'R', OreDictUnifier.get(OrePrefix.valueOf("plateCurved"), Materials.Steel), 'C', OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.Tin));
         	ModHandler.addShapedRecipe("nputils:insulating_tape", NPUMetaItems.INSULATING_TAPE.getStackForm(6), "RRR", "SSS", 'R', new ItemStack(Items.PAPER), 'S', MetaItems.RUBBER_DROP.getStackForm());
         	
         	RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(40).EUt(15).inputs(NPUMetaItems.ROTOR_LV.getStackForm(), NPUMetaItems.STATOR_LV.getStackForm(), NPUMetaItems.MOTOR_HULL_LV.getStackForm()).outputs(MetaItems.ELECTRIC_MOTOR_LV.getStackForm()).buildAndRegister();
@@ -444,7 +444,6 @@ public class NPURecipeAddition {
 			RecipeMaps.ARC_FURNACE_RECIPES.recipeBuilder().duration(60).EUt(30).inputs(NPUMetaItems.MAGNETICALLY_PERMEABLE_PLATE_SET.getStackForm()).outputs(OreDictUnifier.get(OrePrefix.nugget, NPUMaterials.ElectricalSteel, 4)).buildAndRegister();
 			RecipeMaps.CENTRIFUGE_RECIPES.recipeBuilder().duration(60).EUt(20).input(OrePrefix.dust, NPUMaterials.ElectricalSteel, 27).outputs(OreDictUnifier.get(OrePrefix.dust, Materials.Steel, 26), OreDictUnifier.get(OrePrefix.dust, Materials.Silicon)).buildAndRegister();
         	
-//        	RecipeMaps.MIXER_RECIPES.recipeBuilder().duration(40).EUt(16).inputs(OreDictUnifier.get(OrePrefix.dust, Materials.Steel, 26)).input(OrePrefix.dust, Materials.Silicon).outputs(OreDictUnifier.get(OrePrefix.dust, NPUMaterials.ElectricalSteel, 27)).buildAndRegister();
         	RecipeMaps.FORMING_PRESS_RECIPES.recipeBuilder().duration(40).EUt(16).input(OrePrefix.plate, NPUMaterials.ElectricalSteel).notConsumable(new IntCircuitIngredient(0)).outputs(NPUMetaItems.MAGNETICALLY_PERMEABLE_PLATE_SET.getStackForm(2)).buildAndRegister();
         	RecipeMaps.FORMING_PRESS_RECIPES.recipeBuilder().duration(40).EUt(16).input(OrePrefix.plate, Materials.NickelZincFerrite).notConsumable(new IntCircuitIngredient(0)).outputs(NPUMetaItems.FERRITE_PLATE_SET.getStackForm(2)).buildAndRegister();
         	

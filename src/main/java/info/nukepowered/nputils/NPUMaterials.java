@@ -114,6 +114,7 @@ public class NPUMaterials implements IMaterialHandler {
         Materials.Mica.addFlag(DustMaterial.MatFlags.GENERATE_ORE);
         Materials.Asbestos.addFlag(DustMaterial.MatFlags.GENERATE_ORE);
         Materials.Kaolinite.addFlag(DustMaterial.MatFlags.GENERATE_ORE);
+        Materials.Gypsum.addFlag(DustMaterial.MatFlags.GENERATE_ORE);
         
         Materials.Naquadah.addFlag(IngotMaterial.MatFlags.GENERATE_FOIL);
         Materials.NaquadahEnriched.addFlag(IngotMaterial.MatFlags.GENERATE_FOIL);

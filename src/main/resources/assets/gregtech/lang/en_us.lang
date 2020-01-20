@@ -269,7 +269,8 @@ metaitem.coin.name=%s Credit
 metaitem.coin.value=%s Credits
 metaitem.coin_wallet.name=Wallet
 metaitem.coin_wallet.money_amont=Credits: %s
-metaitem.coin_wallet.use=Shift-right click while holding to add all credits from inventory to wallet
+metaitem.coin_wallet.use_ui=Right click it while holding to open wallet UI
+metaitem.coin_wallet.use_add=Shift-right click while holding to add all credits from inventory to wallet
 
 metaarmor.nms.nightvision.enabled=NanoMuscle™ Suite: NightVision enabled
 metaarmor.nms.nightvision.disabled=NanoMuscle™ Suite: NightVision disabled

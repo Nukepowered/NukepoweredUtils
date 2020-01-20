@@ -80,7 +80,7 @@ public class MachineCraftingRecipes {
         //Generators
         registerMachineRecipe(NPUTileEntities.NAQUADAH_REACTOR, "RCR", "FMF", "QCQ", 'M', HULL, 'Q', CABLE_QUAD, 'C', BETTER_CIRCUIT, 'F', FIELD_GENERATOR, 'R', STICK_RADIOACTIVE);
         
-        //TODO vending machine recipe
+        ModHandler.addShapedRecipe("nputils:vending_machine", NPUTileEntities.VENDING_MACHINE.getStackForm(), "CPC", "MHM", "WPW", 'C', "circuitGood", 'P', MetaItems.ELECTRIC_PISTON_LV, 'M', MetaItems.ELECTRIC_MOTOR_LV, 'H', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'W', OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.Tin));
         
         //Machines
         registerMachineRecipe(NPUTileEntities.CLUSTERMILL, "MMM", "CHC", "MMM", 'M', MOTOR, 'C', CIRCUIT, 'H', HULL);
