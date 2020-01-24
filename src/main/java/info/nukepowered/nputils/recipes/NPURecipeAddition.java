@@ -9,6 +9,7 @@ import gregtech.api.recipes.CountableIngredient;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.recipes.ingredients.IntCircuitIngredient;
+import gregtech.api.recipes.recipes.CokeOvenRecipe;
 import gregtech.api.recipes.recipes.FuelRecipe;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.MarkerMaterials;
@@ -510,7 +511,19 @@ public class NPURecipeAddition {
             RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(640).EUt(7680).input(OrePrefix.cableGtSingle, Materials.Tungsten).input(OrePrefix.screw, Materials.TungstenSteel).input(OrePrefix.rotor, Materials.TungstenSteel).input(OrePrefix.pipeMedium, Materials.TungstenSteel).inputs(MetaItems.ELECTRIC_MOTOR_IV.getStackForm()).input(OrePrefix.ring, m).outputs(MetaItems.ELECTRIC_PUMP_IV.getStackForm()).buildAndRegister();
         }
         
+        // Coke oven recipes
+        RecipeMaps.COKE_OVEN_RECIPES.add(new CokeOvenRecipe(CountableIngredient.from("gemLignite"), OreDictUnifier.get(OrePrefix.gem, NPUMaterials.LigniteCoke), Materials.Creosote.getFluid(400), 900));
+        
         //Pyrolise Oven Recipes
+        RecipeMaps.PYROLYSE_RECIPES.recipeBuilder()
+        		.input(OrePrefix.gem, Materials.Lignite, 16)
+        		.circuitMeta(0)
+        		.outputs(OreDictUnifier.get(OrePrefix.gem, NPUMaterials.LigniteCoke, 20))
+        		.fluidOutputs(Materials.Creosote.getFluid(8000))
+        		.duration(440)
+        		.EUt(96)
+        		.buildAndRegister();
+        
         RecipeMaps.PYROLYSE_RECIPES.recipeBuilder()
                 .inputs(new ItemStack(Items.SUGAR, 23))
                 .circuitMeta(1)

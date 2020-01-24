@@ -352,7 +352,7 @@ nputils.machine.power_inverter.mv.name=§bHigh-current power inverter Mk.II
 nputils.machine.power_inverter.hv.name=§dHigh-current power inverter Mk.III
 nputils.machine.power_inverter.message_panelmode=Solar panel-only mode: %s
 nputils.machine.power_inverter.description=Powerfull step-up power inverter. To toggle modes hit with mallet
-nputils.machine.power_inverter.lv.description=Making to many heat while working, be careful!
+nputils.machine.power_inverter.lv.description=Making too much heat while working, be careful!
 nputils.machine.power_inverter.mv.description=Powerfull device let you controll your solar fields
 nputils.machine.power_inverter.hv.description=Advanced power controller for expensive panels
 
