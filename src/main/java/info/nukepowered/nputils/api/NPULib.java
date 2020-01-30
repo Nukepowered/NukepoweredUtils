@@ -66,6 +66,18 @@ public class NPULib {
 	public static final SoundEvent JET_ENGINE = new SoundEvent(new ResourceLocation("nputils:jet_engine"));
 	
 	/**
+	 * Prints to console information about finishing of some event
+	 * @param text for formattin "Some text %.3f"
+	 * @param startTime - time in millis
+	 * @param endTime - time in millis
+	 */
+	public static void printEventFinish(String text, long startTime, long endTime) {
+		float time = (endTime - startTime) * 1.0F / 1000;
+		String result = String.format(text, time);
+		NPULog.info(result);
+	}
+	
+	/**
 	 * Return a list of slot's indexes wher is stack
 	 * @param handler
 	 * @param stack

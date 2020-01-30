@@ -18,12 +18,12 @@ import org.apache.commons.io.IOUtils;
 import gregtech.api.GTValues;
 import info.nukepowered.nputils.NPUConfig;
 import info.nukepowered.nputils.NPULog;
+import info.nukepowered.nputils.api.NPULib;
 import net.minecraftforge.fml.common.Loader;
 
 public class WorldGenRegister {
 	public static void init() {
 		long time = System.currentTimeMillis();
-		NPULog.info("WorldGen init started");
 		
 		// Modifying of standalone GT veins
 		if (NPUConfig.replaceGTWorldGen) {
@@ -42,8 +42,7 @@ public class WorldGenRegister {
             NPULog.fatal("Failed to add NPU worldgen", exception);
         }
 		
-		float t = (System.currentTimeMillis() * 1.0F) / (time * 1.0F);
-		NPULog.info(String.format("WorldGen init finished for %.3f seconds", t));
+		NPULib.printEventFinish("WorldGen init finished for %.3f seconds", time, System.currentTimeMillis());
 	}
 	
 	private static void addModifiedGTVeins() throws IOException {

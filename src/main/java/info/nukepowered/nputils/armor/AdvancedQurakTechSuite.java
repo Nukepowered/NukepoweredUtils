@@ -61,9 +61,9 @@ public class AdvancedQurakTechSuite extends QuarkTechSuite {
 		if (NPULib.isKeyDown(player, EnumKey.JUMP) && NPULib.isKeyDown(player, EnumKey.MODE_SWITCH) && toggleTimer == 0) {
 			hoverMode = !hoverMode;
 			toggleTimer = 10;
-			if (!world.isRemote) {
+			if (world.isRemote) {
 				String status = hoverMode ? "metaarmor.jetpack.hover.enable" : "metaarmor.jetpack.hover.disable";
-				player.sendMessage(new TextComponentTranslation(status));
+				player.sendStatusMessage(new TextComponentTranslation(status), true);
 			}
 		}
 		
@@ -274,7 +274,7 @@ public class AdvancedQurakTechSuite extends QuarkTechSuite {
 	
 	@Override
 	public boolean handleUnblockableDamage(EntityLivingBase entity, @Nonnull ItemStack armor, DamageSource source, double damage, EntityEquipmentSlot equipmentSlot) {
-		if (source == DamageSource.FALL || source == DamageSource.DROWN || source == DamageSource.STARVE) {
+		if (source == DamageSource.FALL || source == DamageSource.DROWN || source == DamageSource.STARVE || source.getDamageType().contains("bee.")) {
 			return false;
 		} else {
 			return true;

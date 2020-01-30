@@ -25,9 +25,9 @@ import gregtech.api.capability.IElectricItem;
 import gregtech.api.capability.impl.EnergyContainerHandler;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.ModularUI;
+import gregtech.api.gui.Widget.ClickData;
 import gregtech.api.gui.widgets.AdvancedTextWidget;
 import gregtech.api.gui.widgets.ClickButtonWidget;
-import gregtech.api.gui.widgets.ClickButtonWidget.ClickData;
 import gregtech.api.gui.widgets.CycleButtonWidget;
 import gregtech.api.gui.widgets.DynamicLabelWidget;
 import gregtech.api.gui.widgets.ImageWidget;
@@ -190,16 +190,16 @@ public class TileEntityVendingMachine extends MetaTileEntity {
 		return itemAvailable;
 	}
 	
-	public IItemHandlerModifiable getCoinSlot() {
-		return this.coins;
+	public IItemHandler getCoinSlot() {
+		return (IItemHandler) this.coins;
 	}
 	
-	public IItemHandlerModifiable getWorkingSlot() {
-		return this.workingWith;
+	public IItemHandler getWorkingSlot() {
+		return (IItemHandler) this.workingWith;
 	}
 	
-	public IItemHandlerModifiable getSample() {
-		return this.sample;
+	public IItemHandler getSample() {
+		return (IItemHandler) this.sample;
 	}
 	
 	public int getPrice() {
@@ -214,14 +214,14 @@ public class TileEntityVendingMachine extends MetaTileEntity {
 		return this.workingMode;
 	}
 	
-	public void toggleStock() {
-		this.unlimitedStock = !this.unlimitedStock;
+	public void setStockMode(boolean mode) {
+		this.unlimitedStock = mode;
 		writeCustomData(105, buf -> buf.writeBoolean(this.unlimitedStock));
 	}
 	
-	public void toggleOreDict() {
-		this.oreDictMode = !this.oreDictMode;
-		writeCustomData(104, buf -> buf.writeBoolean(this.oreDictMode));
+	public void setOreDictMode(boolean mode) {
+		this.oreDictMode = mode;
+		writeCustomData(104, buf -> buf.writeBoolean(mode));
 	}
 	
 	public void toggleWorkingMode() {
@@ -499,7 +499,7 @@ public class TileEntityVendingMachine extends MetaTileEntity {
     @Override
 	protected ModularUI createUI(EntityPlayer entityPlayer) {
     	VendingMachineWrapper wrapper = new VendingMachineWrapper(new Position(0, 0), new Size(176, 120), this, this.isOwner(entityPlayer));
-    	SlotWidget batterySlot = new SlotWidget(this.battery, 0, 150, 65, this.isOwner(entityPlayer) || entityPlayer.canUseCommand(2, ""), this.isOwner(entityPlayer) || entityPlayer.canUseCommand(2, "")) {
+    	SlotWidget batterySlot = new SlotWidget((IItemHandler) this.battery, 0, 150, 65, this.isOwner(entityPlayer) || entityPlayer.canUseCommand(2, ""), this.isOwner(entityPlayer) || entityPlayer.canUseCommand(2, "")) {
     		@Override
     	    public boolean canPutStack(ItemStack stack) {
     	        IElectricItem capability = stack.getCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null);
@@ -523,7 +523,8 @@ public class TileEntityVendingMachine extends MetaTileEntity {
 		staticWidgets.addWidget(new LabelWidget(8, 15, "nputils.vending_machine.ui.credits"));
 		staticWidgets.addWidget(new DynamicLabelWidget(8, 85, () -> I18n.format("nputils.vending_machine.ui.deals", NPULib.format(this.dealsAmount))));
 		staticWidgets.addWidget(new DynamicLabelWidget(8, 26, () -> NPULib.format(this.coinsInserted)));
-		staticWidgets.addWidget(new AdvancedTextWidget(8, 37, text, 0x404040));
+		// Thanks Arch for brocken advancedwidget
+//		staticWidgets.addWidget();
 		staticWidgets.addWidget(new ImageWidget(137, 39, 3, 24, NPUTextures.VENDING_MACHINE_LINE));
 		staticWidgets.addWidget(new ImageWidget(104, 39, 3, 24, NPUTextures.VENDING_MACHINE_LINE));
 		if (!this.unlimitedStock) staticWidgets.addWidget(batterySlot);
@@ -532,13 +533,15 @@ public class TileEntityVendingMachine extends MetaTileEntity {
 			staticWidgets.addWidget(new ClickButtonWidget(52, 70, 13, 12, "+", data -> this.incPrice(getValue.apply(data))));
 			staticWidgets.addWidget(new ClickButtonWidget(39, 70, 13, 12, "-", data -> this.decrPrice(getValue.apply(data))));
 			if (entityPlayer.canUseCommand(2, "")) {
-				staticWidgets.addWidget(new CycleButtonWidget(66, 70, 13, 12, new String[] {"S", "ထ"}, () -> this.unlimitedStock ? 1 : 0, val -> this.toggleStock()));
+				staticWidgets.addWidget(new CycleButtonWidget(66, 70, 13, 12, new String[] {"S", "ထ"}, () -> this.unlimitedStock ? 1 : 0, val -> this.setStockMode(val == 1)).setTooltipHoverString("nputils.vending_machine.ui.stock"));
 			}
 		}
-
+		
 		return ModularUI.builder(GuiTextures.BACKGROUND, 176, 180)
 				.widget(staticWidgets)
 				.widget(wrapper)
+				// temporary fix
+				.widget(new AdvancedTextWidget(8, 37, text, 0x404040).setMaxWidthLimit(156).setClickHandler((x, z) -> {}))
 				.bindPlayerInventory(entityPlayer.inventory, 96)
 				.build(getHolder(), entityPlayer);
 	}

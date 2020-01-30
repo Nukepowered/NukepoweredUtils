@@ -31,7 +31,6 @@ import net.minecraft.item.crafting.IRecipe;
 public class DisassemblyRecipes {
 	public static void init() {
 		long time = System.currentTimeMillis();
-		NPULog.info("Registering of disassembling recipes started");
 		
 		// Machine recycling
 		for (MetaTileEntity machine : GregTechAPI.META_TILE_ENTITY_REGISTRY) {
@@ -180,7 +179,7 @@ public class DisassemblyRecipes {
 			}
 		}
 		
-		NPULog.info("Disassembling recipes registration finished in " + String.format("%,d", (System.currentTimeMillis() - time)) + " ms");
+		NPULib.printEventFinish("Disassembling recipes registration finished in %.3f seconds", time, System.currentTimeMillis());
 	}
 
 	protected static List<ItemStack> getAllowedOutput(List<ItemStack> list, int tier) {

@@ -43,7 +43,7 @@ public class NPUTextures {
     public static final TextureArea COIN_OVERLAY = TextureArea.fullImage("textures/gui/overlay/coin_overlay.png");
     public static final TextureArea BUY_OVERLAY = TextureArea.fullImage("textures/gui/overlay/buy_overlay.png");
     public static final TextureArea SELL_OVERLAY = TextureArea.fullImage("textures/gui/overlay/sell_overlay.png");
-    
+    public static final TextureArea BUTTON_OREDICT = TextureArea.fullImage("textures/gui/button_oredict.png");
     
     static {
     	VENDING_MACHINE = new OrientedOverlayRenderer("machines/vending_machine", OverlayFace.FRONT);

@@ -5,12 +5,14 @@ import gregtech.api.items.armor.ArmorMetaItem;
 import info.nukepowered.nputils.armor.AdvancedImpellerJetpack;
 import info.nukepowered.nputils.armor.AdvancedNanoMuscleSuite;
 import info.nukepowered.nputils.armor.AdvancedQurakTechSuite;
+import info.nukepowered.nputils.armor.ApiaristArmorBehaviour;
 import info.nukepowered.nputils.armor.BatteryPack;
 import info.nukepowered.nputils.armor.ImpellerJetpack;
 import info.nukepowered.nputils.armor.NanoMuscleSuite;
 import info.nukepowered.nputils.armor.PowerlessJetpack;
 import info.nukepowered.nputils.armor.QuarkTechSuite;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraftforge.fml.common.Loader;
 
 public class NPUMetaArmor extends ArmorMetaItem<ArmorMetaItem<?>.ArmorMetaValueItem> {
 	@Override
@@ -40,5 +42,13 @@ public class NPUMetaArmor extends ArmorMetaItem<ArmorMetaItem<?>.ArmorMetaValueI
 		NPUMetaItems.BATPACK_LV.setModelAmount(8);
 		NPUMetaItems.BATPACK_MV.setModelAmount(8);
 		NPUMetaItems.BATPACK_HV.setModelAmount(8);
+		
+		if (Loader.isModLoaded("forestry")) {
+			NPUMetaItems.QUARK_TECH_SUITE_CHESTPLATE.addComponents(new ApiaristArmorBehaviour());
+			NPUMetaItems.QUARK_TECH_SUITE_LEGGINS.addComponents(new ApiaristArmorBehaviour());
+			NPUMetaItems.QUARK_TECH_SUITE_HELMET.addComponents(new ApiaristArmorBehaviour());
+			NPUMetaItems.QUARK_TECH_SUITE_BOOTS.addComponents(new ApiaristArmorBehaviour());
+			NPUMetaItems.ADVANCED_QAURK_TECH_SUITE_CHESTPLATE.addComponents(new ApiaristArmorBehaviour());
+		}
 	}
 }

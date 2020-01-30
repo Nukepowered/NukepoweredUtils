@@ -56,9 +56,9 @@ public class AdvancedNanoMuscleSuite extends NanoMuscleSuite {
 		if (NPULib.isKeyDown(player, EnumKey.JUMP) && NPULib.isKeyDown(player, EnumKey.MODE_SWITCH) && toggleTimer == 0) {
 			hoverMode = !hoverMode;
 			toggleTimer = 10;
-			if (!world.isRemote) {
+			if (world.isRemote) {
 				String status = hoverMode ? "metaarmor.jetpack.hover.enable" : "metaarmor.jetpack.hover.disable";
-				player.sendMessage(new TextComponentTranslation(status));
+				player.sendStatusMessage(new TextComponentTranslation(status), true);
 			}
 		}
 		

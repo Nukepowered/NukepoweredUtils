@@ -28,6 +28,8 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.event.HoverEvent;
+import net.minecraft.util.text.event.HoverEvent.Action;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
@@ -82,8 +84,11 @@ public class TileEntityProcessingArray extends RecipeMapMultiblockController {
 	
 	protected void addDisplayText(List<ITextComponent> textList) {
 		if (!isStructureFormed()) {
+			ITextComponent tooltip = new TextComponentTranslation("gregtech.multiblock.invalid_structure.tooltip")
+					.setStyle(new Style().setColor(TextFormatting.GRAY));
 			textList.add(new TextComponentTranslation("gregtech.multiblock.invalid_structure")
-	                .setStyle(new Style().setColor(TextFormatting.RED)));
+	                .setStyle(new Style().setColor(TextFormatting.RED)
+					.setHoverEvent(new HoverEvent(Action.SHOW_TEXT, tooltip))));
 		} else {
 			IEnergyContainer cont = recipeMapWorkable.getEnergyContainer();
 			long maxVoltage = 0;
@@ -101,11 +106,14 @@ public class TileEntityProcessingArray extends RecipeMapMultiblockController {
 					WorkableTieredMetaTileEntity mte = (WorkableTieredMetaTileEntity) machines.getKey();
 					long result = GTValues.V[mte.getTier()] * machines.getValue();
 					ITextComponent comp = new TextComponentTranslation("nputils.multiblock.processing_array.eu_required", result, GTValues.VN[GTUtility.getTierByVoltage(result)]);
-					if (result > maxVoltage) comp.setStyle(new Style().setColor(TextFormatting.RED));
-					textList.add(comp);
+					Style style = new Style().setHoverEvent(new HoverEvent(Action.SHOW_TEXT, new TextComponentTranslation("nputils.multiblock.processing_array.eu_required.tooltip").setStyle(new Style().setColor(TextFormatting.GRAY))));
+					if (result > maxVoltage) style.setColor(TextFormatting.RED);
+					textList.add(comp.setStyle(style));
 				}
 			} else {
-				textList.add(new TextComponentTranslation("nputils.multiblock.processing_array.nomachines").setStyle(new Style().setColor(TextFormatting.RED)));
+				ITextComponent noMachines = new TextComponentTranslation("nputils.multiblock.processing_array.nomachines")
+						.setStyle(new Style().setColor(TextFormatting.RED));
+				textList.add(noMachines);
 			}
 			
 			if (!recipeMapWorkable.isWorkingEnabled()) {

@@ -62,6 +62,21 @@ public class PowerlessJetpack implements IArmorLogic {
 	public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
 		IFluidHandlerItem internalTank = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null);
 		FuelRecipe currentRecipe = null;
+		NBTTagCompound data = GTUtility.getOrCreateNbtCompound(stack);
+		int burntime = data.hasKey("burnTimer") ? data.getShort("burnTimer") : 0;
+		byte toggleTimer = data.hasKey("toggleTimer") ? data.getByte("toggleTimer") : 0;
+		boolean hover = data.hasKey("hover") ? data.getBoolean("hover") : false;
+		boolean suc = false;
+		
+		if (NPULib.isKeyDown(player, EnumKey.JUMP) && NPULib.isKeyDown(player, EnumKey.MODE_SWITCH) && toggleTimer == 0) {
+			hover = !hover;
+			toggleTimer = 10;
+			if (world.isRemote) {
+				String status = hover ? "metaarmor.jetpack.hover.enable" : "metaarmor.jetpack.hover.disable";
+				player.sendStatusMessage(new TextComponentTranslation(status), true);
+			}
+		}
+		
 		if (internalTank.drain(1, false) != null && !player.isInWater() && !player.isInLava()) {
 			for (FuelRecipe current : fuels) {
 				if (current.getRecipeFluid().isFluidEqual(internalTank.drain(1, false))) {
@@ -75,34 +90,7 @@ public class PowerlessJetpack implements IArmorLogic {
 				return;
 			}
 			
-			NBTTagCompound data = GTUtility.getOrCreateNbtCompound(stack);
-			int burntime = 0;
-			byte toggleTimer = 0;
-			boolean hover = false;
-			boolean suc = false;
 			FluidStack fuel = currentRecipe.getRecipeFluid();
-			if (data.hasKey("burnTimer")) burntime = data.getShort("burnTimer");
-			if (data.hasKey("toggleTimer")) toggleTimer = data.getByte("toggleTimer");
-			if (data.hasKey("hover")) hover = data.getBoolean("hover");
-			
-			if (!world.isRemote) {
-				if (NPULib.isKeyDown(player, EnumKey.MODE_SWITCH) && NPULib.isKeyDown(player, EnumKey.JUMP) && toggleTimer == 0) {
-					hover = !hover;
-					toggleTimer = 10;
-					data.setBoolean("hover", hover);
-					if (hover) {
-						player.sendMessage(new TextComponentTranslation("metaarmor.jetpack.hover.enable"));
-					} else {
-						player.sendMessage(new TextComponentTranslation("metaarmor.jetpack.hover.disable"));
-					}
-				}
-			}
-			
-			if (player.onGround && !NPULib.isKeyDown(player, EnumKey.JUMP) && hover && !world.isRemote) {
-				hover = !hover;
-				data.setBoolean("hover", hover);
-				player.sendMessage(new TextComponentTranslation("metaarmor.jetpack.hover.disable"));
-			}
 			
 			if (internalTank.drain(fuel, false).amount == fuel.amount || burntime >= GTValues.V[burnTier]) {
 				if (!hover) {
@@ -158,17 +146,23 @@ public class PowerlessJetpack implements IArmorLogic {
 					}
 				}
 			}
-			
-			if (world.getWorldTime() % 40 == 0 && !player.onGround) {
-				NPULib.resetPlayerFloatingTime(player);
-			}
-			
-			if (toggleTimer > 0) toggleTimer--;
-			
-			data.setShort("burnTimer", (short) burntime);
-			data.setByte("toggleTimer", toggleTimer);
-			player.inventoryContainer.detectAndSendChanges();
 		}
+		
+
+		if (player.onGround && !NPULib.isKeyDown(player, EnumKey.JUMP) && hover && !world.isRemote) {
+			hover = !hover;
+		}
+		
+		if (world.getWorldTime() % 40 == 0 && !player.onGround) {
+			NPULib.resetPlayerFloatingTime(player);
+		}
+		
+		if (toggleTimer > 0) toggleTimer--;
+		
+		data.setBoolean("hover", hover);
+		data.setShort("burnTimer", (short) burntime);
+		data.setByte("toggleTimer", toggleTimer);
+		player.inventoryContainer.detectAndSendChanges();
 	}
 	
 	@Override

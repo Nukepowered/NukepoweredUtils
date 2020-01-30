@@ -6,8 +6,8 @@ import gregtech.api.unification.material.type.DustMaterial;
 import gregtech.api.unification.material.type.FluidMaterial;
 import gregtech.api.unification.material.type.Material;
 import gregtech.api.unification.ore.OrePrefix;
-import info.nukepowered.nputils.NPULog;
 import info.nukepowered.nputils.NPUMaterials;
+import info.nukepowered.nputils.api.NPULib;
 
 public class MatterReplication {
 	public static void init( ) {
@@ -40,6 +40,7 @@ public class MatterReplication {
                 NPURecipeMaps.REPLICATOR_RECIPES.recipeBuilder().duration((int) (m.getMass() * 100)).EUt(32).notConsumable(OreDictUnifier.get(OrePrefix.dust, m)).outputs((OreDictUnifier.get(OrePrefix.dust, m))).fluidInputs(NPUMaterials.PositiveMatter.getFluid((int) m.getProtons()), NPUMaterials.NeutralMatter.getFluid((int) m.getNeutrons())).buildAndRegister();
             }
         }
-        NPULog.info("Replication was registered for " + String.format("%,d", System.currentTimeMillis() - time) + " ms");
+        
+        NPULib.printEventFinish("Replication was registered for %.3f seconds", time, System.currentTimeMillis());
 	}
 }
