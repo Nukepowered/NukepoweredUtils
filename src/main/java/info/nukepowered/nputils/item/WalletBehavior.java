@@ -72,7 +72,8 @@ public class WalletBehavior implements IItemBehaviour, ItemUIFactory {
 		};
 		ModularUI.Builder ui = ModularUI.builder(GuiTextures.BACKGROUND, 176, 104)
 				.label(6, 6, "metaitem.coin_wallet.name")
-				.widget(new AdvancedTextWidget(62, 20, label, 0x404040));
+				// temporary fix
+				.widget(new AdvancedTextWidget(62, 20, label, 0x404040).setMaxWidthLimit(156).setClickHandler((x, z) -> {}));
 
 		
 		for (int i = 0; i < NPUMetaItems.COINS.size(); i++) {

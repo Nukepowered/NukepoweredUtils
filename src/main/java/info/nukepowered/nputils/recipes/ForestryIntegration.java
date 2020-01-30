@@ -3,16 +3,18 @@ package info.nukepowered.nputils.recipes;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
+import forestry.api.recipes.ICentrifugeRecipe;
 import forestry.api.recipes.IFabricatorRecipe;
 import forestry.api.recipes.RecipeManagers;
 import forestry.core.ModuleCore;
 import forestry.core.items.EnumElectronTube;
+import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.ore.OrePrefix;
 import info.nukepowered.nputils.NPULog;
+import info.nukepowered.nputils.api.NPULib;
 import info.nukepowered.nputils.item.NPUMetaItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -34,9 +36,37 @@ public class ForestryIntegration {
 		}
 	}
 	
-	public static void init() {
-		NPULog.info("Forestry integarion enabled");
+	public static void parseCentrifugeRecipes() {
+		long time = System.currentTimeMillis();
+		Iterator<ICentrifugeRecipe> iter = RecipeManagers.centrifugeManager.recipes().iterator();
+		while (iter.hasNext()) {
+			ICentrifugeRecipe recipe = iter.next();
+			RecipeBuilder<?> builder = RecipeMaps.CENTRIFUGE_RECIPES.recipeBuilder().EUt(14).duration(recipe.getProcessingTime() * 5).inputs(recipe.getInput());
+			
+			if (recipe.getAllProducts().isEmpty()) {
+				NPULog.error("Failed to parse forestry centrifuge recipe for input: " + recipe.getInput() + " - output is empty!");
+				continue;
+			}
+			
+			if (recipe.getAllProducts().size() > 6) {
+				NPULog.error("Failed to parse forestry centrifuge recipe for input: " + recipe.getInput() + " - output items more than 6!");
+				continue;
+			}
+			
+			recipe.getAllProducts().entrySet().forEach(entry -> {
+				if (entry.getValue() < 1.0f)
+					builder.chancedOutput(entry.getKey(), (int)(entry.getValue() * 10000), 100);
+				else 
+					builder.outputs(entry.getKey());
+			});
+			
+			builder.buildAndRegister();
+		}
 		
+		NPULib.printEventFinish("Finished copying centrifuge recipes for %.3f seconds", time, System.currentTimeMillis());
+	}
+	
+	public static void init() {
 		// Recipe generation
 		RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(150).EUt(16).inputs(NPUMetaItems.ELECTRODE_APATITE.getStackForm()).fluidInputs(Materials.Glass.getFluid(144)).outputs(ModuleCore.getItems().tubes.get(EnumElectronTube.APATITE, 1)).buildAndRegister();
         RecipeMaps.FORMING_PRESS_RECIPES.recipeBuilder().duration(100).EUt(24).input(OrePrefix.stick, Materials.Apatite, 2).input(OrePrefix.bolt, Materials.Apatite).input(OrePrefix.dustSmall, Materials.Redstone, 2).outputs(NPUMetaItems.ELECTRODE_APATITE.getStackForm()).buildAndRegister();

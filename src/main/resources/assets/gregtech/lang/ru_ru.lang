@@ -297,15 +297,17 @@ metaarmor.energy_share.tooltip.guide=Для изменения режима на
 
 nputils.multiblock.processing_array.nomachines=Нет установленных машин
 nputils.multiblock.processing_array.eu_required=Требуеться EU/t: %s (%s)
+nputils.multiblock.processing_array.eu_required.tooltip=EU/t требуемое для работы данного количества машин. В противном случае будет работать только часть из них.
 
 nputils.vending_machine.owner_change=Владелец установлен на %s
 nputils.vending_machine.ui.available_deals=Доступно сделок:
 nputils.vending_machine.ui.deals=%s сделок
 nputils.vending_machine.ui.credits=Кредитов:
 nputils.vending_machine.ui.mode_switch=Режим
+nputils.vending_machine.ui.stock=S - использовать предметы из контейнера/nထ - бесконечный режим
 nputils.vending_machine.ui.wrapper.credits=кредитов
-nputils.vending_machine.ui.wrapper.oredict=OreDict
-nputils.vending_machine.ui.wrapper.exact=Строго
+nputils.vending_machine.ui.wrapper.oredict.enabled=Режим OreDictionary включен
+nputils.vending_machine.ui.wrapper.oredict.disabled=Режим OreDictionary отключён
 
 metaitem.liquid_fuel_jetpack.name=§eРеактивный ранец на жидком топливе
 metaitem.impeller_jetpack.name=§eРанец на основе импеллера

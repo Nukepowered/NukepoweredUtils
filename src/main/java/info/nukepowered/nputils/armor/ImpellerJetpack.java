@@ -36,27 +36,21 @@ public class ImpellerJetpack extends ArmorLogicSuite {
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
 		IElectricItem container = stack.getCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null);
-		if (container.canUse(energyPerUse) && !player.isInWater() && !player.isInLava()) {
-			NBTTagCompound data = GTUtility.getOrCreateNbtCompound(stack);
-			byte toggleTimer = 0;
-			boolean hover = false;
-			boolean res = false;
-			if (data.hasKey("toggleTimer")) toggleTimer = data.getByte("toggleTimer");
-			if (data.hasKey("hover")) hover = data.getBoolean("hover");
-			
-			if (NPULib.isKeyDown(player, EnumKey.MODE_SWITCH) && NPULib.isKeyDown(player, EnumKey.JUMP) && toggleTimer == 0) {
-				hover = !hover;
-				toggleTimer = 10;
-				if (!world.isRemote) {
-					data.setBoolean("hover", hover);
-					if (hover) {
-						player.sendMessage(new TextComponentTranslation("metaarmor.jetpack.hover.enable"));
-					} else {
-						player.sendMessage(new TextComponentTranslation("metaarmor.jetpack.hover.disable"));
-					}
-				}
+		NBTTagCompound data = GTUtility.getOrCreateNbtCompound(stack);
+		byte toggleTimer = data.hasKey("toggleTimer") ? data.getByte("toggleTimer") : 0;
+		boolean hover = data.hasKey("hover") ? data.getBoolean("hover") : false ;
+		boolean res = false;
+		
+		if (NPULib.isKeyDown(player, EnumKey.JUMP) && NPULib.isKeyDown(player, EnumKey.MODE_SWITCH) && toggleTimer == 0) {
+			hover = !hover;
+			toggleTimer = 10;
+			if (world.isRemote) {
+				String status = hover ? "metaarmor.jetpack.hover.enable" : "metaarmor.jetpack.hover.disable";
+				player.sendStatusMessage(new TextComponentTranslation(status), true);
 			}
-			
+		}
+		
+		if (container.canUse(energyPerUse) && !player.isInWater() && !player.isInLava()) {
 			if (!hover) {
 				if (NPULib.isKeyDown(player, EnumKey.JUMP)) {
 					if (player.motionY < 0.6D) player.motionY += 0.2D;
@@ -95,20 +89,23 @@ public class ImpellerJetpack extends ArmorLogicSuite {
 					player.fallDistance = 0.0F;
 					res = true;
 			}
-			
-			if (res && !player.onGround) {
-				container.discharge(energyPerUse, container.getTier(), false, false, false);
-			}
-			
-			if (world.getWorldTime() % 40 == 0 && !player.onGround) {
-				NPULib.resetPlayerFloatingTime(player);
-			}
-			
-			if (toggleTimer > 0) toggleTimer--;
-			
-			data.setByte("toggleTimer", toggleTimer);
-			player.inventoryContainer.detectAndSendChanges();
 		}
+		
+		if (player.onGround) hover = false;
+		
+		if (res && !player.onGround) {
+			container.discharge(energyPerUse, container.getTier(), false, false, false);
+		}
+		
+		if (world.getWorldTime() % 40 == 0 && !player.onGround) {
+			NPULib.resetPlayerFloatingTime(player);
+		}
+		
+		if (toggleTimer > 0) toggleTimer--;
+		
+		data.setBoolean("hover", hover);
+		data.setByte("toggleTimer", toggleTimer);
+		player.inventoryContainer.detectAndSendChanges();
 	}
 
 	@Override

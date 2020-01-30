@@ -1,3 +1,7 @@
+#1.4.x
+* Fixed not working vending machine UI after GTCE update
+
+
 #1.3.21
 * Fixed brocken NanoMuscle recipes
 * Fixed brocken Wallet UI on server

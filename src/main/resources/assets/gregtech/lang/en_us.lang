@@ -297,18 +297,17 @@ metaarmor.energy_share.tooltip.guide=To change mode shift-right click when holdi
 
 nputils.multiblock.processing_array.nomachines=No machines installed
 nputils.multiblock.processing_array.eu_required=Required EU/t: %s (%s)
+nputils.multiblock.processing_array.eu_required.tooltip=EU/t required to run this amount of machines. Otherwise will work only part of them.
 
 nputils.vending_machine.owner_change=Owner successfully set to %s
 nputils.vending_machine.ui.available_deals=Available deals:
 nputils.vending_machine.ui.deals=%s deals
 nputils.vending_machine.ui.credits=Credits:
 nputils.vending_machine.ui.mode_switch=Mode
+nputils.vending_machine.ui.stock=S - using items from container/nထ - unlimited stock
 nputils.vending_machine.ui.wrapper.credits=credits
-nputils.vending_machine.ui.wrapper.oredict=OreDict
-nputils.vending_machine.ui.wrapper.exact=Exact
-
-
-
+nputils.vending_machine.ui.wrapper.oredict.enabled=OreDictionary mode is activated
+nputils.vending_machine.ui.wrapper.oredict.disabled=OreDictionary mode disabled
 
 metaitem.liquid_fuel_jetpack.name=§eLiquid fuel jetpack
 metaitem.impeller_jetpack.name=§eImpeller jetpack

@@ -2,6 +2,8 @@ package info.nukepowered.nputils;
 
 import net.minecraftforge.common.config.Config;
 
+// TODO config rework
+
 @Config(modid = NPUtils.MODID, name = "NPUtils")
 public class NPUConfig {
 	

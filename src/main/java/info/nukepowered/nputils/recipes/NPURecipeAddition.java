@@ -32,8 +32,8 @@ import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import info.nukepowered.nputils.NPUConfig;
-import info.nukepowered.nputils.NPULog;
 import info.nukepowered.nputils.NPUMaterials;
+import info.nukepowered.nputils.api.NPULib;
 import info.nukepowered.nputils.armor.PowerlessJetpack;
 import info.nukepowered.nputils.item.NPUMetaBlocks;
 import info.nukepowered.nputils.item.NPUMetaItems;
@@ -788,7 +788,7 @@ public class NPURecipeAddition {
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(600).EUt(512).input("circuitAdvanced", 4).inputs(MetaTileEntities.HULL[3].getStackForm(), OreDictUnifier.get(OrePrefix.wireGtHex, Materials.Copper, 4), OreDictUnifier.get(OrePrefix.wireGtQuadruple, Materials.Gold), NPUMetaItems.FERRITE_PLATE_SET.getStackForm(16)).outputs(NPUTileEntities.POWER_INVERTER[2].getStackForm()).buildAndRegister();
         ModHandler.addShapedRecipe("nputils:solar_panel.basic", NPUTileEntities.SOLAR_PANEL[0].getStackForm(), "PPP", "CDC", "SSS", 'P', "paneGlass", 'C', OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.RedAlloy), 'S', OreDictUnifier.get(OrePrefix.plate, Materials.Steel), 'D', OreDictUnifier.get(OrePrefix.dustSmall, Materials.GalliumArsenide));
         RecipeMaps.FORMING_PRESS_RECIPES.recipeBuilder().duration(100).EUt(60).inputs(OreDictUnifier.get(OrePrefix.plate, Materials.Silicon), OreDictUnifier.get(OrePrefix.wireFine, Materials.Copper, 2)).outputs(NPUMetaItems.POLYCRYSTALLINE_SOLAR_CELL.getStackForm()).buildAndRegister();
-        RecipeMaps.FORMING_PRESS_RECIPES.recipeBuilder().duration(100).EUt(130).inputs(NPUMetaItems.MONOCRYSTALL_SILICON_PLATE.getStackForm(), OreDictUnifier.get(OrePrefix.wireFine, Materials.Copper, 2)).outputs(NPUMetaItems.MONOCRYSTALLINE_SOLAR_CELL.getStackForm()).buildAndRegister();
+        RecipeMaps.FORMING_PRESS_RECIPES.recipeBuilder().duration(100).EUt(130).inputs(NPUMetaItems.MONOCRYSTALL_SILICON_PLATE.getStackForm(), OreDictUnifier.get(OrePrefix.wireFine, Materials.Silver, 2)).outputs(NPUMetaItems.MONOCRYSTALLINE_SOLAR_CELL.getStackForm()).buildAndRegister();
         RecipeMaps.CUTTER_RECIPES.recipeBuilder().duration(30).EUt(60).inputs(MetaItems.SILICON_WAFER.getStackForm()).outputs(NPUMetaItems.MONOCRYSTALL_SILICON_PLATE.getStackForm()).buildAndRegister();
         for (MaterialStack stackFluid : solderingList) {
         	IngotMaterial fluid = (IngotMaterial) stackFluid.material;
@@ -797,6 +797,7 @@ public class NPURecipeAddition {
 	        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(500).input("circuitAdvanced", 1).inputs(OreDictUnifier.get(OrePrefix.plate, Materials.Plastic, 3), OreDictUnifier.get(OrePrefix.plate, Materials.Glass), OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.Copper), NPUMetaItems.MONOCRYSTALLINE_SOLAR_CELL.getStackForm(4)).fluidInputs(fluid.getFluid(mult * 72)).outputs(NPUTileEntities.SOLAR_PANEL[2].getStackForm()).buildAndRegister();
         }
         
+        // TODO battery supporing recipes
         // Armor
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(400).EUt(100).input("circuitAdvanced", 6).inputs(MetaTileEntities.STEEL_TANK.getStackForm(), MetaItems.ELECTRIC_PUMP_MV.getStackForm(2), OreDictUnifier.get(OrePrefix.pipeSmall, Materials.Plastic, 2), OreDictUnifier.get(OrePrefix.pipeMedium, Materials.Steel, 2), OreDictUnifier.get(OrePrefix.plate, Materials.Aluminium), OreDictUnifier.get(OrePrefix.screw, Materials.Aluminium, 4), OreDictUnifier.get(OrePrefix.stick, Materials.Aluminium, 2)).outputs(NPUMetaItems.SEMIFLUID_JETPACK.getStackForm()).buildAndRegister();
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(400).EUt(100).input("circuitAdvanced", 6).inputs(MetaItems.BATTERY_RE_MV_CADMIUM.getStackForm(6), NPUMetaItems.IMPELLER_MV.getStackForm(4), OreDictUnifier.get(OrePrefix.plate, Materials.Aluminium), OreDictUnifier.get(OrePrefix.screw, Materials.Aluminium, 4), OreDictUnifier.get(OrePrefix.stick, Materials.Aluminium, 2)).outputs(NPUMetaItems.IMPELLER_JETPACK.getStackForm()).buildAndRegister();
@@ -806,6 +807,7 @@ public class NPURecipeAddition {
         ModHandler.addShapedRecipe("nputils:battery_pack.mv", NPUMetaItems.BATPACK_MV.getStackForm(), "BPB", "BCB", "B B", 'B', MetaItems.BATTERY_RE_MV_LITHIUM.getStackForm(), 'C', "circuitGood", 'P', OreDictUnifier.get(OrePrefix.plate, Materials.Aluminium));
         ModHandler.addShapedRecipe("nputils:battery_pack.hv", NPUMetaItems.BATPACK_HV.getStackForm(), "BPB", "BCB", "B B", 'B', MetaItems.BATTERY_RE_HV_LITHIUM.getStackForm(), 'C', "circuitAdvanced", 'P', OreDictUnifier.get(OrePrefix.plate, Materials.StainlessSteel));
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(800).EUt(400).input("circuitAdvanced", 4).input("circuitExtreme", 1).inputs(NPUMetaItems.BATPACK_HV.getStackForm(), NPUMetaItems.IMPELLER_HV.getStackForm(6), MetaItems.BATTERY_RE_HV_CADMIUM.getStackForm(), OreDictUnifier.get(OrePrefix.plate, Materials.Aluminium), OreDictUnifier.get(OrePrefix.screw, Materials.Aluminium, 4), OreDictUnifier.get(OrePrefix.stick, Materials.Aluminium, 2)).outputs(NPUMetaItems.ADVANCED_IMPELLER_JETPACK.getStackForm()).buildAndRegister();
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(800).EUt(400).input("circuitExtreme", 1).inputs(NPUMetaItems.BATPACK_HV.getStackForm(), NPUMetaItems.IMPELLER_JETPACK.getStackForm(), NPUMetaItems.IMPELLER_HV.getStackForm(6)).outputs(NPUMetaItems.ADVANCED_IMPELLER_JETPACK.getStackForm()).buildAndRegister();
         
         // NanoMuscle Suite
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(1200).EUt(512).input("circuitAdvanced",  1).inputs(MetaItems.CARBON_PLATE.getStackForm(7), MetaItems.BATTERY_RE_HV_LITHIUM.getStackForm()).notConsumable(new IntCircuitIngredient(0)).outputs(NPUMetaItems.NANO_MUSCLE_SUITE_CHESTPLATE.getStackForm()).buildAndRegister();
@@ -842,9 +844,7 @@ public class NPURecipeAddition {
         // Wallet
         ModHandler.addShapedRecipe("nputils:wallet", NPUMetaItems.COIN_WALLET.getStackForm(), " L ", "S S", " L ", 'L', new ItemStack(Items.LEATHER), 'S', new ItemStack(Items.STRING));
         
-        
-        
-        NPULog.info(String.format("Recipes was registered for  %.3f seconds", (System.currentTimeMillis() - time_c) / 1000.0f));
+        NPULib.printEventFinish("Recipes was registered for  %.3f seconds", time_c, System.currentTimeMillis());
 	}
 	
 	public static void init1() {
@@ -1578,12 +1578,12 @@ public class NPURecipeAddition {
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(800).EUt(7680).inputs(OreDictUnifier.get(OrePrefix.wireGtDouble, Materials.NaquadahAlloy, 8), NPUMetaItems.MICA_INSULATOR_FOIL.getStackForm(8)).fluidInputs(Materials.Naquadah.getFluid(144)).outputs(MetaBlocks.WIRE_COIL.getItemVariant(BlockWireCoil.CoilType.NAQUADAH_ALLOY)).buildAndRegister();
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(1000).EUt(9001).inputs(OreDictUnifier.get(OrePrefix.wireGtDouble, Tier.Superconductor, 8), NPUMetaItems.MICA_INSULATOR_FOIL.getStackForm(8)).fluidInputs(Materials.NaquadahAlloy.getFluid(144)).outputs(MetaBlocks.WIRE_COIL.getItemVariant(BlockWireCoil.CoilType.SUPERCONDUCTOR)).buildAndRegister();
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(1000).EUt(9001).inputs(OreDictUnifier.get(OrePrefix.wireGtDouble, NPUMaterials.LuVSuperconductor, 32), NPUMetaItems.MICA_INSULATOR_FOIL.getStackForm(16)).fluidInputs(Materials.NaquadahAlloy.getFluid(144)).outputs(MetaBlocks.WIRE_COIL.getItemVariant(BlockWireCoil.CoilType.SUPERCONDUCTOR)).buildAndRegister();
-        NPULog.info(String.format("Advanced recipes was registered for  %.3f seconds", (System.currentTimeMillis() - time) / 1000.0F));
+        
+        NPULib.printEventFinish("Advanced recipes was registered for  %.3f seconds", time, System.currentTimeMillis());
 	}
 	
 	public static void generatedRecipes() {
 		long time = System.currentTimeMillis();
-		NPULog.info("Starting of generated recipes");
 		List<ResourceLocation> recipesToRemove = new ArrayList<>();
 		
 		for (IRecipe recipe : CraftingManager.REGISTRY) {
@@ -1697,6 +1697,6 @@ public class NPURecipeAddition {
 			}
 		}
 		
-		 NPULog.info(String.format("End of generated recipes. It is took %.3f seconds", (System.currentTimeMillis() - time) / 1000.0F));
+		 NPULib.printEventFinish("End of generated recipes. It is took %.3f seconds", time, System.currentTimeMillis());
 	}
 }

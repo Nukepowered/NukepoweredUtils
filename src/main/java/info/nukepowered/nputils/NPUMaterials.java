@@ -106,6 +106,8 @@ public class NPUMaterials implements IMaterialHandler {
         LuVSuperconductorBase.setCableProperties(32768, 4, 2);
         ZPMSuperconductorBase.setCableProperties(131072, 4, 2);
         
+        
+        // TODO high pressure pipes
         Materials.NiobiumTitanium.setFluidPipeProperties(450, 2900, true);
         Enderium.setFluidPipeProperties(650, 1500, true);
         Materials.Naquadah.setFluidPipeProperties(1000, 19000, true);

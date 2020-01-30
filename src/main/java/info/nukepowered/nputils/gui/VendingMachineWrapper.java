@@ -6,11 +6,12 @@ import javax.annotation.Nullable;
 
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.widgets.AbstractWidgetGroup;
-import gregtech.api.gui.widgets.CycleButtonWidget;
 import gregtech.api.gui.widgets.LabelWidget;
 import gregtech.api.gui.widgets.SlotWidget;
+import gregtech.api.gui.widgets.ToggleButtonWidget;
 import gregtech.api.util.Position;
 import gregtech.api.util.Size;
+import gregtech.api.util.function.BooleanConsumer;
 import info.nukepowered.nputils.NPUTextures;
 import info.nukepowered.nputils.api.NPULib;
 import info.nukepowered.nputils.machines.TileEntityVendingMachine;
@@ -21,6 +22,7 @@ public class VendingMachineWrapper extends AbstractWidgetGroup {
 	
 	private WeakReference<TileEntityVendingMachine> machine;
 	private TileEntityVendingMachine.MODE machineMode;
+	private boolean oreDict;
 	private final boolean isOwner;
 	
 	
@@ -29,6 +31,7 @@ public class VendingMachineWrapper extends AbstractWidgetGroup {
 		this.machine = new WeakReference<>(machine);
 		this.machineMode = machine.getMode();
 		this.isOwner = isOwner;
+		this.oreDict = machine.getOreDictState();
 	}
 	
 	public void initUI() {
@@ -42,15 +45,22 @@ public class VendingMachineWrapper extends AbstractWidgetGroup {
 		SlotWidget workSlot = new SlotWidget(machine.getWorkingSlot(), 0, 130, isSaling ? 65 : 18, true, !isSaling)
 				.setBackgroundTexture(GuiTextures.SLOT, (isSaling ? NPUTextures.SELL_OVERLAY : NPUTextures.BUY_OVERLAY));
 		SlotWidget sampleSlot = new SlotWidget(machine.getSample(), 0, 96, isSaling ? 65 : 18, isOwner, isOwner);
-		CycleButtonWidget oreDict = new CycleButtonWidget(8, 57, 70, 12, new String[] {"nputils.vending_machine.ui.wrapper.exact", "nputils.vending_machine.ui.wrapper.oredict"},
-				() -> machine.getOreDictState() ? 1 : 0,
-				val -> {if (isOwner) machine.toggleOreDict();});
+		BooleanConsumer oreDictSwitch = state -> {
+			this.oreDict = state;
+			machine.setOreDictMode(state);
+		};
+		ToggleButtonWidget oreDict = new ToggleButtonWidget(150, 18, 18, 18, NPUTextures.BUTTON_OREDICT,
+				() -> this.oreDict, oreDictSwitch)
+				.setTooltipText("nputils.vending_machine.ui.wrapper.oredict");
 		
 		if (isOwner) {
 			sampleSlot.setBackgroundTexture(GuiTextures.SLOT); 
 		}
-		if (!isSaling) {
+		if (!isSaling && isOwner) {
 			this.addWidget(oreDict);
+		}
+		if (this.oreDict && !isOwner) {
+			this.addWidget(new LabelWidget(8, 59, "OreDict", 0xa90004));
 		}
 		this.addWidget(money);
 		this.addWidget(str);
@@ -66,7 +76,10 @@ public class VendingMachineWrapper extends AbstractWidgetGroup {
 		if (machine == null) return;
 		if (this.machineMode != machine.getMode()) {
 			this.machineMode = machine.getMode();
-			writeUpdateInfo(100, buf -> buf.writeBoolean(this.machineMode == MODE.SALE));
+			writeUpdateInfo(100, buf -> {
+				buf.writeBoolean(this.machineMode == MODE.SALE);
+				buf.writeBoolean(this.oreDict);
+			});
 		}
 	}
 	
@@ -75,6 +88,7 @@ public class VendingMachineWrapper extends AbstractWidgetGroup {
 		 super.readUpdateInfo(id, buffer);
 		 if (id == 100) {
 			 this.machineMode = buffer.readBoolean() ? MODE.SALE : MODE.PURCHASE;
+			 this.oreDict = buffer.readBoolean();
 			 this.clearAllWidgets();
 			 this.initUI();
 		 }

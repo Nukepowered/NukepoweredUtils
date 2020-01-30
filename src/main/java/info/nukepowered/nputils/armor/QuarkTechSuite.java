@@ -231,7 +231,8 @@ public class QuarkTechSuite extends ArmorLogicSuite {
 	
 	@Override
 	public boolean handleUnblockableDamage(EntityLivingBase entity, @Nonnull ItemStack armor, DamageSource source, double damage, EntityEquipmentSlot equipmentSlot) {
-		if (source == DamageSource.FALL || source == DamageSource.DROWN || source == DamageSource.STARVE || source == DamageSource.OUT_OF_WORLD) {
+		
+		if (source == DamageSource.FALL || source == DamageSource.DROWN || source == DamageSource.STARVE || source == DamageSource.OUT_OF_WORLD || source.getDamageType().contains("bee.")) {
 			return false;
 		} else {
 			return true;

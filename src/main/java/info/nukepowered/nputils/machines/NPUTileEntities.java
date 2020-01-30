@@ -76,6 +76,7 @@ public class NPUTileEntities {
     public static TileEntityFisher[] FISHER = new TileEntityFisher[8];
 	
     public static TileEntityVendingMachine VENDING_MACHINE;
+    public static TileEntityLockerBox[] LOCKER_BOX = new TileEntityLockerBox[2];
 	
 	public static void init() {
 		CIRCUITASSEMBLER[0] = GregTechAPI.registerMetaTileEntity(2000, new SimpleMachineMetaTileEntity(location("circuit_assembler.lv"), NPURecipeMaps.CIRCUIT_ASSEMBLER_RECIPES, Textures.ASSEMBLER_OVERLAY, 1));
@@ -534,6 +535,7 @@ public class NPUTileEntities {
         PROCESSING_ARRAY = GregTechAPI.registerMetaTileEntity(2222, new TileEntityProcessingArray(location("processing_array")));
         
         VENDING_MACHINE = GregTechAPI.registerMetaTileEntity(2223, new TileEntityVendingMachine(location("vending_machine")));
+//        LOCKER_BOX[0] = GregTechAPI.registerMetaTileEntity(2224, new TileEntityLockerBox(location("locker_box.steel")));
 	}
 	
 	private static ResourceLocation location(String name) {
