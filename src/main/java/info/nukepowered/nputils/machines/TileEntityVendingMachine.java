@@ -523,8 +523,7 @@ public class TileEntityVendingMachine extends MetaTileEntity {
 		staticWidgets.addWidget(new LabelWidget(8, 15, "nputils.vending_machine.ui.credits"));
 		staticWidgets.addWidget(new DynamicLabelWidget(8, 85, () -> I18n.format("nputils.vending_machine.ui.deals", NPULib.format(this.dealsAmount))));
 		staticWidgets.addWidget(new DynamicLabelWidget(8, 26, () -> NPULib.format(this.coinsInserted)));
-		// Thanks Arch for brocken advancedwidget
-//		staticWidgets.addWidget();
+		staticWidgets.addWidget(new AdvancedTextWidget(8, 37, text, 0x404040));
 		staticWidgets.addWidget(new ImageWidget(137, 39, 3, 24, NPUTextures.VENDING_MACHINE_LINE));
 		staticWidgets.addWidget(new ImageWidget(104, 39, 3, 24, NPUTextures.VENDING_MACHINE_LINE));
 		if (!this.unlimitedStock) staticWidgets.addWidget(batterySlot);
@@ -540,8 +539,6 @@ public class TileEntityVendingMachine extends MetaTileEntity {
 		return ModularUI.builder(GuiTextures.BACKGROUND, 176, 180)
 				.widget(staticWidgets)
 				.widget(wrapper)
-				// temporary fix
-				.widget(new AdvancedTextWidget(8, 37, text, 0x404040).setMaxWidthLimit(156).setClickHandler((x, z) -> {}))
 				.bindPlayerInventory(entityPlayer.inventory, 96)
 				.build(getHolder(), entityPlayer);
 	}

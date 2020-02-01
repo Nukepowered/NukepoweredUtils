@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.Map;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.IElectricItem;
@@ -234,6 +235,18 @@ public class QuarkTechSuite extends ArmorLogicSuite {
 		} else {
 			return true;
 		}
+	}
+	
+	@Override
+	public boolean protectEntity(EntityLivingBase entity, ItemStack armor, @Nullable String cause, boolean doProtect) {
+		IElectricItem item = armor.getCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null);
+		long energyPerBite = this.energyPerUse / 100;
+		if (item != null && item.canUse(energyPerBite)) {
+			if (doProtect) item.discharge(energyPerBite, item.getTier(), false, false, false);
+			return true;
+		}
+		
+		return false;
 	}
 	
 	@Override

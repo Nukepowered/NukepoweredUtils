@@ -2,6 +2,7 @@ package info.nukepowered.nputils;
 
 import java.util.function.Function;
 
+import gregtech.api.GTValues;
 import gregtech.common.blocks.VariantItemBlock;
 import info.nukepowered.nputils.api.NPULib;
 import info.nukepowered.nputils.input.Keybinds;
@@ -47,7 +48,7 @@ public class CommonProxy {
 	}
 	
 	public void init() {
-		if (Loader.isModLoaded("forestry") && NPUConfig.Integration.ForestryIntegration) {
+		if (Loader.isModLoaded(GTValues.MODID_FR) && NPUConfig.Integration.ForestryIntegration) {
 			ForestryIntegration.removeFabricatorRecipes();
 			ForestryIntegration.parseCentrifugeRecipes();
 		}
@@ -87,7 +88,7 @@ public class CommonProxy {
 		NPURecipeAddition.init1();
 		if (Loader.isModLoaded("appliedenergistics2") && NPUConfig.Integration.AE2Integration)
 			AEIntegration.init();
-		if (Loader.isModLoaded("forestry") && NPUConfig.Integration.ForestryIntegration)
+		if (Loader.isModLoaded(GTValues.MODID_FR) && NPUConfig.Integration.ForestryIntegration)
 			ForestryIntegration.init();
 		if (Loader.isModLoaded("tconstruct") && NPUConfig.Integration.TiCIntegration) 
 			TinkersIntegration.init();

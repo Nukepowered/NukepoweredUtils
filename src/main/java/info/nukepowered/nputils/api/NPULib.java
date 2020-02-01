@@ -16,6 +16,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.IElectricItem;
 import gregtech.api.items.armor.ArmorMetaItem;
+import gregtech.api.items.armor.IArmorLogic;
 import gregtech.api.items.metaitem.MetaItem;
 import gregtech.api.items.metaitem.stats.IItemBehaviour;
 import gregtech.api.items.toolitem.ToolMetaItem;
@@ -64,6 +65,15 @@ public class NPULib {
 	
 	public static final Side SIDE = FMLCommonHandler.instance().getSide();
 	public static final SoundEvent JET_ENGINE = new SoundEvent(new ResourceLocation("nputils:jet_engine"));
+	
+	@Nullable
+	public static IArmorLogic getArmorLogic(ItemStack item) {
+		if (item.getItem() instanceof ArmorMetaItem) {
+			ArmorMetaItem<?>.ArmorMetaValueItem armorMetaValue = ((ArmorMetaItem<?>)item.getItem()).getItem(item);
+			return armorMetaValue.getArmorLogic();
+		}
+		return null;
+	}
 	
 	/**
 	 * Prints to console information about finishing of some event
