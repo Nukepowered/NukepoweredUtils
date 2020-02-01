@@ -272,14 +272,17 @@ metaitem.coin_wallet.money_amont=Кредитов: %s
 metaitem.coin_wallet.use_ui=Правая кнопка мыши держа в руке чтобы открыть UI
 metaitem.coin_wallet.use_add=Шфит-правый клик держа в руке чтобы положить все монеты из инвентаря в кошелёк
 
-metaarmor.nms.nightvision.enabled=Костюм NanoMuscle™: Ночное зрение активировано
-metaarmor.nms.nightvision.disabled=Костюм NanoMuscle™: Ночное зрение отключено
+metaarmor.nightvision.enabled=Ночное зрение активировано
+metaarmor.nightvision.disabled=Ночное зрение отключеноо
 
-metaarmor.qts.nightvision.enabled=Костюм QuarkTech™: Ночное зрение активировано
-metaarmor.qts.nightvision.disabled=Костюм QuarkTech™: Ночное зрение отключено
+metaarmor.hover.enable=Режим зависания активирован
+metaarmor.hover.disable=Режим зависания отключён
 
-metaarmor.jetpack.hover.enable=Реактивный ранец: режим зависания активирован
-metaarmor.jetpack.hover.disable=Реактивный ранец: режим зависания отключен
+metaarmor.fly.enable=Полёт включен
+metaarmor.fly.disable=Полёт отключён
+
+metaarmor.energy_share.enable=Передача энергии: Подзарядка гаджетов активирована
+metaarmor.energy_share.disable=Передача энергии: Подзарядка гаджетов отключена
 
 metaarmor.hud.status.enabled=§aВКЛ
 metaarmor.hud.status.disabled=§cВЫКЛ
@@ -290,8 +293,6 @@ mataarmor.hud.supply_mode=Режим зарядки: %s
 metaarmor.hud.fly_mode=Режим полёта: %s
 metaarmor.hud.gravi_engine=ГравиДвигатель: %s
 
-metaarmor.energy_share.enable=Передача энергии: Подзарядка гаджетов активирована
-metaarmor.energy_share.disable=Передача энергии: Подзарядка гаджетов отключена
 metaarmor.energy_share.tooltip=Режим зарядки: %s
 metaarmor.energy_share.tooltip.guide=Для изменения режима нажмите shift-правый клик держа в руках
 
@@ -796,6 +797,7 @@ item.mica_based.dust=Слюдяная мякоть
 material.iron_chloride=Хлорид железа III
 material.sand=Кварцевый песок
 material.electrical_steel=Электротехническая сталь
+material.high_pressure=высокого давления
 
 item.epoxid.ingot=Брусок эпоксидной смолы
 item.epoxid.dustTiny=Крошечная пылька эпоксидной смолы

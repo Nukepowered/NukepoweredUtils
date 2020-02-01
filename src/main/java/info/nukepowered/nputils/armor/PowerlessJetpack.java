@@ -72,7 +72,7 @@ public class PowerlessJetpack implements IArmorLogic {
 			hover = !hover;
 			toggleTimer = 10;
 			if (world.isRemote) {
-				String status = hover ? "metaarmor.jetpack.hover.enable" : "metaarmor.jetpack.hover.disable";
+				String status = hover ? "metaarmor.hover.enable" : "metaarmor.hover.disable";
 				player.sendStatusMessage(new TextComponentTranslation(status), true);
 			}
 		}
@@ -93,6 +93,11 @@ public class PowerlessJetpack implements IArmorLogic {
 			FluidStack fuel = currentRecipe.getRecipeFluid();
 			
 			if (internalTank.drain(fuel, false).amount == fuel.amount || burntime >= GTValues.V[burnTier]) {
+				
+				if (!player.onGround) {
+					NPULib.resetPlayerFloatingTime(player);
+				}
+				
 				if (!hover) {
 					if (NPULib.isKeyDown(player, EnumKey.JUMP)) {
 						if (player.motionY < 0.6D) player.motionY += 0.2D;
@@ -143,6 +148,8 @@ public class PowerlessJetpack implements IArmorLogic {
 						} else {
 							burntime -= GTValues.V[burnTier];
 						}
+						
+						NPULib.resetPlayerFloatingTime(player);
 					}
 				}
 			}
@@ -151,10 +158,6 @@ public class PowerlessJetpack implements IArmorLogic {
 
 		if (player.onGround && !NPULib.isKeyDown(player, EnumKey.JUMP) && hover && !world.isRemote) {
 			hover = !hover;
-		}
-		
-		if (world.getWorldTime() % 40 == 0 && !player.onGround) {
-			NPULib.resetPlayerFloatingTime(player);
 		}
 		
 		if (toggleTimer > 0) toggleTimer--;

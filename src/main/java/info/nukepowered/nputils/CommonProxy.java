@@ -38,6 +38,7 @@ public class CommonProxy {
 		NPULog.init();
 		new NPULib();
 		new NetworkHandler();
+		NPUMaterials.init();
 		NPUMetaItems.init();
 		NPUMetaBlocks.init();
 		NPUTileEntities.init();

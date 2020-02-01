@@ -9,10 +9,13 @@ import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.type.*;
 import gregtech.api.unification.ore.OrePrefix;
 import gregtech.api.unification.stack.MaterialStack;
+import gregtech.common.blocks.MetaBlocks;
+import gregtech.common.pipelike.fluidpipe.FluidPipeProperties;
 import info.nukepowered.nputils.item.BasicMaterial;
 
 @IMaterialHandler.RegisterMaterialHandler
 public class NPUMaterials implements IMaterialHandler {
+	
 	public static FluidMaterial FishOil;
 	public static FluidMaterial RawGrowthMedium;
 	public static FluidMaterial SterilizedGrowthMedium;
@@ -29,6 +32,7 @@ public class NPUMaterials implements IMaterialHandler {
 	public static IngotMaterial LuVSuperconductorBase;
 	public static IngotMaterial ZPMSuperconductorBase;
 	public static IngotMaterial Enderium;
+	public static IngotMaterial ElectricalSteel;
 	
 	public static DustMaterial Meat;
 	public static DustMaterial AluminoSilicateWool;
@@ -50,7 +54,7 @@ public class NPUMaterials implements IMaterialHandler {
 	public static BasicMaterial LuVSuperconductor;
 	public static BasicMaterial ZPMSuperconductor;
 	
-	public static IngotMaterial ElectricalSteel;
+	public static DummyMaterial HighPressurePipe;
 	
 	public static GemMaterial LigniteCoke;
 	
@@ -106,12 +110,12 @@ public class NPUMaterials implements IMaterialHandler {
         LuVSuperconductorBase.setCableProperties(32768, 4, 2);
         ZPMSuperconductorBase.setCableProperties(131072, 4, 2);
         
+        HighPressurePipe = new DummyMaterial(500, "high_pressure", 0xff1010);
         
-        // TODO high pressure pipes
         Materials.NiobiumTitanium.setFluidPipeProperties(450, 2900, true);
         Enderium.setFluidPipeProperties(650, 1500, true);
         Materials.Naquadah.setFluidPipeProperties(1000, 19000, true);
-        Neutronium.setFluidPipeProperties(2800, 1000000, true);
+        Neutronium.setFluidPipeProperties(2000, 3000, true);
         
         Materials.Mica.addFlag(DustMaterial.MatFlags.GENERATE_ORE);
         Materials.Asbestos.addFlag(DustMaterial.MatFlags.GENERATE_ORE);
@@ -143,8 +147,18 @@ public class NPUMaterials implements IMaterialHandler {
         OrePrefix.gemFlawless.setIgnored(LigniteCoke);
         OrePrefix.gemExquisite.setIgnored(LigniteCoke);
 	}
-
+	
+	public static void init() {
+        MetaBlocks.FLUID_PIPE.addPipeMaterial(NPUMaterials.HighPressurePipe, new FluidPipeProperties(1500, 2400, true));
+	}
+	
 	@Override
 	public void onMaterialsInit() {}
-
+	
+	public static class DummyMaterial extends Material {
+		public DummyMaterial(int id, String name, int rgbColor) {
+			super(id, name, rgbColor, MaterialIconSet.NONE, ImmutableList.of(), 0, null);
+		}
+	}
+	
 }

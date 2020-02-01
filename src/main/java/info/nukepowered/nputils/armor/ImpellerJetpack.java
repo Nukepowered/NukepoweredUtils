@@ -41,11 +41,15 @@ public class ImpellerJetpack extends ArmorLogicSuite {
 		boolean hover = data.hasKey("hover") ? data.getBoolean("hover") : false ;
 		boolean res = false;
 		
+		if (!player.onGround && container.canUse(energyPerUse)) {
+			NPULib.resetPlayerFloatingTime(player);
+		}
+		
 		if (NPULib.isKeyDown(player, EnumKey.JUMP) && NPULib.isKeyDown(player, EnumKey.MODE_SWITCH) && toggleTimer == 0) {
 			hover = !hover;
 			toggleTimer = 10;
 			if (world.isRemote) {
-				String status = hover ? "metaarmor.jetpack.hover.enable" : "metaarmor.jetpack.hover.disable";
+				String status = hover ? "metaarmor.hover.enable" : "metaarmor.hover.disable";
 				player.sendStatusMessage(new TextComponentTranslation(status), true);
 			}
 		}
@@ -62,32 +66,32 @@ public class ImpellerJetpack extends ArmorLogicSuite {
 					res = true;
 				}
 			} else {
-					if (!player.onGround) {
-						NPULib.spawnParticle(world, player, EnumParticleTypes.CLOUD, -0.3D);
-						NPULib.playJetpackSound(player);
-					}
-					if (NPULib.isKeyDown(player, EnumKey.FORWARD) && player.motionX < 0.5D && player.motionZ < 0.5D) {
-						player.moveRelative(0.0F, 0.0F, 1.0F, 0.025F);
-					}
+				if (!player.onGround) {
+					NPULib.spawnParticle(world, player, EnumParticleTypes.CLOUD, -0.3D);
+					NPULib.playJetpackSound(player);
+				}
+				if (NPULib.isKeyDown(player, EnumKey.FORWARD) && player.motionX < 0.5D && player.motionZ < 0.5D) {
+					player.moveRelative(0.0F, 0.0F, 1.0F, 0.025F);
+				}
 					
-					if (NPULib.isKeyDown(player, EnumKey.JUMP)) {
-						if (player.motionY < 0.5D) {
-							player.motionY += 0.125D;
-						}
-					} else if (NPULib.isKeyDown(player, EnumKey.SHIFT)) {
-						if (player.motionY < -0.5D) player.motionY += 0.1D;
-					} else if (!NPULib.isKeyDown(player, EnumKey.JUMP) && !NPULib.isKeyDown(player, EnumKey.SHIFT) && !player.onGround) {
-						if (player.motionY < 0 && player.motionY >= -0.03D) player.motionY = -0.025D;
-						if (player.motionY < -0.025D) {
-							if (player.motionY + 0.2D > -0.025D) {
-								player.motionY = -0.025D;
-							} else {
-								player.motionY += 0.2D;
-							}
+				if (NPULib.isKeyDown(player, EnumKey.JUMP)) {
+					if (player.motionY < 0.5D) {
+						player.motionY += 0.125D;
+					}
+				} else if (NPULib.isKeyDown(player, EnumKey.SHIFT)) {
+					if (player.motionY < -0.5D) player.motionY += 0.1D;
+				} else if (!NPULib.isKeyDown(player, EnumKey.JUMP) && !NPULib.isKeyDown(player, EnumKey.SHIFT) && !player.onGround) {
+					if (player.motionY < 0 && player.motionY >= -0.03D) player.motionY = -0.025D;
+					if (player.motionY < -0.025D) {
+						if (player.motionY + 0.2D > -0.025D) {
+							player.motionY = -0.025D;
+						} else {
+							player.motionY += 0.2D;
 						}
 					}
-					player.fallDistance = 0.0F;
-					res = true;
+				}
+				player.fallDistance = 0.0F;
+				res = true;
 			}
 		}
 		
@@ -95,10 +99,6 @@ public class ImpellerJetpack extends ArmorLogicSuite {
 		
 		if (res && !player.onGround) {
 			container.discharge(energyPerUse, container.getTier(), false, false, false);
-		}
-		
-		if (world.getWorldTime() % 40 == 0 && !player.onGround) {
-			NPULib.resetPlayerFloatingTime(player);
 		}
 		
 		if (toggleTimer > 0) toggleTimer--;

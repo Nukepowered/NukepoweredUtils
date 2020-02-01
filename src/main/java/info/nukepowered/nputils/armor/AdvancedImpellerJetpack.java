@@ -35,11 +35,19 @@ public class AdvancedImpellerJetpack extends ImpellerJetpack {
 		byte toggleTimer = data.hasKey("ToggleTimer") ? data.getByte("ToggleTimer") : 0;
 		boolean result = false;
 		
+		if (!player.onGround && cont.canUse(energyPerUse)) {
+			NPULib.resetPlayerFloatingTime(player);
+		}
+		
 		// Mode toggle
 		if (!world.isRemote) {
 			if (NPULib.isKeyDown(player, EnumKey.FLY_KEY) && toggleTimer == 0) {
 				flyEnabled = !flyEnabled;
 				toggleTimer = 10;
+				if (world.isRemote) {
+					String status = flyEnabled ? "metaarmor.fly.enable" : "metaarmor.fly.disable";
+					player.sendStatusMessage(new TextComponentTranslation(status), true);
+				}
 			}
 		}
 		
@@ -47,7 +55,7 @@ public class AdvancedImpellerJetpack extends ImpellerJetpack {
 			hoverMode = !hoverMode;
 			toggleTimer = 10;
 			if (world.isRemote) {
-				String status = hoverMode ? "metaarmor.jetpack.hover.enable" : "metaarmor.jetpack.hover.disable";
+				String status = hoverMode ? "metaarmor.hover.enable" : "metaarmor.hover.disable";
 				player.sendStatusMessage(new TextComponentTranslation(status), true);
 			}
 		}
@@ -118,7 +126,6 @@ public class AdvancedImpellerJetpack extends ImpellerJetpack {
 		// Fly discharge
 		if (result) {
 			cont.discharge(energyPerUse, cont.getTier(), true, false, false);	
-			NPULib.resetPlayerFloatingTime(player);
 		}
 		
 		// Do not spam of server packets

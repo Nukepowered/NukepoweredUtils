@@ -40,13 +40,10 @@ public class NanoMuscleSuite extends ArmorLogicSuite {
 			if (NPULib.isKeyDown(player, EnumKey.MENU) && NPULib.isKeyDown(player, EnumKey.MODE_SWITCH) && toggleTimer == 0) {
 				toggleTimer = 10;
 				nightvision = !nightvision;
+				nbtData.setBoolean("Nightvision", nightvision);
 				if (!world.isRemote) {
-					nbtData.setBoolean("Nightvision", nightvision);
-					if (nightvision) {
-						player.sendMessage(new TextComponentTranslation("metaarmor.nms.nightvision.enabled"));
-					} else {
-						player.sendMessage(new TextComponentTranslation("metaarmor.nms.nightvision.disabled"));
-					}
+					String result = nightvision ? "metaarmor.nightvision.enabled" : "metaarmor.nightvision.disabled";
+					player.sendStatusMessage(new TextComponentTranslation(result), true);
 				}
 			}
 			

@@ -272,14 +272,17 @@ metaitem.coin_wallet.money_amont=Credits: %s
 metaitem.coin_wallet.use_ui=Right click it while holding to open wallet UI
 metaitem.coin_wallet.use_add=Shift-right click while holding to add all credits from inventory to wallet
 
-metaarmor.nms.nightvision.enabled=NanoMuscle™ Suite: NightVision enabled
-metaarmor.nms.nightvision.disabled=NanoMuscle™ Suite: NightVision disabled
+metaarmor.nightvision.enabled=NightVision enabled
+metaarmor.nightvision.disabled=NightVision disabled
 
-metaarmor.qts.nightvision.enabled=QuarkTech™ Suite: NightVision enabled
-metaarmor.qts.nightvision.disabled=QuarkTech™ Suite: NightVision disabled
+metaarmor.hover.enable=Hover mode enabled
+metaarmor.hover.disable=Hover mode disabled
 
-metaarmor.jetpack.hover.enable=Jetpack: hover mode enabled
-metaarmor.jetpack.hover.disable=Jetpack: hover mode disabled
+metaarmor.fly.enable=Fly mode enabled
+metaarmor.fly.disable=Fly mode disabled
+
+metaarmor.energy_share.enable=Energy Supply: Gadgets charging enabled
+metaarmor.energy_share.disable=Energy Supply: Gadgets charging disabled
 
 metaarmor.hud.status.enabled=§aON
 metaarmor.hud.status.disabled=§cOFF
@@ -290,8 +293,6 @@ mataarmor.hud.supply_mode=Supply mode: %s
 metaarmor.hud.fly_mode=Fly mode: %s
 metaarmor.hud.gravi_engine=GraviEngine: %s
 
-metaarmor.energy_share.enable=Energy Supply: Gadgets charging enabled
-metaarmor.energy_share.disable=Energy Supply: Gadgets charging disabled
 metaarmor.energy_share.tooltip=Supply mode: %s
 metaarmor.energy_share.tooltip.guide=To change mode shift-right click when holding item
 
@@ -795,6 +796,7 @@ item.mica_based.dust=Mica Based Pulp
 material.iron_chloride=Iron III Chloride
 material.sand=Quartz Sand
 material.electrical_steel=Electrical Steel
+material.high_pressure=High Pressure
 
 item.epoxid.ingot=Epoxy Resin Bar
 item.epoxid.dustTiny=Tiny Pile of Epoxy Resin Pulp
