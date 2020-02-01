@@ -844,6 +844,12 @@ public class NPURecipeAddition {
         // Wallet
         ModHandler.addShapedRecipe("nputils:wallet", NPUMetaItems.COIN_WALLET.getStackForm(), " L ", "S S", " L ", 'L', new ItemStack(Items.LEATHER), 'S', new ItemStack(Items.STRING));
         
+        // High pressure pipes
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(300).EUt(96).input(OrePrefix.pipeTiny, Materials.TungstenSteel).inputs(MetaItems.ELECTRIC_PUMP_EV.getStackForm()).outputs(OreDictUnifier.get(OrePrefix.pipeTiny, NPUMaterials.HighPressurePipe)).buildAndRegister();
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(400).EUt(148).input(OrePrefix.pipeSmall, Materials.TungstenSteel).inputs(MetaItems.ELECTRIC_PUMP_EV.getStackForm(2)).outputs(OreDictUnifier.get(OrePrefix.pipeSmall, NPUMaterials.HighPressurePipe)).buildAndRegister();
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(600).EUt(256).input(OrePrefix.pipeMedium, Materials.TungstenSteel).inputs(MetaItems.ELECTRIC_PUMP_IV.getStackForm()).outputs(OreDictUnifier.get(OrePrefix.pipeMedium, NPUMaterials.HighPressurePipe)).buildAndRegister();
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(800).EUt(512).input(OrePrefix.pipeLarge, Materials.TungstenSteel).inputs(MetaItems.ELECTRIC_PUMP_IV.getStackForm(2)).outputs(OreDictUnifier.get(OrePrefix.pipeLarge, NPUMaterials.HighPressurePipe)).buildAndRegister();
+        
         NPULib.printEventFinish("Recipes was registered for  %.3f seconds", time_c, System.currentTimeMillis());
 	}
 	

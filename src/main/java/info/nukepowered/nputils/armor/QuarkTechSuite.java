@@ -103,13 +103,10 @@ public class QuarkTechSuite extends ArmorLogicSuite {
 			if (NPULib.isKeyDown(player, EnumKey.MENU) && NPULib.isKeyDown(player, EnumKey.MODE_SWITCH) && toggleTimer == 0) {
 				toggleTimer = 10;
 				nightvision = !nightvision;
+				data.setBoolean("Nightvision", nightvision);
 				if (!world.isRemote) {
-					data.setBoolean("Nightvision", nightvision);
-					if (nightvision) {
-						player.sendMessage(new TextComponentTranslation("metaarmor.qts.nightvision.enabled"));
-					} else {
-						player.sendMessage(new TextComponentTranslation("metaarmor.qts.nightvision.disabled"));
-					}
+					String result = nightvision ? "metaarmor.nightvision.enabled" : "metaarmor.nightvision.disabled";
+					player.sendStatusMessage(new TextComponentTranslation(result), true);
 				}
 			}
 			

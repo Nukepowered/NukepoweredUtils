@@ -306,7 +306,7 @@ public class NPULib {
 	}
 	
 	public static void playJetpackSound(@Nonnull EntityPlayer player) {
-		if (NPUConfig.Misc.enableSounds && player.world.isRemote) {
+		if (NPUConfig.Misc.enableSounds && player.world.isRemote && NPULib.SIDE.isClient()) {
 			float cons = (float)player.motionY + player.moveForward;
 			cons = MathHelper.clamp(cons, 0.6F, 1.0F);
 			
@@ -323,13 +323,17 @@ public class NPULib {
 	}
 	
 	/**
-	 * Resets private field, amount of ticks player in the sky
+	 * Resets amount of ticks player in the sky
 	 * @param player
 	 */
-	@SuppressWarnings("deprecation")
 	public static void resetPlayerFloatingTime(EntityPlayer player) {
-		if (player instanceof EntityPlayerMP) { 
-			ObfuscationReflectionHelper.setPrivateValue(NetHandlerPlayServer.class, ((EntityPlayerMP)player).connection, 0, new String[]{"field_147365_f", "floatingTickCount"});
+		if (!player.world.isRemote && player instanceof EntityPlayerMP) {
+			if (player.world.getWorldTime() % 10 == 0) { 
+				int ticks = ObfuscationReflectionHelper.getPrivateValue(NetHandlerPlayServer.class, ((EntityPlayerMP)player).connection, "field_147365_f");
+				if (ticks >= 20) {
+					ObfuscationReflectionHelper.setPrivateValue(NetHandlerPlayServer.class, ((EntityPlayerMP)player).connection, 0, "field_147365_f");
+				}
+			}
 		}
 	}
 	
@@ -365,8 +369,8 @@ public class NPULib {
 		if (SIDE.isClient()) {
 			return Keybinds.REGISTERY.get(type.getID()).state;
 		} else {
-			if (Keybinds.PLAYER_KEYS.get(player) == null) return false;
 			List<Key> playerKeys = Keybinds.PLAYER_KEYS.get(player);
+			if (playerKeys == null) return false;
 			if (playerKeys.isEmpty()) return false;
 			return playerKeys.get(type.getID()).state;
 		}
