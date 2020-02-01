@@ -3,6 +3,7 @@ package info.nukepowered.nputils;
 import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.IElectricItem;
 import gregtech.api.items.armor.ArmorMetaItem;
+import gregtech.api.items.armor.IArmorLogic;
 import info.nukepowered.nputils.api.NPULib;
 import info.nukepowered.nputils.armor.ArmorLogicSuite;
 import info.nukepowered.nputils.armor.PowerlessJetpack;
@@ -34,14 +35,14 @@ public class NPUEventHandler {
 		if (mc.inGameHasFocus && mc.world != null && !mc.gameSettings.showDebugInfo && Minecraft.isGuiEnabled()) {
 			final ItemStack item = mc.player.inventory.armorItemInSlot(EntityEquipmentSlot.CHEST.getIndex());
 			if (item.getItem() instanceof ArmorMetaItem) {
-				ArmorMetaItem<?>.ArmorMetaValueItem armorMetaValue = ((ArmorMetaItem<?>)item.getItem()).getItem(item);
-				if (armorMetaValue.getArmorLogic() instanceof ArmorLogicSuite) {
-					ArmorLogicSuite armorLogic = (ArmorLogicSuite) armorMetaValue.getArmorLogic();
+				IArmorLogic logic = NPULib.getArmorLogic(item);
+				if (logic instanceof ArmorLogicSuite) {
+					ArmorLogicSuite armorLogic = (ArmorLogicSuite) logic;
 					if (armorLogic.isNeedDrawHUD()) {
 						armorLogic.drawHUD(item);
 					}
-				} else if (armorMetaValue.getArmorLogic() instanceof PowerlessJetpack) {
-					PowerlessJetpack armorLogic = (PowerlessJetpack) armorMetaValue.getArmorLogic();
+				} else if (logic instanceof PowerlessJetpack) {
+					PowerlessJetpack armorLogic = (PowerlessJetpack) logic;
 					if (armorLogic.isNeedDrawHUD()) {
 						armorLogic.drawHUD(item);
 					}

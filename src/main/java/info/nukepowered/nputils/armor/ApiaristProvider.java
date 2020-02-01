@@ -1,16 +1,16 @@
 package info.nukepowered.nputils.armor;
 
 import forestry.api.apiculture.ApicultureCapabilities;
-import gregtech.api.capability.GregtechCapabilities;
-import gregtech.api.capability.IElectricItem;
+import forestry.api.apiculture.IArmorApiarist;
+import gregtech.api.items.armor.IArmorLogic;
 import gregtech.api.items.metaitem.stats.IItemCapabilityProvider;
+import info.nukepowered.nputils.api.NPULib;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-public class ApiaristArmorBehaviour implements IItemCapabilityProvider {
+public class ApiaristProvider implements IItemCapabilityProvider {
 
 	@Override
 	public ICapabilityProvider createProvider(ItemStack item) {
@@ -18,28 +18,20 @@ public class ApiaristArmorBehaviour implements IItemCapabilityProvider {
 			
 			@Override
 			public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
-				return canUse(item) ? capability == ApicultureCapabilities.ARMOR_APIARIST : false;
+				return capability == ApicultureCapabilities.ARMOR_APIARIST;
 			}
 			
 			@Override
 			public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
 				if (capability == ApicultureCapabilities.ARMOR_APIARIST) {
-					return canUse(item) ? capability.getDefaultInstance() : null;
-				} else {
-					return null;
+					IArmorLogic logic = NPULib.getArmorLogic(item);
+					if (logic instanceof IArmorApiarist) {
+						return ApicultureCapabilities.ARMOR_APIARIST.cast((IArmorApiarist) logic);
+					}
 				}
+				
+				return null;
 			}
 		};
-	}
-	
-	private boolean canUse(ItemStack item) {
-		IElectricItem container = item.getCapability(GregtechCapabilities.CAPABILITY_ELECTRIC_ITEM, null);
-		if (container != null) {
-			if (container.canUse(container.getTransferLimit())) {
-				return true;
-			}
-		}
-		
-		return false;
 	}
 }

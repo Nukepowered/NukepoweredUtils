@@ -3,10 +3,13 @@ package info.nukepowered.nputils.armor;
 import java.util.List;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 
+import forestry.api.apiculture.IArmorApiarist;
+import gregtech.api.GTValues;
 import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.IElectricItem;
 import gregtech.api.items.armor.ArmorMetaItem;
@@ -30,10 +33,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ISpecialArmor.ArmorProperties;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.common.Optional;
 
-public abstract class ArmorLogicSuite implements ISpecialArmorLogic {
+@Optional.Interface(iface = "forestry.api.apiculture.IArmorApiarist", modid = GTValues.MODID_FR)
+public abstract class ArmorLogicSuite implements ISpecialArmorLogic, IArmorApiarist {
 	
 	protected final int energyPerUse;
 	protected final int tier;
@@ -82,7 +88,6 @@ public abstract class ArmorLogicSuite implements ISpecialArmorLogic {
 	
 	@Override
 	public void addToolComponents(@SuppressWarnings("rawtypes") ArmorMetaValueItem mvi) {
-//		mvi.addStats(ElectricStats.createElectricItem(maxCapacity, tier));
 		mvi.addStats(new ElectricStats(maxCapacity, tier, true, false) {
 			@Override
 			public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
@@ -94,9 +99,19 @@ public abstract class ArmorLogicSuite implements ISpecialArmorLogic {
 				addInfo(itemStack, lines);
 			}
 		});
+		if (Loader.isModLoaded(GTValues.MODID_FR)) {
+			mvi.addStats(new ApiaristProvider());
+		}
 	}
 	
 	public void addInfo(ItemStack itemStack, List<String> lines) {
+	}
+	
+	/**
+	 * Forestry's anti-bee method
+	 */
+	public boolean protectEntity(EntityLivingBase entity, ItemStack armor, @Nullable String cause, boolean doProtect) {
+		return false;
 	}
 	
 	public ActionResult<ItemStack> onRightClick(World world, EntityPlayer player, EnumHand hand) {
