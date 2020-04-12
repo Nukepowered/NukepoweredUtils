@@ -134,7 +134,7 @@ public class QuarkTechSuite extends ArmorLogicSuite {
 			player.extinguish();
 			break;
 		case LEGS:
-			if (item.canUse(energyPerUse / 10) && (player.onGround || player.isInWater()) && NPULib.isKeyDown(player, EnumKey.FORWARD) && (NPUConfig.Misc.enableBoostWithSprint && player.isSprinting() || !NPUConfig.Misc.enableBoostWithSprint && NPULib.isKeyDown(player, EnumKey.BOOST))) {
+			if (item.canUse(energyPerUse / 10) && (player.onGround || player.isInWater()) && NPULib.isKeyDown(player, EnumKey.FORWARD) && (NPUConfig.client.enableBoostWithSprint && player.isSprinting() || !NPUConfig.client.enableBoostWithSprint && NPULib.isKeyDown(player, EnumKey.BOOST))) {
 				byte consumerTicks = data.getByte("consumerTicks");
 				++consumerTicks;
 				if (consumerTicks >= 10) {

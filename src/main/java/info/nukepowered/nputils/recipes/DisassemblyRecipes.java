@@ -103,7 +103,7 @@ public class DisassemblyRecipes {
 		
 		//Component recycling LV-IV tiers
 		for (Components component : Components.values()) {
-			if (component == Components.MOTOR && NPUConfig.enableRealisticMotorCraft) continue;
+			if (component == Components.MOTOR && NPUConfig.gameplay.enableRealisticMotorCraft) continue;
 			for (int tier = 1; tier < 6; tier++) {
 				ItemStack currentItem = component.getComponent(tier);
 				List<IRecipe> recipes = NPULib.getRecipesByOutput(currentItem);
@@ -139,7 +139,7 @@ public class DisassemblyRecipes {
 		}
 		
 		//Motors when Realistic
-		if (NPUConfig.enableRealisticMotorCraft) {
+		if (NPUConfig.gameplay.enableRealisticMotorCraft) {
 			for (Components component : Components.values()) {
 				if (component == Components.MOTOR) {
 					for (int tier = 1; tier < 6; tier++) {

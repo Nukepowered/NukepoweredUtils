@@ -36,7 +36,7 @@ public class NPUMetaTool extends ToolMetaItem<ToolMetaItem<?>.MetaToolValueItem>
 				}
 				
 				//GT6 Wrench Recipe
-				if (NPUConfig.GT6.ExpensiveWrenches && !OreDictUnifier.get(OrePrefix.plate, material).isEmpty()) {
+				if (NPUConfig.gameplay.ExpensiveWrenches && !OreDictUnifier.get(OrePrefix.plate, material).isEmpty()) {
 					ModHandler.addShapedRecipe(String.format("ga_wrench_%s", material.toString()),
                             MetaItems.WRENCH.getStackForm(toolMaterial),
                             "XhX", "XXX", " X ", 'X', new UnificationEntry(OrePrefix.plate, toolMaterial));

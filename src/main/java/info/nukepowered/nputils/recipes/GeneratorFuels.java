@@ -54,7 +54,7 @@ public class GeneratorFuels {
         FuelRecipes.registerDieselGeneratorFuel(Materials.SulfuricLightFuel.getFluid(4), 5, GTValues.LV);
         FuelRecipes.registerDieselGeneratorFuel(Materials.Methanol.getFluid(8), 21, GTValues.LV);
         FuelRecipes.registerDieselGeneratorFuel(Materials.RocketFuel.getFluid(2), 7, GTValues.LV);
-        if (Loader.isModLoaded("forestry") && NPUConfig.Integration.ForestryIntegration)
+        if (Loader.isModLoaded("forestry") && NPUConfig.integration.ForestryIntegration)
             FuelRecipes.registerDieselGeneratorFuel(Fluids.BIO_ETHANOL.getFluid(1), 6, GTValues.LV);
         else
             FuelRecipes.registerDieselGeneratorFuel(Materials.Ethanol.getFluid(1), 6, GTValues.LV);
@@ -68,7 +68,7 @@ public class GeneratorFuels {
         
       //Semifuels
         FuelRecipes.registerSemiFluidGeneratorFuel(NPUMaterials.FishOil.getFluid(64), 1, GTValues.LV);
-        if (Loader.isModLoaded("forestry") && NPUConfig.Integration.ForestryIntegration)
+        if (Loader.isModLoaded("forestry") && NPUConfig.integration.ForestryIntegration)
             FuelRecipes.registerSemiFluidGeneratorFuel(Fluids.SEED_OIL.getFluid(64), 1, GTValues.LV);
         else
             FuelRecipes.registerSemiFluidGeneratorFuel(Materials.SeedOil.getFluid(64), 1, GTValues.LV);

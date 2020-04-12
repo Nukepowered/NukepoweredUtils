@@ -151,7 +151,7 @@ public abstract class ArmorLogicSuite implements ISpecialArmorLogic, IArmorApiar
 	
 	@SideOnly(Side.CLIENT)
 	public boolean isNeedDrawHUD() {
-		return NPUConfig.Misc.enableHUD && false;
+		return NPUConfig.client.enableHUD && false;
 	}
 	
 	@SideOnly(Side.CLIENT)

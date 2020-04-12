@@ -48,7 +48,7 @@ public class CommonProxy {
 	}
 	
 	public void init() {
-		if (Loader.isModLoaded(GTValues.MODID_FR) && NPUConfig.Integration.ForestryIntegration) {
+		if (Loader.isModLoaded(GTValues.MODID_FR) && NPUConfig.integration.ForestryIntegration) {
 			ForestryIntegration.removeFabricatorRecipes();
 			ForestryIntegration.parseCentrifugeRecipes();
 		}
@@ -57,7 +57,7 @@ public class CommonProxy {
 	
 	public void postInit() {
 		NPURecipeAddition.generatedRecipes();
-		if (Loader.isModLoaded("tconstruct") && NPUConfig.Integration.TiCIntegration)
+		if (Loader.isModLoaded("tconstruct") && NPUConfig.integration.TiCIntegration)
 			TinkersIntegration.preInit();
 	}
 	
@@ -86,11 +86,11 @@ public class CommonProxy {
 		NPUMachineRecipeRemoval.init();
 		NPURecipeAddition.init();
 		NPURecipeAddition.init1();
-		if (Loader.isModLoaded("appliedenergistics2") && NPUConfig.Integration.AE2Integration)
+		if (Loader.isModLoaded("appliedenergistics2") && NPUConfig.integration.AE2Integration)
 			AEIntegration.init();
-		if (Loader.isModLoaded(GTValues.MODID_FR) && NPUConfig.Integration.ForestryIntegration)
+		if (Loader.isModLoaded(GTValues.MODID_FR) && NPUConfig.integration.ForestryIntegration)
 			ForestryIntegration.init();
-		if (Loader.isModLoaded("tconstruct") && NPUConfig.Integration.TiCIntegration) 
+		if (Loader.isModLoaded("tconstruct") && NPUConfig.integration.TiCIntegration) 
 			TinkersIntegration.init();
 		MatterReplication.init();
 		MachineCraftingRecipes.init();
