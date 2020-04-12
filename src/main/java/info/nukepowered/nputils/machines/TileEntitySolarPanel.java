@@ -160,7 +160,9 @@ public class TileEntitySolarPanel extends MetaTileEntity implements IEnergyChang
 			}
 		} else {
 			long energy = energyContainer.getEnergyStored();
-			getControllerEntity().energyContainer.addEnergy(energy);
+			TileEntitySolarPanel sp = getControllerEntity();
+			if (sp == null) return;
+			sp.energyContainer.addEnergy(energy);
 			energyContainer = EnergyContainerHandler.emitterContainer(this, 0L, GTValues.V[TYPE.getTier()], 0L);
 			energyContainer.setSideOutputCondition(side -> side == EnumFacing.DOWN);
 		}

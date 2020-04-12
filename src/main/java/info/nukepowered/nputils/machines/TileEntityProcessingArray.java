@@ -75,7 +75,7 @@ public class TileEntityProcessingArray extends RecipeMapMultiblockController {
 		ModularUI.Builder builder = ModularUI.extendedBuilder();
 		builder.image(4, 4, 150, 124, GuiTextures.DISPLAY);
 		builder.label(10, 11, getMetaFullName(), 0xFFFFFF);
-		builder.widget(new AdvancedTextWidget(10, 22, this::addDisplayText, 0xFFFFFF).setMaxWidthLimit(156));
+		builder.widget(new AdvancedTextWidget(10, 22, this::addDisplayText, 0xFFFFFF).setMaxWidthLimit(146));
 		builder.slot(this.machinesInventory, 0, 154, 4, GuiTextures.SLOT);
 		builder.bindPlayerInventory(entityPlayer.inventory, 134);
 		builder.build(getHolder(), entityPlayer);
@@ -95,8 +95,9 @@ public class TileEntityProcessingArray extends RecipeMapMultiblockController {
 			if (cont != null) {
 				if (cont.getEnergyCapacity() > 0) {
 					maxVoltage = cont.getInputVoltage();
-	                String voltageName = GTValues.VN[GTUtility.getTierByVoltage(maxVoltage)];
-	                textList.add(new TextComponentTranslation("gregtech.multiblock.max_energy_per_tick", maxVoltage, voltageName));
+					int tier = GTUtility.getTierByVoltage(maxVoltage);
+	                String voltageName = GTValues.VN[tier > (GTValues.VN.length - 1) ? (GTValues.VN.length - 1) : tier];
+	                textList.add(new TextComponentTranslation("gregtech.multiblock.max_energy_per_tick", NPULib.format(maxVoltage), voltageName));
 				}
 			}
 			
@@ -105,7 +106,7 @@ public class TileEntityProcessingArray extends RecipeMapMultiblockController {
 				if (machines.getKey() instanceof WorkableTieredMetaTileEntity) {
 					WorkableTieredMetaTileEntity mte = (WorkableTieredMetaTileEntity) machines.getKey();
 					long result = GTValues.V[mte.getTier()] * machines.getValue();
-					ITextComponent comp = new TextComponentTranslation("nputils.multiblock.processing_array.eu_required", result, GTValues.VN[GTUtility.getTierByVoltage(result)]);
+					ITextComponent comp = new TextComponentTranslation("nputils.multiblock.processing_array.eu_required", NPULib.format(result), GTValues.VN[GTUtility.getTierByVoltage(result)]);
 					Style style = new Style().setHoverEvent(new HoverEvent(Action.SHOW_TEXT, new TextComponentTranslation("nputils.multiblock.processing_array.eu_required.tooltip").setStyle(new Style().setColor(TextFormatting.GRAY))));
 					if (result > maxVoltage) style.setColor(TextFormatting.RED);
 					textList.add(comp.setStyle(style));

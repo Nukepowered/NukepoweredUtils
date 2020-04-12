@@ -615,11 +615,7 @@ public class NPULib {
 		return String.format("(x=§c%s§r, y=§c%s§r, z=§c%s§r)", pos.getX(), pos.getY(), pos.getZ());
 	}
 	
-	public static String format(long value) {
-		return new DecimalFormat("###,###.##").format(value);
-	}
-
-	public static String format(double value) {
+	public static <T extends Number> String format(T value) {
 		return new DecimalFormat("###,###.##").format(value);
 	}
 	
