@@ -25,7 +25,9 @@ import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMap;
 import gregtech.api.util.ItemStackKey;
 import info.nukepowered.nputils.NPUConfig;
+import info.nukepowered.nputils.NPUConfig.Client.HUD;
 import info.nukepowered.nputils.NPULog;
+import info.nukepowered.nputils.NPUtils;
 import info.nukepowered.nputils.input.EnumKey;
 import info.nukepowered.nputils.input.Key;
 import info.nukepowered.nputils.input.Keybinds;
@@ -64,8 +66,20 @@ import net.minecraftforge.items.IItemHandler;
 public class NPULib {
 	
 	public static final Side SIDE = FMLCommonHandler.instance().getSide();
-	public static final SoundEvent JET_ENGINE = new SoundEvent(new ResourceLocation("nputils:jet_engine"));
+	// All the sounds declarated here will be automatically registered
+	public static final SoundEvent JET_ENGINE = NPULib.declarateSound(NPUtils.MODID, "jet_engine");
 	
+	/**
+	 * Creating SoundEvent object for declaration
+	 */
+	public static SoundEvent declarateSound(String modid, String name) {
+		ResourceLocation rl = new ResourceLocation(modid, name);
+		return new SoundEvent(rl).setRegistryName(rl);
+	}
+	
+	/**
+	 * Returs armor locgic from ItemStack
+	 */
 	@Nullable
 	public static IArmorLogic getArmorLogic(ItemStack item) {
 		if (item.getItem() instanceof ArmorMetaItem) {
@@ -316,7 +330,7 @@ public class NPULib {
 	}
 	
 	public static void playJetpackSound(@Nonnull EntityPlayer player) {
-		if (NPUConfig.Misc.enableSounds && player.world.isRemote && NPULib.SIDE.isClient()) {
+		if (NPUConfig.client.enableSounds && SIDE.isClient()) {
 			float cons = (float)player.motionY + player.moveForward;
 			cons = MathHelper.clamp(cons, 0.6F, 1.0F);
 			
@@ -327,7 +341,7 @@ public class NPULib {
 			if (player.motionY < -0.05F) {
 				cons -= 0.4F;
 			}
-			
+				
 			player.playSound(JET_ENGINE, 0.3F, cons);
 		}
 	}
@@ -338,7 +352,7 @@ public class NPULib {
 	 */
 	public static void resetPlayerFloatingTime(EntityPlayer player) {
 		if (!player.world.isRemote && player instanceof EntityPlayerMP) {
-			if (player.world.getWorldTime() % 10 == 0) { 
+			if (player.world.getWorldTime() % 15 == 0) { 
 				int ticks = ObfuscationReflectionHelper.getPrivateValue(NetHandlerPlayServer.class, ((EntityPlayerMP)player).connection, "field_147365_f");
 				if (ticks >= 20) {
 					ObfuscationReflectionHelper.setPrivateValue(NetHandlerPlayServer.class, ((EntityPlayerMP)player).connection, 0, "field_147365_f");
@@ -653,22 +667,23 @@ public class NPULib {
 			int windowHeight = new ScaledResolution(mc).getScaledHeight();
 			int windowWidth = new ScaledResolution(mc).getScaledWidth();
 			int stringWidth = mc.fontRenderer.getStringWidth(stringList.get(index));
-			switch(NPUConfig.Misc.hudLocation) {
+			HUD hudSettings = NPUConfig.client.hud;
+			switch(hudSettings.mode) {
 			case 1:
-				posX = 1 + NPUConfig.Misc.hudOffsetX;
-				posY = 1 + NPUConfig.Misc.hudOffsetY + (fontHeight * index);
+				posX = 1 + hudSettings.offsetX;
+				posY = 1 + hudSettings.offsetY + (fontHeight * index);
 				break;
 			case 2:
-				posX = windowWidth - (1 + NPUConfig.Misc.hudOffsetX) - stringWidth;
-				posY = 1 + NPUConfig.Misc.hudOffsetY + (fontHeight * index);
+				posX = windowWidth - (1 + hudSettings.offsetX) - stringWidth;
+				posY = 1 + hudSettings.offsetY + (fontHeight * index);
 				break;
 			case 3:
-				posX = 1 + NPUConfig.Misc.hudOffsetX;
-				posY = windowHeight - fontHeight * (stringAmount - index) - 1 - NPUConfig.Misc.hudOffsetY;
+				posX = 1 + hudSettings.offsetX;
+				posY = windowHeight - fontHeight * (stringAmount - index) - 1 - hudSettings.offsetY;
 				break;
 			case 4:
-				posX = windowWidth - (1 + NPUConfig.Misc.hudOffsetX) - stringWidth;
-				posY = windowHeight - fontHeight * (stringAmount - index) - 1 - NPUConfig.Misc.hudOffsetY;
+				posX = windowWidth - (1 + hudSettings.offsetX) - stringWidth;
+				posY = windowHeight - fontHeight * (stringAmount - index) - 1 - hudSettings.offsetY;
 				break;
 			default:
 				NPULog.error("Illegal argument for HUD position!");

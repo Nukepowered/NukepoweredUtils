@@ -1,5 +1,7 @@
 package info.nukepowered.nputils;
 
+import java.lang.reflect.Field;
+
 import gregtech.api.capability.GregtechCapabilities;
 import gregtech.api.capability.IElectricItem;
 import gregtech.api.items.armor.ArmorMetaItem;
@@ -16,17 +18,46 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.client.event.GuiOpenEvent;
+import net.minecraftforge.common.config.Config;
+import net.minecraftforge.common.config.ConfigManager;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class NPUEventHandler {
+	
+	@SubscribeEvent
+	public void registerSounds(RegistryEvent.Register<SoundEvent> event) {
+		NPULog.info("Register sounds...");
+		for (Field field : NPULib.class.getFields()) {
+			if (SoundEvent.class.isAssignableFrom(field.getType())) {
+				try {
+					SoundEvent regEvent = (SoundEvent) field.get(new SoundEvent(null));
+					NPULog.warn(String.format(" %s succsessfully registered", regEvent.getRegistryName()));
+					ForgeRegistries.SOUND_EVENTS.register(regEvent);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void onConfigChanged(final ConfigChangedEvent.OnConfigChangedEvent event) {
+		if (event.getModID().equals(NPUtils.MODID)) {
+			ConfigManager.sync(NPUtils.MODID, Config.Type.INSTANCE);
+		}
+	}
 	
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent

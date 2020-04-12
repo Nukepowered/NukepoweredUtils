@@ -51,7 +51,7 @@ public class NPUMetaItem extends MaterialMetaItem {
         NPUMetaItems.ELITE_BOARD = addItem(34, "board.elite");
         NPUMetaItems.MASTER_BOARD = addItem(35, "board.master");
 		
-		if (Loader.isModLoaded("forestry") && NPUConfig.Integration.ForestryIntegration) {
+		if (Loader.isModLoaded("forestry") && NPUConfig.integration.ForestryIntegration) {
 			NPUMetaItems.ELECTRODE_APATITE = addItem(100, "electrode.apatite");
 			NPUMetaItems.ELECTRODE_BLAZE = addItem(101, "electrode.blaze");
 			NPUMetaItems.ELECTRODE_BRONZE = addItem(102, "electrode.bronze");
@@ -71,17 +71,17 @@ public class NPUMetaItem extends MaterialMetaItem {
 			NPUMetaItems.ELECTRODE_TIN = addItem(113, "electrode.tin");
 		}
 		
-		if (NPUConfig.GT5U.enableZPMandUVBats) {
+		if (NPUConfig.gameplay.enableZPMandUVBats) {
 			NPUMetaItems.ENERGY_MODULE = addItem(19, "energy.module").addComponents(ElectricStats.createRechargeableBattery(10000000000L, 7)).setModelAmount(8);
 			NPUMetaItems.ENERGY_CLUSTER = addItem(20, "energy.cluster").addComponents(ElectricStats.createRechargeableBattery(100000000000L, 8)).setModelAmount(8);
         }
 		
-		if (NPUConfig.GT5U.replaceUVwithMAXBat) {
+		if (NPUConfig.gameplay.replaceUVwithMAXBat) {
 			NPUMetaItems.MAX_BATTERY = addItem(21, "max.battery").addComponents(ElectricStats.createRechargeableBattery(9223372036854775807L, 9)).setModelAmount(8);
             MetaItems.ZPM2.setInvisible();
         }
 		
-		if (Loader.isModLoaded("tconstruct") && NPUConfig.Integration.TiCIntegration) {
+		if (Loader.isModLoaded("tconstruct") && NPUConfig.integration.TiCIntegration) {
 			NPUMetaItems.COMPRESSED_GROUT = addItem(22, "npu_compressed.grout");
 			NPUMetaItems.MOLD_FORM_ANVIL = addItem(36, "mold.form.anvil");
 			NPUMetaItems.MOLD_FORM_BALL = addItem(37, "mold.form.ball");
@@ -124,7 +124,7 @@ public class NPUMetaItem extends MaterialMetaItem {
 	        MetaItems.FIRECLAY_BRICK.setInvisible();
 	    }
 		
-        if (NPUConfig.enableRealisticMotorCraft) {
+        if (NPUConfig.gameplay.enableRealisticMotorCraft) {
 	        NPUMetaItems.STATOR_LV = addItem(69, "stator.lv");
 	        NPUMetaItems.STATOR_MV = addItem(70, "stator.mv");
 	        NPUMetaItems.STATOR_HV = addItem(71, "stator.hv");

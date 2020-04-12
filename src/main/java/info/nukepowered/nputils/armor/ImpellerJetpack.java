@@ -134,7 +134,7 @@ public class ImpellerJetpack extends ArmorLogicSuite {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public boolean isNeedDrawHUD() {
-		return NPUConfig.Misc.enableHUD && true;
+		return NPUConfig.client.enableHUD && true;
 	}
 	
 	@SideOnly(Side.CLIENT)

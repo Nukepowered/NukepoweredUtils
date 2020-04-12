@@ -54,12 +54,12 @@ public class NPUMachineRecipeRemoval {
 						new FluidStack[] {Materials.SolderingAlloy.getFluid(32)});
 			
 			//Remove old Wrench Recipes
-			if (m instanceof IngotMaterial && !m.hasFlag(DustMaterial.MatFlags.NO_SMASHING) && NPUConfig.GT6.ExpensiveWrenches) {
+			if (m instanceof IngotMaterial && !m.hasFlag(DustMaterial.MatFlags.NO_SMASHING) && NPUConfig.gameplay.ExpensiveWrenches) {
 				ModHandler.removeRecipeByName(new ResourceLocation(String.format("nputils:wrench_%s", m.toString())));
 			}
 			
 			//Remove EV+ Cable Recipes
-			if (NPUConfig.GT5U.CablesGT5U) {
+			if (NPUConfig.gameplay.CablesGT5U) {
 				removeRecipesByInputs(RecipeMaps.ASSEMBLER_RECIPES,
 						new ItemStack[] {OreDictUnifier.get(OrePrefix.wireGtSingle, m), IntCircuitIngredient.getIntegratedCircuit(24)},
 						new FluidStack[] {Materials.Rubber.getFluid(144)});
@@ -284,7 +284,7 @@ public class NPUMachineRecipeRemoval {
         }
         
         //Hardened motors crafting
-        if (NPUConfig.enableRealisticMotorCraft) {
+        if (NPUConfig.gameplay.enableRealisticMotorCraft) {
         	ModHandler.removeRecipeByName(new ResourceLocation("gregtech", "electric_motor/electric_motor_lv_iron"));
         	ModHandler.removeRecipeByName(new ResourceLocation("gregtech", "electric_motor/electric_motor_lv_steel"));
         	ModHandler.removeRecipeByName(new ResourceLocation("gregtech", "electric_motor/electric_motor_mv"));

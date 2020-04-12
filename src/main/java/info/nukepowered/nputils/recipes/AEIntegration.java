@@ -22,7 +22,7 @@ public class AEIntegration {
 		NPULog.info("Applied Energistics 2 integarion enabled");
 		
 		// Recipe removal
-		if (NPUConfig.AE.recipeRemoval) {
+		if (NPUConfig.integration.ae.recipeRemoval) {
 			ModHandler.removeRecipeByName(new ResourceLocation("appliedenergistics2", "network/blocks/inscribers"));
 			
 		}
@@ -32,14 +32,14 @@ public class AEIntegration {
 		final Item crystalSeedCertus = Item.getByNameOrId(AppEng.MOD_ID + ":" + (ItemCrystalSeed.getResolver(ItemCrystalSeed.CERTUS).itemName));
 		final ItemStack crystalSeedNether  = new ItemStack(crystalSeedCertus, 1, 600);
 		final ItemStack crystalSeedFluix  = new ItemStack(crystalSeedCertus, 1, 1200);
-		if (NPUConfig.AE.formingProcessorsPrintRecipes) {
+		if (NPUConfig.integration.ae.formingProcessorsPrintRecipes) {
 			RecipeMaps.FORMING_PRESS_RECIPES.recipeBuilder().duration(200).EUt(16).input(OrePrefix.plate, Materials.Silicon).notConsumable(materials.siliconPress().maybeStack(1).get()).outputs(materials.siliconPrint().maybeStack(1).get()).buildAndRegister();
 			RecipeMaps.FORMING_PRESS_RECIPES.recipeBuilder().duration(200).EUt(16).inputs(materials.purifiedCertusQuartzCrystal().maybeStack(1).get()).notConsumable(materials.calcProcessorPress().maybeStack(1).get()).outputs(materials.calcProcessorPrint().maybeStack(1).get()).buildAndRegister();
 			RecipeMaps.FORMING_PRESS_RECIPES.recipeBuilder().duration(200).EUt(16).input(OrePrefix.plate, Materials.CertusQuartz).notConsumable(materials.calcProcessorPress().maybeStack(1).get()).outputs(materials.calcProcessorPrint().maybeStack(1).get()).buildAndRegister();
 			RecipeMaps.FORMING_PRESS_RECIPES.recipeBuilder().duration(200).EUt(16).input(OrePrefix.plate, Materials.Gold).notConsumable(materials.logicProcessorPress().maybeStack(1).get()).outputs(materials.logicProcessorPrint().maybeStack(1).get()).buildAndRegister();
 			RecipeMaps.FORMING_PRESS_RECIPES.recipeBuilder().duration(200).EUt(16).input(OrePrefix.plate, Materials.Diamond).notConsumable(materials.engProcessorPress().maybeStack(1).get()).outputs(materials.engProcessorPrint().maybeStack(1).get()).buildAndRegister();
 		}
-		if (NPUConfig.AE.processorAssemlerRecipes) {
+		if (NPUConfig.integration.ae.processorAssemlerRecipes) {
 			RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(64).EUt(32).inputs(materials.calcProcessorPrint().maybeStack(1).get(), materials.siliconPrint().maybeStack(1).get()).fluidInputs(Materials.Redstone.getFluid(144)).outputs(materials.calcProcessor().maybeStack(1).get()).buildAndRegister();
 			RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(64).EUt(32).inputs(materials.logicProcessorPrint().maybeStack(1).get(), materials.siliconPrint().maybeStack(1).get()).fluidInputs(Materials.Redstone.getFluid(144)).outputs(materials.logicProcessor().maybeStack(1).get()).buildAndRegister();
 			RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(64).EUt(32).inputs(materials.engProcessorPrint().maybeStack(1).get(), materials.siliconPrint().maybeStack(1).get()).fluidInputs(Materials.Redstone.getFluid(144)).outputs(materials.engProcessor().maybeStack(1).get()).buildAndRegister();

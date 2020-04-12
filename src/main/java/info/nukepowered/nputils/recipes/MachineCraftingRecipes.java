@@ -51,10 +51,10 @@ public class MachineCraftingRecipes {
         ModHandler.removeRecipeByName(new ResourceLocation("gregtech:coke_oven_hatch"));
         
         //Power Manipulation Machines
-        ItemStack last_bat = (NPUConfig.GT5U.replaceUVwithMAXBat ? NPUMetaItems.MAX_BATTERY : MetaItems.ZPM2).getStackForm();        
+        ItemStack last_bat = (NPUConfig.gameplay.replaceUVwithMAXBat ? NPUMetaItems.MAX_BATTERY : MetaItems.ZPM2).getStackForm();        
         ModHandler.addShapedRecipe("nputils:charger_ev", MetaTileEntities.CHARGER[GTValues.EV].getStackForm(), "WTW", "WMW", "BCB", 'M', MetaTileEntities.HULL[GTValues.EV].getStackForm(), 'W', new UnificationEntry(OrePrefix.wireGtHex, Materials.Aluminium), 'T', OreDictNames.chestWood, 'B', MetaItems.LAPOTRON_CRYSTAL, 'C', new UnificationEntry(OrePrefix.circuit, Tier.Extreme));
-        ModHandler.addShapedRecipe("nputils:charger_zpm", MetaTileEntities.CHARGER[GTValues.ZPM].getStackForm(), "WTW", "WMW", "BCB", 'M', MetaTileEntities.HULL[GTValues.ZPM].getStackForm(), 'W', new UnificationEntry(OrePrefix.wireGtHex, Materials.Naquadah), 'T', OreDictNames.chestWood, 'B', (NPUConfig.GT5U.enableZPMandUVBats ? NPUMetaItems.ENERGY_MODULE : MetaItems.ENERGY_LAPOTRONIC_ORB2), 'C', new UnificationEntry(OrePrefix.circuit, Tier.Ultimate));
-        ModHandler.addShapedRecipe("nputils:charger_uv", MetaTileEntities.CHARGER[GTValues.UV].getStackForm(), "WTW", "WMW", "BCB", 'M', MetaTileEntities.HULL[GTValues.UV].getStackForm(), 'W', new UnificationEntry(OrePrefix.wireGtHex, Materials.NaquadahAlloy), 'T', OreDictNames.chestWood, 'B', (NPUConfig.GT5U.enableZPMandUVBats ? NPUMetaItems.ENERGY_CLUSTER : last_bat), 'C', new UnificationEntry(OrePrefix.circuit, Tier.Superconductor));
+        ModHandler.addShapedRecipe("nputils:charger_zpm", MetaTileEntities.CHARGER[GTValues.ZPM].getStackForm(), "WTW", "WMW", "BCB", 'M', MetaTileEntities.HULL[GTValues.ZPM].getStackForm(), 'W', new UnificationEntry(OrePrefix.wireGtHex, Materials.Naquadah), 'T', OreDictNames.chestWood, 'B', (NPUConfig.gameplay.enableZPMandUVBats ? NPUMetaItems.ENERGY_MODULE : MetaItems.ENERGY_LAPOTRONIC_ORB2), 'C', new UnificationEntry(OrePrefix.circuit, Tier.Ultimate));
+        ModHandler.addShapedRecipe("nputils:charger_uv", MetaTileEntities.CHARGER[GTValues.UV].getStackForm(), "WTW", "WMW", "BCB", 'M', MetaTileEntities.HULL[GTValues.UV].getStackForm(), 'W', new UnificationEntry(OrePrefix.wireGtHex, Materials.NaquadahAlloy), 'T', OreDictNames.chestWood, 'B', (NPUConfig.gameplay.enableZPMandUVBats ? NPUMetaItems.ENERGY_CLUSTER : last_bat), 'C', new UnificationEntry(OrePrefix.circuit, Tier.Superconductor));
         ModHandler.addShapedRecipe("nputils:charger_max", MetaTileEntities.CHARGER[GTValues.MAX].getStackForm(), "WTW", "WMW", "BCB", 'M', MetaTileEntities.HULL[GTValues.MAX].getStackForm(), 'W', new UnificationEntry(OrePrefix.wireGtHex, Tier.Superconductor), 'T', OreDictNames.chestWood, 'B', last_bat, 'C', new UnificationEntry(OrePrefix.circuit, Tier.Infinite));
 
         ModHandler.addShapedRecipe("nputils:transformer_ev", MetaTileEntities.TRANSFORMER[GTValues.EV - 1].getStackForm(), "KBB", "CM ", "KBB", 'M', MetaTileEntities.HULL[GTValues.HV].getStackForm(), 'C', new UnificationEntry(OrePrefix.cableGtSingle, Materials.Aluminium), 'B', new UnificationEntry(OrePrefix.cableGtSingle, Materials.Gold), 'K', MetaItems.SMALL_COIL);
@@ -86,87 +86,87 @@ public class MachineCraftingRecipes {
         registerMachineRecipe(NPUTileEntities.CLUSTERMILL, "MMM", "CHC", "MMM", 'M', MOTOR, 'C', CIRCUIT, 'H', HULL);
         registerMachineRecipe(NPUTileEntities.CIRCUITASSEMBLER, "ACE", "VMV", "WCW", 'M', HULL, 'V', CONVEYOR, 'A', ROBOT_ARM, 'C', BETTER_CIRCUIT, 'W', CABLE, 'E', EMITTER);
         registerMachineRecipe(NPUTileEntities.DISASSEMBLER, "SCS", "WHW", "RCR", 'S', SENSOR, 'C', CIRCUIT, 'H', HULL, 'W', CABLE, 'R', ROBOT_ARM);
-        if (NPUConfig.GT5U.highTierPumps)
+        if (NPUConfig.tiers.highTierPumps)
             registerMachineRecipe(NPUTileEntities.PUMP, "WGW", "GMG", "TGT", 'M', HULL, 'W', CIRCUIT, 'G', PUMP, 'T', PIPE);
-        if (NPUConfig.GT5U.highTierAlloySmelter)
+        if (NPUConfig.tiers.highTierAlloySmelter)
             registerMachineRecipe(NPUTileEntities.ALLOY_SMELTER, "ECE", "CMC", "WCW", 'M', HULL, 'E', CIRCUIT, 'W', CABLE, 'C', COIL_HEATING_DOUBLE);
-        if (NPUConfig.GT5U.highTierAssemblers)
+        if (NPUConfig.tiers.highTierAssemblers)
             registerMachineRecipe(NPUTileEntities.ASSEMBLER, "ACA", "VMV", "WCW", 'M', HULL, 'V', CONVEYOR, 'A', ROBOT_ARM, 'C', CIRCUIT, 'W', CABLE);
-        if (NPUConfig.GT5U.highTierBenders)
+        if (NPUConfig.tiers.highTierBenders)
             registerMachineRecipe(NPUTileEntities.BENDER, "PWP", "CMC", "EWE", 'M', HULL, 'E', MOTOR, 'P', PISTON, 'C', CIRCUIT, 'W', CABLE);
-        if (NPUConfig.GT5U.highTierCanners)
+        if (NPUConfig.tiers.highTierCanners)
             registerMachineRecipe(NPUTileEntities.CANNER, "WPW", "CMC", "GGG", 'M', HULL, 'P', PUMP, 'C', CIRCUIT, 'W', CABLE, 'G', GLASS);
-        if (NPUConfig.GT5U.highTierCompressors)
+        if (NPUConfig.tiers.highTierCompressors)
             registerMachineRecipe(NPUTileEntities.COMPRESSOR, " C ", "PMP", "WCW", 'M', HULL, 'P', PISTON, 'C', CIRCUIT, 'W', CABLE);
-        if (NPUConfig.GT5U.highTierCutters)
+        if (NPUConfig.tiers.highTierCutters)
             registerMachineRecipe(NPUTileEntities.CUTTER, "WCG", "VMB", "CWE", 'M', HULL, 'E', MOTOR, 'V', CONVEYOR, 'C', CIRCUIT, 'W', CABLE, 'G', GLASS, 'B', OreDictNames.craftingDiamondBlade);
-        if (NPUConfig.GT5U.highTierElectricFurnace)
+        if (NPUConfig.tiers.highTierElectricFurnace)
             registerMachineRecipe(NPUTileEntities.ELECTRIC_FURNACE, "ECE", "CMC", "WCW", 'M', HULL, 'E', CIRCUIT, 'W', CABLE, 'C', COIL_HEATING);
-        if (NPUConfig.GT5U.highTierExtractors)
+        if (NPUConfig.tiers.highTierExtractors)
             registerMachineRecipe(NPUTileEntities.EXTRACTOR, "GCG", "EMP", "WCW", 'M', HULL, 'E', PISTON, 'P', PUMP, 'C', CIRCUIT, 'W', CABLE, 'G', GLASS);
-        if (NPUConfig.GT5U.highTierExtruders)
+        if (NPUConfig.tiers.highTierExtruders)
             registerMachineRecipe(NPUTileEntities.EXTRUDER, "CCE", "XMP", "CCE", 'M', HULL, 'X', PISTON, 'E', CIRCUIT, 'P', PIPE, 'C', COIL_HEATING_DOUBLE);
-        if (NPUConfig.GT5U.highTierLathes)
+        if (NPUConfig.tiers.highTierLathes)
             registerMachineRecipe(NPUTileEntities.LATHE, "WCW", "EMD", "CWP", 'M', HULL, 'E', MOTOR, 'P', PISTON, 'C', CIRCUIT, 'W', CABLE, 'D', DIAMOND);
-        if (NPUConfig.GT5U.highTierMacerators)
+        if (NPUConfig.tiers.highTierMacerators)
             registerMachineRecipe(NPUTileEntities.MACERATOR, "PEG", "WWM", "CCW", 'M', HULL, 'E', MOTOR, 'P', PISTON, 'C', CIRCUIT, 'W', CABLE, 'G', GRINDER);
-        if (NPUConfig.GT5U.highTierMicrowaves)
+        if (NPUConfig.tiers.highTierMicrowaves)
             registerMachineRecipe(NPUTileEntities.MICROWAVE, "LWC", "LMR", "LEC", 'M', HULL, 'E', MOTOR, 'R', EMITTER, 'C', CIRCUIT, 'W', CABLE, 'L', new UnificationEntry(OrePrefix.plate, Materials.Lead));
-        if (NPUConfig.GT5U.highTierWiremills)
+        if (NPUConfig.tiers.highTierWiremills)
             registerMachineRecipe(NPUTileEntities.WIREMILL, "EWE", "CMC", "EWE", 'M', HULL, 'E', MOTOR, 'C', CIRCUIT, 'W', CABLE);
-        if (NPUConfig.GT5U.highTierCentrifuges)
+        if (NPUConfig.tiers.highTierCentrifuges)
             registerMachineRecipe(NPUTileEntities.CENTRIFUGE, "CEC", "WMW", "CEC", 'M', HULL, 'E', MOTOR, 'C', CIRCUIT, 'W', CABLE);
-        if (NPUConfig.GT5U.highTierElectrolyzers)
+        if (NPUConfig.tiers.highTierElectrolyzers)
             registerMachineRecipe(NPUTileEntities.ELECTROLYZER, "IGI", "IMI", "CWC", 'M', HULL, 'C', CIRCUIT, 'W', CABLE, 'I', WIRE, 'G', GLASS);
-        if (NPUConfig.GT5U.highTierThermalCentrifuges)
+        if (NPUConfig.tiers.highTierThermalCentrifuges)
             registerMachineRecipe(NPUTileEntities.THERMAL_CENTRIFUGE, "CEC", "OMO", "WEW", 'M', HULL, 'E', MOTOR, 'C', CIRCUIT, 'W', CABLE, 'O', COIL_HEATING_DOUBLE);
-        if (NPUConfig.GT5U.highTierOreWashers)
+        if (NPUConfig.tiers.highTierOreWashers)
             registerMachineRecipe(NPUTileEntities.ORE_WASHER, "RGR", "CEC", "WMW", 'M', HULL, 'R', ROTOR, 'E', MOTOR, 'C', CIRCUIT, 'W', CABLE, 'G', GLASS);
-        if (NPUConfig.GT5U.highTierPackers)
+        if (NPUConfig.tiers.highTierPackers)
             registerMachineRecipe(NPUTileEntities.PACKER, "BCB", "RMV", "WCW", 'M', HULL, 'R', ROBOT_ARM, 'V', CONVEYOR, 'C', CIRCUIT, 'W', CABLE, 'B', OreDictNames.chestWood);
-        if (NPUConfig.GT5U.highTierUnpackers)
+        if (NPUConfig.tiers.highTierUnpackers)
             registerMachineRecipe(NPUTileEntities.UNPACKER, "BCB", "VMR", "WCW", 'M', HULL, 'R', ROBOT_ARM, 'V', CONVEYOR, 'C', CIRCUIT, 'W', CABLE, 'B', OreDictNames.chestWood);
-        if (NPUConfig.GT5U.highTierChemicalReactors)
+        if (NPUConfig.tiers.highTierChemicalReactors)
             registerMachineRecipe(NPUTileEntities.CHEMICAL_REACTOR, "GRG", "WEW", "CMC", 'M', HULL, 'R', ROTOR, 'E', MOTOR, 'C', CIRCUIT, 'W', CABLE, 'G', GLASS);
-        if (NPUConfig.GT5U.highTierFluidCanners)
+        if (NPUConfig.tiers.highTierFluidCanners)
             registerMachineRecipe(NPUTileEntities.FLUID_CANNER, "GCG", "GMG", "WPW", 'M', HULL, 'P', PUMP, 'C', CIRCUIT, 'W', CABLE, 'G', GLASS);
-        if (NPUConfig.GT5U.highTierBreweries)
+        if (NPUConfig.tiers.highTierBreweries)
             registerMachineRecipe(NPUTileEntities.BREWERY, "GPG", "WMW", "CBC", 'M', HULL, 'P', PUMP, 'B', STICK_DISTILLATION, 'C', CIRCUIT, 'W', CABLE, 'G', GLASS);
-        if (NPUConfig.GT5U.highTierFermenters)
+        if (NPUConfig.tiers.highTierFermenters)
             registerMachineRecipe(NPUTileEntities.FERMENTER, "WPW", "GMG", "WCW", 'M', HULL, 'P', PUMP, 'C', CIRCUIT, 'W', CABLE, 'G', GLASS);
-        if (NPUConfig.GT5U.highTierFluidExtractors)
+        if (NPUConfig.tiers.highTierFluidExtractors)
             registerMachineRecipe(NPUTileEntities.FLUID_EXTRACTOR, "GCG", "PME", "WCW", 'M', HULL, 'E', PISTON, 'P', PUMP, 'C', CIRCUIT, 'W', CABLE, 'G', GLASS);
-        if (NPUConfig.GT5U.highTierFluidSolidifiers)
+        if (NPUConfig.tiers.highTierFluidSolidifiers)
             registerMachineRecipe(NPUTileEntities.FLUID_SOLIDIFIER, "PGP", "WMW", "CBC", 'M', HULL, 'P', PUMP, 'C', CIRCUIT, 'W', CABLE, 'G', GLASS, 'B', OreDictNames.chestWood);
-        if (NPUConfig.GT5U.highTierDistilleries)
+        if (NPUConfig.tiers.highTierDistilleries)
             registerMachineRecipe(NPUTileEntities.DISTILLERY, "GBG", "CMC", "WPW", 'M', HULL, 'P', PUMP, 'B', STICK_DISTILLATION, 'C', CIRCUIT, 'W', CABLE, 'G', GLASS);
-        if (NPUConfig.GT5U.highTierChemicalBaths)
+        if (NPUConfig.tiers.highTierChemicalBaths)
             registerMachineRecipe(NPUTileEntities.CHEMICAL_BATH, "VGW", "PGV", "CMC", 'M', HULL, 'P', PUMP, 'V', CONVEYOR, 'C', CIRCUIT, 'W', CABLE, 'G', GLASS);
-        if (NPUConfig.GT5U.highTierPolarizers)
+        if (NPUConfig.tiers.highTierPolarizers)
             registerMachineRecipe(NPUTileEntities.POLARIZER, "ZSZ", "WMW", "ZSZ", 'M', HULL, 'S', STICK_ELECTROMAGNETIC, 'Z', COIL_ELECTRIC, 'W', CABLE);
-        if (NPUConfig.GT5U.highTierElectromagneticSeparators)
+        if (NPUConfig.tiers.highTierElectromagneticSeparators)
             registerMachineRecipe(NPUTileEntities.ELECTROMAGNETIC_SEPARATOR, "VWZ", "WMS", "CWZ", 'M', HULL, 'S', STICK_ELECTROMAGNETIC, 'Z', COIL_ELECTRIC, 'V', CONVEYOR, 'C', CIRCUIT, 'W', CABLE);
-        if (NPUConfig.GT5U.highTierAutoclaves)
+        if (NPUConfig.tiers.highTierAutoclaves)
             registerMachineRecipe(NPUTileEntities.AUTOCLAVE, "IGI", "IMI", "CPC", 'M', HULL, 'P', PUMP, 'C', CIRCUIT, 'I', PLATE, 'G', GLASS);
-        if (NPUConfig.GT5U.highTierMixers)
+        if (NPUConfig.tiers.highTierMixers)
             registerMachineRecipe(NPUTileEntities.MIXER, "GRG", "GEG", "CMC", 'M', HULL, 'E', MOTOR, 'R', ROTOR, 'C', CIRCUIT, 'G', GLASS);
-        if (NPUConfig.GT5U.highTierLaserEngravers)
+        if (NPUConfig.tiers.highTierLaserEngravers)
             registerMachineRecipe(NPUTileEntities.LASER_ENGRAVER, "PEP", "CMC", "WCW", 'M', HULL, 'E', EMITTER, 'P', PISTON, 'C', CIRCUIT, 'W', CABLE);
-        if (NPUConfig.GT5U.highTierFormingPresses)
+        if (NPUConfig.tiers.highTierFormingPresses)
             registerMachineRecipe(NPUTileEntities.FORMING_PRESS, "WPW", "CMC", "WPW", 'M', HULL, 'P', PISTON, 'C', CIRCUIT, 'W', CABLE);
-        if (NPUConfig.GT5U.highTierForgeHammers)
+        if (NPUConfig.tiers.highTierForgeHammers)
             registerMachineRecipe(NPUTileEntities.FORGE_HAMMER, "WPW", "CMC", "WAW", 'M', HULL, 'P', PISTON, 'C', CIRCUIT, 'W', CABLE, 'A', OreDictNames.craftingAnvil);
-        if (NPUConfig.GT5U.highTierFluidHeaters)
+        if (NPUConfig.tiers.highTierFluidHeaters)
             registerMachineRecipe(NPUTileEntities.FLUID_HEATER, "OGO", "PMP", "WCW", 'M', HULL, 'P', PUMP, 'O', COIL_HEATING_DOUBLE, 'C', CIRCUIT, 'W', CABLE, 'G', GLASS);
-        if (NPUConfig.GT5U.highTierSifters)
+        if (NPUConfig.tiers.highTierSifters)
             registerMachineRecipe(NPUTileEntities.SIFTER, "WFW", "PMP", "CFC", 'M', HULL, 'P', PISTON, 'F', MetaItems.ITEM_FILTER, 'C', CIRCUIT, 'W', CABLE);
-        if (NPUConfig.GT5U.highTierArcFurnaces)
+        if (NPUConfig.tiers.highTierArcFurnaces)
             registerMachineRecipe(NPUTileEntities.ARC_FURNACE, "WGW", "CMC", "PPP", 'M', HULL, 'P', PLATE, 'C', CIRCUIT, 'W', CABLE_QUAD, 'G', new UnificationEntry(OrePrefix.ingot, Materials.Graphite));
-        if (NPUConfig.GT5U.highTierPlasmaArcFurnaces)
+        if (NPUConfig.tiers.highTierPlasmaArcFurnaces)
             registerMachineRecipe(NPUTileEntities.PLASMA_ARC_FURNACE, "WGW", "CMC", "TPT", 'M', HULL, 'P', PLATE, 'C', BETTER_CIRCUIT, 'W', CABLE_QUAD, 'T', PUMP, 'G', new UnificationEntry(OrePrefix.ingot, Materials.Graphite));
         registerMachineRecipe(NPUTileEntities.MASS_FAB, "CFC", "QMQ", "CFC", 'M', HULL, 'Q', CABLE_QUAD, 'C', BETTER_CIRCUIT, 'F', FIELD_GENERATOR);
         registerMachineRecipe(NPUTileEntities.REPLICATOR, "EFE", "CMC", "EQE", 'M', HULL, 'Q', CABLE_QUAD, 'C', BETTER_CIRCUIT, 'F', FIELD_GENERATOR, 'E', EMITTER);
-        if (NPUConfig.Misc.highTierCollector)
+        if (NPUConfig.tiers.highTierCollector)
             registerMachineRecipe(NPUTileEntities.AIR_COLLECTOR, "WFW", "PHP", "WCW", 'W', Blocks.IRON_BARS, 'F', MetaItems.ITEM_FILTER, 'P', PUMP, 'H', HULL, 'C', CIRCUIT);
         registerMachineRecipe(NPUTileEntities.FISHER, "QCQ", "RMR", "FCF", 'M', HULL, 'Q', CABLE, 'C', CIRCUIT, 'R', ROBOT_ARM, 'F', Items.FISHING_ROD);
 	}

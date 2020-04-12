@@ -237,7 +237,7 @@ public class AdvancedQurakTechSuite extends QuarkTechSuite {
 	
 	@SideOnly(Side.CLIENT)
 	public boolean isNeedDrawHUD() {
-		return NPUConfig.Misc.enableHUD && true;
+		return NPUConfig.client.enableHUD && true;
 	}
 	
 	@Override

@@ -284,7 +284,7 @@ public class NPURecipeAddition {
             }
             
             //Cables
-            if ((m instanceof IngotMaterial || superconductors.contains(m)) && !OreDictUnifier.get(OrePrefix.cableGtSingle, m).isEmpty() && m != Materials.RedAlloy && m != Materials.Cobalt && m != Materials.Zinc && m != Materials.SolderingAlloy && m != Materials.Tin && m != Materials.Lead && NPUConfig.GT5U.CablesGT5U) {
+            if ((m instanceof IngotMaterial || superconductors.contains(m)) && !OreDictUnifier.get(OrePrefix.cableGtSingle, m).isEmpty() && m != Materials.RedAlloy && m != Materials.Cobalt && m != Materials.Zinc && m != Materials.SolderingAlloy && m != Materials.Tin && m != Materials.Lead && NPUConfig.gameplay.CablesGT5U) {
                 for (MaterialStack stackFluid : cableFluids) {
                     IngotMaterial fluid = (IngotMaterial) stackFluid.material;
                     int multiplier = (int) stackFluid.amount;
@@ -423,7 +423,7 @@ public class NPURecipeAddition {
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(640).EUt(7680).input(OrePrefix.circuit, Tier.Elite, 4).inputs(MetaItems.QUANTUM_STAR.getStackForm()).input(OrePrefix.wireGtHex, Materials.Osmium, 4).outputs(MetaItems.FIELD_GENERATOR_IV.getStackForm()).buildAndRegister();
 	    
         //Hardened motors crafting
-        if (NPUConfig.enableRealisticMotorCraft) {
+        if (NPUConfig.gameplay.enableRealisticMotorCraft) {
         	ModHandler.addShapedRecipe("nputils:magnetic_plates_set", NPUMetaItems.MAGNETICALLY_PERMEABLE_PLATE_SET.getStackForm(4), "PP", "PP", "fx", 'P', "plateElectricalSteel");
         	ModHandler.addShapedRecipe("nputils:motor_from_scratch", MetaItems.ELECTRIC_MOTOR_LV.getStackForm(), "w H", " Sd", "RxC", 'H', NPUMetaItems.MOTOR_HULL_LV.getStackForm(), 'S', NPUMetaItems.STATOR_LV.getStackForm(), 'R', NPUMetaItems.ROTOR_LV.getStackForm(), 'C', OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.Tin));
         	ModHandler.addShapedRecipe("nputils:basic_rotor_from_scratch", NPUMetaItems.ROTOR_LV.getStackForm(), "hP ", "RLR", " Pw", 'P', "plateSteel", 'R', OreDictUnifier.get(OrePrefix.stick, Materials.Iron), 'L', OreDictUnifier.get(OrePrefix.stickLong, Materials.Steel));
@@ -858,7 +858,7 @@ public class NPURecipeAddition {
 	public static void init1() {
 		long time = System.currentTimeMillis();
 		//Assembling Line Recipes
-		if (NPUConfig.enableRealisticMotorCraft) {
+		if (NPUConfig.gameplay.enableRealisticMotorCraft) {
 //			NPURecipeMaps.ASSEMBLY_LINE_RECIPES.recipeBuilder().inputs(
 //					NPUMetaItems.FERRITE_PLATE_SET.getStackForm(16),
 //					NPUMetaItems.FERRITE_PLATE_SET.getStackForm(16),
@@ -1288,8 +1288,8 @@ public class NPURecipeAddition {
                 .outputs(MetaItems.WETWARE_MAINFRAME_MAX.getStackForm()).duration(2000).EUt(300000)
                 .buildAndRegister();
 		
-		ItemStack last_bat = (NPUConfig.GT5U.replaceUVwithMAXBat ? NPUMetaItems.MAX_BATTERY : MetaItems.ZPM2).getStackForm();
-		if (NPUConfig.GT5U.enableZPMandUVBats) {
+		ItemStack last_bat = (NPUConfig.gameplay.replaceUVwithMAXBat ? NPUMetaItems.MAX_BATTERY : MetaItems.ZPM2).getStackForm();
+		if (NPUConfig.gameplay.enableZPMandUVBats) {
             NPURecipeMaps.ASSEMBLY_LINE_RECIPES.recipeBuilder().inputs(
                     OreDictUnifier.get(OrePrefix.plate, Materials.Europium, 16),
                     MetaItems.WETWARE_SUPER_COMPUTER_UV.getStackForm(),
@@ -1608,9 +1608,9 @@ public class NPURecipeAddition {
 						}
 					}
 					if (match) {
-						if (NPUConfig.GT5U.Remove3x3BlockRecipes) 
+						if (NPUConfig.gameplay.Remove3x3BlockRecipes) 
 							recipesToRemove.add(recipe.getRegistryName());
-						if (NPUConfig.GT5U.GenerateCompressorRecipes) 
+						if (NPUConfig.gameplay.GenerateCompressorRecipes) 
 							RecipeMaps.COMPRESSOR_RECIPES.recipeBuilder().duration(400).EUt(2).inputs(CountableIngredient.from(recipe.getIngredients().get(0).getMatchingStacks()[0], recipe.getIngredients().size())).outputs(recipe.getRecipeOutput()).buildAndRegister();
 					}
 				}
@@ -1624,7 +1624,7 @@ public class NPURecipeAddition {
                             break;
                         }
                     }
-                    if (match && !recipesToRemove.contains(recipe.getRegistryName()) && !NPUMetaItems.hasPrefix(recipe.getRecipeOutput(), "dust", "dustTiny") && recipe.getRecipeOutput().getCount() == 1 && NPUConfig.Misc.Packager3x3Recipes) {
+                    if (match && !recipesToRemove.contains(recipe.getRegistryName()) && !NPUMetaItems.hasPrefix(recipe.getRecipeOutput(), "dust", "dustTiny") && recipe.getRecipeOutput().getCount() == 1 && NPUConfig.gameplay.Packager3x3Recipes) {
                         RecipeMaps.PACKER_RECIPES.recipeBuilder().duration(100).EUt(4).inputs(CountableIngredient.from(recipe.getIngredients().get(0).getMatchingStacks()[0], recipe.getIngredients().size())).notConsumable(new IntCircuitIngredient(3)).outputs(recipe.getRecipeOutput()).buildAndRegister();
                     }
                 }
@@ -1638,7 +1638,7 @@ public class NPURecipeAddition {
                             break;
                         }
                     }
-                    if (match && !recipesToRemove.contains(recipe.getRegistryName()) && !NPUMetaItems.hasPrefix(recipe.getRecipeOutput(), "dust", "dustSmall") && recipe.getRecipeOutput().getCount() == 1 && NPUConfig.Misc.Packager2x2Recipes) {
+                    if (match && !recipesToRemove.contains(recipe.getRegistryName()) && !NPUMetaItems.hasPrefix(recipe.getRecipeOutput(), "dust", "dustSmall") && recipe.getRecipeOutput().getCount() == 1 && NPUConfig.gameplay.Packager2x2Recipes) {
                         RecipeMaps.PACKER_RECIPES.recipeBuilder().duration(100).EUt(4).inputs(CountableIngredient.from(recipe.getIngredients().get(0).getMatchingStacks()[0], recipe.getIngredients().size())).notConsumable(new IntCircuitIngredient(2)).outputs(recipe.getRecipeOutput()).buildAndRegister();
                     }
                 }
@@ -1651,14 +1651,14 @@ public class NPURecipeAddition {
                         break;
                     }
                 }
-                if (NPUConfig.GT5U.RemoveBlockUncraftingRecipes)
+                if (NPUConfig.gameplay.RemoveBlockUncraftingRecipes)
                     recipesToRemove.add(recipe.getRegistryName());
                 if (!isIngot) {
                     RecipeMaps.FORGE_HAMMER_RECIPES.recipeBuilder().duration(100).EUt(24).inputs(recipe.getIngredients().get(0).getMatchingStacks()[0]).outputs(recipe.getRecipeOutput()).buildAndRegister();
                 }
             }
             if (recipe.getIngredients().size() == 1 && recipe.getIngredients().get(0).getMatchingStacks().length > 0 && recipe.getRecipeOutput().getCount() == 9) {
-                if (!recipesToRemove.contains(recipe.getRegistryName()) && NPUConfig.Misc.Unpackager3x3Recipes) {
+                if (!recipesToRemove.contains(recipe.getRegistryName()) && NPUConfig.gameplay.Unpackager3x3Recipes) {
                     RecipeMaps.UNPACKER_RECIPES.recipeBuilder().duration(100).EUt(8).inputs(recipe.getIngredients().get(0).getMatchingStacks()[0]).notConsumable(new IntCircuitIngredient(1)).outputs(recipe.getRecipeOutput()).buildAndRegister();
                 }
             }
@@ -1668,7 +1668,7 @@ public class NPURecipeAddition {
 			ModHandler.removeRecipeByName(r);
 		recipesToRemove.clear();
 		
-		if (NPUConfig.GT5U.GenerateCompressorRecipes) {
+		if (NPUConfig.gameplay.GenerateCompressorRecipes) {
 			ModHandler.removeRecipeByName(new ResourceLocation("minecraft:glowstone"));
             ModHandler.removeRecipeByName(new ResourceLocation("gregtech:block_compress_glowstone"));
             ModHandler.removeRecipeByName(new ResourceLocation("minecraft:quartz_block"));
@@ -1684,7 +1684,7 @@ public class NPURecipeAddition {
 				continue;
 			for (int i : OreDictionary.getOreIDs(recipe.getRecipeOutput())) {
 				if (OreDictionary.getOreName(i).equals("plankWood") && recipe.getIngredients().size() == 1 && recipe.getRecipeOutput().getCount() == 4) {
-                    if (NPUConfig.GT5U.GeneratedSawingRecipes) {
+                    if (NPUConfig.gameplay.GeneratedSawingRecipes) {
                         ModHandler.removeRecipeByName(recipe.getRegistryName());
                         ModHandler.addShapelessRecipe(String.format("nputils:log_to_4_%s", recipe.getRecipeOutput().toString()), GTUtility.copyAmount(4, recipe.getRecipeOutput()), recipe.getIngredients().get(0).getMatchingStacks()[0], ToolDictNames.craftingToolSaw);
                         ModHandler.addShapelessRecipe(String.format("nputils:log_to_2_%s", recipe.getRecipeOutput().toString()), GTUtility.copyAmount(2, recipe.getRecipeOutput()), recipe.getIngredients().get(0).getMatchingStacks()[0]);
@@ -1702,7 +1702,7 @@ public class NPURecipeAddition {
 		
 		for (ItemStack wood : allWood) {
 			ItemStack resultOfSmelt = ModHandler.getSmeltingOutput(wood);
-			if (!resultOfSmelt.isEmpty() && resultOfSmelt.getItem() == Items.COAL && resultOfSmelt.getMetadata() == 1 && NPUConfig.GT5U.DisableLogToCharcoalSmelting) {
+			if (!resultOfSmelt.isEmpty() && resultOfSmelt.getItem() == Items.COAL && resultOfSmelt.getMetadata() == 1 && NPUConfig.gameplay.DisableLogToCharcoalSmelting) {
 				ItemStack woodStack = wood.copy();
 				ModHandler.removeFurnaceSmelting(woodStack);
 			}
