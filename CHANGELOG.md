@@ -1,5 +1,12 @@
 #1.4.x
 * Fixed not working vending machine UI after GTCE update
+* Added forestry apiculture compat to all armor
+* Optimization of jetpacks
+* Added high pressure pipes
+* Fixed server kicks player while using jetpacks
+* Some changes in motor's recipes (hardened version)
+* Closed #10 & #11 issues
+
 
 
 #1.3.21
