@@ -108,31 +108,6 @@ public class NPUMetaItems {
 	public static MetaItem<?>.MetaValueItem BENDING_CYLINDER;
 	public static MetaItem<?>.MetaValueItem SMALL_BENDING_CYLINDER;
 	
-	public static MetaItem<?>.MetaValueItem STATOR_LV;
-	public static MetaItem<?>.MetaValueItem STATOR_MV;
-	public static MetaItem<?>.MetaValueItem STATOR_HV;
-	public static MetaItem<?>.MetaValueItem STATOR_EV;
-	public static MetaItem<?>.MetaValueItem STATOR_IV;
-	public static MetaItem<?>.MetaValueItem STATOR_LuV;
-	public static MetaItem<?>.MetaValueItem STATOR_ZPM;
-	public static MetaItem<?>.MetaValueItem STATOR_UV;
-	public static MetaItem<?>.MetaValueItem ROTOR_LV;
-	public static MetaItem<?>.MetaValueItem ROTOR_MV;
-	public static MetaItem<?>.MetaValueItem ROTOR_HV;
-	public static MetaItem<?>.MetaValueItem ROTOR_EV;
-	public static MetaItem<?>.MetaValueItem ROTOR_IV;
-	public static MetaItem<?>.MetaValueItem ROTOR_LuV;
-	public static MetaItem<?>.MetaValueItem ROTOR_ZPM;
-	public static MetaItem<?>.MetaValueItem ROTOR_UV;
-	public static MetaItem<?>.MetaValueItem MOTOR_HULL_LV;
-	public static MetaItem<?>.MetaValueItem MOTOR_HULL_MV;
-	public static MetaItem<?>.MetaValueItem MOTOR_HULL_HV;
-	public static MetaItem<?>.MetaValueItem MOTOR_HULL_EV;
-	public static MetaItem<?>.MetaValueItem MOTOR_HULL_IV;
-	public static MetaItem<?>.MetaValueItem MOTOR_HULL_LuV;
-	public static MetaItem<?>.MetaValueItem MOTOR_HULL_ZPM;
-	public static MetaItem<?>.MetaValueItem MOTOR_HULL_UV;
-	
 	public static MetaItem<?>.MetaValueItem INSULATING_TAPE;
 	public static MetaItem<?>.MetaValueItem MAGNETICALLY_PERMEABLE_PLATE_SET;
 	public static MetaItem<?>.MetaValueItem FERRITE_PLATE_SET;

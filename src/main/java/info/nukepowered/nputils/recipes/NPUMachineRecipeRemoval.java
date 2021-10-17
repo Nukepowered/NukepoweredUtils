@@ -283,15 +283,6 @@ public class NPUMachineRecipeRemoval {
             }
         }
         
-        //Hardened motors crafting
-        if (NPUConfig.gameplay.enableRealisticMotorCraft) {
-        	ModHandler.removeRecipeByName(new ResourceLocation("gregtech", "electric_motor/electric_motor_lv_iron"));
-        	ModHandler.removeRecipeByName(new ResourceLocation("gregtech", "electric_motor/electric_motor_lv_steel"));
-        	ModHandler.removeRecipeByName(new ResourceLocation("gregtech", "electric_motor/electric_motor_mv"));
-        	ModHandler.removeRecipeByName(new ResourceLocation("gregtech", "electric_motor/electric_motor_hv"));
-        	ModHandler.removeRecipeByName(new ResourceLocation("gregtech", "electric_motor/electric_motor_ev"));
-        	ModHandler.removeRecipeByName(new ResourceLocation("gregtech", "electric_motor/electric_motor_iv"));
-        }
         
         // Coins recipes due other coin value
         ModHandler.removeRecipeByName(new ResourceLocation("gregtech", "credit/credit_darmstadtium"));
