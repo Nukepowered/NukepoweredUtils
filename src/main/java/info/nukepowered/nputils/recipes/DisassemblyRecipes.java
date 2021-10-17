@@ -5,11 +5,11 @@ import static gregtech.common.blocks.BlockMachineCasing.MachineCasingType.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 import gregtech.api.GTValues;
 import gregtech.api.GregTechAPI;
 import gregtech.api.metatileentity.ITieredMetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
-import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeBuilder;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
@@ -20,11 +20,12 @@ import gregtech.common.blocks.BlockMachineCasing.MachineCasingType;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
+
 import info.nukepowered.nputils.NPUConfig;
 import info.nukepowered.nputils.NPULog;
 import info.nukepowered.nputils.NPUMaterials;
 import info.nukepowered.nputils.api.NPULib;
-import info.nukepowered.nputils.item.NPUMetaItems;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 
@@ -103,7 +104,6 @@ public class DisassemblyRecipes {
 		
 		//Component recycling LV-IV tiers
 		for (Components component : Components.values()) {
-			if (component == Components.MOTOR && NPUConfig.gameplay.enableRealisticMotorCraft) continue;
 			for (int tier = 1; tier < 6; tier++) {
 				ItemStack currentItem = component.getComponent(tier);
 				List<IRecipe> recipes = NPULib.getRecipesByOutput(currentItem);
@@ -133,47 +133,6 @@ public class DisassemblyRecipes {
 							.EUt(tier == 0 ? 8 : tier == 1 ? 30 : (int) Math.ceil((GTValues.V[tier] * (1 / tier + 0.4))))
 							.inputs(currentItem);
 					result.forEach(item -> builder.chancedOutput(item, 5000, 750));
-					builder.buildAndRegister();
-				}
-			}
-		}
-		
-		//Motors when Realistic
-		if (NPUConfig.gameplay.enableRealisticMotorCraft) {
-			for (Components component : Components.values()) {
-				if (component == Components.MOTOR) {
-					for (int tier = 1; tier < 6; tier++) {
-						List<Recipe> recipes = NPULib.getGTRecipeByOutput(RecipeMaps.ASSEMBLER_RECIPES, component.getComponent(tier));
-						List<ItemStack> result = new ArrayList<>();
-						if (recipes == null) continue;
-						if (recipes.isEmpty() || recipes.size() > 1) continue;
-						result = NPULib.parseGTRecipe(recipes.get(0));
-						if (result.isEmpty()) continue;
-						//Removing HULL from LV motor disassemble
-//						if (component.getComponent(tier).isItemEqual(Components.MOTOR.getComponent(1))) result.remove(NPULib.getItemIndex(result, MotorComponent.HULL.getComponent(1))); 
-						RecipeBuilder<?> builder = NPURecipeMaps.DISASSEMBLING_RECIPES.recipeBuilder()
-								.duration((int) Math.floor(Math.pow(2.5, tier) * 20))
-								.EUt(tier == 0 ? 8 : tier == 1 ? 30 : (int) Math.ceil((GTValues.V[tier] * (1 / tier + 0.4))))
-								.inputs(component.getComponent(tier));
-						result.forEach(stack -> builder.chancedOutput(stack, 5000, 750));
-						builder.buildAndRegister();
-					}
-				}
-			}
-
-			for (MotorComponent component : MotorComponent.values()) {
-				for (int tier = 1; tier < 6; tier++) {
-					List<Recipe> recipes = NPULib.getGTRecipeByOutput(RecipeMaps.ASSEMBLER_RECIPES, component.getComponent(tier));
-					List<ItemStack> result = new ArrayList<>();
-					if (recipes == null) continue;
-//					if (recipes.isEmpty() || (recipes.size() > 1 && !component.getComponent(tier).isItemEqual(MotorComponent.STATOR.getComponent(1)))) continue;
-					if (recipes.isEmpty() || (recipes.size() > 1)) continue;
-					result = NPULib.parseGTRecipe(recipes.get(0));
-					RecipeBuilder<?> builder = NPURecipeMaps.DISASSEMBLING_RECIPES.recipeBuilder()
-							.duration((int) Math.floor(Math.pow(2.5, tier) * 20))
-							.EUt(tier == 0 ? 8 : tier == 1 ? 30 : (int) Math.ceil((GTValues.V[tier] * (1 / tier + 0.4))))
-							.inputs(component.getComponent(tier));
-					result.forEach(stack -> builder.chancedOutput(stack, 5000, 750));
 					builder.buildAndRegister();
 				}
 			}
@@ -474,94 +433,6 @@ public class DisassemblyRecipes {
 			for (MachineBlocks block : MachineBlocks.values()) {
 				for (int i = 0; i < 10; i++) {
 					if (block.getComponent(i).isItemEqual(stack)) {
-						return true;
-					}
-				}
-			}
-			return false;
-		}
-		
-		abstract public ItemStack getComponent(int tier);
-	}
-	
-	public enum MotorComponent {
-		ROTOR {
-			@Override
-			public ItemStack getComponent(int tier) {
-				switch(tier) {
-				case 0:
-				case 1:
-					return NPUMetaItems.ROTOR_LV.getStackForm();
-				case 2:
-					return NPUMetaItems.ROTOR_MV.getStackForm();
-				case 3:
-					return NPUMetaItems.ROTOR_HV.getStackForm();
-				case 4:
-					return NPUMetaItems.ROTOR_EV.getStackForm();
-				case 5:
-					return NPUMetaItems.ROTOR_IV.getStackForm();
-				case 6:
-					return NPUMetaItems.ROTOR_LuV.getStackForm();
-				case 7:
-					return NPUMetaItems.ROTOR_ZPM.getStackForm();
-				default:
-					return NPUMetaItems.ROTOR_UV.getStackForm();
-				}
-			}
-		},
-		STATOR {
-			@Override
-			public ItemStack getComponent(int tier) {
-				switch(tier) {
-				case 0:
-				case 1:
-					return NPUMetaItems.STATOR_LV.getStackForm();
-				case 2:
-					return NPUMetaItems.STATOR_MV.getStackForm();
-				case 3:
-					return NPUMetaItems.STATOR_HV.getStackForm();
-				case 4:
-					return NPUMetaItems.STATOR_EV.getStackForm();
-				case 5:
-					return NPUMetaItems.STATOR_IV.getStackForm();
-				case 6:
-					return NPUMetaItems.STATOR_LuV.getStackForm();
-				case 7:
-					return NPUMetaItems.STATOR_ZPM.getStackForm();
-				default:
-					return NPUMetaItems.STATOR_UV.getStackForm();
-				}
-			}
-		},
-		HULL {
-			@Override
-			public ItemStack getComponent(int tier) {
-				switch(tier) {
-				case 0:
-				case 1:
-					return NPUMetaItems.MOTOR_HULL_LV.getStackForm();
-				case 2:
-					return NPUMetaItems.MOTOR_HULL_MV.getStackForm();
-				case 3:
-					return NPUMetaItems.MOTOR_HULL_HV.getStackForm();
-				case 4:
-					return NPUMetaItems.MOTOR_HULL_EV.getStackForm();
-				case 5:
-					return NPUMetaItems.MOTOR_HULL_IV.getStackForm();
-				case 6:
-					return NPUMetaItems.MOTOR_HULL_LuV.getStackForm();
-				case 7:
-					return NPUMetaItems.MOTOR_HULL_ZPM.getStackForm();
-				default:
-					return NPUMetaItems.MOTOR_HULL_UV.getStackForm();
-				}
-			}
-		};
-		
-		public static boolean contains(ItemStack stack) {
-			for (MotorComponent part : MotorComponent.values()) {
-				for (int i = 0; i < 9; i++) {
-					if (part.getComponent(i).isItemEqual(stack)) {
 						return true;
 					}
 				}

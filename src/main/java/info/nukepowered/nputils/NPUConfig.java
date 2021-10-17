@@ -93,8 +93,6 @@ public class NPUConfig {
 	public static class GAMEPLAY {
 		@Config.Comment("Set this to false to enable the GT5 Wrench recipes")
 		public boolean ExpensiveWrenches = true;
-		@Config.Comment("Set to false to disable realistic(hard) recipes of motors")
-		public boolean enableRealisticMotorCraft = true;
 		@Config.Comment("Set to false to enable Log -> Charcoal smelting recipes")
 		public boolean DisableLogToCharcoalSmelting = true;
 		@Config.Comment({"Set to false to disable generated wood sawing recipes", "A saw is required to get 4 Planks per Log"})

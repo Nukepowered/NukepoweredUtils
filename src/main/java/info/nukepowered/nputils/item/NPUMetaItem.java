@@ -123,35 +123,6 @@ public class NPUMetaItem extends MaterialMetaItem {
 	        MetaItems.COKE_OVEN_BRICK.setInvisible();
 	        MetaItems.FIRECLAY_BRICK.setInvisible();
 	    }
-		
-        if (NPUConfig.gameplay.enableRealisticMotorCraft) {
-	        NPUMetaItems.STATOR_LV = addItem(69, "stator.lv");
-	        NPUMetaItems.STATOR_MV = addItem(70, "stator.mv");
-	        NPUMetaItems.STATOR_HV = addItem(71, "stator.hv");
-	        NPUMetaItems.STATOR_EV = addItem(72, "stator.ev");
-	        NPUMetaItems.STATOR_IV = addItem(73, "stator.iv");
-	        NPUMetaItems.STATOR_LuV = addItem(74, "stator.luv");
-	        NPUMetaItems.STATOR_ZPM = addItem(75, "stator.zpm");
-	        NPUMetaItems.STATOR_UV = addItem(76, "stator.uv");
-	        
-	        NPUMetaItems.ROTOR_LV = addItem(77, "rotor.lv");
-	        NPUMetaItems.ROTOR_MV = addItem(78, "rotor.mv");
-	        NPUMetaItems.ROTOR_HV = addItem(79, "rotor.hv");
-	        NPUMetaItems.ROTOR_EV = addItem(80, "rotor.ev");
-	        NPUMetaItems.ROTOR_IV = addItem(81, "rotor.iv");
-	        NPUMetaItems.ROTOR_LuV = addItem(82, "rotor.luv");
-	        NPUMetaItems.ROTOR_ZPM = addItem(83, "rotor.zpm");
-	        NPUMetaItems.ROTOR_UV = addItem(84, "rotor.uv");
-	        
-	        NPUMetaItems.MOTOR_HULL_LV = addItem(85, "motor_hull.lv");
-	        NPUMetaItems.MOTOR_HULL_MV = addItem(86, "motor_hull.mv");
-	        NPUMetaItems.MOTOR_HULL_HV = addItem(87, "motor_hull.hv");
-	        NPUMetaItems.MOTOR_HULL_EV = addItem(88, "motor_hull.ev");
-	        NPUMetaItems.MOTOR_HULL_IV = addItem(89, "motor_hull.iv");
-	        NPUMetaItems.MOTOR_HULL_LuV = addItem(90, "motor_hull.luv");
-	        NPUMetaItems.MOTOR_HULL_ZPM = addItem(91, "motor_hull.zpm");
-	        NPUMetaItems.MOTOR_HULL_UV = addItem(92, "motor_hull.uv");
-        }
         
         NPUMetaItems.INSULATING_TAPE = addItem(93, "insulating_tape");
         NPUMetaItems.MAGNETICALLY_PERMEABLE_PLATE_SET = addItem(94, "magnetic_plates");
