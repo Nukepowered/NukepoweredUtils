@@ -33,6 +33,7 @@ import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import info.nukepowered.nputils.NPUConfig;
 import info.nukepowered.nputils.NPUMaterials;
+import info.nukepowered.nputils.NPUtils;
 import info.nukepowered.nputils.api.NPULib;
 import info.nukepowered.nputils.armor.PowerlessJetpack;
 import info.nukepowered.nputils.item.NPUMetaBlocks;
@@ -435,14 +436,58 @@ public class NPURecipeAddition {
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(320).EUt(1920).input(OrePrefix.circuit, Tier.Extreme, 2).inputs(OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.Aluminium, 2), OreDictUnifier.get(OrePrefix.gem, Materials.EnderPearl)).input(OrePrefix.stick, Materials.Platinum, 4).outputs(MetaItems.EMITTER_EV.getStackForm()).buildAndRegister();
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(640).EUt(7680).input(OrePrefix.circuit, Tier.Elite, 2).inputs(OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.Tungsten, 2), OreDictUnifier.get(OrePrefix.gem, Materials.EnderEye)).input(OrePrefix.stick, Materials.Osmium, 4).outputs(MetaItems.EMITTER_IV.getStackForm()).buildAndRegister();
 
-        for (MaterialStack stackFluid : cableFluids) {
-            IngotMaterial m = (IngotMaterial) stackFluid.material;
-            RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(40).EUt(30).input(OrePrefix.cableGtSingle, Materials.Tin).input(OrePrefix.screw, Materials.Tin).input(OrePrefix.rotor, Materials.Tin).input(OrePrefix.pipeMedium, Materials.Copper).inputs(MetaItems.ELECTRIC_MOTOR_LV.getStackForm()).input(OrePrefix.ring, m).outputs(MetaItems.ELECTRIC_PUMP_LV.getStackForm()).buildAndRegister();
-            RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(80).EUt(120).input(OrePrefix.cableGtSingle, Materials.Copper).input(OrePrefix.screw, Materials.Bronze).input(OrePrefix.rotor, Materials.Bronze).input(OrePrefix.pipeMedium, Materials.Steel).inputs(MetaItems.ELECTRIC_MOTOR_MV.getStackForm()).input(OrePrefix.ring, m).outputs(MetaItems.ELECTRIC_PUMP_MV.getStackForm()).buildAndRegister();
-            RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(160).EUt(480).input(OrePrefix.cableGtSingle, Materials.Gold).input(OrePrefix.screw, Materials.Steel).input(OrePrefix.rotor, Materials.Steel).input(OrePrefix.pipeMedium, Materials.StainlessSteel).inputs(MetaItems.ELECTRIC_MOTOR_HV.getStackForm()).input(OrePrefix.ring, m).outputs(MetaItems.ELECTRIC_PUMP_HV.getStackForm()).buildAndRegister();
-            RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(320).EUt(1920).input(OrePrefix.cableGtSingle, Materials.Aluminium).input(OrePrefix.screw, Materials.StainlessSteel).input(OrePrefix.rotor, Materials.StainlessSteel).input(OrePrefix.pipeMedium, Materials.Titanium).inputs(MetaItems.ELECTRIC_MOTOR_EV.getStackForm()).input(OrePrefix.ring, m).outputs(MetaItems.ELECTRIC_PUMP_EV.getStackForm()).buildAndRegister();
-            RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(640).EUt(7680).input(OrePrefix.cableGtSingle, Materials.Tungsten).input(OrePrefix.screw, Materials.TungstenSteel).input(OrePrefix.rotor, Materials.TungstenSteel).input(OrePrefix.pipeMedium, Materials.TungstenSteel).inputs(MetaItems.ELECTRIC_MOTOR_IV.getStackForm()).input(OrePrefix.ring, m).outputs(MetaItems.ELECTRIC_PUMP_IV.getStackForm()).buildAndRegister();
-        }
+		if (NPUConfig.gameplay.disableNewPumpCraft) {
+			for (MaterialStack stackFluid : cableFluids) {
+				IngotMaterial m = (IngotMaterial) stackFluid.material;
+				RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(40).EUt(30).input(OrePrefix.cableGtSingle, Materials.Tin).input(OrePrefix.screw, Materials.Tin).input(OrePrefix.rotor, Materials.Tin).input(OrePrefix.pipeMedium, Materials.Copper).inputs(MetaItems.ELECTRIC_MOTOR_LV.getStackForm()).input(OrePrefix.ring, m).outputs(MetaItems.ELECTRIC_PUMP_LV.getStackForm()).buildAndRegister();
+				RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(80).EUt(120).input(OrePrefix.cableGtSingle, Materials.Copper).input(OrePrefix.screw, Materials.Bronze).input(OrePrefix.rotor, Materials.Bronze).input(OrePrefix.pipeMedium, Materials.Steel).inputs(MetaItems.ELECTRIC_MOTOR_MV.getStackForm()).input(OrePrefix.ring, m).outputs(MetaItems.ELECTRIC_PUMP_MV.getStackForm()).buildAndRegister();
+				RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(160).EUt(480).input(OrePrefix.cableGtSingle, Materials.Gold).input(OrePrefix.screw, Materials.Steel).input(OrePrefix.rotor, Materials.Steel).input(OrePrefix.pipeMedium, Materials.StainlessSteel).inputs(MetaItems.ELECTRIC_MOTOR_HV.getStackForm()).input(OrePrefix.ring, m).outputs(MetaItems.ELECTRIC_PUMP_HV.getStackForm()).buildAndRegister();
+				RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(320).EUt(1920).input(OrePrefix.cableGtSingle, Materials.Aluminium).input(OrePrefix.screw, Materials.StainlessSteel).input(OrePrefix.rotor, Materials.StainlessSteel).input(OrePrefix.pipeMedium, Materials.Titanium).inputs(MetaItems.ELECTRIC_MOTOR_EV.getStackForm()).input(OrePrefix.ring, m).outputs(MetaItems.ELECTRIC_PUMP_EV.getStackForm()).buildAndRegister();
+				RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(640).EUt(7680).input(OrePrefix.cableGtSingle, Materials.Tungsten).input(OrePrefix.screw, Materials.TungstenSteel).input(OrePrefix.rotor, Materials.TungstenSteel).input(OrePrefix.pipeMedium, Materials.TungstenSteel).inputs(MetaItems.ELECTRIC_MOTOR_IV.getStackForm()).input(OrePrefix.ring, m).outputs(MetaItems.ELECTRIC_PUMP_IV.getStackForm()).buildAndRegister();
+				
+				ModHandler.addShapedRecipe(NPUtils.MODID + ":electric_pump_lv_" + m.getUnlocalizedName(), MetaItems.ELECTRIC_PUMP_LV.getStackForm(),
+						"SRG", "dPw", "GMC",
+						'S', OreDictUnifier.get(OrePrefix.screw, Materials.Tin),
+						'R', OreDictUnifier.get(OrePrefix.rotor, Materials.Tin),
+						'G', OreDictUnifier.get(OrePrefix.ring, m),
+						'P', OreDictUnifier.get(OrePrefix.pipeMedium, Materials.Bronze),
+						'M', MetaItems.ELECTRIC_MOTOR_LV.getStackForm(),
+						'C', OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.Tin));
+				ModHandler.addShapedRecipe(NPUtils.MODID + ":electric_pump_mv_" + m.getUnlocalizedName(), MetaItems.ELECTRIC_PUMP_MV.getStackForm(),
+						"SRG", "dPw", "GMC",
+						'S', OreDictUnifier.get(OrePrefix.screw, Materials.Bronze),
+						'R', OreDictUnifier.get(OrePrefix.rotor, Materials.Bronze),
+						'G', OreDictUnifier.get(OrePrefix.ring, m),
+						'P', OreDictUnifier.get(OrePrefix.pipeMedium, Materials.Steel),
+						'M', MetaItems.ELECTRIC_MOTOR_MV.getStackForm(),
+						'C', OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.Copper));
+				ModHandler.addShapedRecipe(NPUtils.MODID + ":electric_pump_hv_" + m.getUnlocalizedName(), MetaItems.ELECTRIC_PUMP_HV.getStackForm(),
+						"SRG", "dPw", "GMC",
+						'S', OreDictUnifier.get(OrePrefix.screw, Materials.Steel),
+						'R', OreDictUnifier.get(OrePrefix.rotor, Materials.Steel),
+						'G', OreDictUnifier.get(OrePrefix.ring, m),
+						'P', OreDictUnifier.get(OrePrefix.pipeMedium, Materials.StainlessSteel),
+						'M', MetaItems.ELECTRIC_MOTOR_HV.getStackForm(),
+						'C', OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.Gold));
+				ModHandler.addShapedRecipe(NPUtils.MODID + ":electric_pump_ev_" + m.getUnlocalizedName(), MetaItems.ELECTRIC_PUMP_EV.getStackForm(),
+						"SRG", "dPw", "GMC",
+						'S', OreDictUnifier.get(OrePrefix.screw, Materials.StainlessSteel),
+						'R', OreDictUnifier.get(OrePrefix.rotor, Materials.StainlessSteel),
+						'G', OreDictUnifier.get(OrePrefix.ring, m),
+						'P', OreDictUnifier.get(OrePrefix.pipeMedium, Materials.Titanium),
+						'M', MetaItems.ELECTRIC_MOTOR_EV.getStackForm(),
+						'C', OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.Aluminium));
+				ModHandler.addShapedRecipe(NPUtils.MODID + ":electric_pump_iv_" + m.getUnlocalizedName(), MetaItems.ELECTRIC_PUMP_IV.getStackForm(),
+						"SRG", "dPw", "GMC",
+						'S', OreDictUnifier.get(OrePrefix.screw, Materials.TungstenSteel),
+						'R', OreDictUnifier.get(OrePrefix.rotor, Materials.TungstenSteel),
+						'G', OreDictUnifier.get(OrePrefix.ring, m),
+						'P', OreDictUnifier.get(OrePrefix.pipeMedium, Materials.TungstenSteel),
+						'M', MetaItems.ELECTRIC_MOTOR_IV.getStackForm(),
+						'C', OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.Tungsten));
+				
+			}
+		}
         
         // Coke oven recipes
         RecipeMaps.COKE_OVEN_RECIPES.add(new CokeOvenRecipe(CountableIngredient.from("gemLignite"), OreDictUnifier.get(OrePrefix.gem, NPUMaterials.LigniteCoke), Materials.Creosote.getFluid(400), 900));
