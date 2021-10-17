@@ -8,7 +8,7 @@ import net.minecraft.util.IStringSerializable;
 public class NPUMultiblockCasing extends VariantBlock<NPUMultiblockCasing.CasingType> {
 	public NPUMultiblockCasing() {
 		super(Material.IRON);
-		setUnlocalizedName("npu_multiblock_casing");
+		setTranslationKey("npu_multiblock_casing");
 		setHardness(5.0f);
 		setResistance(10.0f);
 		setSoundType(SoundType.METAL);

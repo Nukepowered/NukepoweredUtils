@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 
 import gregtech.integration.jei.multiblock.MultiblockInfoRecipeWrapper;
 import info.nukepowered.nputils.NPUtils;
+import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.gui.IDrawable;
@@ -15,9 +16,11 @@ import net.minecraft.client.resources.I18n;
 
 public class NPUMultiblockInfoCategory implements IRecipeCategory<MultiblockInfoRecipeWrapper> {
 	private final IDrawable background;
+	private final IGuiHelper guiHelper;
 	
 	public NPUMultiblockInfoCategory(IJeiHelpers helpers) {
 		this.background = helpers.getGuiHelper().createBlankDrawable(176, 166);
+		this.guiHelper = helpers.getGuiHelper();
 	}
 	
 	public static void registerRecipes(IModRegistry registry) {
@@ -47,6 +50,6 @@ public class NPUMultiblockInfoCategory implements IRecipeCategory<MultiblockInfo
 	}
 	
 	public void setRecipe(IRecipeLayout recipeLayout, MultiblockInfoRecipeWrapper recipeWrapper, IIngredients ingredients) {
-		recipeWrapper.setRecipeLayout((RecipeLayout) recipeLayout);
+		recipeWrapper.setRecipeLayout((RecipeLayout) recipeLayout, this.guiHelper);
 	}
 }
