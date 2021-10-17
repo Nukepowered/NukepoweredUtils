@@ -1,7 +1,7 @@
 buildscript {
     repositories {
         jcenter()
-        maven { url = "http://files.minecraftforge.net/maven" }
+        maven { url = "https://files.minecraftforge.net/maven" }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
@@ -23,9 +23,9 @@ compileJava {
 }
 
 minecraft {
-    version = "${minecraft_version}-14.23.5.2846"
+    version = "${minecraft_version}-14.23.5.2847"
     runDir = "run"
-    mappings = "snapshot_20171003"
+    mappings = "stable_39"
 
     replace("@VERSION@",project.version)
     replaceIn("NPUtils.java")
@@ -57,8 +57,8 @@ repositories {
         url = "http://maven.ic2.player.to"
     }
 	maven {
-        name = "tehnut maven"
-        setUrl("http://tehnut.info/maven/")
+        name = "curseforge"
+        url = "https://minecraft.curseforge.com/api/maven/"
     }
 	maven {
         name = "CoFH Maven"
@@ -72,17 +72,17 @@ repositories {
 
 dependencies {
     deobfCompile "codechicken:ChickenASM:${short_version}-${chickenasm_version}"
-    deobfCompile "codechicken:CodeChickenLib:${minecraft_version}-${ccl_version}:deobf"
-    deobfCompile "codechicken:ForgeMultipart:${minecraft_version}-${multipart_version}:deobf"
+    deobfCompile "codechicken:CodeChickenLib:${minecraft_version}-${ccl_version}:universal"
     deobfCompile "CraftTweaker2:CraftTweaker2-MC${stripped_version}-Main:${crafttweaker_version}"
     deobfCompile "mezz.jei:jei_${minecraft_version}:${jei_version}"
     deobfCompile "net.sengir.forestry:forestry_${minecraft_version}:${forestry_version}"
     deobfCompile "slimeknights.mantle:Mantle:${short_version}-${mantle_version}"
     deobfCompile "slimeknights:TConstruct:${minecraft_version}-${tconstruct_version}"
-	deobfCompile "appeng:appliedenergistics2:${appeng_version}"
+	deobfCompile "applied-energistics-2:appliedenergistics2-rv6:stable:7"
 	deobfCompile "com.mod-buildcraft:buildcraft-api:${bc_version}"
 	"deobfCompile"("mcjty.theoneprobe:TheOneProbe-${short_version}:${short_version}-${onerpobe_v}")
-    compile files("libs/gregtech-${minecraft_version}-${gt_version}.jar")
+	"deobfCompile"("team.chisel.ctm:CTM:MC${minecraft_version}-${ctm_version}")
+	deobfCompile "gregtechce:gregtech:${minecraft_version}:${gt_version}"
 }
 
 processResources {

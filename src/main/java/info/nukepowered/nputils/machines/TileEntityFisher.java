@@ -72,14 +72,14 @@ public class TileEntityFisher extends TieredMetaTileEntity {
 			List<ItemStack> result = getWorld().getLootTableManager().getLootTableFromLocation(LootTableList.GAMEPLAY_FISHING).generateLootForPools(rand, lootcontext$builder.build());
 			long energyToConsume = GTValues.V[getTier()] / 16;
 			int waitTime = (int) Math.ceil(256 / (Math.pow(2, getTier())));
-			if (hasPool() && getTimer() % waitTime == 0 && energyContainer.getEnergyStored() >= energyToConsume) {
+			if (hasPool() && getOffsetTimer() % waitTime == 0 && energyContainer.getEnergyStored() >= energyToConsume) {
 				for (ItemStack output : result) {
 					if (slotToOutput(output) != 4) {
 						exportItems.insertItem(slotToOutput(output), output, false);
 						energyContainer.removeEnergy(energyToConsume);
 					}
 				}
-				if (getTimer() % 5 == 0) {
+				if (getOffsetTimer() % 5 == 0) {
 					EnumFacing outputFacing = getOutputFacing();
 					if (autoOutputItems) {
 						pushItemsIntoNearbyHandlers(outputFacing);

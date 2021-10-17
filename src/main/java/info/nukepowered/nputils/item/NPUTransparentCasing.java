@@ -17,7 +17,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class NPUTransparentCasing extends VariantBlock<NPUTransparentCasing.CasingType> {
 	public  NPUTransparentCasing() {
 		super(Material.IRON);
-		setUnlocalizedName("npu_transparent_casing");
+		setTranslationKey("npu_transparent_casing");
 		setHardness(5.0f);
 		setResistance(5000.0f);
 		setSoundType(SoundType.GLASS);
