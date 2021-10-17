@@ -9,9 +9,9 @@ import java.util.List;
 import codechicken.lib.render.CCRenderState;
 import codechicken.lib.render.pipeline.IVertexOperation;
 import codechicken.lib.vec.Matrix4;
+
 import gregtech.api.GTValues;
 import gregtech.api.capability.IEnergyContainer;
-import gregtech.api.capability.impl.AbstractRecipeLogic;
 import gregtech.api.capability.impl.EnergyContainerHandler;
 import gregtech.api.capability.impl.EnergyContainerList;
 import gregtech.api.capability.impl.FluidTankList;
@@ -27,13 +27,16 @@ import gregtech.api.multiblock.FactoryBlockPattern;
 import gregtech.api.multiblock.PatternMatchContext;
 import gregtech.api.recipes.Recipe;
 import gregtech.api.recipes.RecipeMaps;
+import gregtech.api.recipes.recipeproperties.FusionEUToStartProperty;
 import gregtech.api.render.ICubeRenderer;
 import gregtech.common.blocks.BlockMachineCasing;
 import gregtech.common.blocks.BlockMultiblockCasing;
 import gregtech.common.blocks.BlockWireCoil;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.metatileentities.MetaTileEntities;
+
 import info.nukepowered.nputils.NPUTextures;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
@@ -51,11 +54,7 @@ public class TileEntityFusionReactor extends RecipeMapMultiblockController {
 	
 	public TileEntityFusionReactor(ResourceLocation metaTileEntityId, int tier) {
 		super(metaTileEntityId, RecipeMaps.FUSION_RECIPES);
-		this.recipeMapWorkable = new MultiblockRecipeLogic(this) {
-			protected int getOverclockingTier(long voltage) {
-				return 0;
-			}
-		};
+		this.recipeMapWorkable = new FusionReactorRecipeLogic(this);
 		this.tier = tier;
 		this.reinitializeStructurePattern();
 		this.energyContainer = new EnergyContainerHandler(this, Integer.MAX_VALUE, 0, 0, 0, 0) {
@@ -163,6 +162,7 @@ public class TileEntityFusionReactor extends RecipeMapMultiblockController {
 		};
 	}
 	
+	@Override
 	protected void updateFormedValid() {
 		if (!getWorld().isRemote) {
 			if (this.inputEnergyContainers.getEnergyStored() > 0) {
@@ -172,47 +172,7 @@ public class TileEntityFusionReactor extends RecipeMapMultiblockController {
 				}
 			}
 			
-			if (this.recipeMapWorkable.isWorkingEnabled()) {
-                if (this.recipeMapWorkable.isHasNotEnoughEnergy()) {
-                    ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, 0, "progressTime");
-                    recipeMapWorkable.setMaxProgress(0);
-                    ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, 0, "recipeEUt");
-                    ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, null, "fluidOutputs");
-                    ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, null, "itemOutputs");
-                    ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, false, "hasNotEnoughEnergy");
-                    ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, true, "wasActiveAndNeedsUpdate");
-                    return;
-                }
-                Recipe previousRecipe = ObfuscationReflectionHelper.getPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, "previousRecipe");
-                this.recipeMapWorkable.updateWorkable();
-                Recipe recipe = ObfuscationReflectionHelper.getPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, "previousRecipe");
-                if (previousRecipe != recipe) {
-                    if (recipe != null) {
-                        long euToStart = ((Integer) recipe.getProperty("eu_to_start")).intValue();
-                        if (this.energyContainer.getEnergyStored() < euToStart) {
-                            ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, 0, "progressTime");
-                            recipeMapWorkable.setMaxProgress(0);
-                            ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, 0, "recipeEUt");
-                            ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, null, "fluidOutputs");
-                            ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, null, "itemOutputs");
-                            ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, false, "hasNotEnoughEnergy");
-                            ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, false, "hasNotEnoughEnergy");
-                            ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, true, "wasActiveAndNeedsUpdate");
-                        } else {
-                            this.energyContainer.addEnergy(-euToStart);
-                        }
-                    } else {
-                        ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, 0, "progressTime");
-                        recipeMapWorkable.setMaxProgress(0);
-                        ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, 0, "recipeEUt");
-                        ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, null, "fluidOutputs");
-                        ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, null, "itemOutputs");
-                        ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, false, "hasNotEnoughEnergy");
-                        ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, false, "hasNotEnoughEnergy");
-                        ObfuscationReflectionHelper.setPrivateValue(AbstractRecipeLogic.class, recipeMapWorkable, true, "wasActiveAndNeedsUpdate");
-                    }
-                }
-            }
+			this.recipeMapWorkable.update();
 		}
 	}
 	
@@ -258,4 +218,51 @@ public class TileEntityFusionReactor extends RecipeMapMultiblockController {
 		NPUTextures.FUSION_REACTOR_OVERLAY.render(renderState, translation, pipeline, this.getFrontFacing(), this.recipeMapWorkable.isActive());
 	}
 	
+	public static class FusionReactorRecipeLogic extends MultiblockRecipeLogic {
+
+		public FusionReactorRecipeLogic(RecipeMapMultiblockController tileEntity) {
+			super(tileEntity);
+		}
+		
+		@Override
+		protected int getOverclockingTier(long voltage) {
+			return 0;
+		}
+		
+		@Override
+		public void update() {
+			if (workingEnabled) {
+                if (hasNotEnoughEnergy) {
+                	resetRecipe();
+                    return;
+                }
+                
+                Recipe previous = previousRecipe;
+                updateWorkable();
+                Recipe current = previousRecipe;
+                if (current != previous) {
+                	if (current != null) {
+                    	long euToStart = current.getRecipePropertyStorage().getRecipePropertyValue(FusionEUToStartProperty.getInstance(), 0L);
+                    	if (getEnergyContainer().getEnergyStored() < euToStart) {
+                    		resetRecipe();
+                    	} else {
+                    		getEnergyContainer().addEnergy(-euToStart);
+                    	}
+                	} else {
+                		resetRecipe();
+                	}
+                }
+			}
+		}
+		
+		protected void resetRecipe() {
+			progressTime = 0;
+            setMaxProgress(0);
+            recipeEUt = 0;
+            fluidOutputs = null;
+            itemOutputs = null;
+            hasNotEnoughEnergy = false;
+            wasActiveAndNeedsUpdate = true;
+		}
+	}
 }
