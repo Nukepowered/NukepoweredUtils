@@ -76,6 +76,11 @@ public class TileEntityPowerInverter extends MetaTileEntity {
 	}
 	
 	@Override
+	public void onNeighborChanged() {
+		this.isPanelCheckedOnce = false;
+	}
+	
+	@Override
 	public void addDebugInfo(List<String> list) {
 		list.add("PanelMode: " + this.panelMode);
 		list.add("Panel: " + (this.panel == null ? "§cnull" : NPULib.posToStringC(this.getPanel().getPos())));
@@ -217,10 +222,10 @@ public class TileEntityPowerInverter extends MetaTileEntity {
 		long outputA = energyContainer.getOutputAmperage();
 		tooltip.add(I18n.format("nputils.machine.power_inverter.description"));
 		tooltip.add(I18n.format("nputils.machine.power_inverter." + GTValues.VN[tier].toLowerCase() + ".description"));
-		tooltip.add(I18n.format("gregtech.universal.tooltip.voltage_in", NPULib.format(inputV), GTValues.VN[tier - 1]));
-		tooltip.add(I18n.format("gregtech.universal.tooltip.voltage_out", NPULib.format(outputV), GTValues.VN[tier]));
-		tooltip.add(I18n.format("gregtech.universal.tooltip.amperage_in", NPULib.format(inputA)));
-		tooltip.add(I18n.format("gregtech.universal.tooltip.amperage_out", NPULib.format(outputA)));
+		tooltip.add(I18n.format("gregtech.universal.tooltip.voltage_in", inputV, GTValues.VN[tier - 1]));
+		tooltip.add(I18n.format("gregtech.universal.tooltip.voltage_out", outputV, GTValues.VN[tier]));
+		tooltip.add(I18n.format("gregtech.universal.tooltip.amperage_in", inputA));
+		tooltip.add(I18n.format("gregtech.universal.tooltip.amperage_out", outputA));
 	}
 	
 }

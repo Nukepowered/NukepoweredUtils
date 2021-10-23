@@ -380,6 +380,6 @@ public class NPUMachineMetaTileEntity extends WorkableTieredMetaTileEntity {
     @Override
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, boolean advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(I18n.format("gregtech.universal.tooltip.amperage_in_till", "8A"));
+        tooltip.add(I18n.format("gregtech.universal.tooltip.amperage_in_till", 8));
     }
 }

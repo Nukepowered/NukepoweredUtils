@@ -33,6 +33,7 @@ import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import info.nukepowered.nputils.NPUConfig;
 import info.nukepowered.nputils.NPUMaterials;
+import info.nukepowered.nputils.NPUtils;
 import info.nukepowered.nputils.api.NPULib;
 import info.nukepowered.nputils.armor.PowerlessJetpack;
 import info.nukepowered.nputils.item.NPUMetaBlocks;
@@ -435,14 +436,57 @@ public class NPURecipeAddition {
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(320).EUt(1920).input(OrePrefix.circuit, Tier.Extreme, 2).inputs(OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.Aluminium, 2), OreDictUnifier.get(OrePrefix.gem, Materials.EnderPearl)).input(OrePrefix.stick, Materials.Platinum, 4).outputs(MetaItems.EMITTER_EV.getStackForm()).buildAndRegister();
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(640).EUt(7680).input(OrePrefix.circuit, Tier.Elite, 2).inputs(OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.Tungsten, 2), OreDictUnifier.get(OrePrefix.gem, Materials.EnderEye)).input(OrePrefix.stick, Materials.Osmium, 4).outputs(MetaItems.EMITTER_IV.getStackForm()).buildAndRegister();
 
-        for (MaterialStack stackFluid : cableFluids) {
-            IngotMaterial m = (IngotMaterial) stackFluid.material;
-            RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(40).EUt(30).input(OrePrefix.cableGtSingle, Materials.Tin).input(OrePrefix.screw, Materials.Tin).input(OrePrefix.rotor, Materials.Tin).input(OrePrefix.pipeMedium, Materials.Copper).inputs(MetaItems.ELECTRIC_MOTOR_LV.getStackForm()).input(OrePrefix.ring, m).outputs(MetaItems.ELECTRIC_PUMP_LV.getStackForm()).buildAndRegister();
-            RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(80).EUt(120).input(OrePrefix.cableGtSingle, Materials.Copper).input(OrePrefix.screw, Materials.Bronze).input(OrePrefix.rotor, Materials.Bronze).input(OrePrefix.pipeMedium, Materials.Steel).inputs(MetaItems.ELECTRIC_MOTOR_MV.getStackForm()).input(OrePrefix.ring, m).outputs(MetaItems.ELECTRIC_PUMP_MV.getStackForm()).buildAndRegister();
-            RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(160).EUt(480).input(OrePrefix.cableGtSingle, Materials.Gold).input(OrePrefix.screw, Materials.Steel).input(OrePrefix.rotor, Materials.Steel).input(OrePrefix.pipeMedium, Materials.StainlessSteel).inputs(MetaItems.ELECTRIC_MOTOR_HV.getStackForm()).input(OrePrefix.ring, m).outputs(MetaItems.ELECTRIC_PUMP_HV.getStackForm()).buildAndRegister();
-            RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(320).EUt(1920).input(OrePrefix.cableGtSingle, Materials.Aluminium).input(OrePrefix.screw, Materials.StainlessSteel).input(OrePrefix.rotor, Materials.StainlessSteel).input(OrePrefix.pipeMedium, Materials.Titanium).inputs(MetaItems.ELECTRIC_MOTOR_EV.getStackForm()).input(OrePrefix.ring, m).outputs(MetaItems.ELECTRIC_PUMP_EV.getStackForm()).buildAndRegister();
-            RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(640).EUt(7680).input(OrePrefix.cableGtSingle, Materials.Tungsten).input(OrePrefix.screw, Materials.TungstenSteel).input(OrePrefix.rotor, Materials.TungstenSteel).input(OrePrefix.pipeMedium, Materials.TungstenSteel).inputs(MetaItems.ELECTRIC_MOTOR_IV.getStackForm()).input(OrePrefix.ring, m).outputs(MetaItems.ELECTRIC_PUMP_IV.getStackForm()).buildAndRegister();
-        }
+		if (NPUConfig.gameplay.disableNewPumpCraft) {
+			for (MaterialStack stackFluid : cableFluids) {
+				IngotMaterial m = (IngotMaterial) stackFluid.material;
+				RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(40).EUt(30).input(OrePrefix.cableGtSingle, Materials.Tin).input(OrePrefix.screw, Materials.Tin).input(OrePrefix.rotor, Materials.Tin).input(OrePrefix.pipeMedium, Materials.Copper).inputs(MetaItems.ELECTRIC_MOTOR_LV.getStackForm()).input(OrePrefix.ring, m).outputs(MetaItems.ELECTRIC_PUMP_LV.getStackForm()).buildAndRegister();
+				RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(80).EUt(120).input(OrePrefix.cableGtSingle, Materials.Copper).input(OrePrefix.screw, Materials.Bronze).input(OrePrefix.rotor, Materials.Bronze).input(OrePrefix.pipeMedium, Materials.Steel).inputs(MetaItems.ELECTRIC_MOTOR_MV.getStackForm()).input(OrePrefix.ring, m).outputs(MetaItems.ELECTRIC_PUMP_MV.getStackForm()).buildAndRegister();
+				RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(160).EUt(480).input(OrePrefix.cableGtSingle, Materials.Gold).input(OrePrefix.screw, Materials.Steel).input(OrePrefix.rotor, Materials.Steel).input(OrePrefix.pipeMedium, Materials.StainlessSteel).inputs(MetaItems.ELECTRIC_MOTOR_HV.getStackForm()).input(OrePrefix.ring, m).outputs(MetaItems.ELECTRIC_PUMP_HV.getStackForm()).buildAndRegister();
+				RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(320).EUt(1920).input(OrePrefix.cableGtSingle, Materials.Aluminium).input(OrePrefix.screw, Materials.StainlessSteel).input(OrePrefix.rotor, Materials.StainlessSteel).input(OrePrefix.pipeMedium, Materials.Titanium).inputs(MetaItems.ELECTRIC_MOTOR_EV.getStackForm()).input(OrePrefix.ring, m).outputs(MetaItems.ELECTRIC_PUMP_EV.getStackForm()).buildAndRegister();
+				RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(640).EUt(7680).input(OrePrefix.cableGtSingle, Materials.Tungsten).input(OrePrefix.screw, Materials.TungstenSteel).input(OrePrefix.rotor, Materials.TungstenSteel).input(OrePrefix.pipeMedium, Materials.TungstenSteel).inputs(MetaItems.ELECTRIC_MOTOR_IV.getStackForm()).input(OrePrefix.ring, m).outputs(MetaItems.ELECTRIC_PUMP_IV.getStackForm()).buildAndRegister();
+				
+				ModHandler.addShapedRecipe(NPUtils.MODID + ":electric_pump_lv_" + m.getUnlocalizedName(), MetaItems.ELECTRIC_PUMP_LV.getStackForm(),
+						"SRG", "dPw", "GMC",
+						'S', OreDictUnifier.get(OrePrefix.screw, Materials.Tin),
+						'R', OreDictUnifier.get(OrePrefix.rotor, Materials.Tin),
+						'G', OreDictUnifier.get(OrePrefix.ring, m),
+						'P', OreDictUnifier.get(OrePrefix.pipeMedium, Materials.Bronze),
+						'M', MetaItems.ELECTRIC_MOTOR_LV.getStackForm(),
+						'C', OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.Tin));
+				ModHandler.addShapedRecipe(NPUtils.MODID + ":electric_pump_mv_" + m.getUnlocalizedName(), MetaItems.ELECTRIC_PUMP_MV.getStackForm(),
+						"SRG", "dPw", "GMC",
+						'S', OreDictUnifier.get(OrePrefix.screw, Materials.Bronze),
+						'R', OreDictUnifier.get(OrePrefix.rotor, Materials.Bronze),
+						'G', OreDictUnifier.get(OrePrefix.ring, m),
+						'P', OreDictUnifier.get(OrePrefix.pipeMedium, Materials.Steel),
+						'M', MetaItems.ELECTRIC_MOTOR_MV.getStackForm(),
+						'C', OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.Copper));
+				ModHandler.addShapedRecipe(NPUtils.MODID + ":electric_pump_hv_" + m.getUnlocalizedName(), MetaItems.ELECTRIC_PUMP_HV.getStackForm(),
+						"SRG", "dPw", "GMC",
+						'S', OreDictUnifier.get(OrePrefix.screw, Materials.Steel),
+						'R', OreDictUnifier.get(OrePrefix.rotor, Materials.Steel),
+						'G', OreDictUnifier.get(OrePrefix.ring, m),
+						'P', OreDictUnifier.get(OrePrefix.pipeMedium, Materials.StainlessSteel),
+						'M', MetaItems.ELECTRIC_MOTOR_HV.getStackForm(),
+						'C', OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.Gold));
+				ModHandler.addShapedRecipe(NPUtils.MODID + ":electric_pump_ev_" + m.getUnlocalizedName(), MetaItems.ELECTRIC_PUMP_EV.getStackForm(),
+						"SRG", "dPw", "GMC",
+						'S', OreDictUnifier.get(OrePrefix.screw, Materials.StainlessSteel),
+						'R', OreDictUnifier.get(OrePrefix.rotor, Materials.StainlessSteel),
+						'G', OreDictUnifier.get(OrePrefix.ring, m),
+						'P', OreDictUnifier.get(OrePrefix.pipeMedium, Materials.Titanium),
+						'M', MetaItems.ELECTRIC_MOTOR_EV.getStackForm(),
+						'C', OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.Aluminium));
+				ModHandler.addShapedRecipe(NPUtils.MODID + ":electric_pump_iv_" + m.getUnlocalizedName(), MetaItems.ELECTRIC_PUMP_IV.getStackForm(),
+						"SRG", "dPw", "GMC",
+						'S', OreDictUnifier.get(OrePrefix.screw, Materials.TungstenSteel),
+						'R', OreDictUnifier.get(OrePrefix.rotor, Materials.TungstenSteel),
+						'G', OreDictUnifier.get(OrePrefix.ring, m),
+						'P', OreDictUnifier.get(OrePrefix.pipeMedium, Materials.TungstenSteel),
+						'M', MetaItems.ELECTRIC_MOTOR_IV.getStackForm(),
+						'C', OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.Tungsten));
+			}
+		}
         
         // Coke oven recipes
         RecipeMaps.COKE_OVEN_RECIPES.add(new CokeOvenRecipe(CountableIngredient.from("gemLignite"), OreDictUnifier.get(OrePrefix.gem, NPUMaterials.LigniteCoke), Materials.Creosote.getFluid(400), 900));
@@ -591,8 +635,8 @@ public class NPURecipeAddition {
             NPURecipeMaps.CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(60).inputs(NPUMetaItems.GOOD_PLASTIC_BOARD.getStackForm(), MetaItems.CENTRAL_PROCESSING_UNIT.getStackForm(), MetaItems.RESISTOR.getStackForm(2), MetaItems.CAPACITOR.getStackForm(2), MetaItems.TRANSISTOR.getStackForm(2), OreDictUnifier.get(OrePrefix.wireFine, Materials.RedAlloy, 2)).fluidInputs(material.getFluid(72 * multiplier)).outputs(MetaItems.ADVANCED_CIRCUIT_MV.getStackForm()).buildAndRegister();
             NPURecipeMaps.CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(60).inputs(NPUMetaItems.GOOD_PLASTIC_BOARD.getStackForm(), MetaItems.CENTRAL_PROCESSING_UNIT.getStackForm(), MetaItems.SMD_RESISTOR.getStackForm(2), MetaItems.SMD_CAPACITOR.getStackForm(2), MetaItems.SMD_TRANSISTOR.getStackForm(2), OreDictUnifier.get(OrePrefix.wireFine, Materials.RedAlloy, 2)).fluidInputs(material.getFluid(72 * multiplier)).outputs(MetaItems.ADVANCED_CIRCUIT_MV.getStackForm()).buildAndRegister();
             NPURecipeMaps.CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder().duration(50).EUt(2400).inputs(NPUMetaItems.GOOD_PLASTIC_BOARD.getStackForm(), MetaItems.SYSTEM_ON_CHIP.getStackForm(), OreDictUnifier.get(OrePrefix.wireFine, Materials.RedAlloy, 2)).fluidInputs(material.getFluid(72 * multiplier)).outputs(MetaItems.ADVANCED_CIRCUIT_MV.getStackForm()).buildAndRegister();
-            NPURecipeMaps.CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder().duration(800).EUt(28).inputs(MetaItems.GOOD_INTEGRATED_CIRCUIT_MV.getStackForm(2), MetaItems.INTEGRATED_LOGIC_CIRCUIT.getStackForm(3), MetaItems.RANDOM_ACCESS_MEMORY.getStackForm(), MetaItems.TRANSISTOR.getStackForm(4), OreDictUnifier.get(OrePrefix.wireFine, Materials.Electrum, 16)).fluidInputs(material.getFluid(72 * multiplier)).outputs(NPUMetaItems.ADVANCED_CIRCUIT.getStackForm()).buildAndRegister();
-            NPURecipeMaps.CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder().duration(800).EUt(28).inputs(MetaItems.GOOD_INTEGRATED_CIRCUIT_MV.getStackForm(2), MetaItems.INTEGRATED_LOGIC_CIRCUIT.getStackForm(3), MetaItems.RANDOM_ACCESS_MEMORY.getStackForm(), MetaItems.SMD_TRANSISTOR.getStackForm(4), OreDictUnifier.get(OrePrefix.wireFine, Materials.Electrum, 16)).fluidInputs(material.getFluid(72 * multiplier)).outputs(NPUMetaItems.ADVANCED_CIRCUIT.getStackForm()).buildAndRegister();
+            NPURecipeMaps.CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder().duration(640).EUt(30).inputs(MetaItems.GOOD_INTEGRATED_CIRCUIT_MV.getStackForm(2), MetaItems.INTEGRATED_LOGIC_CIRCUIT.getStackForm(3), MetaItems.RANDOM_ACCESS_MEMORY.getStackForm(), MetaItems.TRANSISTOR.getStackForm(4), OreDictUnifier.get(OrePrefix.wireFine, Materials.Electrum, 16)).fluidInputs(material.getFluid(72 * multiplier)).outputs(NPUMetaItems.ADVANCED_CIRCUIT.getStackForm()).buildAndRegister();
+            NPURecipeMaps.CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder().duration(640).EUt(30).inputs(MetaItems.GOOD_INTEGRATED_CIRCUIT_MV.getStackForm(2), MetaItems.INTEGRATED_LOGIC_CIRCUIT.getStackForm(3), MetaItems.RANDOM_ACCESS_MEMORY.getStackForm(), MetaItems.SMD_TRANSISTOR.getStackForm(4), OreDictUnifier.get(OrePrefix.wireFine, Materials.Electrum, 16)).fluidInputs(material.getFluid(72 * multiplier)).outputs(NPUMetaItems.ADVANCED_CIRCUIT.getStackForm()).buildAndRegister();
             NPURecipeMaps.CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder().duration(400).EUt(90).inputs(NPUMetaItems.GOOD_PLASTIC_BOARD.getStackForm(), MetaItems.ADVANCED_CIRCUIT_MV.getStackForm(2), MetaItems.SMALL_COIL.getStackForm(4), MetaItems.CAPACITOR.getStackForm(4), MetaItems.RANDOM_ACCESS_MEMORY.getStackForm(4), OreDictUnifier.get(OrePrefix.wireFine, Materials.RedAlloy, 12)).fluidInputs(material.getFluid(144 * multiplier)).outputs(MetaItems.PROCESSOR_ASSEMBLY_HV.getStackForm()).buildAndRegister();
             NPURecipeMaps.CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder().duration(400).EUt(80).inputs(NPUMetaItems.GOOD_PLASTIC_BOARD.getStackForm(), MetaItems.ADVANCED_CIRCUIT_MV.getStackForm(2), MetaItems.SMALL_COIL.getStackForm(4), MetaItems.SMD_CAPACITOR.getStackForm(4), MetaItems.RANDOM_ACCESS_MEMORY.getStackForm(4), OreDictUnifier.get(OrePrefix.wireFine, Materials.RedAlloy, 12)).fluidInputs(material.getFluid(144 * multiplier)).outputs(MetaItems.PROCESSOR_ASSEMBLY_HV.getStackForm()).buildAndRegister();
             NPURecipeMaps.CIRCUIT_ASSEMBLER_RECIPES.recipeBuilder().duration(200).EUt(600).inputs(NPUMetaItems.ADVANCED_BOARD.getStackForm(), MetaItems.NANO_CENTRAL_PROCESSING_UNIT.getStackForm(), MetaItems.SMD_RESISTOR.getStackForm(2), MetaItems.SMD_CAPACITOR.getStackForm(2), MetaItems.SMD_TRANSISTOR.getStackForm(2), OreDictUnifier.get(OrePrefix.wireFine, Materials.Electrum, 2)).fluidInputs(material.getFluid(72 * multiplier)).outputs(MetaItems.NANO_PROCESSOR_HV.getStackForm()).buildAndRegister();
@@ -653,28 +697,28 @@ public class NPURecipeAddition {
         ModHandler.addShapedRecipe("nputils:basic_board", NPUMetaItems.BASIC_BOARD.getStackForm(), "WWW", "WBW", "WWW", 'W', new UnificationEntry(OrePrefix.wireGtSingle, Materials.Copper), 'B', MetaItems.COATED_BOARD);
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(40).EUt(20).input(OrePrefix.plate, Materials.Wood).input(OrePrefix.foil, Materials.Copper, 4).fluidInputs(Materials.Glue.getFluid(72)).outputs(NPUMetaItems.BASIC_BOARD.getStackForm()).buildAndRegister();
         ModHandler.addShapedRecipe("nputils:good_board", NPUMetaItems.GOOD_PHENOLIC_BOARD.getStackForm(), "WWW", "WBW", "WWW", 'W', new UnificationEntry(OrePrefix.wireGtSingle, Materials.Gold), 'B', MetaItems.PHENOLIC_BOARD);
-        RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().duration(600).EUt(30).inputs(MetaItems.PHENOLIC_BOARD.getStackForm()).input(OrePrefix.foil, Materials.Gold, 4).fluidInputs(Materials.SodiumPersulfate.getFluid(200)).outputs(NPUMetaItems.GOOD_PHENOLIC_BOARD.getStackForm()).buildAndRegister();
-        RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().duration(600).EUt(30).inputs(MetaItems.PHENOLIC_BOARD.getStackForm()).input(OrePrefix.foil, Materials.Gold, 4).fluidInputs(NPUMaterials.IronChloride.getFluid(100)).outputs(NPUMetaItems.GOOD_PHENOLIC_BOARD.getStackForm()).buildAndRegister();
-        RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().duration(800).EUt(30).inputs(MetaItems.PLASTIC_BOARD.getStackForm()).input(OrePrefix.foil, Materials.Copper, 6).fluidInputs(Materials.SodiumPersulfate.getFluid(500)).outputs(NPUMetaItems.GOOD_PLASTIC_BOARD.getStackForm()).buildAndRegister();
-        RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().duration(800).EUt(30).inputs(MetaItems.PLASTIC_BOARD.getStackForm()).input(OrePrefix.foil, Materials.Copper, 6).fluidInputs(NPUMaterials.IronChloride.getFluid(250)).outputs(NPUMetaItems.GOOD_PLASTIC_BOARD.getStackForm()).buildAndRegister();
-        RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().duration(1200).EUt(30).inputs(MetaItems.EPOXY_BOARD.getStackForm()).input(OrePrefix.foil, Materials.Electrum, 8).fluidInputs(Materials.SodiumPersulfate.getFluid(1000)).outputs(NPUMetaItems.ADVANCED_BOARD.getStackForm()).buildAndRegister();
-        RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().duration(1200).EUt(30).inputs(MetaItems.EPOXY_BOARD.getStackForm()).input(OrePrefix.foil, Materials.Electrum, 8).fluidInputs(NPUMaterials.IronChloride.getFluid(500)).outputs(NPUMetaItems.ADVANCED_BOARD.getStackForm()).buildAndRegister();
-        RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().duration(1800).EUt(30).inputs(MetaItems.FIBER_BOARD.getStackForm()).input(OrePrefix.foil, Materials.AnnealedCopper, 12).fluidInputs(Materials.SodiumPersulfate.getFluid(2000)).outputs(NPUMetaItems.EXTREME_BOARD.getStackForm()).buildAndRegister();
-        RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().duration(1800).EUt(30).inputs(MetaItems.FIBER_BOARD.getStackForm()).input(OrePrefix.foil, Materials.AnnealedCopper, 12).fluidInputs(NPUMaterials.IronChloride.getFluid(1000)).outputs(NPUMetaItems.EXTREME_BOARD.getStackForm()).buildAndRegister();
+        RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().duration(480).EUt(30).inputs(MetaItems.PHENOLIC_BOARD.getStackForm()).input(OrePrefix.foil, Materials.Gold, 4).fluidInputs(Materials.SodiumPersulfate.getFluid(200)).outputs(NPUMetaItems.GOOD_PHENOLIC_BOARD.getStackForm()).buildAndRegister();
+        RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().duration(480).EUt(30).inputs(MetaItems.PHENOLIC_BOARD.getStackForm()).input(OrePrefix.foil, Materials.Gold, 4).fluidInputs(NPUMaterials.IronChloride.getFluid(100)).outputs(NPUMetaItems.GOOD_PHENOLIC_BOARD.getStackForm()).buildAndRegister();
+        RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().duration(600).EUt(30).inputs(MetaItems.PLASTIC_BOARD.getStackForm()).input(OrePrefix.foil, Materials.Copper, 6).fluidInputs(Materials.SodiumPersulfate.getFluid(500)).outputs(NPUMetaItems.GOOD_PLASTIC_BOARD.getStackForm()).buildAndRegister();
+        RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().duration(600).EUt(30).inputs(MetaItems.PLASTIC_BOARD.getStackForm()).input(OrePrefix.foil, Materials.Copper, 6).fluidInputs(NPUMaterials.IronChloride.getFluid(250)).outputs(NPUMetaItems.GOOD_PLASTIC_BOARD.getStackForm()).buildAndRegister();
+        RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().duration(800).EUt(30).inputs(MetaItems.EPOXY_BOARD.getStackForm()).input(OrePrefix.foil, Materials.Electrum, 8).fluidInputs(Materials.SodiumPersulfate.getFluid(1000)).outputs(NPUMetaItems.ADVANCED_BOARD.getStackForm()).buildAndRegister();
+        RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().duration(800).EUt(30).inputs(MetaItems.EPOXY_BOARD.getStackForm()).input(OrePrefix.foil, Materials.Electrum, 8).fluidInputs(NPUMaterials.IronChloride.getFluid(500)).outputs(NPUMetaItems.ADVANCED_BOARD.getStackForm()).buildAndRegister();
+        RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().duration(1500).EUt(30).inputs(MetaItems.FIBER_BOARD.getStackForm()).input(OrePrefix.foil, Materials.AnnealedCopper, 12).fluidInputs(Materials.SodiumPersulfate.getFluid(2000)).outputs(NPUMetaItems.EXTREME_BOARD.getStackForm()).buildAndRegister();
+        RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().duration(1500).EUt(30).inputs(MetaItems.FIBER_BOARD.getStackForm()).input(OrePrefix.foil, Materials.AnnealedCopper, 12).fluidInputs(NPUMaterials.IronChloride.getFluid(1000)).outputs(NPUMetaItems.EXTREME_BOARD.getStackForm()).buildAndRegister();
         RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().duration(2400).EUt(120).inputs(MetaItems.MULTILAYER_FIBER_BOARD.getStackForm()).input(OrePrefix.foil, Materials.Platinum, 16).fluidInputs(Materials.SodiumPersulfate.getFluid(4000)).outputs(NPUMetaItems.ELITE_BOARD.getStackForm()).buildAndRegister();
         RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().duration(2400).EUt(120).inputs(MetaItems.MULTILAYER_FIBER_BOARD.getStackForm()).input(OrePrefix.foil, Materials.Platinum, 16).fluidInputs(NPUMaterials.IronChloride.getFluid(2000)).outputs(NPUMetaItems.ELITE_BOARD.getStackForm()).buildAndRegister();
         RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().duration(3000).EUt(480).inputs(MetaItems.WETWARE_BOARD.getStackForm()).input(OrePrefix.foil, Materials.NiobiumTitanium, 32).fluidInputs(Materials.SodiumPersulfate.getFluid(10000)).outputs(NPUMetaItems.MASTER_BOARD.getStackForm()).buildAndRegister();
         RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().duration(3000).EUt(480).inputs(MetaItems.WETWARE_BOARD.getStackForm()).input(OrePrefix.foil, Materials.NiobiumTitanium, 32).fluidInputs(NPUMaterials.IronChloride.getFluid(5000)).outputs(NPUMetaItems.MASTER_BOARD.getStackForm()).buildAndRegister();
 
         ModHandler.removeRecipeByName(new ResourceLocation("gregtech:diode"));
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(600).EUt(30).input(OrePrefix.wireFine, Materials.Copper, 4).input(OrePrefix.dustSmall, Materials.GalliumArsenide).fluidInputs(Materials.Glass.getFluid(288)).outputs(MetaItems.DIODE.getStackForm(2)).buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(600).EUt(30).input(OrePrefix.wireFine, Materials.AnnealedCopper, 4).input(OrePrefix.dustSmall, Materials.GalliumArsenide).fluidInputs(Materials.Glass.getFluid(288)).outputs(MetaItems.DIODE.getStackForm(2)).buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(600).EUt(30).input(OrePrefix.wireFine, Materials.Copper, 4).input(OrePrefix.dustSmall, Materials.GalliumArsenide).fluidInputs(Materials.Plastic.getFluid(144)).outputs(MetaItems.DIODE.getStackForm(4)).buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(600).EUt(30).input(OrePrefix.wireFine, Materials.AnnealedCopper, 4).input(OrePrefix.dustSmall, Materials.GalliumArsenide).fluidInputs(Materials.Plastic.getFluid(144)).outputs(MetaItems.DIODE.getStackForm(4)).buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(600).EUt(30).input(OrePrefix.wireFine, Materials.Copper, 4).inputs(MetaItems.SILICON_WAFER.getStackForm()).fluidInputs(Materials.Glass.getFluid(288)).outputs(MetaItems.DIODE.getStackForm()).buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(600).EUt(30).input(OrePrefix.wireFine, Materials.AnnealedCopper, 4).inputs(MetaItems.SILICON_WAFER.getStackForm()).fluidInputs(Materials.Glass.getFluid(288)).outputs(MetaItems.DIODE.getStackForm()).buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(600).EUt(30).input(OrePrefix.wireFine, Materials.Copper, 4).inputs(MetaItems.SILICON_WAFER.getStackForm()).fluidInputs(Materials.Plastic.getFluid(144)).outputs(MetaItems.DIODE.getStackForm(2)).buildAndRegister();
-        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(600).EUt(30).input(OrePrefix.wireFine, Materials.AnnealedCopper, 4).inputs(MetaItems.SILICON_WAFER.getStackForm()).fluidInputs(Materials.Plastic.getFluid(144)).outputs(MetaItems.DIODE.getStackForm(2)).buildAndRegister();
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(480).EUt(30).input(OrePrefix.wireFine, Materials.Copper, 4).input(OrePrefix.dustSmall, Materials.GalliumArsenide).fluidInputs(Materials.Glass.getFluid(288)).outputs(MetaItems.DIODE.getStackForm(2)).buildAndRegister();
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(480).EUt(30).input(OrePrefix.wireFine, Materials.AnnealedCopper, 4).input(OrePrefix.dustSmall, Materials.GalliumArsenide).fluidInputs(Materials.Glass.getFluid(288)).outputs(MetaItems.DIODE.getStackForm(2)).buildAndRegister();
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(480).EUt(30).input(OrePrefix.wireFine, Materials.Copper, 4).input(OrePrefix.dustSmall, Materials.GalliumArsenide).fluidInputs(Materials.Plastic.getFluid(144)).outputs(MetaItems.DIODE.getStackForm(4)).buildAndRegister();
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(480).EUt(30).input(OrePrefix.wireFine, Materials.AnnealedCopper, 4).input(OrePrefix.dustSmall, Materials.GalliumArsenide).fluidInputs(Materials.Plastic.getFluid(144)).outputs(MetaItems.DIODE.getStackForm(4)).buildAndRegister();
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(480).EUt(30).input(OrePrefix.wireFine, Materials.Copper, 4).inputs(MetaItems.SILICON_WAFER.getStackForm()).fluidInputs(Materials.Glass.getFluid(288)).outputs(MetaItems.DIODE.getStackForm()).buildAndRegister();
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(480).EUt(30).input(OrePrefix.wireFine, Materials.AnnealedCopper, 4).inputs(MetaItems.SILICON_WAFER.getStackForm()).fluidInputs(Materials.Glass.getFluid(288)).outputs(MetaItems.DIODE.getStackForm()).buildAndRegister();
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(480).EUt(30).input(OrePrefix.wireFine, Materials.Copper, 4).inputs(MetaItems.SILICON_WAFER.getStackForm()).fluidInputs(Materials.Plastic.getFluid(144)).outputs(MetaItems.DIODE.getStackForm(2)).buildAndRegister();
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(480).EUt(30).input(OrePrefix.wireFine, Materials.AnnealedCopper, 4).inputs(MetaItems.SILICON_WAFER.getStackForm()).fluidInputs(Materials.Plastic.getFluid(144)).outputs(MetaItems.DIODE.getStackForm(2)).buildAndRegister();
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(600).EUt(30).input(OrePrefix.wireFine, Materials.Platinum, 8).input(OrePrefix.dust, Materials.GalliumArsenide).fluidInputs(Materials.Plastic.getFluid(288)).outputs(MetaItems.SMD_DIODE.getStackForm(32)).buildAndRegister();
 
         ModHandler.removeRecipes(MetaItems.RESISTOR.getStackForm(3));
@@ -704,7 +748,6 @@ public class NPURecipeAddition {
         RecipeMaps.BLAST_RECIPES.recipeBuilder().duration(900).EUt(480).blastFurnaceTemp(5000).inputs(NPUMetaItems.RAW_CRYSTAL_CHIP.getStackForm()).input(OrePrefix.plate, Materials.Olivine).fluidInputs(Materials.Helium.getFluid(1000)).outputs(MetaItems.ENGRAVED_CRYSTAL_CHIP.getStackForm()).buildAndRegister();
         RecipeMaps.EXTRACTOR_RECIPES.recipeBuilder().duration(300).EUt(1024).inputs(new ItemStack(Items.EGG)).chancedOutput(NPUMetaItems.STEMCELLS.getStackForm(), 500, 750).buildAndRegister();
         RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().duration(400).EUt(30).input(OrePrefix.dust, Materials.Iron).fluidInputs(Materials.HydrochloricAcid.getFluid(2000)).fluidOutputs(NPUMaterials.IronChloride.getFluid(3000), Materials.Hydrogen.getFluid(3000)).buildAndRegister();
-        RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().duration(400).EUt(1920).inputs(MetaItems.CENTRAL_PROCESSING_UNIT_WAFER.getStackForm(), MetaItems.CARBON_FIBERS.getStackForm(16)).fluidInputs(Materials.Glowstone.getFluid(576)).outputs(MetaItems.NANO_CENTRAL_PROCESSING_UNIT_WAFER.getStackForm()).buildAndRegister();
 
         //Circuit Rabbit Hole - Layer 4
         RecipeMaps.AUTOCLAVE_RECIPES.recipeBuilder().duration(12000).EUt(320).inputs(OreDictUnifier.get(OrePrefix.gemExquisite, Materials.Olivine)).fluidInputs(Materials.Europium.getFluid(16)).chancedOutput(NPUMetaItems.RAW_CRYSTAL_CHIP.getStackForm(), 1000, 750).buildAndRegister();

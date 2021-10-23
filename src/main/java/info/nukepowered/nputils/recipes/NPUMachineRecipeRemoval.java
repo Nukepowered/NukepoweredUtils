@@ -22,8 +22,10 @@ import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.blocks.BlockMachineCasing;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.items.MetaItems;
+
 import info.nukepowered.nputils.NPUConfig;
 import info.nukepowered.nputils.NPULog;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -300,6 +302,67 @@ public class NPUMachineRecipeRemoval {
         ModHandler.removeRecipeByName(new ResourceLocation("gregtech", "credit/credit_cupronickel_alt"));
         ModHandler.removeRecipeByName(new ResourceLocation("gregtech", "credit/credit_copper"));
         removeRecipesByInputs(RecipeMaps.FORMING_PRESS_RECIPES, OreDictUnifier.get(OrePrefix.plate, Materials.Cupronickel), MetaItems.SHAPE_MOLD_CREDIT.getStackForm());
+        
+        
+    	// Removing new pump recipes, if enabled
+        if (NPUConfig.gameplay.disableNewPumpCraft) {
+            ModHandler.removeRecipeByName(new ResourceLocation("gregtech", "electric_pump/electric_pump_lv_paper"));
+            for (String VN : new String[] { "lv", "mv", "hv", "ev", "iv" }) {
+            	ModHandler.removeRecipeByName(new ResourceLocation("gregtech", "electric_pump/silicone_rubber/electric_pump_" + VN));
+                ModHandler.removeRecipeByName(new ResourceLocation("gregtech", "electric_pump/rubber/electric_pump_" + VN));
+                ModHandler.removeRecipeByName(new ResourceLocation("gregtech", "electric_pump/styrene_butadiene_rubber/electric_pump_" + VN));
+            }
+            
+            final FluidStack[] rubbers = {
+            		Materials.Rubber.getFluid(144),
+            		Materials.StyreneButadieneRubber.getFluid(108),
+            		Materials.SiliconeRubber.getFluid(72)
+            };
+            
+            final ItemStack[][] pumpItems = {
+            		{ // LV
+            			OreDictUnifier.get(OrePrefix.plate, Materials.Tin, 2),
+            			OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.Tin),
+            			OreDictUnifier.get(OrePrefix.screw, Materials.Tin),
+            			OreDictUnifier.get(OrePrefix.rotor, Materials.Tin),
+            			MetaItems.ELECTRIC_MOTOR_LV.getStackForm()
+            		},
+            		{ // MV
+            			OreDictUnifier.get(OrePrefix.plate, Materials.Bronze, 2),
+            			OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.Copper),
+            			OreDictUnifier.get(OrePrefix.screw, Materials.Bronze),
+            			OreDictUnifier.get(OrePrefix.rotor, Materials.Bronze),
+            			MetaItems.ELECTRIC_MOTOR_MV.getStackForm()
+            		},
+            		{ // HV
+            			OreDictUnifier.get(OrePrefix.plate, Materials.Steel, 2),
+            			OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.Gold),
+            			OreDictUnifier.get(OrePrefix.screw, Materials.Steel),
+            			OreDictUnifier.get(OrePrefix.rotor, Materials.Steel),
+            			MetaItems.ELECTRIC_MOTOR_HV.getStackForm()
+            		},
+            		{ // EV
+            			OreDictUnifier.get(OrePrefix.plate, Materials.StainlessSteel, 2),
+            			OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.Aluminium),
+            			OreDictUnifier.get(OrePrefix.screw, Materials.StainlessSteel),
+            			OreDictUnifier.get(OrePrefix.rotor, Materials.StainlessSteel),
+            			MetaItems.ELECTRIC_MOTOR_EV.getStackForm()
+            		},
+            		{ // IV
+            			OreDictUnifier.get(OrePrefix.plate, Materials.TungstenSteel, 2),
+            			OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.Tungsten),
+            			OreDictUnifier.get(OrePrefix.screw, Materials.TungstenSteel),
+            			OreDictUnifier.get(OrePrefix.rotor, Materials.TungstenSteel),
+            			MetaItems.ELECTRIC_MOTOR_IV.getStackForm()
+            		}
+            };
+            
+            for (ItemStack[] items : pumpItems) {
+            	for (FluidStack fluid : rubbers) {
+                	removeRecipesByInputs(RecipeMaps.ASSEMBLER_RECIPES, items, fluid);
+                }
+            }
+        }
 	}
 	
 	private static void removeRecipesByInputs(RecipeMap<? extends RecipeBuilder<?>> map, ItemStack... itemInputs) {
@@ -317,7 +380,7 @@ public class NPUMachineRecipeRemoval {
         map.removeRecipe(map.findRecipe(Integer.MAX_VALUE, Collections.emptyList(), inputs, 0));
     }
 	
-	private static void removeRecipesByInputs(RecipeMap<? extends RecipeBuilder<?>> map, ItemStack[] itemInputs, FluidStack[] fluidInputs) {
+	private static void removeRecipesByInputs(RecipeMap<? extends RecipeBuilder<?>> map, ItemStack[] itemInputs, FluidStack... fluidInputs) {
         List<ItemStack> itemIn = new ArrayList<>();
         for (ItemStack s : itemInputs)
             itemIn.add(s);

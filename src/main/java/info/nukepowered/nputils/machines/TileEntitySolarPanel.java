@@ -108,10 +108,8 @@ public class TileEntitySolarPanel extends MetaTileEntity implements IEnergyChang
 			// Energy generatrion
 			if (getActualOutput(false) > 0) {
 	            TileEntitySolarPanel tesp;
-				if (getControllerEntity() == null) {
+				if ((tesp = getControllerEntity()) == null) {
 					tesp = this;
-				} else {
-					tesp = getControllerEntity();
 				}
 				if (TYPE.getEUt() < 16) {
 					if (getWorld().getWorldTime() % 20 == 0) tesp.energyContainer.addEnergy(getActualOutputL(true));
@@ -578,8 +576,8 @@ public class TileEntitySolarPanel extends MetaTileEntity implements IEnergyChang
 		tooltip.add(I18n.format("nputils.machine.solar_panel.multiblock"));
 		tooltip.add(I18n.format("nputils.machine.solar_panel.maxstack", NPULib.format(this.TYPE.getStackAmount())));
 		tooltip.add(I18n.format("nputils.machine.solar_panel.generation", NPULib.format(this.TYPE.getEUt())));
-		tooltip.add(I18n.format("gregtech.universal.tooltip.voltage_out", NPULib.format(this.TYPE.getVoltage()), GTValues.VN[this.TYPE.getTier()]));
-		tooltip.add(I18n.format("gregtech.universal.tooltip.amperage_out_till", NPULib.format(this.TYPE.getOutputAmperage(this.TYPE.getStackAmount()))));
+		tooltip.add(I18n.format("gregtech.universal.tooltip.voltage_out", this.TYPE.getVoltage(), GTValues.VN[this.TYPE.getTier()]));
+		tooltip.add(I18n.format("gregtech.universal.tooltip.amperage_out_till", this.TYPE.getOutputAmperage(this.TYPE.getStackAmount())));
 	}
 	
 	@Override

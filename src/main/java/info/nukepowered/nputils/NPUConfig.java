@@ -99,6 +99,8 @@ public class NPUConfig {
 		public boolean GeneratedSawingRecipes = true;
         @Config.Comment("Set this to false to disable naquadah reactors")
         public boolean enableNaquadahReactors = true;
+        @Config.Comment("Set this to false to enable GTCE default pump recipes")
+        public boolean disableNewPumpCraft = true;
         
         // TODO Exceptions
 		@Config.Comment({"Set these to flase to disable the generated Packager and Unpackaker recipes", "Packaging - 1x1 recipes with 9 outputs can be automated with the Unpackaker"})
