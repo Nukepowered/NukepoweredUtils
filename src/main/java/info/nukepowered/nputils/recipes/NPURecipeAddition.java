@@ -485,7 +485,6 @@ public class NPURecipeAddition {
 						'P', OreDictUnifier.get(OrePrefix.pipeMedium, Materials.TungstenSteel),
 						'M', MetaItems.ELECTRIC_MOTOR_IV.getStackForm(),
 						'C', OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.Tungsten));
-				
 			}
 		}
         
