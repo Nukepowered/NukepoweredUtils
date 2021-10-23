@@ -76,6 +76,11 @@ public class TileEntityPowerInverter extends MetaTileEntity {
 	}
 	
 	@Override
+	public void onNeighborChanged() {
+		this.isPanelCheckedOnce = false;
+	}
+	
+	@Override
 	public void addDebugInfo(List<String> list) {
 		list.add("PanelMode: " + this.panelMode);
 		list.add("Panel: " + (this.panel == null ? "§cnull" : NPULib.posToStringC(this.getPanel().getPos())));

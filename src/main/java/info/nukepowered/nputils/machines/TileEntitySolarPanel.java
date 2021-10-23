@@ -108,10 +108,8 @@ public class TileEntitySolarPanel extends MetaTileEntity implements IEnergyChang
 			// Energy generatrion
 			if (getActualOutput(false) > 0) {
 	            TileEntitySolarPanel tesp;
-				if (getControllerEntity() == null) {
+				if ((tesp = getControllerEntity()) == null) {
 					tesp = this;
-				} else {
-					tesp = getControllerEntity();
 				}
 				if (TYPE.getEUt() < 16) {
 					if (getWorld().getWorldTime() % 20 == 0) tesp.energyContainer.addEnergy(getActualOutputL(true));
