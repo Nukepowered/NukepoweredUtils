@@ -1,4 +1,4 @@
-package info.nukepowered.nputils.item;
+package info.nukepowered.nputils.blocks;
 
 import java.util.Comparator;
 import java.util.List;
@@ -9,6 +9,7 @@ import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.pipelike.cable.WireProperties;
 import gregtech.common.pipelike.fluidpipe.FluidPipeProperties;
 import info.nukepowered.nputils.NPUMaterials;
+import info.nukepowered.nputils.crafttweaker.NPUMultiblockCasing;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
@@ -21,8 +22,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class NPUMetaBlocks {
 	
 	public static NPUMultiblockCasing MULTIBLOCK_CASING;
-	
 	public static NPUTransparentCasing TRANSPARENT_CASING;
+	public static BlockInductionCoil INDUCTION_COIL;
 	
 	public static void init() {
 		MULTIBLOCK_CASING = new NPUMultiblockCasing();
@@ -31,6 +32,9 @@ public class NPUMetaBlocks {
 		TRANSPARENT_CASING = new NPUTransparentCasing();
 		TRANSPARENT_CASING.setRegistryName("npu_transparent_casing");
 
+		INDUCTION_COIL = new BlockInductionCoil();
+		INDUCTION_COIL.setRegistryName("induction_coil_block");
+		
 		MetaBlocks.FLUID_PIPE.addPipeMaterial(NPUMaterials.Plasma, new FluidPipeProperties(1000000, 30, true));
 
 		MetaBlocks.CABLE.addCableMaterial(NPUMaterials.MVSuperconductor, new WireProperties(128, 2, 0));
@@ -45,6 +49,7 @@ public class NPUMetaBlocks {
 	public static void registerItemModels() {
 		registerItemModel(MULTIBLOCK_CASING);
 		registerItemModel(TRANSPARENT_CASING);
+		registerItemModel(INDUCTION_COIL);
 	}
 
 	@SideOnly(Side.CLIENT)

@@ -1,7 +1,7 @@
 package info.nukepowered.nputils;
 
+import info.nukepowered.nputils.blocks.NPUMetaBlocks;
 import info.nukepowered.nputils.input.Keybinds;
-import info.nukepowered.nputils.item.NPUMetaBlocks;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

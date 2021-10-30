@@ -1,4 +1,4 @@
-package info.nukepowered.nputils.item;
+package info.nukepowered.nputils.blocks;
 
 import gregtech.common.blocks.VariantBlock;
 import net.minecraft.block.Block;

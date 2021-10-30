@@ -1,0 +1,33 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_all",
+    "textures": {
+      "all": "gregtech:blocks/rendering_error"
+    }
+  },
+  "variants": {
+    "variant": {
+      "copper_coil": {
+        "textures": {
+          "all": "gregtech:blocks/casings/coils/machine_coil_hssg"
+        }
+      },
+	  "silver_plated_copper_coil": {
+        "textures": {
+          "all": "gregtech:blocks/casings/coils/machine_coil_hssg"
+        }
+      },
+	  "fine_gold_coil": {
+        "textures": {
+          "all": "gregtech:blocks/casings/coils/machine_coil_hssg"
+        }
+      },
+	  "superconducting_coil": {
+        "textures": {
+          "all": "gregtech:blocks/casings/coils/machine_coil_hssg"
+        }
+      }
+    }
+  }
+}

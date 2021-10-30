@@ -635,9 +635,26 @@ nputils.machine.fisher_luv.name=Advanced Fisher V
 nputils.machine.fisher_zpm.name=Advanced Fisher VI
 nputils.machine.fisher_uv.name=Advanced Fisher VII
 
+nputils.machine.induction_blast_furnance.name=§dIndustrial Induction Blast Furnance
+nputils.machine.induction_blast_furnance.tooltip=This is an furnace, which §6§lreally§r§7 smelts
+
+nputils.machine.induction_blast_furnance.gui.overheat=Overheat: %d%%
+nputils.machine.induction_blast_furnance.gui.throttle=Throttling due overheating!
+nputils.machine.induction_blast_furnance.gui.stopped=Working stopped!
+
 tile.npu_multiblock_casing.tungstensteel_gearbox_casing.name=Assembly Line Casing
 tile.npu_transparent_casing.reinforced_glass.name=Reinforced Glass
 tile.npu_multiblock_casing.reactor_casing.name=Reactor Casing
+tile.npu_multiblock_casing.magnetic_proof_machine_casing.name=Magnetic Proof Machine Casing
+tile.npu_multiblock_casing.coolant_trunk_line.name=Coolant Trunk Line
+
+tile.induction_coil_block.copper_coil.name=Copper Induction Coil
+tile.induction_coil_block.silver_plated_copper_coil.name=Silver-plated Copper Indcution Coil
+tile.induction_coil_block.fine_gold_coil.name=Cryogenic Fine Gold Wire Induction Coil
+tile.induction_coil_block.superconducting_coil.name=Superconduction Induction Coil
+
+tile.induction_coil_block.tooltip=When using in §aIndustrial Induction Blast Furnance§7:
+tile.induction_coil_block.tooltip.temp=  Maximum heating temperature: §e%,dK
 
 metaitem.tool.bending_cylinder.name=%s Bending Cylinder
 metaitem.tool.bending_cylinder_small.name=Small %s Bending Cylinder
