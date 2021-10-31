@@ -147,7 +147,7 @@ public class TileEntityIIBF extends RecipeMapMultiblockController {
     public void addDebugInfo(List<String> list) {
     	list.add("Coil type: " + coilType);
     	list.add("Heat Stored: " + heat + " / " + MAX_HEAT);
-    	list.add("Blnk: " + blink);
+    	list.add("Blink: " + blink);
     	list.add("Working state: " + (heat >= MAX_HEAT ? "OVERHEATED" : heat > WORKING_LEVEL ? "THROTTLE" : "NORMAL"));
     }
     
@@ -283,7 +283,7 @@ public class TileEntityIIBF extends RecipeMapMultiblockController {
 					int coolantMult = NPURecipeMaps.COOLANTS.get(cachedFluid);
 					int newHeat = (int)Math.max(0, machine.heat - (Math.pow(coolantMult, 1.7D) * amount * voltageMult));
 					machine.heat = newHeat;
-					if (!workingEnabled)
+					if (!workingEnabled || !isActive)
 						drawEnergy((int)(maxVoltage * 0.95D));
 				}
 			}
@@ -312,8 +312,10 @@ public class TileEntityIIBF extends RecipeMapMultiblockController {
 				drawEnergy((int)(recipeEUt * 0.9D));
 				if (time % 15 == 0) {
 					machine.blink = !machine.blink;
-					if (progressTime > 1)
-						--progressTime;
+					if (progressTime > 1) {
+						int delta = (int)Math.max(1.0D, maxProgressTime * 0.05D);
+						progressTime = Math.max(1, progressTime - delta);
+					}
 				}
 			}
 		}
