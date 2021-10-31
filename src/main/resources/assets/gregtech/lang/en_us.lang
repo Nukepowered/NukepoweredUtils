@@ -814,6 +814,7 @@ material.iron_chloride=Iron III Chloride
 material.sand=Quartz Sand
 material.electrical_steel=Electrical Steel
 material.high_pressure=High Pressure
+material.nm15m_stainless_steel=NM15M Stainless Steel
 
 item.epoxid.ingot=Epoxy Resin Bar
 item.epoxid.dustTiny=Tiny Pile of Epoxy Resin Pulp
