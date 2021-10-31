@@ -11,4 +11,4 @@ All GregicAdditions code is under GNU General Public Licene v3.0
 
 Nukepowered additions (All new content been added):
 - Code is under All rights reversed. (only new classes and features)
-- Assets is under Creativ Common Attribution-NoDerivs v3.0
+- Assets is under Creative Common Attribution-NoDerivs v3.0
