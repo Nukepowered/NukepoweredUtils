@@ -636,9 +636,26 @@ nputils.machine.fisher_luv.name=Улучшеный автоматический 
 nputils.machine.fisher_zpm.name=Улучшеный автоматический рыболовный агригат VI
 nputils.machine.fisher_uv.name=Улучшеный автоматический рыболовный агригат VII
 
+nputils.machine.induction_blast_furnance.name=§dПромышленная Индукционная Доменная Печь
+nputils.machine.induction_blast_furnance.tooltip=Это печь, которая §6§lдействительно§r§7 плавит
+
+nputils.machine.induction_blast_furnance.gui.overheat=Перегрев: %d%%
+nputils.machine.induction_blast_furnance.gui.throttle=Дросселирование из-за перегрева!
+nputils.machine.induction_blast_furnance.gui.stopped=Работа остановлена!
+
 tile.npu_multiblock_casing.tungstensteel_gearbox_casing.name=Корпус сборочного конвеера
 tile.npu_transparent_casing.reinforced_glass.name=Армированное стекло
 tile.npu_multiblock_casing.reactor_casing.name=Реакторный корпус
+tile.npu_multiblock_casing.magnetic_proof_machine_casing.name=Магнитостойкий Корпус Машины
+tile.npu_multiblock_casing.coolant_trunk_line.name=Магистральный Трубопровод Охлаждения
+
+tile.induction_coil_block.copper_coil.name=Медная Индукционная Катушка
+tile.induction_coil_block.silver_plated_copper_coil.name=Посеребрённая Медная Индукционная Катушка
+tile.induction_coil_block.fine_gold_coil.name=Индукционная Катушка из Тонкой Криогенной Золотой Проволоки
+tile.induction_coil_block.superconducting_coil.name=Суперпроводниковая Индукционная Катушка
+
+tile.induction_coil_block.tooltip=При использовании в §aПромышленной Индукционной Доменной Печи§7:
+tile.induction_coil_block.tooltip.temp=  Максимальная температура нагрева: §e%,dK
 
 metaitem.tool.bending_cylinder.name=%s гнущий цилиндр
 metaitem.tool.bending_cylinder_small.name=Малый %s гнущий цилиндр
@@ -798,6 +815,7 @@ material.iron_chloride=Хлорид железа III
 material.sand=Кварцевый песок
 material.electrical_steel=Электротехническая сталь
 material.high_pressure=высокого давления
+material.nm15m_stainless_steel=Нержавеющая сталь NM15M
 
 item.epoxid.ingot=Брусок эпоксидной смолы
 item.epoxid.dustTiny=Крошечная пылька эпоксидной смолы
