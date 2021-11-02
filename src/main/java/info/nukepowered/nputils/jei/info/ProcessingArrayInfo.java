@@ -1,4 +1,4 @@
-package info.nukepowered.nputils.jei;
+package info.nukepowered.nputils.jei.info;
 
 import java.util.Collections;
 import java.util.List;

@@ -1,4 +1,4 @@
-package info.nukepowered.nputils.jei;
+package info.nukepowered.nputils.jei.info;
 
 import java.util.List;
 import com.google.common.collect.Lists;
@@ -31,15 +31,15 @@ public class FusionReactor2Info extends MultiblockInfoPage {
                 .aisle("##C#########C##", "#Cce#######wcC#", "##C#########C##")
                 .aisle("##C#########C##", "#CcC#######CcC#", "##C#########C##")
                 .aisle("#D###########D#", "WcE#########WcE", "#U###########U#")
-                .aisle("#C###########C#", "CcC#########CcC", "#C###########C#")
+                .aisle("#C###########C#", "McC#########CcC", "#C###########C#")
                 .aisle("#D###########D#", "WcE#########WcE", "#U###########U#")
                 .aisle("##C#########C##", "#CcC#######CcC#", "##C#########C##")
                 .aisle("##C#########C##", "#Cce#######wcC#", "##C#########C##")
                 .aisle("###C#######C###", "##wcsC###Csce##", "###C#######C###")
                 .aisle("####CC###CC####", "###nccSCSccn###", "####CC###CC####")
                 .aisle("######DCD######", "####CCcccCC####", "######UCU######")
-                .aisle("###############", "######NMN######", "###############")
-                .where('M', NPUTileEntities.FUSION_REACTOR[1], EnumFacing.SOUTH)
+                .aisle("###############", "######NCN######", "###############")
+                .where('M', NPUTileEntities.FUSION_REACTOR[1], EnumFacing.WEST)
                 .where('C', MetaBlocks.MUTLIBLOCK_CASING.getState(BlockMultiblockCasing.MultiblockCasingType.FUSION_CASING))
                 .where('c', MetaBlocks.WIRE_COIL.getState(BlockWireCoil.CoilType.FUSION_COIL))
                 .where('W', MetaTileEntities.FLUID_EXPORT_HATCH[7], EnumFacing.WEST)

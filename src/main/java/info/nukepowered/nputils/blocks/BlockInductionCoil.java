@@ -24,6 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 /**
  * @author TheDarkDnKTv
  *
+ * Copyright (C) 2021 TheDarkDnKTv
  */
 public class BlockInductionCoil extends VariantBlock<BlockInductionCoil.InductionCoilType> {
 

@@ -637,7 +637,7 @@ nputils.machine.fisher_zpm.name=Улучшеный автоматический 
 nputils.machine.fisher_uv.name=Улучшеный автоматический рыболовный агригат VII
 
 nputils.machine.induction_blast_furnance.name=§dПромышленная Индукционная Доменная Печь
-nputils.machine.induction_blast_furnance.tooltip=Это печь, которая §6§lдействительно§r§7 плавит
+nputils.machine.induction_blast_furnance.tooltip=Это печь, которая §6§lдействительно§r§7 плавит/nТеплоёмкость: 100,000
 
 nputils.machine.induction_blast_furnance.gui.overheat=Перегрев: %d%%
 nputils.machine.induction_blast_furnance.gui.throttle=Дросселирование из-за перегрева!
@@ -882,6 +882,9 @@ gregtech.multiblock.processing_array.description=Массив обработки
 gregtech.multiblock.fusion_reactor_mk1.description=Термоядерный реактор - большая многоблочная структура использующаяся для термоядерного синтеза двух элементов в один. Версия 1 термоядерного реакторма может использовать LuV, ZPM или UV энерго-люки. За каждый люк внутренний буффер увеличиваеться на 100т.
 gregtech.multiblock.fusion_reactor_mk2.description=Термоядерный реактор - большая многоблочная структура использующаяся для термоядерного синтеза двух элементов в один. Версия 1 термоядерного реакторма может использовать ZPM или UV энерго-люки. За каждый люк внутренний буффер увеличиваеться на 200т.
 gregtech.multiblock.fusion_reactor_mk3.description=Термоядерный реактор - большая многоблочная структура использующаяся для термоядерного синтеза двух элементов в один. Версия 1 термоядерного реакторма может использовать UV энерго-люки. За каждый люк внутренний буффер увеличиваеться на 400т.
+gregtech.multiblock.induction_blast_furnance.description.general=Промышленная Индукционная Доменная Печь – следующий уровень доменных печей. Она позволит вам плавить тугоплавкие материалы ещё более быстрее и эффективнее! Но, как и все сложные механизмы, требует более сложной инфраструктуры и баланса для нормальной работы.
+gregtech.multiblock.induction_blast_furnance.description.efficiency=Есть несколько уровней индукторов, каждый из них сделан по особому техпроцессу. По умолчанию, ПИДП работает §nв два раза быстрее§r, чем Электрическая Доменная Печь, и каждый следующий уровень катушек увеличит скорость ещё на 10%% больше.
+gregtech.multiblock.induction_blast_furnance.description.coolant=ПИДП – продвинутая машина, сделанная по последним технологиям. Это позволяет ей контролировать собственную мощность в зависимости от производительности системы охлаждения. Охлаждение обязательно для правильной работы. Силовые схемы производят больше излишнего тепла при повышение входного напряжения. Убедитесь, что ваша система охлаждения выдержит! 
 
 item.material.oreprefix.plateCurved=Изогнутый %s лист
 item.material.oreprefix.ingotDouble=Двойной слиток %s
@@ -906,3 +909,6 @@ gregtech.machine.primitive_blast_furnace.bronze.tooltip=Структура: 3x3x
 
 fluid.tile.water=Вода
 fluid.tile.lava=Лава
+
+jei.induction_blast_furnance_coolant.category=Хладогены Индукционной Печи
+jei.induction_blast_furnance_coolant.axis_y_name=Тепло / t

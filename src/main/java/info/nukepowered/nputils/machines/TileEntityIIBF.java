@@ -78,6 +78,11 @@ public class TileEntityIIBF extends RecipeMapMultiblockController {
 		this.recipeMapWorkable = new IIBFRecipeLogic(this);
 	}
 	
+	public static double calcualteHeat(int amount, int coolantMult, long voltage) {
+		double voltageMult = Math.pow(voltage * 0.00002D, 0.66D);
+		return Math.max(0.0D, (Math.pow(coolantMult, 1.7D) * amount * voltageMult));
+	}
+	
 	@Override
     public MetaTileEntity createMetaTileEntity(MetaTileEntityHolder holder) {
         return new TileEntityIIBF(metaTileEntityId);
@@ -171,8 +176,6 @@ public class TileEntityIIBF extends RecipeMapMultiblockController {
         builder.bindPlayerInventory(entityPlayer.inventory, 134);
         return builder;
     }
-    
-    
     
 	@Override
 	protected BlockPattern createStructurePattern() {

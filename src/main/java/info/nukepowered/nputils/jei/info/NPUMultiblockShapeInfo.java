@@ -1,4 +1,4 @@
-package info.nukepowered.nputils.jei;
+package info.nukepowered.nputils.jei.info;
 
 import java.util.ArrayList;
 import java.util.HashMap;
