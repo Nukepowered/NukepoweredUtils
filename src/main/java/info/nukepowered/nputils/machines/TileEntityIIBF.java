@@ -25,13 +25,13 @@ import gregtech.api.multiblock.PatternMatchContext;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.render.ICubeRenderer;
 import gregtech.api.render.OrientedOverlayRenderer;
-import gregtech.api.render.Textures;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.type.DustMaterial;
 import gregtech.api.util.GTUtility;
 import gregtech.common.blocks.MetaBlocks;
 import gregtech.common.blocks.BlockCompressed;
 
+import info.nukepowered.nputils.NPUTextures;
 import info.nukepowered.nputils.blocks.BlockInductionCoil;
 import info.nukepowered.nputils.blocks.NPUMetaBlocks;
 import info.nukepowered.nputils.crafttweaker.NPUMultiblockCasing.CasingType;
@@ -47,6 +47,8 @@ import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.event.HoverEvent;
+import net.minecraft.util.text.event.HoverEvent.Action;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -121,6 +123,8 @@ public class TileEntityIIBF extends RecipeMapMultiblockController {
             }
             
             if (recipeMapWorkable.isActive()) {
+            	ITextComponent translate = new TextComponentTranslation("nputils.machine.induction_blast_furnance.gui.heat_generation");
+            	textList.add(translate.appendText(String.format("%,.1f", ((IIBFRecipeLogic)recipeMapWorkable).getLastHeat())));
             	double currentProgress = recipeMapWorkable.getProgressPercent();
                 StringBuilder builder = new StringBuilder();
                 builder.append("<");
@@ -145,6 +149,12 @@ public class TileEntityIIBF extends RecipeMapMultiblockController {
             if (recipeMapWorkable.isHasNotEnoughEnergy()) {
                 textList.add(new TextComponentTranslation("gregtech.multiblock.not_enough_energy").setStyle(new Style().setColor(TextFormatting.RED)));
             }
+        } else {
+        	ITextComponent tooltip = new TextComponentTranslation("gregtech.multiblock.invalid_structure.tooltip");
+            tooltip.setStyle(new Style().setColor(TextFormatting.GRAY));
+            textList.add(new TextComponentTranslation("gregtech.multiblock.invalid_structure")
+                .setStyle(new Style().setColor(TextFormatting.RED)
+                    .setHoverEvent(new HoverEvent(Action.SHOW_TEXT, tooltip))));
         }
     }
     
@@ -152,6 +162,7 @@ public class TileEntityIIBF extends RecipeMapMultiblockController {
     public void addDebugInfo(List<String> list) {
     	list.add("Coil type: " + coilType);
     	list.add("Heat Stored: " + heat + " / " + MAX_HEAT);
+    	list.add("Heat Generation: " + ((IIBFRecipeLogic)recipeMapWorkable).getLastHeat());
     	list.add("Blink: " + blink);
     	list.add("Working state: " + (heat >= MAX_HEAT ? "OVERHEATED" : heat > WORKING_LEVEL ? "THROTTLE" : "NORMAL"));
     }
@@ -239,13 +250,13 @@ public class TileEntityIIBF extends RecipeMapMultiblockController {
 	
     @Override
     public ICubeRenderer getBaseTexture(IMultiblockPart sourcePart) {
-        return Textures.HEAT_PROOF_CASING; // TODO TEXTURES
+        return NPUTextures.MAGNETIC_PROOF_CASING;
     }
     
     @Nonnull
     @Override
     protected OrientedOverlayRenderer getFrontOverlay() {
-        return Textures.AMPLIFAB_OVERLAY;
+        return NPUTextures.INDUCTION_BLAST_FURNACE_OVERLAY;
     }
 	
     @Override
@@ -265,6 +276,7 @@ public class TileEntityIIBF extends RecipeMapMultiblockController {
 	protected class IIBFRecipeLogic extends MultiblockRecipeLogic {
 		
 		private Fluid cachedFluid = null;
+		private double lastHeatGenerated = 0D;
 		
 		public IIBFRecipeLogic(TileEntityIIBF tileEntity) {
 			super(tileEntity);
@@ -276,7 +288,7 @@ public class TileEntityIIBF extends RecipeMapMultiblockController {
 			TileEntityIIBF machine = TileEntityIIBF.this;
 			if (!machine.getWorld().isRemote) {
 				int maxVoltage = recipeEUt <= 0 ? (int) machine.getEnergyContainer().getInputVoltage() : recipeEUt;
-				double voltageMult = Math.pow(maxVoltage * 0.00002D, 0.66D);
+				//double voltageMult = Math.pow(maxVoltage * 0.00002D, 0.66D);
 				// Air coolant
 				if (getMetaTileEntity().getOffsetTimer() % 15 == 0 && machine.heat > 0)
 					machine.heat--;
@@ -284,8 +296,7 @@ public class TileEntityIIBF extends RecipeMapMultiblockController {
 				int amount = drainCoolant((int)(machine.heat * 1.0D / MAX_HEAT * 200));
 				if (amount > 0) {
 					int coolantMult = NPURecipeMaps.COOLANTS.get(cachedFluid);
-					int newHeat = (int)Math.max(0, machine.heat - (Math.pow(coolantMult, 1.7D) * amount * voltageMult));
-					machine.heat = newHeat;
+					machine.heat = (int)Math.max(0, machine.heat - calcualteHeat(amount, coolantMult, maxVoltage));
 					if (!workingEnabled || !isActive)
 						drawEnergy((int)(maxVoltage * 0.95D));
 				}
@@ -307,7 +318,8 @@ public class TileEntityIIBF extends RecipeMapMultiblockController {
 				if (machine.heat > WORKING_LEVEL)
 					throttle = (int)((overheat - 0.4D) * 40.0D) + 1;
 				if (throttle < 21) {
-					machine.heat += (int)(recipeEUt * 0.02D * Math.pow(0.9D, coilTier) *  (1 - (throttle - 1) * 0.025D));
+					lastHeatGenerated = recipeEUt * 0.02D * Math.pow(0.9D, coilTier) *  (1 - (throttle - 1) * 0.025D);
+					machine.heat += (int)lastHeatGenerated;
 					if (time % throttle == 0)
 						super.updateRecipeProgress();
 				}
@@ -350,6 +362,10 @@ public class TileEntityIIBF extends RecipeMapMultiblockController {
 			final int coilTier = TileEntityIIBF.this.coilType.ordinal();
 			result[1] = Math.max(1, (int)(result[1] * 0.5D * Math.pow(0.85D, coilTier)));
 			return result;
+		}
+	
+		public double getLastHeat() {
+			return lastHeatGenerated;
 		}
 	}
 }

@@ -638,6 +638,7 @@ nputils.machine.fisher_uv.name=Advanced Fisher VII
 nputils.machine.induction_blast_furnance.name=§dIndustrial Induction Blast Furnance
 nputils.machine.induction_blast_furnance.tooltip=This is an furnace, which §6§lreally§r§7 smelts/nHeat capacity: 100,000
 
+nputils.machine.induction_blast_furnance.gui.heat_generation=Heat generation: 
 nputils.machine.induction_blast_furnance.gui.overheat=Overheat: %d%%
 nputils.machine.induction_blast_furnance.gui.throttle=Throttling due overheating!
 nputils.machine.induction_blast_furnance.gui.stopped=Working stopped!
@@ -883,7 +884,7 @@ gregtech.multiblock.fusion_reactor_mk2.description=The Fusion Reactor Mark 2 is 
 gregtech.multiblock.fusion_reactor_mk3.description=The Fusion Reactor Mark 3 is a large multiblock structure used for fusing elements into heavier ones. The Mark 3 Fusion Reactor can only use UV Energy Hatches. For every Hatch it has its buffer increases by 400k.
 gregtech.multiblock.induction_blast_furnance.description.general=The Industrial Induction Blast Furnace is next level of Blast furnaces. It is allowed to smelt refractory materials faster and more efficient! But as all complex mechanisms, requires more complex infrastructure and balance to operate.
 gregtech.multiblock.induction_blast_furnance.description.efficiency=There are several tiers of Inductors, every of them made according to a special process technology. By default, IIBF work §ntwice§r faster than Electric Blast Furnace, and every coil tier will increase speed for 10%% more.
-gregtech.multiblock.induction_blast_furnance.description.coolant=IIBF is advanced machine, made by latest technology specifications. It allows machine to control power according on coolant system performance. Coolant system is required for proper work. Power circuits producing more excess power by increasing inputs voltage. Make sure your coolant system will perform well!
+gregtech.multiblock.induction_blast_furnance.description.coolant=IIBF is advanced machine, made by latest technology specifications. It allows machine to control power according on coolant system performance. Coolant system is required for proper work, it will consume up to 200mb/t of coolant. Power circuits producing more excess power by increasing inputs voltage. Make sure your coolant system will perform well!
 
 item.material.oreprefix.plateCurved=Curved %s Plate
 item.material.oreprefix.ingotDouble=Double %s Ingot

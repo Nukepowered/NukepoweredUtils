@@ -9,21 +9,17 @@ import info.nukepowered.nputils.render.SimpleAtlasHolder;
 import info.nukepowered.nputils.render.SolarPanelRenderer;
 
 public class NPUTextures {
-    public static SimpleCubeRenderer FUSION_TEXTURE;
+    public static final SimpleCubeRenderer FUSION_TEXTURE;
+    public static final SimpleCubeRenderer ACTIVE_FUSION_TEXTURE;
+    public static final SimpleCubeRenderer MAGNETIC_PROOF_CASING;
 
-    public static SimpleCubeRenderer ACTIVE_FUSION_TEXTURE;
-
-    public static OrientedOverlayRenderer NAQADAH_OVERLAY;
-
-    public static OrientedOverlayRenderer REPLICATOR_OVERLAY;
-
-    public static OrientedOverlayRenderer MASS_FAB_OVERLAY;
-
-    public static OrientedOverlayRenderer FUSION_REACTOR_OVERLAY;
-
-    public static OrientedOverlayRenderer STEAM_MIXER_OVERLAY;
-    
+    public static final OrientedOverlayRenderer NAQADAH_OVERLAY;
+    public static final OrientedOverlayRenderer REPLICATOR_OVERLAY;
+    public static final OrientedOverlayRenderer MASS_FAB_OVERLAY;
+    public static final OrientedOverlayRenderer FUSION_REACTOR_OVERLAY;
+    public static final OrientedOverlayRenderer STEAM_MIXER_OVERLAY;
     public static final OrientedOverlayRenderer VENDING_MACHINE;
+    public static final OrientedOverlayRenderer INDUCTION_BLAST_FURNACE_OVERLAY;
     
     public static final SolarPanelRenderer SOLAR_PANEL_BASIC;
     public static final SolarPanelRenderer SOLAR_PANEL_POLYCRYSTALLNE;
@@ -34,6 +30,8 @@ public class NPUTextures {
 	
     public static final SimpleOverlayRenderer ENERGY_IN_MULTI_16;
     public static final SimpleOverlayRenderer ENERGY_IN_PANELMODE;
+    
+
     
 //  GUI TEXTURES
     public static final TextureArea BRONZE_FLUID_SLOT = TextureArea.fullImage("textures/gui/steam/fluid_slot.png");
@@ -46,8 +44,6 @@ public class NPUTextures {
     public static final TextureArea BUTTON_OREDICT = TextureArea.fullImage("textures/gui/button_oredict.png");
     
     static {
-    	VENDING_MACHINE = new OrientedOverlayRenderer("machines/vending_machine", OverlayFace.FRONT);
-    	
     	SOLAR_PANEL_BASIC = new SolarPanelRenderer("machines/solar_panel/solar_panel.basic");
     	SOLAR_PANEL_POLYCRYSTALLNE = new SolarPanelRenderer("machines/solar_panel/solar_panel.polycrystalline");
     	SOLAR_PANEL_MONOCRYSTALLINE = new SolarPanelRenderer("machines/solar_panel/solar_panel.monocrystalline");
@@ -59,17 +55,15 @@ public class NPUTextures {
     	ENERGY_IN_PANELMODE = new SimpleOverlayRenderer("overlay/machine/overlay_energy_in_panelmode");
     	
         FUSION_TEXTURE = new SimpleCubeRenderer("casings/fusion/machine_casing_fusion_glass");
-
         ACTIVE_FUSION_TEXTURE = new SimpleCubeRenderer("casings/fusion/machine_casing_fusion_glass_yellow");
+        MAGNETIC_PROOF_CASING = new SimpleCubeRenderer("casings/solid/machine_casing_magneticproof");
 
         NAQADAH_OVERLAY = new OrientedOverlayRenderer("machines/naquadah_reactor", new OverlayFace[]{OverlayFace.FRONT, OverlayFace.BACK, OverlayFace.TOP});
-
         REPLICATOR_OVERLAY = new OrientedOverlayRenderer("machines/replicator", new OverlayFace[]{OverlayFace.FRONT});
-
         MASS_FAB_OVERLAY = new OrientedOverlayRenderer("machines/mass_fab", new OverlayFace[]{OverlayFace.FRONT});
-
         FUSION_REACTOR_OVERLAY = new OrientedOverlayRenderer("machines/fusion_reactor", new OverlayFace[]{OverlayFace.FRONT});
-
         STEAM_MIXER_OVERLAY = new OrientedOverlayRenderer("machines/steam_mixer", new OverlayFace[]{OverlayFace.FRONT, OverlayFace.SIDE, OverlayFace.TOP});
+        VENDING_MACHINE = new OrientedOverlayRenderer("machines/vending_machine", OverlayFace.FRONT);
+        INDUCTION_BLAST_FURNACE_OVERLAY = new OrientedOverlayRenderer("machines/induction_blast_furnance",  OverlayFace.FRONT);
     }
 }
