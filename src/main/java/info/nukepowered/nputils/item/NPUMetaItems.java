@@ -146,6 +146,9 @@ public class NPUMetaItems {
 	public static MetaItem<?>.MetaValueItem COIN_BRONZE;
 	public static MetaItem<?>.MetaValueItem COIN_IRON;
 	
+	public static MetaItem<?>.MetaValueItem SMALL_SILVER_PLATED_COPPER_TUBE;
+	public static MetaItem<?>.MetaValueItem SMALL_COOLANTABLE_GOLD_TUBE;
+	
 	public static final List<MetaItem<?>.MetaValueItem> COINS = new ArrayList<>();
 	
 	public static void init() {

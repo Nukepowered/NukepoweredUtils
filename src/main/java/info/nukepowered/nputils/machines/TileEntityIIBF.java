@@ -288,7 +288,6 @@ public class TileEntityIIBF extends RecipeMapMultiblockController {
 			TileEntityIIBF machine = TileEntityIIBF.this;
 			if (!machine.getWorld().isRemote) {
 				int maxVoltage = recipeEUt <= 0 ? (int) machine.getEnergyContainer().getInputVoltage() : recipeEUt;
-				//double voltageMult = Math.pow(maxVoltage * 0.00002D, 0.66D);
 				// Air coolant
 				if (getMetaTileEntity().getOffsetTimer() % 15 == 0 && machine.heat > 0)
 					machine.heat--;

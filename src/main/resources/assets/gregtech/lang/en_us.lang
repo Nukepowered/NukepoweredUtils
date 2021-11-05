@@ -225,23 +225,8 @@ metaitem.board.extreme.name=Extreme Circuit Board
 metaitem.board.elite.name=Elite Circuit Board
 metaitem.board.master.name=Master Circuit Board
 
-metaitem.stator.lv.name=Basic stator
-metaitem.stator.mv.name=Advanced stator
-metaitem.stator.hv.name=Advanced stator II
-metaitem.stator.ev.name=Advanced stator III
-metaitem.stator.iv.name=Advanced stator IV
-metaitem.stator.luv.name=Advanced stator V
-metaitem.stator.zpm.name=Advanced stator VI
-metaitem.stator.uv.name=Superconducting stator
-
-metaitem.rotor.lv.name=Basic rotor
-metaitem.rotor.mv.name=Advanced rotor
-metaitem.rotor.hv.name=Advanced rotor II
-metaitem.rotor.ev.name=Advanced rotor III
-metaitem.rotor.iv.name=Advanced rotor IV
-metaitem.rotor.luv.name=Advanced rotor V
-metaitem.rotor.zpm.name=Advanced rotor VI
-metaitem.rotor.uv.name=Superconducting rotor
+metaitem.coil_tube.silver.name=Silver-plated copper tube
+metaitem.coil_tube.gold.name=Coolantable gold conduction tube
 
 metaitem.motor_hull.lv.name=Steel Motor casing
 metaitem.motor_hull.mv.name=Aluminium Motor casing

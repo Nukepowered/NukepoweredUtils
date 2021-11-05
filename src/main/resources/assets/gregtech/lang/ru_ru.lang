@@ -225,23 +225,8 @@ metaitem.board.extreme.name=Экстремальная печатная плат
 metaitem.board.elite.name=Элитная плата
 metaitem.board.master.name=Мастер печатная плата
 
-metaitem.stator.lv.name=Базовый статор
-metaitem.stator.mv.name=Улучшенный статор
-metaitem.stator.hv.name=Улучшенный статор II
-metaitem.stator.ev.name=Улучшенный статор III
-metaitem.stator.iv.name=Улучшенный статор IV
-metaitem.stator.luv.name=Улучшенный статор V
-metaitem.stator.zpm.name=Улучшенный статор VI
-metaitem.stator.uv.name=Супер-проводящий статор
-
-metaitem.rotor.lv.name=Базовый ротор
-metaitem.rotor.mv.name=Улучшенный ротор
-metaitem.rotor.hv.name=Улучшенный ротор II
-metaitem.rotor.ev.name=Улучшенный ротор III
-metaitem.rotor.iv.name=Улучшенный ротор IV
-metaitem.rotor.luv.name=Улучшенный ротор V
-metaitem.rotor.zpm.name=Улучшенный ротор VI
-metaitem.rotor.uv.name=Супер-проводящий ротор
+metaitem.coil_tube.silver.name=Посеребрённая медная трубка
+metaitem.coil_tube.gold.name=Охлаждаемая золотая проводящая трубка
 
 metaitem.motor_hull.lv.name=Стальной корпус мотора
 metaitem.motor_hull.mv.name=Алюминиевый корпус мотора
