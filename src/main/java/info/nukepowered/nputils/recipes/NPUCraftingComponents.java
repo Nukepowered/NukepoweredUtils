@@ -10,8 +10,8 @@ import gregtech.api.unification.stack.UnificationEntry;
 import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import info.nukepowered.nputils.NPUMaterials;
-import info.nukepowered.nputils.item.NPUMetaBlocks;
-import info.nukepowered.nputils.item.NPUTransparentCasing;
+import info.nukepowered.nputils.blocks.NPUMetaBlocks;
+import info.nukepowered.nputils.blocks.NPUTransparentCasing;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 

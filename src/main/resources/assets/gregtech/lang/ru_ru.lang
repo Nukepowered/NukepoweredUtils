@@ -225,23 +225,8 @@ metaitem.board.extreme.name=Экстремальная печатная плат
 metaitem.board.elite.name=Элитная плата
 metaitem.board.master.name=Мастер печатная плата
 
-metaitem.stator.lv.name=Базовый статор
-metaitem.stator.mv.name=Улучшенный статор
-metaitem.stator.hv.name=Улучшенный статор II
-metaitem.stator.ev.name=Улучшенный статор III
-metaitem.stator.iv.name=Улучшенный статор IV
-metaitem.stator.luv.name=Улучшенный статор V
-metaitem.stator.zpm.name=Улучшенный статор VI
-metaitem.stator.uv.name=Супер-проводящий статор
-
-metaitem.rotor.lv.name=Базовый ротор
-metaitem.rotor.mv.name=Улучшенный ротор
-metaitem.rotor.hv.name=Улучшенный ротор II
-metaitem.rotor.ev.name=Улучшенный ротор III
-metaitem.rotor.iv.name=Улучшенный ротор IV
-metaitem.rotor.luv.name=Улучшенный ротор V
-metaitem.rotor.zpm.name=Улучшенный ротор VI
-metaitem.rotor.uv.name=Супер-проводящий ротор
+metaitem.coil_tube.silver.name=Посеребрённая медная трубка
+metaitem.coil_tube.gold.name=Охлаждаемая золотая проводящая трубка
 
 metaitem.motor_hull.lv.name=Стальной корпус мотора
 metaitem.motor_hull.mv.name=Алюминиевый корпус мотора
@@ -636,9 +621,27 @@ nputils.machine.fisher_luv.name=Улучшеный автоматический 
 nputils.machine.fisher_zpm.name=Улучшеный автоматический рыболовный агригат VI
 nputils.machine.fisher_uv.name=Улучшеный автоматический рыболовный агригат VII
 
+nputils.machine.induction_blast_furnance.name=§dПромышленная Индукционная Доменная Печь
+nputils.machine.induction_blast_furnance.tooltip=Это печь, которая §6§lдействительно§r§7 плавит/nТеплоёмкость: 100,000
+
+nputils.machine.induction_blast_furnance.gui.heat_generation=Нагрев в тик: 
+nputils.machine.induction_blast_furnance.gui.overheat=Перегрев: %d%%
+nputils.machine.induction_blast_furnance.gui.throttle=Дросселирование из-за перегрева!
+nputils.machine.induction_blast_furnance.gui.stopped=Работа остановлена!
+
 tile.npu_multiblock_casing.tungstensteel_gearbox_casing.name=Корпус сборочного конвеера
 tile.npu_transparent_casing.reinforced_glass.name=Армированное стекло
 tile.npu_multiblock_casing.reactor_casing.name=Реакторный корпус
+tile.npu_multiblock_casing.magnetic_proof_machine_casing.name=Магнитостойкий Корпус Машины
+tile.npu_multiblock_casing.coolant_trunk_line.name=Магистральный Трубопровод Охлаждения
+
+tile.induction_coil_block.copper_coil.name=Медная Индукционная Катушка
+tile.induction_coil_block.silver_plated_copper_coil.name=Посеребрённая Медная Индукционная Катушка
+tile.induction_coil_block.fine_gold_coil.name=Индукционная Катушка из Тонкой Криогенной Золотой Проволоки
+tile.induction_coil_block.superconducting_coil.name=Суперпроводниковая Индукционная Катушка
+
+tile.induction_coil_block.tooltip=При использовании в §aПромышленной Индукционной Доменной Печи§7:
+tile.induction_coil_block.tooltip.temp=  Максимальная температура нагрева: §e%,dK
 
 metaitem.tool.bending_cylinder.name=%s гнущий цилиндр
 metaitem.tool.bending_cylinder_small.name=Малый %s гнущий цилиндр
@@ -798,6 +801,7 @@ material.iron_chloride=Хлорид железа III
 material.sand=Кварцевый песок
 material.electrical_steel=Электротехническая сталь
 material.high_pressure=высокого давления
+material.nm15m_stainless_steel=Нержавеющая сталь NM15M
 
 item.epoxid.ingot=Брусок эпоксидной смолы
 item.epoxid.dustTiny=Крошечная пылька эпоксидной смолы
@@ -864,6 +868,9 @@ gregtech.multiblock.processing_array.description=Массив обработки
 gregtech.multiblock.fusion_reactor_mk1.description=Термоядерный реактор - большая многоблочная структура использующаяся для термоядерного синтеза двух элементов в один. Версия 1 термоядерного реакторма может использовать LuV, ZPM или UV энерго-люки. За каждый люк внутренний буффер увеличиваеться на 100т.
 gregtech.multiblock.fusion_reactor_mk2.description=Термоядерный реактор - большая многоблочная структура использующаяся для термоядерного синтеза двух элементов в один. Версия 1 термоядерного реакторма может использовать ZPM или UV энерго-люки. За каждый люк внутренний буффер увеличиваеться на 200т.
 gregtech.multiblock.fusion_reactor_mk3.description=Термоядерный реактор - большая многоблочная структура использующаяся для термоядерного синтеза двух элементов в один. Версия 1 термоядерного реакторма может использовать UV энерго-люки. За каждый люк внутренний буффер увеличиваеться на 400т.
+gregtech.multiblock.induction_blast_furnance.description.general=Промышленная Индукционная Доменная Печь – следующий уровень доменных печей. Она позволит вам плавить тугоплавкие материалы ещё более быстрее и эффективнее! Но, как и все сложные механизмы, требует более сложной инфраструктуры и баланса для нормальной работы.
+gregtech.multiblock.induction_blast_furnance.description.efficiency=Есть несколько уровней индукторов, каждый из них сделан по особому техпроцессу. По умолчанию, ПИДП работает §nв два раза быстрее§r, чем Электрическая Доменная Печь, и каждый следующий уровень катушек увеличит скорость ещё на 10%% больше.
+gregtech.multiblock.induction_blast_furnance.description.coolant=ПИДП – продвинутая машина, сделанная по последним технологиям. Это позволяет ей контролировать собственную мощность в зависимости от производительности системы охлаждения, потребляя при этом до 200мб/т хладогена. Охлаждение обязательно для правильной работы. Силовые схемы производят больше излишнего тепла при повышение входного напряжения. Убедитесь, что ваша система охлаждения выдержит! 
 
 item.material.oreprefix.plateCurved=Изогнутый %s лист
 item.material.oreprefix.ingotDouble=Двойной слиток %s
@@ -888,3 +895,6 @@ gregtech.machine.primitive_blast_furnace.bronze.tooltip=Структура: 3x3x
 
 fluid.tile.water=Вода
 fluid.tile.lava=Лава
+
+jei.induction_blast_furnance_coolant.category=Хладогены Индукционной Печи
+jei.induction_blast_furnance_coolant.axis_y_name=Тепло / t

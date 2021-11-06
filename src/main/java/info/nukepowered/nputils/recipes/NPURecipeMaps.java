@@ -1,5 +1,9 @@
 package info.nukepowered.nputils.recipes;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 import crafttweaker.annotations.ZenRegister;
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.widgets.ProgressWidget;
@@ -8,6 +12,8 @@ import gregtech.api.recipes.builders.AssemblerRecipeBuilder;
 import gregtech.api.recipes.builders.IntCircuitRecipeBuilder;
 import gregtech.api.recipes.builders.SimpleRecipeBuilder;
 import gregtech.api.recipes.machines.FuelRecipeMap;
+import gregtech.api.unification.material.Materials;
+import net.minecraftforge.fluids.Fluid;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenProperty;
 
@@ -30,6 +36,8 @@ public class NPURecipeMaps {
     public static final RecipeMap<SimpleRecipeBuilder> REPLICATOR_RECIPES;
     public static final RecipeMap<SimpleRecipeBuilder> PROCESSING_ARRAY;
     
+    public static final Map<Fluid, Integer> COOLANTS;
+    
 	static {
 		CIRCUIT_ASSEMBLER_RECIPES = (new RecipeMap<>("circuit_assembler", 1, 6, 1, 1, 0, 1, 0, 0, new AssemblerRecipeBuilder())).setSlotOverlay(false, false, GuiTextures.CIRCUIT_OVERLAY).setProgressBar(GuiTextures.PROGRESS_BAR_CIRCUIT, ProgressWidget.MoveType.HORIZONTAL);
 		CLUSTER_MILL_RECIPES = (new RecipeMap<>("cluster_mill", 1, 1, 1, 1, 0, 0, 0, 0, new SimpleRecipeBuilder())).setSlotOverlay(false, false, GuiTextures.BENDER_OVERLAY).setProgressBar(GuiTextures.PROGRESS_BAR_BENDING, ProgressWidget.MoveType.HORIZONTAL);
@@ -41,5 +49,16 @@ public class NPURecipeMaps {
         CRACKER_UNIT_RECIPES = new RecipeMap<>("cracker_unit", 0, 0, 0, 0, 2, 2, 1, 1, (new SimpleRecipeBuilder()));
         DISASSEMBLING_RECIPES = new RecipeMap<>("disassembling_machine", 1, 1, 1, 9, 0, 0, 0, 0, (new SimpleRecipeBuilder())).setSlotOverlay(false, false, GuiTextures.CIRCUIT_OVERLAY).setProgressBar(GuiTextures.PROGRESS_BAR_CIRCUIT, ProgressWidget.MoveType.HORIZONTAL);
         PROCESSING_ARRAY = new RecipeMap<>("processing_array", 0, 9, 0, 6, 0, 6, 0, 6, new SimpleRecipeBuilder());
+        
+        Map<Fluid, Integer> coolats = new HashMap<>();
+    	// Coolant map
+    	coolats.put(Materials.DistilledWater.getMaterialFluid()	, 2);
+    	coolats.put(Materials.LiquidAir.getMaterialFluid()		, 3);
+    	coolats.put(Materials.Nitrogen.getMaterialFluid()		, 4);
+    	coolats.put(Materials.Oxygen.getMaterialFluid()			, 4);
+    	coolats.put(Materials.Helium.getMaterialFluid()			, 5);
+    	coolats.put(Materials.Argon.getMaterialFluid()			, 7);
+    	
+    	COOLANTS = Collections.unmodifiableMap(coolats);
 	}
 }

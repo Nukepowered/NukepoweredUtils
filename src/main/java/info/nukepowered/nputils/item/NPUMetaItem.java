@@ -141,6 +141,9 @@ public class NPUMetaItem extends MaterialMetaItem {
         NPUMetaItems.COIN_BRONZE = addItem(124, "credit.bronze").addComponents(new CoinBehaviour(10), new CoinInfoBehaviour(Materials.Bronze));
         NPUMetaItems.COIN_IRON = addItem(125, "credit.iron").addComponents(new CoinBehaviour(20), new CoinInfoBehaviour(Materials.Iron));
 
+        NPUMetaItems.SMALL_SILVER_PLATED_COPPER_TUBE = addItem(126, "coil_tube.silver");
+        NPUMetaItems.SMALL_COOLANTABLE_GOLD_TUBE = addItem(127, "coil_tube.gold");
+        
         MetaItems.CREDIT_COPPER.addComponents(new CoinBehaviour(1));
         MetaItems.CREDIT_CUPRONICKEL.addComponents(new CoinBehaviour(5));
         MetaItems.CREDIT_SILVER.addComponents(new CoinBehaviour(50));

@@ -36,11 +36,12 @@ import info.nukepowered.nputils.NPUMaterials;
 import info.nukepowered.nputils.NPUtils;
 import info.nukepowered.nputils.api.NPULib;
 import info.nukepowered.nputils.armor.PowerlessJetpack;
-import info.nukepowered.nputils.item.NPUMetaBlocks;
+import info.nukepowered.nputils.blocks.NPUMetaBlocks;
+import info.nukepowered.nputils.blocks.NPUTransparentCasing;
+import info.nukepowered.nputils.blocks.BlockInductionCoil.InductionCoilType;
+import info.nukepowered.nputils.blocks.NPUTransparentCasing.CasingType;
+import info.nukepowered.nputils.crafttweaker.NPUMultiblockCasing;
 import info.nukepowered.nputils.item.NPUMetaItems;
-import info.nukepowered.nputils.item.NPUMultiblockCasing;
-import info.nukepowered.nputils.item.NPUTransparentCasing;
-import info.nukepowered.nputils.item.NPUTransparentCasing.CasingType;
 import info.nukepowered.nputils.machines.NPUTileEntities;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -1494,6 +1495,19 @@ public class NPURecipeAddition {
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(800).EUt(7680).inputs(OreDictUnifier.get(OrePrefix.wireGtDouble, Materials.NaquadahAlloy, 8), NPUMetaItems.MICA_INSULATOR_FOIL.getStackForm(8)).fluidInputs(Materials.Naquadah.getFluid(144)).outputs(MetaBlocks.WIRE_COIL.getItemVariant(BlockWireCoil.CoilType.NAQUADAH_ALLOY)).buildAndRegister();
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(1000).EUt(9001).inputs(OreDictUnifier.get(OrePrefix.wireGtDouble, Tier.Superconductor, 8), NPUMetaItems.MICA_INSULATOR_FOIL.getStackForm(8)).fluidInputs(Materials.NaquadahAlloy.getFluid(144)).outputs(MetaBlocks.WIRE_COIL.getItemVariant(BlockWireCoil.CoilType.SUPERCONDUCTOR)).buildAndRegister();
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(1000).EUt(9001).inputs(OreDictUnifier.get(OrePrefix.wireGtDouble, NPUMaterials.LuVSuperconductor, 32), NPUMetaItems.MICA_INSULATOR_FOIL.getStackForm(16)).fluidInputs(Materials.NaquadahAlloy.getFluid(144)).outputs(MetaBlocks.WIRE_COIL.getItemVariant(BlockWireCoil.CoilType.SUPERCONDUCTOR)).buildAndRegister();
+        
+        // Induction Furnace Coils
+        RecipeMaps.MIXER_RECIPES.recipeBuilder().duration(14400).EUt(120).input(OrePrefix.dust, Materials.Iron, 32).input(OrePrefix.dust, Materials.Chrome, 9).input(OrePrefix.dust, Materials.Manganese, 8).input(OrePrefix.dust, Materials.Nickel, 2).fluidInputs(Materials.Nitrogen.getFluid(1000)).output(OrePrefix.dust, NPUMaterials.NM15MSteel, 52).buildAndRegister();
+        
+        // Advanced pipes
+        RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().duration(800).EUt(800).input(OrePrefix.pipeSmall, Materials.Copper, 4).input(OrePrefix.wireFine, Materials.Silver, 16).fluidInputs(Materials.NitricAcid.getFluid(1000)).outputs(NPUMetaItems.SMALL_SILVER_PLATED_COPPER_TUBE.getStackForm(4)).buildAndRegister();
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(1200).EUt(2048).input(OrePrefix.pipeTiny, Materials.Polytetrafluoroethylene, 16).input(OrePrefix.wireFine, Materials.Gold, 64).input(OrePrefix.wireFine, Materials.Gold, 64).inputs(MetaItems.GLASS_FIBER.getStackForm(32)).fluidInputs(Materials.Epoxid.getFluid(2000)).outputs(NPUMetaItems.SMALL_COOLANTABLE_GOLD_TUBE.getStackForm(16)).buildAndRegister();
+        
+        // Coils
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(1800).EUt(320).input(OrePrefix.pipeTiny, Materials.Copper, 16).input(OrePrefix.frameGt, NPUMaterials.NM15MSteel).inputs(NPUMetaItems.MICA_INSULATOR_FOIL.getStackForm(16)).fluidInputs(Materials.RoseGold.getFluid(288)).outputs(NPUMetaBlocks.INDUCTION_COIL.getItemVariant(InductionCoilType.COPPER)).buildAndRegister();
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(1800).EUt(900).input(OrePrefix.frameGt, NPUMaterials.NM15MSteel).inputs(NPUMetaItems.SMALL_SILVER_PLATED_COPPER_TUBE.getStackForm(16), NPUMetaItems.MICA_INSULATOR_FOIL.getStackForm(32)).fluidInputs(Materials.SterlingSilver.getFluid(288)).outputs(NPUMetaBlocks.INDUCTION_COIL.getItemVariant(InductionCoilType.SILVER_PLATED_COPPER)).buildAndRegister();
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(1800).EUt(6072).inputs(NPUMetaItems.SMALL_COOLANTABLE_GOLD_TUBE.getStackForm(16), MetaItems.GLASS_FIBER.getStackForm(16)).input(OrePrefix.frameGt, NPUMaterials.NM15MSteel).fluidInputs(Materials.Epoxid.getFluid(1000)).outputs(NPUMetaBlocks.INDUCTION_COIL.getItemVariant(InductionCoilType.FINE_GOLD_WIRE)).buildAndRegister();
+        RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(1800).EUt(9000).inputs(NPUMetaItems.MICA_INSULATOR_FOIL.getStackForm(32)).input(OrePrefix.wireGtDouble, NPUMaterials.LuVSuperconductor, 8).input(OrePrefix.frameGt, NPUMaterials.NM15MSteel).fluidInputs(Materials.NaquadahAlloy.getFluid(144)).outputs(NPUMetaBlocks.INDUCTION_COIL.getItemVariant(InductionCoilType.SUPERCONDUCTING)).buildAndRegister();
         
         NPULib.printEventFinish("Advanced recipes was registered for  %.3f seconds", time, System.currentTimeMillis());
 	}

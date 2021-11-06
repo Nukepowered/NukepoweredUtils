@@ -5,8 +5,8 @@ import java.util.function.Function;
 import gregtech.api.GTValues;
 import gregtech.common.blocks.VariantItemBlock;
 import info.nukepowered.nputils.api.NPULib;
+import info.nukepowered.nputils.blocks.NPUMetaBlocks;
 import info.nukepowered.nputils.input.Keybinds;
-import info.nukepowered.nputils.item.NPUMetaBlocks;
 import info.nukepowered.nputils.item.NPUMetaItems;
 import info.nukepowered.nputils.machines.NPUTileEntities;
 import info.nukepowered.nputils.network.NetworkHandler;
@@ -66,6 +66,7 @@ public class CommonProxy {
 		IForgeRegistry<Block> registry = e.getRegistry();
 		registry.register(NPUMetaBlocks.MULTIBLOCK_CASING);
 		registry.register(NPUMetaBlocks.TRANSPARENT_CASING);
+		registry.register(NPUMetaBlocks.INDUCTION_COIL);
 	}
 	
 	@SubscribeEvent
@@ -73,6 +74,7 @@ public class CommonProxy {
 		IForgeRegistry<Item> registry = e.getRegistry();
 		registry.register(createItemBlock(NPUMetaBlocks.MULTIBLOCK_CASING, VariantItemBlock::new));
 		registry.register(createItemBlock(NPUMetaBlocks.TRANSPARENT_CASING, VariantItemBlock::new));
+		registry.register(createItemBlock(NPUMetaBlocks.INDUCTION_COIL, VariantItemBlock::new));
 	}
 	
 	private static <T extends Block> ItemBlock createItemBlock(T block, Function<T, ItemBlock> producer) {

@@ -2,10 +2,12 @@ package info.nukepowered.nputils.recipes;
 
 import gregtech.api.GTValues;
 import gregtech.api.items.OreDictNames;
+import gregtech.api.items.ToolDictNames;
 import gregtech.api.metatileentity.ITieredMetaTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.recipes.ModHandler;
 import gregtech.api.unification.OreDictUnifier;
+import gregtech.api.unification.material.MarkerMaterials;
 import gregtech.api.unification.material.Materials;
 import gregtech.api.unification.material.MarkerMaterials.Tier;
 import gregtech.api.unification.ore.OrePrefix;
@@ -18,6 +20,10 @@ import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import gregtech.common.items.MetaItems;
 import gregtech.common.metatileentities.MetaTileEntities;
 import info.nukepowered.nputils.NPUConfig;
+import info.nukepowered.nputils.NPUMaterials;
+import info.nukepowered.nputils.NPUtils;
+import info.nukepowered.nputils.blocks.NPUMetaBlocks;
+import info.nukepowered.nputils.crafttweaker.NPUMultiblockCasing.CasingType;
 import info.nukepowered.nputils.item.NPUMetaItems;
 import info.nukepowered.nputils.machines.NPUTileEntities;
 import net.minecraft.init.Blocks;
@@ -81,6 +87,11 @@ public class MachineCraftingRecipes {
         registerMachineRecipe(NPUTileEntities.NAQUADAH_REACTOR, "RCR", "FMF", "QCQ", 'M', HULL, 'Q', CABLE_QUAD, 'C', BETTER_CIRCUIT, 'F', FIELD_GENERATOR, 'R', STICK_RADIOACTIVE);
         
         ModHandler.addShapedRecipe("nputils:vending_machine", NPUTileEntities.VENDING_MACHINE.getStackForm(), "CPC", "MHM", "WPW", 'C', "circuitGood", 'P', MetaItems.ELECTRIC_PISTON_LV, 'M', MetaItems.ELECTRIC_MOTOR_LV, 'H', MetaTileEntities.HULL[GTValues.LV].getStackForm(), 'W', OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.Tin));
+        
+        // Industrial Induction Blast Furnace
+        ModHandler.addShapedRecipe(registryName("trunk_line"), NPUMetaBlocks.MULTIBLOCK_CASING.getItemVariant(CasingType.COOLANT_TRUNK_LINE, 2), "RSR", "MFB", "RSR", 'R', new UnificationEntry(OrePrefix.stick, NPUMaterials.NM15MSteel), 'S', new UnificationEntry(OrePrefix.pipeSmall, Materials.StainlessSteel), 'M', MetaItems.ELECTRIC_PUMP_HV.getStackForm(), 'F', new UnificationEntry(OrePrefix.frameGt, NPUMaterials.NM15MSteel), 'B', new UnificationEntry(OrePrefix.pipeMedium, Materials.StainlessSteel));
+        ModHandler.addShapedRecipe(registryName("magnetic_proof_casing"), NPUMetaBlocks.MULTIBLOCK_CASING.getItemVariant(CasingType.MAGNETIC_PROOF_MACHINE_CASING, 3), "PhP", "PFP", "PwP", 'P', new UnificationEntry(OrePrefix.plate, NPUMaterials.NM15MSteel), 'F', new UnificationEntry(OrePrefix.frameGt, NPUMaterials.NM15MSteel), 'h', ToolDictNames.craftingToolHardHammer.toString(), 'w', ToolDictNames.craftingToolWrench.toString());
+        ModHandler.addShapedRecipe(registryName("induction_blast_furnace"), NPUTileEntities.INDUCTION_BLAST_FURNANCE.getStackForm(), "CCC", "PMP", "RHR", 'C', MetaItems.POWER_INTEGRATED_CIRCUIT.getStackForm(), 'P', new UnificationEntry(OrePrefix.pipeSmall, Materials.Copper), 'M', MetaItems.ELECTRIC_PUMP_HV.getStackForm(), 'R', new UnificationEntry(OrePrefix.circuit, MarkerMaterials.Tier.Extreme), 'H', NPUMetaBlocks.MULTIBLOCK_CASING.getItemVariant(CasingType.MAGNETIC_PROOF_MACHINE_CASING));
         
         //Machines
         registerMachineRecipe(NPUTileEntities.CLUSTERMILL, "MMM", "CHC", "MMM", 'M', MOTOR, 'C', CIRCUIT, 'H', HULL);
@@ -189,6 +200,8 @@ public class MachineCraftingRecipes {
 	}
 	
 	
-	
+	private static String registryName(String name) {
+		return NPUtils.MODID + ":" + name;
+	}
 	
 }
