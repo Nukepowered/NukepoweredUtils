@@ -55,7 +55,7 @@ public class ForestryIntegration {
 
             RecipeBuilder<?> builder = RecipeMaps.CENTRIFUGE_RECIPES.recipeBuilder()
                 .EUt(14)
-                .duration(Math.min(1, (int)(avgProducts * (recipe.getProcessingTime() / 4 * 20))))
+                .duration(Math.max(1, (int)(avgProducts * (recipe.getProcessingTime() / 4 * 20))))
                 .inputs(recipe.getInput());
 
 			if (products.isEmpty() || recipe.getInput() == null || recipe.getInput().isEmpty()) {
@@ -93,7 +93,7 @@ public class ForestryIntegration {
 
             RecipeBuilder<?> builder = map.recipeBuilder()
                 .EUt(14)
-                .duration(Math.min(1, recipe.getProcessingTime() / 4 * 20))
+                .duration(Math.max(1, recipe.getProcessingTime() / 4 * 20))
                 .inputs(recipe.getResources())
                 .fluidOutputs(recipe.getFluidOutput());
 
