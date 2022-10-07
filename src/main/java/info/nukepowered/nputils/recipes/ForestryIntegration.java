@@ -3,12 +3,16 @@ package info.nukepowered.nputils.recipes;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+
 import forestry.api.recipes.ICentrifugeRecipe;
 import forestry.api.recipes.IFabricatorRecipe;
+import forestry.api.recipes.ISqueezerRecipe;
 import forestry.api.recipes.RecipeManagers;
 import forestry.core.ModuleCore;
 import forestry.core.items.EnumElectronTube;
 import gregtech.api.recipes.RecipeBuilder;
+import gregtech.api.recipes.RecipeMap;
 import gregtech.api.recipes.RecipeMaps;
 import gregtech.api.unification.OreDictUnifier;
 import gregtech.api.unification.material.Materials;
@@ -21,6 +25,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Loader;
 
 public class ForestryIntegration {
+
+    public static final int CHANCE_PER_TIER = 250; // 2.5%
+
+
 	public static void removeFabricatorRecipes() {
 		// Recipe removal
 		Iterator<IFabricatorRecipe> fabIter = RecipeManagers.fabricatorManager.recipes().iterator();
@@ -38,33 +46,72 @@ public class ForestryIntegration {
 	
 	public static void parseCentrifugeRecipes() {
 		long time = System.currentTimeMillis();
-		Iterator<ICentrifugeRecipe> iter = RecipeManagers.centrifugeManager.recipes().iterator();
-		while (iter.hasNext()) {
-			ICentrifugeRecipe recipe = iter.next();
-			RecipeBuilder<?> builder = RecipeMaps.CENTRIFUGE_RECIPES.recipeBuilder().EUt(14).duration(recipe.getProcessingTime() * 5).inputs(recipe.getInput());
-			
-			if (recipe.getAllProducts().isEmpty()) {
-				NPULog.error("Failed to parse forestry centrifuge recipe for input: " + recipe.getInput() + " - output is empty!");
+		for (ICentrifugeRecipe recipe : RecipeManagers.centrifugeManager.recipes()) {
+            Map<ItemStack, Float> products = recipe.getAllProducts();
+            float avgProducts = 1.0F;
+            for (float f : products.values()) {
+                avgProducts += f;
+            }
+
+            RecipeBuilder<?> builder = RecipeMaps.CENTRIFUGE_RECIPES.recipeBuilder()
+                .EUt(14)
+                .duration(Math.min(1, (int)(avgProducts * (recipe.getProcessingTime() / 4 * 20))))
+                .inputs(recipe.getInput());
+
+			if (products.isEmpty() || recipe.getInput() == null || recipe.getInput().isEmpty()) {
 				continue;
 			}
-			
-			if (recipe.getAllProducts().size() > 6) {
-				NPULog.error("Failed to parse forestry centrifuge recipe for input: " + recipe.getInput() + " - output items more than 6!");
+
+			if (products.size() > RecipeMaps.CENTRIFUGE_RECIPES.getMaxOutputs()) {
+				NPULog.error("Failed to parse forestry centrifuge recipe for input: " + recipe.getInput() + " - output items more than " + RecipeMaps.CENTRIFUGE_RECIPES.getMaxOutputs());
 				continue;
 			}
-			
-			recipe.getAllProducts().entrySet().forEach(entry -> {
-				if (entry.getValue() < 1.0f)
-					builder.chancedOutput(entry.getKey(), (int)(entry.getValue() * 10000), 100);
-				else 
-					builder.outputs(entry.getKey());
-			});
-			
+
+            products.forEach((key, value) -> {
+                if (value < 1.0f)
+                    builder.chancedOutput(key, (int) (value * 10000), CHANCE_PER_TIER);
+                else
+                    builder.outputs(key);
+            });
+
 			builder.buildAndRegister();
 		}
 		
 		NPULib.printEventFinish("Finished copying centrifuge recipes for %.3f seconds", time, System.currentTimeMillis());
 	}
+
+    public static void parseSqueezerRecipes() {
+        long time = System.currentTimeMillis();
+        for (ISqueezerRecipe recipe : RecipeManagers.squeezerManager.recipes()) {
+            List<ItemStack> inputs = recipe.getResources();
+            if (inputs.isEmpty()) {
+                continue;
+            }
+
+            RecipeMap<?> map = inputs.size() > 1 ?
+                RecipeMaps.MIXER_RECIPES : RecipeMaps.FLUID_EXTRACTION_RECIPES;
+
+            RecipeBuilder<?> builder = map.recipeBuilder()
+                .EUt(14)
+                .duration(Math.min(1, recipe.getProcessingTime() / 4 * 20))
+                .inputs(recipe.getResources())
+                .fluidOutputs(recipe.getFluidOutput());
+
+            ItemStack remnants = recipe.getRemnants();
+            float chance = recipe.getRemnantsChance();
+            if (remnants != null && !remnants.isEmpty()) {
+                if (chance == 1.0F) {
+                    builder.outputs(remnants);
+                } else {
+                    builder.chancedOutput(remnants, (int) (chance * 10000), CHANCE_PER_TIER);
+                }
+            }
+
+            builder.buildAndRegister();
+        }
+
+        NPULib.printEventFinish("Finished copying squeezer recipes for %.3f seconds", time, System.currentTimeMillis());
+    }
 	
 	public static void init() {
 		// Recipe generation

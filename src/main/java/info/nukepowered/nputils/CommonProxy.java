@@ -51,6 +51,7 @@ public class CommonProxy {
 		if (Loader.isModLoaded(GTValues.MODID_FR) && NPUConfig.integration.ForestryIntegration) {
 			ForestryIntegration.removeFabricatorRecipes();
 			ForestryIntegration.parseCentrifugeRecipes();
+			ForestryIntegration.parseSqueezerRecipes();
 		}
 		WorldGenRegister.init();
 	}
