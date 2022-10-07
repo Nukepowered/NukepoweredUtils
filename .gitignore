@@ -20,5 +20,9 @@ tmp/
 local.properties
 .settings/
 .loadpath
+.idea
+.idea/
 /eclipse
-.project
+*.iml
+*.ipr
+*.iws

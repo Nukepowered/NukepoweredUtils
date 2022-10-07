@@ -78,11 +78,11 @@ dependencies {
     deobfCompile "net.sengir.forestry:forestry_${minecraft_version}:${forestry_version}"
     deobfCompile "slimeknights.mantle:Mantle:${short_version}-${mantle_version}"
     deobfCompile "slimeknights:TConstruct:${minecraft_version}-${tconstruct_version}"
-	deobfCompile "applied-energistics-2:appliedenergistics2-rv6:stable:7"
-	deobfCompile "com.mod-buildcraft:buildcraft-api:${bc_version}"
-	"deobfCompile"("mcjty.theoneprobe:TheOneProbe-${short_version}:${short_version}-${onerpobe_v}")
-	"deobfCompile"("team.chisel.ctm:CTM:MC${minecraft_version}-${ctm_version}")
-	deobfCompile "gregtechce:gregtech:${minecraft_version}:${gt_version}"
+    deobfCompile "applied-energistics-2:appliedenergistics2-rv6:stable:7"
+    deobfCompile "com.mod-buildcraft:buildcraft-api:${bc_version}"
+    "deobfCompile"("mcjty.theoneprobe:TheOneProbe-${short_version}:${short_version}-${onerpobe_v}")
+    "deobfCompile"("team.chisel.ctm:CTM:MC${minecraft_version}-${ctm_version}")
+     deobfCompile "gregtechce:gregtech:${minecraft_version}:${gt_version}"
 }
 
 processResources {

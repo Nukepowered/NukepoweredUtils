@@ -558,9 +558,8 @@ public class NPURecipeAddition {
         RecipeMaps.CENTRIFUGE_RECIPES.recipeBuilder().duration(500).EUt(96).input(OrePrefix.dust, Materials.Thorium).chancedOutput(OreDictUnifier.get(OrePrefix.dustSmall, Materials.Lutetium), 1650, 100).buildAndRegister();
         
         //Sodium Hydroxide Solution
-        RecipeMaps.CHEMICAL_RECIPES.recipeBuilder().duration(80).EUt(40).fluidInputs(Materials.Water.getFluid(3000)).input(OrePrefix.dust, Materials.SodiumHydroxide).fluidOutputs(NPUMaterials.SodiumHydroxideSolution.getFluid(4000)).buildAndRegister();
+        RecipeMaps.MIXER_RECIPES.recipeBuilder().duration(80).EUt(40).fluidInputs(Materials.Water.getFluid(3000)).input(OrePrefix.dust, Materials.SodiumHydroxide).fluidOutputs(NPUMaterials.SodiumHydroxideSolution.getFluid(4000)).buildAndRegister();
         RecipeMaps.ELECTROLYZER_RECIPES.recipeBuilder().duration(50).EUt(512).fluidInputs(NPUMaterials.SodiumHydroxideSolution.getFluid(4000)).fluidOutputs(Materials.Hydrogen.getFluid(2000), Materials.Oxygen.getFluid(1000)).outputs(OreDictUnifier.get(OrePrefix.dustTiny, Materials.SodiumHydroxide, 8)).buildAndRegister();
-        RecipeMaps.ELECTROLYZER_RECIPES.recipeBuilder().duration(160).EUt(120).input(OrePrefix.dust, Materials.SodiumHydroxide, 2).fluidOutputs(Materials.Hydrogen.getFluid(1000), Materials.Oxygen.getFluid(1000)).outputs(OreDictUnifier.get(OrePrefix.dustTiny, Materials.Sodium, 16)).buildAndRegister();
         
         //Oil Extractor Recipes
         RecipeMaps.FLUID_EXTRACTION_RECIPES.recipeBuilder().duration(160).EUt(4).inputs(new ItemStack(Items.FISH)).fluidOutputs(NPUMaterials.FishOil.getFluid(40)).buildAndRegister();
