@@ -16,6 +16,7 @@ import gregtech.api.util.GTUtility;
 import gregtech.common.blocks.BlockMetalCasing.MetalCasingType;
 import gregtech.common.blocks.MetaBlocks;
 import info.nukepowered.nputils.api.NPULib;
+import info.nukepowered.nputils.api.AmpereMachineMetaTileEntity;
 import info.nukepowered.nputils.recipes.NPURecipeMaps;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -69,7 +70,7 @@ public class TileEntityProcessingArray extends RecipeMapMultiblockController {
 		this.machinesInventory = new InventoryMachinesHolder();
 		this.recipeMapWorkable = new ProcessingArrayWorkable(this);
 	}
-	
+
 	@Override
 	protected ModularUI.Builder createUITemplate(EntityPlayer entityPlayer) {
 		ModularUI.Builder builder = ModularUI.extendedBuilder();
@@ -216,8 +217,7 @@ public class TileEntityProcessingArray extends RecipeMapMultiblockController {
 				this.multiplier = 0;
 				return;
 			}
-			
-			// TODO fix recipes for EVERY machine
+
 			RecipeLogicEnergy rle = ObfuscationReflectionHelper.getPrivateValue(WorkableTieredMetaTileEntity.class, (WorkableTieredMetaTileEntity) machines.getKey(), "workable");
 			long recipeVoltage = GTValues.V[((WorkableTieredMetaTileEntity) machines.getKey()).getTier()];
 			
@@ -417,10 +417,11 @@ public class TileEntityProcessingArray extends RecipeMapMultiblockController {
 		 public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
 			 if (stack.getItem() instanceof MachineItemBlock) {
 				 MetaTileEntity mte = MachineItemBlock.getMetaTileEntity(stack);
-				 if (mte instanceof WorkableTieredMetaTileEntity) {
-					 return true;
-				 }
+				 // Do not allow to put amperage machines in
+				 // We can not force RecipeLogic to work in ProcessingArray cause of GT API limitation
+				 return mte instanceof WorkableTieredMetaTileEntity && !(mte instanceof AmpereMachineMetaTileEntity);
 			 }
+
 			 return false;
 		 }
 	}
