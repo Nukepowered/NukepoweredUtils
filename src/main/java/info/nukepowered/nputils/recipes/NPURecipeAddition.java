@@ -438,6 +438,15 @@ public class NPURecipeAddition {
         RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(640).EUt(7680).input(OrePrefix.circuit, Tier.Elite, 2).inputs(OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.Tungsten, 2), OreDictUnifier.get(OrePrefix.gem, Materials.EnderEye)).input(OrePrefix.stick, Materials.Osmium, 4).outputs(MetaItems.EMITTER_IV.getStackForm()).buildAndRegister();
 
 		if (NPUConfig.gameplay.disableNewPumpCraft) {
+            ModHandler.addShapedRecipe(NPUtils.MODID + ":electric_pump_lv_paper_np", MetaItems.ELECTRIC_PUMP_LV.getStackForm(),
+                "SRG", "dPw", "GMC",
+                'S', OreDictUnifier.get(OrePrefix.screw, Materials.Tin),
+                'R', OreDictUnifier.get(OrePrefix.rotor, Materials.Tin),
+                'G', OreDictUnifier.get(OrePrefix.ring, Materials.Paper),
+                'P', OreDictUnifier.get(OrePrefix.pipeMedium, Materials.Bronze),
+                'M', MetaItems.ELECTRIC_MOTOR_LV.getStackForm(),
+                'C', OreDictUnifier.get(OrePrefix.cableGtSingle, Materials.Tin));
+
 			for (MaterialStack stackFluid : cableFluids) {
 				IngotMaterial m = (IngotMaterial) stackFluid.material;
 				RecipeMaps.ASSEMBLER_RECIPES.recipeBuilder().duration(40).EUt(30).input(OrePrefix.cableGtSingle, Materials.Tin).input(OrePrefix.screw, Materials.Tin).input(OrePrefix.rotor, Materials.Tin).input(OrePrefix.pipeMedium, Materials.Copper).inputs(MetaItems.ELECTRIC_MOTOR_LV.getStackForm()).input(OrePrefix.ring, m).outputs(MetaItems.ELECTRIC_PUMP_LV.getStackForm()).buildAndRegister();
