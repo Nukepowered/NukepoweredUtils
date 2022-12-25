@@ -11,7 +11,7 @@ import gregtech.common.metatileentities.electric.MetaTileEntityPump;
 import info.nukepowered.nputils.NPUConfig;
 import info.nukepowered.nputils.NPUTextures;
 import info.nukepowered.nputils.NPUtils;
-import info.nukepowered.nputils.api.NPUMachineMetaTileEntity;
+import info.nukepowered.nputils.api.AmpereMachineMetaTileEntity;
 import info.nukepowered.nputils.recipes.NPURecipeMaps;
 import net.minecraft.util.ResourceLocation;
 
@@ -58,8 +58,8 @@ public class NPUTileEntities {
     public static SimpleMachineMetaTileEntity[] THERMAL_CENTRIFUGE = new SimpleMachineMetaTileEntity[4];
     public static SimpleMachineMetaTileEntity[] WIREMILL = new SimpleMachineMetaTileEntity[4];
     public static SimpleGeneratorMetaTileEntity[] NAQUADAH_REACTOR = new SimpleGeneratorMetaTileEntity[4];
-    public static NPUMachineMetaTileEntity[] REPLICATOR = new NPUMachineMetaTileEntity[8];
-    public static NPUMachineMetaTileEntity[] MASS_FAB = new NPUMachineMetaTileEntity[8];
+    public static AmpereMachineMetaTileEntity[] REPLICATOR = new AmpereMachineMetaTileEntity[8];
+    public static AmpereMachineMetaTileEntity[] MASS_FAB = new AmpereMachineMetaTileEntity[8];
     public static TileEntityFusionReactor[] FUSION_REACTOR = new TileEntityFusionReactor[3];
 
     public static TileEntityAssemblyLine ASSEMBLY_LINE;
@@ -451,29 +451,29 @@ public class NPUTileEntities {
 	        NAQUADAH_REACTOR[2] = GregTechAPI.registerMetaTileEntity(2174, new SimpleGeneratorMetaTileEntity(location("naquadah_reactor.mk3"), NPURecipeMaps.NAQUADAH_REACTOR_FUELS, NPUTextures.NAQADAH_OVERLAY, 6));
 	        NAQUADAH_REACTOR[3] = GregTechAPI.registerMetaTileEntity(2191, new SimpleGeneratorMetaTileEntity(location("naquadah_reactor.mk4"), NPURecipeMaps.NAQUADAH_REACTOR_FUELS, NPUTextures.NAQADAH_OVERLAY, 7));
         }
-        MASS_FAB[0] = GregTechAPI.registerMetaTileEntity(2175, new NPUMachineMetaTileEntity(location("mass_fab.lv"), NPURecipeMaps.MASS_FAB_RECIPES, NPUTextures.MASS_FAB_OVERLAY, 1));
-        MASS_FAB[1] = GregTechAPI.registerMetaTileEntity(2176, new NPUMachineMetaTileEntity(location("mass_fab.mv"), NPURecipeMaps.MASS_FAB_RECIPES, NPUTextures.MASS_FAB_OVERLAY, 2));
-        MASS_FAB[2] = GregTechAPI.registerMetaTileEntity(2177, new NPUMachineMetaTileEntity(location("mass_fab.hv"), NPURecipeMaps.MASS_FAB_RECIPES, NPUTextures.MASS_FAB_OVERLAY, 3));
-        MASS_FAB[3] = GregTechAPI.registerMetaTileEntity(2178, new NPUMachineMetaTileEntity(location("mass_fab.ev"), NPURecipeMaps.MASS_FAB_RECIPES, NPUTextures.MASS_FAB_OVERLAY, 4));
+        MASS_FAB[0] = GregTechAPI.registerMetaTileEntity(2175, new AmpereMachineMetaTileEntity(location("mass_fab.lv"), NPURecipeMaps.MASS_FAB_RECIPES, NPUTextures.MASS_FAB_OVERLAY, 1));
+        MASS_FAB[1] = GregTechAPI.registerMetaTileEntity(2176, new AmpereMachineMetaTileEntity(location("mass_fab.mv"), NPURecipeMaps.MASS_FAB_RECIPES, NPUTextures.MASS_FAB_OVERLAY, 2));
+        MASS_FAB[2] = GregTechAPI.registerMetaTileEntity(2177, new AmpereMachineMetaTileEntity(location("mass_fab.hv"), NPURecipeMaps.MASS_FAB_RECIPES, NPUTextures.MASS_FAB_OVERLAY, 3));
+        MASS_FAB[3] = GregTechAPI.registerMetaTileEntity(2178, new AmpereMachineMetaTileEntity(location("mass_fab.ev"), NPURecipeMaps.MASS_FAB_RECIPES, NPUTextures.MASS_FAB_OVERLAY, 4));
         if (NPUConfig.tiers.highTierMassFabs) {
-            MASS_FAB[4] = GregTechAPI.registerMetaTileEntity(2179, new NPUMachineMetaTileEntity(location("mass_fab.iv"), NPURecipeMaps.MASS_FAB_RECIPES, NPUTextures.MASS_FAB_OVERLAY, 5));
-            MASS_FAB[5] = GregTechAPI.registerMetaTileEntity(2180, new NPUMachineMetaTileEntity(location("mass_fab.luv"), NPURecipeMaps.MASS_FAB_RECIPES, NPUTextures.MASS_FAB_OVERLAY, 6));
+            MASS_FAB[4] = GregTechAPI.registerMetaTileEntity(2179, new AmpereMachineMetaTileEntity(location("mass_fab.iv"), NPURecipeMaps.MASS_FAB_RECIPES, NPUTextures.MASS_FAB_OVERLAY, 5));
+            MASS_FAB[5] = GregTechAPI.registerMetaTileEntity(2180, new AmpereMachineMetaTileEntity(location("mass_fab.luv"), NPURecipeMaps.MASS_FAB_RECIPES, NPUTextures.MASS_FAB_OVERLAY, 6));
             if (NPUConfig.tiers.uselessTiers) {
-            	MASS_FAB[6] = GregTechAPI.registerMetaTileEntity(2181, new NPUMachineMetaTileEntity(location("mass_fab.zpm"), NPURecipeMaps.MASS_FAB_RECIPES, NPUTextures.MASS_FAB_OVERLAY, 7));
-            	MASS_FAB[7] = GregTechAPI.registerMetaTileEntity(2182, new NPUMachineMetaTileEntity(location("mass_fab.uv"), NPURecipeMaps.MASS_FAB_RECIPES, NPUTextures.MASS_FAB_OVERLAY, 8));
+            	MASS_FAB[6] = GregTechAPI.registerMetaTileEntity(2181, new AmpereMachineMetaTileEntity(location("mass_fab.zpm"), NPURecipeMaps.MASS_FAB_RECIPES, NPUTextures.MASS_FAB_OVERLAY, 7));
+            	MASS_FAB[7] = GregTechAPI.registerMetaTileEntity(2182, new AmpereMachineMetaTileEntity(location("mass_fab.uv"), NPURecipeMaps.MASS_FAB_RECIPES, NPUTextures.MASS_FAB_OVERLAY, 8));
             }
         }
 
-        REPLICATOR[0] = GregTechAPI.registerMetaTileEntity(2183, new NPUMachineMetaTileEntity(location("replicator.lv"), NPURecipeMaps.REPLICATOR_RECIPES, NPUTextures.REPLICATOR_OVERLAY, 1));
-        REPLICATOR[1] = GregTechAPI.registerMetaTileEntity(2184, new NPUMachineMetaTileEntity(location("replicator.mv"), NPURecipeMaps.REPLICATOR_RECIPES, NPUTextures.REPLICATOR_OVERLAY, 2));
-        REPLICATOR[2] = GregTechAPI.registerMetaTileEntity(2185, new NPUMachineMetaTileEntity(location("replicator.hv"), NPURecipeMaps.REPLICATOR_RECIPES, NPUTextures.REPLICATOR_OVERLAY, 3));
-        REPLICATOR[3] = GregTechAPI.registerMetaTileEntity(2186, new NPUMachineMetaTileEntity(location("replicator.ev"), NPURecipeMaps.REPLICATOR_RECIPES, NPUTextures.REPLICATOR_OVERLAY, 4));
+        REPLICATOR[0] = GregTechAPI.registerMetaTileEntity(2183, new AmpereMachineMetaTileEntity(location("replicator.lv"), NPURecipeMaps.REPLICATOR_RECIPES, NPUTextures.REPLICATOR_OVERLAY, 1));
+        REPLICATOR[1] = GregTechAPI.registerMetaTileEntity(2184, new AmpereMachineMetaTileEntity(location("replicator.mv"), NPURecipeMaps.REPLICATOR_RECIPES, NPUTextures.REPLICATOR_OVERLAY, 2));
+        REPLICATOR[2] = GregTechAPI.registerMetaTileEntity(2185, new AmpereMachineMetaTileEntity(location("replicator.hv"), NPURecipeMaps.REPLICATOR_RECIPES, NPUTextures.REPLICATOR_OVERLAY, 3));
+        REPLICATOR[3] = GregTechAPI.registerMetaTileEntity(2186, new AmpereMachineMetaTileEntity(location("replicator.ev"), NPURecipeMaps.REPLICATOR_RECIPES, NPUTextures.REPLICATOR_OVERLAY, 4));
         if (NPUConfig.tiers.highTierReplicators) {
-            REPLICATOR[4] = GregTechAPI.registerMetaTileEntity(2187, new NPUMachineMetaTileEntity(location("replicator.iv"), NPURecipeMaps.REPLICATOR_RECIPES, NPUTextures.REPLICATOR_OVERLAY, 5));
-            REPLICATOR[5] = GregTechAPI.registerMetaTileEntity(2188, new NPUMachineMetaTileEntity(location("replicator.luv"), NPURecipeMaps.REPLICATOR_RECIPES, NPUTextures.REPLICATOR_OVERLAY, 6));
+            REPLICATOR[4] = GregTechAPI.registerMetaTileEntity(2187, new AmpereMachineMetaTileEntity(location("replicator.iv"), NPURecipeMaps.REPLICATOR_RECIPES, NPUTextures.REPLICATOR_OVERLAY, 5));
+            REPLICATOR[5] = GregTechAPI.registerMetaTileEntity(2188, new AmpereMachineMetaTileEntity(location("replicator.luv"), NPURecipeMaps.REPLICATOR_RECIPES, NPUTextures.REPLICATOR_OVERLAY, 6));
             if (NPUConfig.tiers.uselessTiers) {
-            	REPLICATOR[6] = GregTechAPI.registerMetaTileEntity(2189, new NPUMachineMetaTileEntity(location("replicator.zpm"), NPURecipeMaps.REPLICATOR_RECIPES, NPUTextures.REPLICATOR_OVERLAY, 7));
-            	REPLICATOR[7] = GregTechAPI.registerMetaTileEntity(2190, new NPUMachineMetaTileEntity(location("replicator.uv"), NPURecipeMaps.REPLICATOR_RECIPES, NPUTextures.REPLICATOR_OVERLAY, 8));
+            	REPLICATOR[6] = GregTechAPI.registerMetaTileEntity(2189, new AmpereMachineMetaTileEntity(location("replicator.zpm"), NPURecipeMaps.REPLICATOR_RECIPES, NPUTextures.REPLICATOR_OVERLAY, 7));
+            	REPLICATOR[7] = GregTechAPI.registerMetaTileEntity(2190, new AmpereMachineMetaTileEntity(location("replicator.uv"), NPURecipeMaps.REPLICATOR_RECIPES, NPUTextures.REPLICATOR_OVERLAY, 8));
             }
         }
         if (NPUConfig.enableDissabembling) {
