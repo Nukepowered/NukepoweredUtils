@@ -61,15 +61,19 @@ public class TileEntityPowerInverter extends MetaTileEntity {
 	public void update() {
 		super.update();
 		if (!this.getWorld().isRemote) {
-			if (!isPanelCheckedOnce) updatePanel();
-			if (panelMode && panel != null) {
-				if (this.getPanel().getType().getVoltage() <= energyContainer.getInputVoltage()) {
+			if (!isPanelCheckedOnce){
+				updatePanel();
+			}
+
+			TileEntitySolarPanel panel;
+			if (panelMode && (panel = this.getPanel()) != null) {
+				if (panel.getType().getVoltage() <= energyContainer.getInputVoltage()) {
 					long packet = energyContainer.getInputVoltage() * energyContainer.getInputAmperage();
-					if (this.getPanel().getPowerFromStack(packet)) {
+					if (panel.getPowerFromStack(packet)) {
 						energyContainer.addEnergy(packet);
 					}
 				} else {
-					GTUtility.doOvervoltageExplosion(this, this.getPanel().getType().getVoltage());
+					GTUtility.doOvervoltageExplosion(this, panel.getType().getVoltage());
 				}
 			}
 		}
@@ -83,34 +87,34 @@ public class TileEntityPowerInverter extends MetaTileEntity {
 	@Override
 	public void addDebugInfo(List<String> list) {
 		list.add("PanelMode: " + this.panelMode);
-		list.add("Panel: " + (this.panel == null ? "§cnull" : NPULib.posToStringC(this.getPanel().getPos())));
+		TileEntitySolarPanel panel = this.getPanel();
+		list.add("Panel: " + (panel == null ? "§cnull" : NPULib.posToStringC(panel.getPos())));
     }
 	
 	@Override
 	public void updateInputRedstoneSignals() {
-		if (this.panelMode) this.updatePanel();
+		if (this.panelMode) {
+			this.updatePanel();
+		}
 	}
 	
 	private void updatePanel() {
 		this.isPanelCheckedOnce = true;
 		BlockPos panelPos = getPos().offset(getFrontFacing().getOpposite());
 		MetaTileEntity mte = BlockMachine.getMetaTileEntity(getWorld(), panelPos);
-		if (mte != null) {
-			if (mte instanceof TileEntitySolarPanel) {
-				this.panel = new WeakReference<>((TileEntitySolarPanel) mte);
-				return;
-			} 
+		if (mte instanceof TileEntitySolarPanel) {
+			this.panel = new WeakReference<>((TileEntitySolarPanel) mte);
+			return;
 		}
-		this.panel = null;
+
+		this.panel = new WeakReference<>(null);
 	}
 	
 	@Nullable
 	private TileEntitySolarPanel getPanel() {
 		TileEntitySolarPanel panel = this.panel.get();
-		if (panel != null) {
-			if (panel.isValid()) {
-				return panel;
-			}
+		if (panel != null && panel.isValid()) {
+			return panel;
 		}
 		
 		this.panel.clear();
@@ -128,12 +132,15 @@ public class TileEntityPowerInverter extends MetaTileEntity {
 		ItemStack heldItem = playerIn.getHeldItem(hand);
 		if (!heldItem.isEmpty() && heldItem.hasCapability(GregtechCapabilities.CAPABILITY_MALLET, null)) {
 			ISoftHammerItem shi = heldItem.getCapability(GregtechCapabilities.CAPABILITY_MALLET, null);
-			if (getWorld().isRemote) return true;
-			if (!shi.damageItem(DamageValues.DAMAGE_FOR_SOFT_HAMMER, false)) return false;
-			if (this.panelMode)
-				this.panelMode = false;
-			else
-				this.panelMode = true;
+			if (getWorld().isRemote) {
+				return true;
+			}
+
+			if (shi == null || !shi.damageItem(DamageValues.DAMAGE_FOR_SOFT_HAMMER, false)) {
+				return false;
+			}
+
+			this.panelMode = !this.panelMode;
 			playerIn.sendMessage(new TextComponentTranslation("nputils.machine.power_inverter.message_panelmode", this.panelMode));
 			writeCustomData(1, buf -> buf.writeBoolean(this.panelMode));
 		}
